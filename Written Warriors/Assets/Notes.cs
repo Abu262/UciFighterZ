@@ -1,20 +1,26 @@
 ﻿/*
 All scripts that relate to players go in the PlayerStuff
 
-All CharacterChild scripts go in the PlayableCharacters folder
+All CharacterChild scripts go in the Resource folder. If you dont put them there I will hunt you and I will hurt you verbally.
 
 Any other scripts go in the Other folder
 
 Prefabs go in Prfabs Folder and Art goes in art folder and Scenes go in Scenes folder
 
+
+
+
 Designer goals: 
 Create new characters for the game! The goal is to get 1-2 characters in the game
+
+
 
 
 Programmer goals: 
 Get a GameManager and Character Select Screen, If our progress is good then a main menu is nice too.
 
 Timer in game, a health system that isnt a UI text box
+
 
 Make the interaction when someone gets hit sexier (slow mo and a better pushback system.
 
