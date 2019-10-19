@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 //JESSE ALLAS
 //Last Updated: 10/1/2019
 //Character stats parent class
@@ -10,6 +10,8 @@ public class Character : MonoBehaviour
 {
 
     // MISC data
+    public Sprite PlayerImage; //player picture, ill make this an animation when we have animations.
+
     public int Health = 3; // Health Points, I think all characters will have 3 hp
 
     public Vector2 PlayerSize = new Vector2(1.0f, 1.25f); //player hitbox size

@@ -7,7 +7,11 @@ public class GameManager : MonoBehaviour
 
     public string PathP1 = "SampleCharactePrFab";
     public string PathP2 = "SampleCharactePrFab";
-
+    private Character self1;
+    private Character self2;
+    public Character Self1 { get => self1; set => self1 = value; }
+    public Character Self2 { get => self2; set => self2 = value; }
+    bool P1 = true;
     public static GameManager instance;
 
     private void Awake()
@@ -22,8 +26,22 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(instance);
 
+
+    }
+
+    public string ReturnPath()
+    {
+        if (P1)
+        {
+            P1 = false;
+            return PathP1;
+        }
+        else
+        {
+            return PathP2;
+        }
 
     }
 }

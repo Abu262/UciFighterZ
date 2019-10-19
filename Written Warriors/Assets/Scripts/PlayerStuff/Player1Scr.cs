@@ -15,17 +15,17 @@ public class Player1Scr : Player
 
     private void Awake()
     {
-        Path = FindObjectOfType<GameManager>().PathP1;
-
+;
+        Self = Resources.Load<Character>(FindObjectOfType<GameManager>().PathP1);
         opponentTag = "Player2";
         //set hitbox sizes and positions
-        HighHitBox.offset = Self.HighHitBoxOffset;
-        MedHitBox.offset = Self.MedHitBoxOffset;
-        LowHitBox.offset = Self.LowHitBoxOffset;
+        //HighHitBox.offset = Self.HighHitBoxOffset;
+        //MedHitBox.offset = Self.MedHitBoxOffset;
+        //LowHitBox.offset = Self.LowHitBoxOffset;
 
-        HighHitBox.size = Self.HighHitBoxSize;
-        MedHitBox.size = Self.MedHitBoxSize;
-        LowHitBox.size = Self.LowHitBoxSize;
+        //HighHitBox.size = Self.HighHitBoxSize;
+        //MedHitBox.size = Self.MedHitBoxSize;
+        //LowHitBox.size = Self.LowHitBoxSize;
 
 
         //call controls

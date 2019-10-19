@@ -15,6 +15,9 @@ public class CharSelectScr : MonoBehaviour
     public Image P1Arrow;
     public Image P2Arrow;
 
+    [SerializeField]
+    private GameManager manager;
+    
     int indexP1;
     int indexP2;
 
@@ -110,12 +113,20 @@ public class CharSelectScr : MonoBehaviour
     void SelectP1()
     {
         ReadyP1 = true;
-        FindObjectOfType<GameManager>().PathP1 = FindSource(indexP1);
+        //  FindObjectOfType<GameManager>().PathP1 = FindSource(indexP1);
+        manager.PathP1 = FindSource(indexP1);
+        //FindObjectOfType<GameManager>().Self1 = (Character)Resources.Load(FindObjectOfType<GameManager>().PathP1, typeof(Character));
+        //manager.Self1 = (Character)Resources.Load(manager.PathP1, typeof(Character));
+        manager.Self2 = Resources.Load<Character>(manager.PathP1);
     }
     void SelectP2()
     {
         ReadyP2 = true;
-        FindObjectOfType<GameManager>().PathP2 = FindSource(indexP2);
+        //FindObjectOfType<GameManager>().PathP2 = FindSource(indexP2);
+        //FindObjectOfType<GameManager>().Self2 = (Character)Resources.Load(FindObjectOfType<GameManager>().PathP2, typeof(Character));
+        manager.PathP2 = FindSource(indexP2);
+        //manager.Self2 = (Character)Resources.Load(manager.PathP2, typeof(Character));
+        manager.Self2 = Resources.Load<Character>(manager.PathP2);
     }
     void BackP1()
     {
@@ -127,48 +138,49 @@ public class CharSelectScr : MonoBehaviour
     }
     void StartMatch()
     {
+      //  manager.Self1 
         SceneManager.LoadScene(1);
     }
 
 
     string FindSource(int index)
     {
-        string path = "SampleCharactePrFab";
+        string path = "SampleCharactePreFab";
 
         switch (index)
         {
             case 0:
-                path = "SampleCharactePrFab";
+                path = "SampleCharactePreFab";
                 break;
             case 1:
-                path = "SampleCharactePrFab";
+                path = "SampleCharactePreFab";
                 break;
             case 2:
-                path = "SampleCharactePrFab";
+                path = "SampleCharactePreFab";
                 break;
             case 3:
-                path = "SampleCharactePrFab";
+                path = "SampleCharactePreFab";
                 break;
             case 4:
-                path = "SampleCharactePrFab";
+                path = "SampleCharactePreFab";
                 break;
             case 5:
-                path = "SampleCharactePrFab";
+                path = "Thornton";
                 break;
             case 6:
-                path = "SampleCharactePrFab";
+                path = "SampleCharactePreFab";
                 break;
             case 7:
-                path = "SampleCharactePrFab";
+                path = "SampleCharactePreFab";
                 break;
             case 8:
-                path = "SampleCharactePrFab";
+                path = "SampleCharactePreFab";
                 break;
             case 9:
-                path = "SampleCharactePrFab";
+                path = "Pattis";
                 break;
             default:
-                path = "SampleCharactePrFab";
+                path = "SampleCharactePreFab";
                 break;
         }
 

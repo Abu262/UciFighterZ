@@ -14,11 +14,15 @@ using UnityEngine.InputSystem;
 
 public abstract class Player : MonoBehaviour
 {
-    public string Path = "SampleCharactePrFab";
+
+    public bool IsP1 = false;
+//    public string Path = FindObjectOfType<GameManager>().ReturnPath();
     public Text HP; //Temporary, displays the current HP
     public int Health; //Since the health value changes we want to copy the character health stat
     public PlayerControls Controls; //Player Controls
+    
     public Character Self; //the character we're getting all the stats from
+
     public Player Opponent; //the opponent player object
     public string opponentTag; //The opponent tag, for checking collisions 
 
@@ -38,13 +42,20 @@ public abstract class Player : MonoBehaviour
     //bools to check if the player is blocking
     public bool HighBlocking;
     public bool LowBlocking;
-
+    
     public bool Hit; //true when the player is hit
 
     string CurrentAtk; //the string titling the current move
-
+//    bool ready = false;
     private void Start()
     {
+
+        PlayerBox.size = new Vector2(Self.PlayerSize.x, Self.PlayerSize.y);
+        PlayerBox.offset = new Vector2(Self.PlayerOffset.x, Self.PlayerOffset.y);
+
+        Self.transform.position = transform.position;
+
+        gameObject.GetComponent<SpriteRenderer>().sprite = Self.PlayerImage;
         //setting some initial things
         Hit = false;
         Health = Self.Health;
@@ -52,27 +63,43 @@ public abstract class Player : MonoBehaviour
         HighBlocking = false;
         LowBlocking = false;
         RB = gameObject.GetComponent<Rigidbody2D>();
+        HighHitBox.offset = Self.HighHitBoxOffset;
+        MedHitBox.offset = Self.MedHitBoxOffset;
+        LowHitBox.offset = Self.LowHitBoxOffset;
+
+        HighHitBox.size = Self.HighHitBoxSize;
+        MedHitBox.size = Self.MedHitBoxSize;
+        LowHitBox.size = Self.LowHitBoxSize;
+      //  ready = true;
     }
 
     private void Awake()
     {
+        // if (IsP1)
+        //{
+        //Debug.Log("heelo");
+
+       // }
+       // else
+       // {
+         //   Debug.Log("heelo");
+          //  Self = Resources.Load<Character>(FindObjectOfType<GameManager>().PathP2);
+       // }
+
+        //         StartCoroutine(CreateChar());
         //grabbing some more things that we want to get before the start
 
         //The Idea is that there will be a character select menu that sets this later
-        
 
-        Self = (Character)Resources.Load(Path, typeof(Character)); //grab the prefab from the prefab folder
+
+
         ///////////
         //FOR THE LOVE OF GOD PUT YOUR CHARACTER PREFABS IN THE RESOURCES FOLDER
         //////////
 
-        PlayerBox.size = new Vector2(Self.PlayerSize.x, Self.PlayerSize.y);
-        PlayerBox.offset = new Vector2(Self.PlayerOffset.x, Self.PlayerOffset.y);
 
-        Self.transform.position = transform.position;
-        
+
     }
-
 
 
     void Update()

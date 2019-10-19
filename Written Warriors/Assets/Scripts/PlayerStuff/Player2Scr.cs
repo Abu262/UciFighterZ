@@ -16,18 +16,19 @@ public class Player2Scr : Player
           
     private void Awake()
     {
-        Path = FindObjectOfType<GameManager>().PathP2;
-
+        //    Path = FindObjectOfType<GameManager>().PathP2;
+ 
+        Self = Resources.Load<Character>(FindObjectOfType<GameManager>().PathP2);
 
         opponentTag = "Player1";
         //set hitbix sizes and positions
-        HighHitBox.offset = Self.HighHitBoxOffset;
-        MedHitBox.offset = Self.MedHitBoxOffset;
-        LowHitBox.offset = Self.LowHitBoxOffset;
+        //HighHitBox.offset = Self.HighHitBoxOffset;
+        //MedHitBox.offset = Self.MedHitBoxOffset;
+        //LowHitBox.offset = Self.LowHitBoxOffset;
 
-        HighHitBox.size = Self.HighHitBoxSize;
-        MedHitBox.size = Self.MedHitBoxSize;
-        LowHitBox.size = Self.LowHitBoxSize;
+        //HighHitBox.size = Self.HighHitBoxSize;
+        //MedHitBox.size = Self.MedHitBoxSize;
+        //LowHitBox.size = Self.LowHitBoxSize;
 
 
         //PIM = FindObjectOfType<PlayerInputManager>();
