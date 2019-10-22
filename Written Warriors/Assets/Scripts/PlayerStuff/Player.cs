@@ -83,8 +83,7 @@ public abstract class Player : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Move);
-
+        
         if (TakingAction == false)
         {
             //Move changes when the player waggles the analog stick
