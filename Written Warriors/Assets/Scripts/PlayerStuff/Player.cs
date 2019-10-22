@@ -83,7 +83,7 @@ public abstract class Player : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Move);
+       // Debug.Log(Move);
 
         if (TakingAction == false)
         {

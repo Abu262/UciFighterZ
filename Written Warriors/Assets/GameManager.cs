@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
     public string PathP1 = "SampleCharactePrFab";
     public string PathP2 = "SampleCharactePrFab";
 
-    
-
     bool P1 = true;
     public static GameManager instance;
 
