@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class CharSelectScr : MonoBehaviour
 {
     public PlayerControls Controls; //Player Controls
@@ -31,35 +32,6 @@ public class CharSelectScr : MonoBehaviour
     public Vector2 MoveP1;
     public Vector2 MoveP2;
 
-    private void Awake()
-    {
-        Controls = new PlayerControls();
-
-        Controls.Gameplay.Special1.performed += ctx => SelectP1();
-        Controls.Gameplay.Special2.performed += ctx => SelectP2();
-
-        Controls.Gameplay.High1.performed += ctx => StartMatch();
-        Controls.Gameplay.High2.performed += ctx => StartMatch();
-
-        Controls.Gameplay.Low1.performed += ctx => BackP1();
-        Controls.Gameplay.Low2.performed += ctx => BackP2();
-
-        Controls.Gameplay.Move1.performed += ctx => MoveP1 = ctx.ReadValue<Vector2>();
-        Controls.Gameplay.Move1.canceled += ctx => MoveP1 = Vector2.zero;
-
-        Controls.Gameplay.Move2.performed += ctx => MoveP2 = ctx.ReadValue<Vector2>();
-        Controls.Gameplay.Move2.canceled += ctx => MoveP2 = Vector2.zero;
-    }
-
-    void OnEnable()
-    {
-        Controls.Gameplay.Enable();
-    }
-
-    void OnDisable()
-    {
-        Controls.Gameplay.Disable();
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -73,6 +45,8 @@ public class CharSelectScr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MoveP2 = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
+        MoveP1 = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
 
 
         if (ReadyP2 == false && turn2 == true && ((MoveP2.x > 0.8f || MoveP2.x < -0.8f) || (MoveP2.y > 0.8f || MoveP2.y < -0.8f)))
@@ -101,6 +75,29 @@ public class CharSelectScr : MonoBehaviour
             READY.enabled = false;
         }
 
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        {
+            SelectP1();
+        }
+        if (Input.GetKeyDown(KeyCode.Joystick2Button1))
+        {
+            SelectP2();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Joystick2Button3))
+        {
+            StartMatch();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+        {
+            BackP1();
+        }
+        if (Input.GetKeyDown(KeyCode.Joystick2Button2))
+        {
+            BackP2();
+        }
         // else
         // {
         //     turn1 = true;
@@ -117,7 +114,7 @@ public class CharSelectScr : MonoBehaviour
         manager.PathP1 = FindSource(indexP1);
         //FindObjectOfType<GameManager>().Self1 = (Character)Resources.Load(FindObjectOfType<GameManager>().PathP1, typeof(Character));
         //manager.Self1 = (Character)Resources.Load(manager.PathP1, typeof(Character));
-        manager.Self2 = Resources.Load<Character>(manager.PathP1);
+       
     }
     void SelectP2()
     {
@@ -126,7 +123,7 @@ public class CharSelectScr : MonoBehaviour
         //FindObjectOfType<GameManager>().Self2 = (Character)Resources.Load(FindObjectOfType<GameManager>().PathP2, typeof(Character));
         manager.PathP2 = FindSource(indexP2);
         //manager.Self2 = (Character)Resources.Load(manager.PathP2, typeof(Character));
-        manager.Self2 = Resources.Load<Character>(manager.PathP2);
+       
     }
     void BackP1()
     {

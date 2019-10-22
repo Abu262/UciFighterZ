@@ -9,8 +9,8 @@ using UnityEngine.InputSystem;
 
 //This is all the controls and stuff for the player
 //designers probably won' have to touch this, 
-//if anyone programmmers might need to tweak some things,
-//but odds are nobody will have to
+
+//Keep in mind that all coordinates are relative to the object, so you dont need to worry about characters switching sides
 
 public abstract class Player : MonoBehaviour
 {
@@ -46,7 +46,9 @@ public abstract class Player : MonoBehaviour
     public bool Hit; //true when the player is hit
 
     string CurrentAtk; //the string titling the current move
-//    bool ready = false;
+
+
+
     private void Start()
     {
 
@@ -75,36 +77,14 @@ public abstract class Player : MonoBehaviour
 
     private void Awake()
     {
-        // if (IsP1)
-        //{
-        //Debug.Log("heelo");
-
-       // }
-       // else
-       // {
-         //   Debug.Log("heelo");
-          //  Self = Resources.Load<Character>(FindObjectOfType<GameManager>().PathP2);
-       // }
-
-        //         StartCoroutine(CreateChar());
-        //grabbing some more things that we want to get before the start
-
-        //The Idea is that there will be a character select menu that sets this later
-
-
-
-        ///////////
-        //FOR THE LOVE OF GOD PUT YOUR CHARACTER PREFABS IN THE RESOURCES FOLDER
-        //////////
-
-
 
     }
 
 
     void Update()
     {
-        
+        Debug.Log(Move);
+
         if (TakingAction == false)
         {
             //Move changes when the player waggles the analog stick
@@ -183,16 +163,6 @@ public abstract class Player : MonoBehaviour
 
     }
 
-
-    void OnEnable()
-    {
-        Controls.Gameplay.Enable();
-    }
-
-    void OnDisable()
-    {
-        Controls.Gameplay.Disable();
-    }
 
 
 
@@ -298,8 +268,7 @@ public abstract class Player : MonoBehaviour
         yield return null;
     }
 
-    //I dont actually need this, I could just reuse the startup frames coroutine
-    //but naming the two seperately makes it easier to read
+
     IEnumerator PlayCoolDownFrames(int Frames)
     {
         int FrameCount = Frames;

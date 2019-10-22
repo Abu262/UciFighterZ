@@ -31,19 +31,49 @@ public class Player2Scr : Player
         //LowHitBox.size = Self.LowHitBoxSize;
 
 
-        //PIM = FindObjectOfType<PlayerInputManager>();
-        //call controls
-        Controls = new PlayerControls();
-        
-        Controls.Gameplay.High2.performed += ctx => StartCoroutine(HighAttack());
-        Controls.Gameplay.Medium2.performed += ctx => StartCoroutine(MedAttack());
-        Controls.Gameplay.Low2.performed += ctx => StartCoroutine(LowAttack());
-        Controls.Gameplay.Special2.performed += ctx => StartCoroutine(SpecAttack());
-        Controls.Gameplay.Move2.performed += ctx => Move = ctx.ReadValue<Vector2>();
-        Controls.Gameplay.Move2.canceled += ctx => Move = Vector2.zero;
+
+        StartCoroutine(FakeUpdate());
+        //Controls.Gameplay.High2.performed += ctx => StartCoroutine(HighAttack());
+        //Controls.Gameplay.Medium2.performed += ctx => StartCoroutine(MedAttack());
+        //Controls.Gameplay.Low2.performed += ctx => StartCoroutine(LowAttack());
+        //Controls.Gameplay.Special2.performed += ctx => StartCoroutine(SpecAttack());
+        //Controls.Gameplay.Move2.performed += ctx => Move = ctx.ReadValue<Vector2>();
+        //Controls.Gameplay.Move2.canceled += ctx => Move = Vector2.zero;
 
     }
 
 
+    IEnumerator FakeUpdate()
+    {
+
+        //controller stuff
+        while (true)
+        {
+            if (Input.GetKey(KeyCode.Joystick2Button0))
+            {
+                StartCoroutine(MedAttack());
+            }
+            //X
+            if (Input.GetKeyDown(KeyCode.Joystick2Button1))
+            {
+                StartCoroutine(LowAttack());
+            }
+            //circle
+            if (Input.GetKeyDown(KeyCode.Joystick2Button2))
+            {
+                StartCoroutine(SpecAttack());
+            }
+            //triangle
+            if (Input.GetKeyDown(KeyCode.Joystick2Button3))
+            {
+                StartCoroutine(HighAttack());
+            }
+
+            Move = new Vector2(Input.GetAxis("Horizontal2"), 0.0f);
+
+            yield return null;
+        }
+
+    }
 
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 //JESSE ALLAS
 //Last Updated: 10/1/2019
@@ -15,30 +14,50 @@ public class Player1Scr : Player
 
     private void Awake()
     {
-;
-        Self = Resources.Load<Character>(FindObjectOfType<GameManager>().PathP1);
-        opponentTag = "Player2";
-        //set hitbox sizes and positions
-        //HighHitBox.offset = Self.HighHitBoxOffset;
-        //MedHitBox.offset = Self.MedHitBoxOffset;
-        //LowHitBox.offset = Self.LowHitBoxOffset;
 
-        //HighHitBox.size = Self.HighHitBoxSize;
-        //MedHitBox.size = Self.MedHitBoxSize;
-        //LowHitBox.size = Self.LowHitBoxSize;
+        Self = Resources.Load<Character>(FindObjectOfType<GameManager>().PathP1); ///load the character script
+        opponentTag = "Player2";        //set the tag for the opponent
 
 
-        //call controls
-        Controls = new PlayerControls();
-        Controls.Gameplay.High1.performed += ctx => StartCoroutine(HighAttack());
-        Controls.Gameplay.Medium1.performed += ctx => StartCoroutine(MedAttack());
-        Controls.Gameplay.Low1.performed += ctx => StartCoroutine(LowAttack());
-        Controls.Gameplay.Special1.performed += ctx => StartCoroutine(SpecAttack());
-        Controls.Gameplay.Move1.performed += ctx => Move = ctx.ReadValue<Vector2>();
-        Controls.Gameplay.Move1.canceled += ctx => Move = Vector2.zero;
+  
+        StartCoroutine(FakeUpdate());   //start the "update"
+
 
     }
 
+    IEnumerator FakeUpdate()
+    {
+
+        //controller stuff
+        while (true)
+        {
+            if (Input.GetKey(KeyCode.Joystick1Button0))
+            {
+                Debug.Log("Hello");
+                StartCoroutine(MedAttack());
+            }
+            //X
+            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+            {
+                StartCoroutine(LowAttack());
+            }
+            //circle
+            if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+            {
+                StartCoroutine(SpecAttack());
+            }
+            //triangle
+            if (Input.GetKeyDown(KeyCode.Joystick1Button3))
+            {
+                StartCoroutine(HighAttack());
+            }
+
+            Move = new Vector2(Input.GetAxis("Horizontal1"), 0.0f);
+
+            yield return null;
+        }
+
+    }
 
 
 
