@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System;
 
 //JESSE ALLAS
 //Last Updated: 10/1/2019
@@ -14,7 +15,7 @@ using UnityEngine.InputSystem;
 
 public abstract class Player : MonoBehaviour
 {
-
+    public Camera cam;
     public bool IsP1 = false;
 //    public string Path = FindObjectOfType<GameManager>().ReturnPath();
     public Text HP; //Temporary, displays the current HP
@@ -282,6 +283,9 @@ public abstract class Player : MonoBehaviour
     //The player is a collider and cant activate triggers, so this is only for attacks
     void OnTriggerEnter2D(Collider2D col)
     {
+        Vector2 v = col.bounds.max;
+
+
         //only activates if the object his is the opponent and not a projectile or another punch
         //remember all attacks are triggers, hence the !col.isTrigger
         if (col.tag == opponentTag && !col.isTrigger)
@@ -297,8 +301,10 @@ public abstract class Player : MonoBehaviour
                 }
                 else
                 {
+                    Explode(v);
                     Opponent.TakeDamage();
                     Debug.Log("HIT");
+                    
                 }
             }
             else if (CurrentAtk == "Middle")
@@ -310,7 +316,7 @@ public abstract class Player : MonoBehaviour
                 
                 else
                 {
-
+                    Explode(v);
                     Opponent.TakeDamage();
                     Debug.Log("HIT");
                 }
@@ -324,7 +330,9 @@ public abstract class Player : MonoBehaviour
                 }
                 else
                 {
+
                     Opponent.TakeDamage();
+                    Explode(v);
                     Debug.Log("HIT");
                 }
             }
@@ -344,7 +352,7 @@ public abstract class Player : MonoBehaviour
     {
         //I want to impliment a slowdown/zoom in effect when someone gets hit
         //but it isn't necessary
-
+        
         Health -= 1;
         HP.text = Health.ToString();
         Hit = true; //when hit is on the player cant move
@@ -353,10 +361,18 @@ public abstract class Player : MonoBehaviour
        
     }
 
+    void Explode(Vector2 position)
+    {
+        GameObject firework = Instantiate(FindObjectOfType<GameManager>().HitEffect, position, Quaternion.identity);
+       // firework.GetComponent<ParticleSystem>().Play();
+    }
+
+
+
     //I seperated this from the take damage because coroutines do things in the order I list them
     //functions tend to be less controlled
 
-     //this function isnt working quite how I want it to but it works well enough right now
+    //this function isnt working quite how I want it to but it works well enough right now
     IEnumerator HitAnimation()
     {
         //stop both players from moving
@@ -364,20 +380,59 @@ public abstract class Player : MonoBehaviour
         RB.velocity = new Vector2(0.0f, 0.0f);
 
         //send both players flying away from eachother
-        Opponent.RB.AddForce(3000.0f * Opponent.transform.localScale * -1.0f);
-        RB.AddForce(3000.0f * transform.localScale * -1.0f);
-
+        StartCoroutine(KnockBack(0.3f));
+        yield return StartCoroutine(SlowDown());
         //we send them flying for about a minute
-        int FrameCount = 60;
-        while (FrameCount > 0)
-        {
-            Opponent.RB.AddForce(300.0f * Opponent.transform.localScale * -1.0f);
-            RB.AddForce(300.0f * transform.localScale * -1.0f);
-            FrameCount--;
-            yield return null;
-        }
+        
+
+
         Hit = false; //allow player to move now
         yield return null;
     }
 
+    IEnumerator KnockBack(float time)
+    {
+        while (time > 0.0f)
+        {
+            RB.velocity = 50.0f * transform.localScale * -1.0f;
+            Opponent.RB.velocity = 50.0f * Opponent.transform.localScale * -1.0f;
+            time -= Time.deltaTime;
+            yield return null;
+
+        }
+        yield return null;
+    }
+
+    IEnumerator SlowDown()
+    {
+
+        TakingAction = true;
+        Opponent.TakingAction = true;
+        Time.timeScale = 0.01f;
+        Time.fixedDeltaTime = 0.01f * 0.02f;
+        while (cam.orthographicSize > 1.5f)
+        {
+            TakingAction = true;
+            Opponent.TakingAction = true;
+            cam.orthographicSize -= 0.5f;
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.0025f);
+        while (cam.orthographicSize < 5.0f)
+        {
+            TakingAction = true;
+            Opponent.TakingAction = true;
+            cam.orthographicSize += 0.5f;
+            yield return null;
+        }
+
+
+        Time.timeScale = 1.0f;
+        Time.fixedDeltaTime = 1.0f * 0.02f;
+        cam.orthographicSize = 5.0f;
+
+        TakingAction = false;
+        Opponent.TakingAction = false;
+        yield return null;
+    }
 }
