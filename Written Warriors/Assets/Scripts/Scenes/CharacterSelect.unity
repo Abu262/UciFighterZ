@@ -1612,6 +1612,12 @@ PrefabInstance:
       propertyPath: self1
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7995926854756224209, guid: d7194f5e5e42715489b048878f063da4,
+        type: 3}
+      propertyPath: HitEffect
+      value: 
+      objectReference: {fileID: 3510511002356767385, guid: 42a9b7c6dd5c3f14eb9a7ae17faa26f4,
+        type: 3}
     - target: {fileID: 7995926854756224210, guid: d7194f5e5e42715489b048878f063da4,
         type: 3}
       propertyPath: m_LocalPosition.x
