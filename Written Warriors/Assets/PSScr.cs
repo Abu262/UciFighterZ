@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PSScr : MonoBehaviour
 {
-   // public ParticleSystem ps;
-
+    // public ParticleSystem ps;
+    public float endtime;
     void Start()
     {
-        StartCoroutine(killself());
+       StartCoroutine(killself());
     }
 
     IEnumerator killself()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(endtime);
         Destroy(gameObject);
     }
 }
