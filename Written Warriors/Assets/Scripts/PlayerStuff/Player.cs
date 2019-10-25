@@ -69,11 +69,13 @@ public abstract class Player : MonoBehaviour
         HighHitBox.offset = Self.HighHitBoxOffset;
         MedHitBox.offset = Self.MedHitBoxOffset;
         LowHitBox.offset = Self.LowHitBoxOffset;
+        SpecHitBox.offset = Self.SpecHitBoxOffset;
 
         HighHitBox.size = Self.HighHitBoxSize;
         MedHitBox.size = Self.MedHitBoxSize;
         LowHitBox.size = Self.LowHitBoxSize;
-      //  ready = true;
+        SpecHitBox.size = Self.SpecHitBoxSize;
+        //  ready = true;
     }
 
     private void Awake()
@@ -243,7 +245,7 @@ public abstract class Player : MonoBehaviour
     {
         if (TakingAction == false)
         {
-            CurrentAtk = Self.SpecialStr;
+            CurrentAtk = "Special";
             //this is mainly to aim projectiles,
             //the character object and the player dont share positions so we have to do it manually
             Self.transform.position = transform.position;
@@ -320,6 +322,9 @@ public abstract class Player : MonoBehaviour
             if (CurrentAtk == "High")
             {
                 v = new Vector2(col.bounds.center.x + (col.bounds.size.x/2 * transform.localScale.x * -1.0f), HighHitBox.bounds.center.y);
+
+                
+
                 if (Opponent.HighBlocking == true)
                 {
                     GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
@@ -339,6 +344,9 @@ public abstract class Player : MonoBehaviour
             else if (CurrentAtk == "Middle")
             {
                 v = new Vector2(col.bounds.center.x + (col.bounds.size.x/2 * transform.localScale.x * -1.0f), MedHitBox.bounds.center.y);
+
+                
+
                 if (Opponent.HighBlocking == true)
                 {
                     GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
@@ -359,6 +367,10 @@ public abstract class Player : MonoBehaviour
             else if (CurrentAtk == "Low")
             {
                 v = new Vector2(col.bounds.center.x + (col.bounds.size.x/2 * transform.localScale.x * -1.0f), LowHitBox.bounds.center.y);
+
+
+
+
                 if (Opponent.LowBlocking == true)
                 {
                     GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
@@ -375,6 +387,72 @@ public abstract class Player : MonoBehaviour
                     Debug.Log("HIT");
                 }
             }
+            else if (CurrentAtk == "Special")
+            {
+                v = new Vector2(col.bounds.center.x + (col.bounds.size.x / 2 * transform.localScale.x * -1.0f), SpecHitBox.bounds.center.y);
+                if (Self.SpecialStr == "High")
+                {
+                    if (Opponent.HighBlocking == true)
+                    {
+                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
+                        StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
+                        //   KnockBackSelf(Self.LowAttackerBlockPush);
+                        // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
+                        Debug.Log("BLOCK");
+                    }
+                    else
+                    {
+
+                        Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
+                        Explode(v);
+                        Debug.Log("HIT");
+                    }
+                }
+                else if (Self.SpecialStr == "Middle")
+                {
+                    if (Opponent.HighBlocking == true)
+                    {
+                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
+                        StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
+                        //   KnockBackSelf(Self.LowAttackerBlockPush);
+                        // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
+                        Debug.Log("BLOCK");
+                    }
+                    else
+                    {
+
+                        Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
+                        Explode(v);
+                        Debug.Log("HIT");
+                    }
+                }
+                else if (Self.SpecialStr == "Low")
+                {
+                    if (Opponent.LowBlocking == true)
+                    {
+                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
+                        StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
+                        //   KnockBackSelf(Self.LowAttackerBlockPush);
+                        // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
+                        Debug.Log("BLOCK");
+                    }
+                    else
+                    {
+
+                        Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
+                        Explode(v);
+                        Debug.Log("HIT");
+                    }
+                }
+                else
+                {
+
+                    Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
+                    Explode(v);
+                    Debug.Log("HIT");
+                }
+            }
+
             ///////////////////
 
 

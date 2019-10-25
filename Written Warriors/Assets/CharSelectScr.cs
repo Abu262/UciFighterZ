@@ -135,8 +135,12 @@ public class CharSelectScr : MonoBehaviour
     }
     void StartMatch()
     {
+        if (ReadyP1 && ReadyP2)
+        {
+            SceneManager.LoadScene(1);
+        }
       //  manager.Self1 
-        SceneManager.LoadScene(1);
+
     }
 
 
@@ -147,35 +151,35 @@ public class CharSelectScr : MonoBehaviour
         switch (index)
         {
             case 0:
-                path = "SampleCharactePreFab";
-                break;
-            case 1:
-                path = "SampleCharactePreFab";
-                break;
-            case 2:
-                path = "SampleCharactePreFab";
-                break;
-            case 3:
-                path = "SampleCharactePreFab";
-                break;
-            case 4:
-                path = "SampleCharactePreFab";
-                break;
-            case 5:
                 path = "Thornton";
                 break;
-            case 6:
-                path = "SampleCharactePreFab";
-                break;
-            case 7:
+            case 1:
                 path = "Klefstad";
                 break;
-            case 8:
-                path = "SampleCharactePreFab";
-                break;
-            case 9:
+            case 2:
                 path = "Pattis";
                 break;
+            //case 3:
+            //    path = "SampleCharactePreFab";
+            //    break;
+            //case 4:
+            //    path = "SampleCharactePreFab";
+            //    break;
+            //case 5:
+            //    path = "Thornton";
+            //    break;
+            //case 6:
+            //    path = "SampleCharactePreFab";
+            //    break;
+            //case 7:
+            //    path = "Klefstad";
+            //    break;
+            //case 8:
+            //    path = "SampleCharactePreFab";
+            //    break;
+            //case 9:
+            //    path = "Pattis";
+            //    break;
             default:
                 path = "SampleCharactePreFab";
                 break;
@@ -197,9 +201,9 @@ public class CharSelectScr : MonoBehaviour
         {
             if (MoveP2.x > 0.8f)
             {
-                if (indexP2 + 1 + 1 == CharPics.Length / 2 + 1 || indexP2 + 1 + 1 > CharPics.Length)
+                if (indexP2 == 2)
                 {
-                    indexP2 = indexP2 - CharPics.Length / 2 + 1;
+                    indexP2 = 0;
                 }
                 else
                 {
@@ -213,9 +217,9 @@ public class CharSelectScr : MonoBehaviour
 
             else if (MoveP2.x < -0.8f)
             {
-                if (indexP2 + 1 == CharPics.Length / 2 + 1 || indexP2 == 0)
+                if (indexP2 == 0)
                 {
-                    indexP2 = indexP2 + CharPics.Length / 2 - 1;
+                    indexP2 = 2;
                 }
                 else
                 {
@@ -227,41 +231,41 @@ public class CharSelectScr : MonoBehaviour
                 //         Debug.Log(indexP2);
             }
 
-            if (MoveP2.y < -0.8f)
-            {
-                if (indexP2 + 1 <= CharPics.Length / 2)
-                {
-                    indexP2 = indexP2 + CharPics.Length / 2;
-                }
-                else
-                {
-                    indexP2 = indexP2 - CharPics.Length / 2;
-                }
-            }
-            else if (MoveP2.y > 0.8f)
-            {
-                if (indexP2 + 1 > CharPics.Length / 2)
-                {
-                    indexP2 = indexP2 - CharPics.Length / 2;
-                }
-                else
-                {
-                    indexP2 = indexP2 + CharPics.Length / 2;
-                }
+            //if (MoveP2.y < -0.8f)
+            //{
+            //    if (indexP2 + 1 <= CharPics.Length / 2)
+            //    {
+            //        indexP2 = indexP2 + CharPics.Length / 2;
+            //    }
+            //    else
+            //    {
+            //        indexP2 = indexP2 - CharPics.Length / 2;
+            //    }
+            //}
+            //else if (MoveP2.y > 0.8f)
+            //{
+            //    if (indexP2 + 1 > CharPics.Length / 2)
+            //    {
+            //        indexP2 = indexP2 - CharPics.Length / 2;
+            //    }
+            //    else
+            //    {
+            //        indexP2 = indexP2 + CharPics.Length / 2;
+            //    }
 
 
-                if (indexP2 > CharPics.Length - 1)
-                {
-                    indexP2 = 0;
-                }
+            //    if (indexP2 > CharPics.Length - 1)
+            //    {
+            //        indexP2 = 0;
+            //    }
 
-                if (indexP2 < 0)
-                {
-                    indexP2 = CharPics.Length;
-                }
-                //   yield return new WaitForSeconds(0.15f);
-                // turn1 = true;
-            }
+            //    if (indexP2 < 0)
+            //    {
+            //        indexP2 = CharPics.Length;
+            //    }
+            //    //   yield return new WaitForSeconds(0.15f);
+            //    // turn1 = true;
+            //}
             yield return new WaitForSeconds(0.15f);
             turn2 = true;
 
@@ -284,7 +288,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (MoveP1.x > 0.8f)
                 {
-                    if (indexP1 + 1 + 1 == CharPics.Length / 2 + 1 || indexP1 + 1 + 1 > CharPics.Length)
+                    if (indexP1 == 2)
                     {
                         indexP1 = indexP1 - CharPics.Length / 2 + 1;
                     }
@@ -300,9 +304,9 @@ public class CharSelectScr : MonoBehaviour
 
                 else if (MoveP1.x < -0.8f)
                 {
-                    if (indexP1 + 1 == CharPics.Length / 2 + 1 || indexP1 == 0)
+                    if (indexP1 == 0)
                     {
-                        indexP1 = indexP1 + CharPics.Length / 2 - 1;
+                        indexP1 = 2;
                     }
                     else
                     {
@@ -314,41 +318,41 @@ public class CharSelectScr : MonoBehaviour
                     //         Debug.Log(indexP2);
                 }
 
-                if (MoveP1.y < -0.8f)
-                {
-                    if (indexP1 + 1 <= CharPics.Length/2)
-                    {
-                        indexP1 = indexP1 + CharPics.Length /2;
-                    }
-                    else
-                    {
-                        indexP1 = indexP1 - CharPics.Length / 2;
-                    }
-                }
-                else if (MoveP1.y > 0.8f)
-                {
-                    if (indexP1 + 1 > CharPics.Length/2)
-                    {
-                        indexP1 = indexP1 - CharPics.Length / 2;
-                    }
-                    else
-                    {
-                        indexP1 = indexP1 + CharPics.Length / 2;
-                    }
+                //if (MoveP1.y < -0.8f)
+                //{
+                //    if (indexP1 + 1 <= CharPics.Length/2)
+                //    {
+                //        indexP1 = indexP1 + CharPics.Length /2;
+                //    }
+                //    else
+                //    {
+                //        indexP1 = indexP1 - CharPics.Length / 2;
+                //    }
+                //}
+                //else if (MoveP1.y > 0.8f)
+                //{
+                //    if (indexP1 + 1 > CharPics.Length/2)
+                //    {
+                //        indexP1 = indexP1 - CharPics.Length / 2;
+                //    }
+                //    else
+                //    {
+                //        indexP1 = indexP1 + CharPics.Length / 2;
+                //    }
 
 
-                    if (indexP1 > CharPics.Length - 1)
-                    {
-                        indexP1 = 0;
-                    }
+                //    if (indexP1 > CharPics.Length - 1)
+                //    {
+                //        indexP1 = 0;
+                //    }
 
-                    if (indexP1 < 0)
-                    {
-                        indexP1 = CharPics.Length;
-                    }
-                 //   yield return new WaitForSeconds(0.15f);
-                   // turn1 = true;
-                }
+                //    if (indexP1 < 0)
+                //    {
+                //        indexP1 = CharPics.Length;
+                //    }
+                // //   yield return new WaitForSeconds(0.15f);
+                //   // turn1 = true;
+                //}
             yield return new WaitForSeconds(0.15f);
             turn1 = true;
 

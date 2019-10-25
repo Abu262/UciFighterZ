@@ -27,15 +27,17 @@ public class Klefstad : Character
         P.LowBlocking = true;
         while (F > 0)
         {
-            
+            SpecHitBox.enabled = true;
             P.RB.velocity = new Vector2(MoveSpeed * 0.25f * transform.localScale.x, 0.0f);
             F -= 1;
+            yield return new WaitForSeconds(1.0f / 60.0f);
+            SpecHitBox.enabled = false;
             yield return null;
         }
         P.HighBlocking = false;
         P.LowBlocking = false;
 
-        SpecHitBox.enabled = false;
+
 
 
         yield return null;
