@@ -20,7 +20,7 @@ public class ProjectileScr : MonoBehaviour
             }
             else
             {
-                col.GetComponent<Player>().TakeDamage(); //this is why we made a TakeDamage function, projectiles dont actually reach the player who shot it
+//                col.GetComponent<Player>().TakeDamage(); //this is why we made a TakeDamage function, projectiles dont actually reach the player who shot it
                 Debug.Log("HIT");
             }
 

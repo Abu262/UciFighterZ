@@ -52,7 +52,7 @@ public class Player1Scr : Player
                 StartCoroutine(HighAttack());
             }
 
-            Move = new Vector2(Input.GetAxis("Horizontal1"), 0.0f);
+            Move = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
 
             yield return null;
         }

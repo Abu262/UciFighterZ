@@ -25,6 +25,12 @@ public class Character : MonoBehaviour
     public int LowAtkStartUp = 3;  //Low Attack startup frames
     public int LowAtkHit = 6;   //Low Attack hit frames
     public int LowAtkCoolDown = 3;   //Low Attack Cooldown frames
+
+    //pushback on block and hit
+    public float LowAttackerHitPush = 0.0f;
+    public float LowDefenderHitPush = 0.0f;
+    public float LowAttackerBlockPush = 0.0f;
+    public float LowDefenderBlockPush = 0.0f;
     //public Animation LowAtkAnim;    //Low Attack Animation
 
     public Vector2 LowHitBoxOffset = new Vector2(1.5f, -0.5f);   //Low Attack Hitbox stats
@@ -36,8 +42,16 @@ public class Character : MonoBehaviour
     public int MedAtkStartUp = 3;     //Med Attack startup frames
     public int MedAtkHit = 6;  //Med Attack hit frames
     public int MedAtkCoolDown = 3;  //Med Attack Cooldown frames
+
+    //pushback on block and hit
+    public float MedAttackerHitPush = 0.0f;
+    public float MedDefenderHitPush = 0.0f;
+    public float MedAttackerBlockPush = 0.0f;
+    public float MedDefenderBlockPush = 0.0f;
+
+
     //public Animation MedAtkAnim;  //Med Attack Animation
-    
+
     public Vector2 MedHitBoxOffset = new Vector2(1.5f, 0.0f);  //Med Attack Hitbox stats
     public Vector2 MedHitBoxSize = new Vector2(1.5f, 0.5f);
     //////////////////
@@ -47,8 +61,15 @@ public class Character : MonoBehaviour
     public int HighAtkStartUp = 3; //High Attack startup frames
     public int HighAtkHit = 6;  //High Attack hit frames
     public int HighAtkCoolDown = 3; //High Attack Cooldown frames
+
+    //pushback on block and hit
+    public float HighAttackerHitPush = 0.0f;
+    public float HighDefenderHitPush = 0.0f;
+    public float HighAttackerBlockPush = 0.0f;
+    public float HighDefenderBlockPush = 0.0f;
+
     //public Animation HighAtkAnim; //High Attack Animation
-    
+
     public Vector2 HighHitBoxOffset = new Vector2(1.5f, 0.5f); //High Attack Hitbox stats
     public Vector2 HighHitBoxSize = new Vector2(1.5f, 0.5f);
     //////////////////
@@ -58,7 +79,12 @@ public class Character : MonoBehaviour
     public int SpecAtkStartUp = 3;      //Special Attack startup frames
     public int SpecAtkHit = 3; //Special Attack hit frames
     public int SpecAtkCoolDown = 3; //Special Attack Cooldown frames
-    
+
+    public float SpecAttackerHitPush = 0.0f;
+    public float SpecDefenderHitPush = 0.0f;
+    public float SpecAttackerBlockPush = 0.0f;
+    public float SpecDefenderBlockPush = 0.0f;
+
     public Vector2 SpecHitBoxOffset = new Vector2(4.0f, -1.25f); //Special Attack Hitbox stats
     public Vector2 SpecHitBoxSize = new Vector2(5.0f, 1.0f);
 

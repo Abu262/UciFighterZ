@@ -49,7 +49,6 @@ public abstract class Player : MonoBehaviour
     string CurrentAtk; //the string titling the current move
 
 
-
     private void Start()
     {
 
@@ -297,12 +296,15 @@ public abstract class Player : MonoBehaviour
             {
                 if (Opponent.HighBlocking == true)
                 {
+                    StartCoroutine(KnockBack(0.1f, Self.HighAttackerBlockPush, Self.HighDefenderBlockPush));
+                    //                    KnockBackSelf(Self.HighAttackerBlockPush);
+                    //                  Opponent.KnockBackSelf(Self.HighDefenderBlockPush);
                     Debug.Log("BLOCK");
                 }
                 else
                 {
                     Explode(v);
-                    Opponent.TakeDamage();
+                    Opponent.TakeDamage(Self.HighAttackerHitPush,Self.HighDefenderHitPush);
                     Debug.Log("HIT");
                     
                 }
@@ -311,13 +313,16 @@ public abstract class Player : MonoBehaviour
             {
                 if (Opponent.HighBlocking == true)
                 {
+                    KnockBack(0.1f, Self.MedAttackerBlockPush, Self.MedDefenderBlockPush);
+                    //                    KnockBackSelf(Self.MedAttackerBlockPush);
+                    //                  Opponent.KnockBackSelf(Self.MedDefenderBlockPush);
                     Debug.Log("BLOCK");
                 }
                 
                 else
                 {
                     Explode(v);
-                    Opponent.TakeDamage();
+                    Opponent.TakeDamage(Self.MedAttackerHitPush, Self.MedDefenderHitPush);
                     Debug.Log("HIT");
                 }
 
@@ -326,12 +331,15 @@ public abstract class Player : MonoBehaviour
             {
                 if (Opponent.LowBlocking == true)
                 {
+                    StartCoroutine(KnockBack(0.1f, Self.LowAttackerBlockPush, Self.LowDefenderBlockPush));
+                 //   KnockBackSelf(Self.LowAttackerBlockPush);
+                   // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
                     Debug.Log("BLOCK");
                 }
                 else
                 {
 
-                    Opponent.TakeDamage();
+                    Opponent.TakeDamage(Self.LowAttackerHitPush, Self.LowDefenderHitPush);
                     Explode(v);
                     Debug.Log("HIT");
                 }
@@ -348,7 +356,7 @@ public abstract class Player : MonoBehaviour
     //instead of a deal damage function
 
     //anyway this function causes the player to take damage
-    public void TakeDamage()
+    public void TakeDamage(float AttackerPush, float DefenderPush)
     {
         //I want to impliment a slowdown/zoom in effect when someone gets hit
         //but it isn't necessary
@@ -356,7 +364,7 @@ public abstract class Player : MonoBehaviour
         Health -= 1;
         HP.text = Health.ToString();
         Hit = true; //when hit is on the player cant move
-        StartCoroutine(HitAnimation());
+        StartCoroutine(HitAnimation(AttackerPush,DefenderPush));
 
        
     }
@@ -373,14 +381,14 @@ public abstract class Player : MonoBehaviour
     //functions tend to be less controlled
 
     //this function isnt working quite how I want it to but it works well enough right now
-    IEnumerator HitAnimation()
+    IEnumerator HitAnimation(float AttackerPush, float DefenderPush)
     {
         //stop both players from moving
         Opponent.RB.velocity = new Vector2(0.0f, 0.0f);
         RB.velocity = new Vector2(0.0f, 0.0f);
 
         //send both players flying away from eachother
-        StartCoroutine(KnockBack(0.3f));
+        StartCoroutine(KnockBack(0.3f,AttackerPush,DefenderPush));
         yield return StartCoroutine(SlowDown());
         //we send them flying for about a minute
         
@@ -390,16 +398,33 @@ public abstract class Player : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator KnockBack(float time)
+    IEnumerator KnockBack(float time, float AttackerPush, float DefenderPush)
     {
         while (time > 0.0f)
         {
-            RB.velocity = 50.0f * transform.localScale * -1.0f;
-            Opponent.RB.velocity = 50.0f * Opponent.transform.localScale * -1.0f;
+            RB.velocity = AttackerPush * transform.localScale * -1.0f;
+            Opponent.RB.velocity = DefenderPush * Opponent.transform.localScale * -1.0f;
             time -= Time.deltaTime;
             yield return null;
 
         }
+        yield return null;
+    }
+
+    public IEnumerator KnockBackSelf(float pushtime)
+    {
+        float t = pushtime;
+
+        RB.AddForce(pushtime * transform.localScale * -1.0f);
+
+        //while (t > 0.0f)
+        //{
+        //    RB.velocity = 10.0f * transform.localScale * -1.0f;
+        //    t -= Time.deltaTime;
+        //    yield return null;
+        //}
+
+
         yield return null;
     }
 

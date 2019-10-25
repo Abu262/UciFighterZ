@@ -69,7 +69,7 @@ public class Player2Scr : Player
                 StartCoroutine(HighAttack());
             }
 
-            Move = new Vector2(Input.GetAxis("Horizontal2"), 0.0f);
+            Move = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
 
             yield return null;
         }
