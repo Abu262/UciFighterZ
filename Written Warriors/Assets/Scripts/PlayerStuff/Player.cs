@@ -403,11 +403,15 @@ public abstract class Player : MonoBehaviour
         yield return null;
     }
 
+
+
+
     IEnumerator SlowDown()
     {
 
         TakingAction = true;
         Opponent.TakingAction = true;
+
         Time.timeScale = 0.01f;
         Time.fixedDeltaTime = 0.01f * 0.02f;
         while (cam.orthographicSize > 1.5f)
