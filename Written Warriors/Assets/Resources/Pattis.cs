@@ -10,7 +10,9 @@ public class Pattis : Character
 
     }
 
-    public override IEnumerator SpecAtk()
+
+    //teleport
+    public override IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
         yield return null;
     }

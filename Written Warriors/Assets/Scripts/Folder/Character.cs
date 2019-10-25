@@ -92,7 +92,7 @@ public class Character : MonoBehaviour
     //public Animation SpecAtkAnim;    //Special Attack Animation
 
     //Special Attack function, let's us make a unique special attack
-    public virtual IEnumerator SpecAtk()
+    public virtual IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
         yield return null;
     }

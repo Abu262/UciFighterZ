@@ -10,7 +10,7 @@ public class Thornton : Character
         
     }
 
-    public override IEnumerator SpecAtk()
+    public override IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
         yield return null;
     }

@@ -35,6 +35,7 @@ public abstract class Player : MonoBehaviour
     public BoxCollider2D HighHitBox;
     public BoxCollider2D MedHitBox;
     public BoxCollider2D LowHitBox;
+    public BoxCollider2D SpecHitBox;
     public BoxCollider2D PlayerBox;
 
     //RigidBody because physics dont work if we dont
@@ -142,6 +143,9 @@ public abstract class Player : MonoBehaviour
             }
         }
 
+
+
+
         //flips the character depending on which side of the screen they are on
         //basically we want everyone to face eachother
         if (Opponent.transform.position.x < gameObject.transform.position.x)
@@ -161,6 +165,8 @@ public abstract class Player : MonoBehaviour
         }
 
     }
+    
+
 
 
 
@@ -174,8 +180,13 @@ public abstract class Player : MonoBehaviour
         //if the player isn't already attacking
         if (TakingAction == false)
         {
+            HighBlocking = false;
+            LowBlocking = false;
             // state that they are attacking    
             TakingAction = true;
+
+
+
             CurrentAtk = "High";
             yield return StartCoroutine(PlayStartUpFrames(Self.HighAtkStartUp)); //start up frames
             yield return StartCoroutine(PlayHitFrames(Self.HighAtkHit, HighHitBox)); //hit frames
@@ -190,7 +201,13 @@ public abstract class Player : MonoBehaviour
     {
         if (TakingAction == false)
         {
+
+            HighBlocking = false;
+            LowBlocking = false;
             TakingAction = true;
+
+
+
             CurrentAtk = "Middle";
             yield return StartCoroutine(PlayStartUpFrames(Self.MedAtkStartUp));
             yield return StartCoroutine(PlayHitFrames(Self.MedAtkHit, MedHitBox));
@@ -205,7 +222,12 @@ public abstract class Player : MonoBehaviour
     {
         if (TakingAction == false)
         {
+            HighBlocking = false;
+            LowBlocking = false;
             TakingAction = true;
+
+
+
             CurrentAtk = "Low";
             yield return StartCoroutine(PlayStartUpFrames(Self.LowAtkStartUp));
             yield return StartCoroutine(PlayHitFrames(Self.LowAtkHit, LowHitBox));
@@ -230,7 +252,7 @@ public abstract class Player : MonoBehaviour
             TakingAction = true;
 
             yield return StartCoroutine(PlayStartUpFrames(Self.SpecAtkStartUp));
-            yield return StartCoroutine(Self.SpecAtk()); //call the special attack directly
+            yield return StartCoroutine(Self.SpecAtk(SpecHitBox)); //call the special attack directly
             yield return StartCoroutine(PlayCoolDownFrames(Self.SpecAtkCoolDown));
             TakingAction = false;
         }
@@ -239,6 +261,8 @@ public abstract class Player : MonoBehaviour
     //counts the frames
     IEnumerator PlayStartUpFrames(int Frames)
     {
+        HighBlocking = false;
+        LowBlocking = false;
         //copy the frames so we don't actually change the character
         int FrameCount = Frames;
 
@@ -282,7 +306,8 @@ public abstract class Player : MonoBehaviour
     //The player is a collider and cant activate triggers, so this is only for attacks
     void OnTriggerEnter2D(Collider2D col)
     {
-        Vector2 v = col.bounds.max;
+        Vector2 v = new Vector2(0.0f, 0.0f);
+
 
 
         //only activates if the object his is the opponent and not a projectile or another punch
@@ -294,8 +319,10 @@ public abstract class Player : MonoBehaviour
             //As far as I know my logic here is solid, but it isn't too hard to change
             if (CurrentAtk == "High")
             {
+                v = new Vector2(col.bounds.center.x + (col.bounds.size.x/2 * transform.localScale.x * -1.0f), HighHitBox.bounds.center.y);
                 if (Opponent.HighBlocking == true)
                 {
+                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
                     StartCoroutine(KnockBack(0.1f, Self.HighAttackerBlockPush, Self.HighDefenderBlockPush));
                     //                    KnockBackSelf(Self.HighAttackerBlockPush);
                     //                  Opponent.KnockBackSelf(Self.HighDefenderBlockPush);
@@ -311,8 +338,10 @@ public abstract class Player : MonoBehaviour
             }
             else if (CurrentAtk == "Middle")
             {
+                v = new Vector2(col.bounds.center.x + (col.bounds.size.x/2 * transform.localScale.x * -1.0f), MedHitBox.bounds.center.y);
                 if (Opponent.HighBlocking == true)
                 {
+                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
                     KnockBack(0.1f, Self.MedAttackerBlockPush, Self.MedDefenderBlockPush);
                     //                    KnockBackSelf(Self.MedAttackerBlockPush);
                     //                  Opponent.KnockBackSelf(Self.MedDefenderBlockPush);
@@ -329,8 +358,10 @@ public abstract class Player : MonoBehaviour
             }
             else if (CurrentAtk == "Low")
             {
+                v = new Vector2(col.bounds.center.x + (col.bounds.size.x/2 * transform.localScale.x * -1.0f), LowHitBox.bounds.center.y);
                 if (Opponent.LowBlocking == true)
                 {
+                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
                     StartCoroutine(KnockBack(0.1f, Self.LowAttackerBlockPush, Self.LowDefenderBlockPush));
                  //   KnockBackSelf(Self.LowAttackerBlockPush);
                    // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);

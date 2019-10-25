@@ -168,7 +168,7 @@ public class CharSelectScr : MonoBehaviour
                 path = "SampleCharactePreFab";
                 break;
             case 7:
-                path = "SampleCharactePreFab";
+                path = "Klefstad";
                 break;
             case 8:
                 path = "SampleCharactePreFab";

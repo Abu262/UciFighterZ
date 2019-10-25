@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -909,6 +909,7 @@ GameObject:
   - component: {fileID: 1367420249}
   - component: {fileID: 1367420248}
   - component: {fileID: 1367420247}
+  - component: {fileID: 1367420251}
   - component: {fileID: 1367420250}
   m_Layer: 0
   m_Name: Player2
@@ -1028,6 +1029,7 @@ MonoBehaviour:
   HighHitBox: {fileID: 1367420249}
   MedHitBox: {fileID: 1367420248}
   LowHitBox: {fileID: 1367420247}
+  SpecHitBox: {fileID: 1367420251}
   PlayerBox: {fileID: 1367420245}
   RB: {fileID: 1367420250}
   HighBlocking: 0
@@ -1132,6 +1134,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
+--- !u!61 &1367420251
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367420242}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.8, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.99, y: 1.3}
+    newSize: {x: 2.26, y: 2.3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 1.3}
+  m_EdgeRadius: 0
 --- !u!1 &1385800296
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,6 +1176,7 @@ GameObject:
   - component: {fileID: 1385800302}
   - component: {fileID: 1385800304}
   - component: {fileID: 1385800301}
+  - component: {fileID: 1385800305}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -1365,11 +1394,38 @@ MonoBehaviour:
   HighHitBox: {fileID: 1385800300}
   MedHitBox: {fileID: 1385800303}
   LowHitBox: {fileID: 1385800302}
+  SpecHitBox: {fileID: 1385800305}
   PlayerBox: {fileID: 1385800299}
   RB: {fileID: 1385800301}
   HighBlocking: 0
   LowBlocking: 0
   Hit: 0
+--- !u!61 &1385800305
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385800296}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.99, y: 1.3}
+    newSize: {x: 4.79, y: 3.84}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.99, y: 1.3}
+  m_EdgeRadius: 0
 --- !u!1 &1422497546
 GameObject:
   m_ObjectHideFlags: 0

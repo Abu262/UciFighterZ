@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public Camera cam;
     public static GameManager instance;
     public GameObject HitEffect;
+    public GameObject BlockEffect;
 
 
     private void Awake()

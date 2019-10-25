@@ -28,7 +28,7 @@ public class SampleCharacterScr : Character
 
 
     //makes a bullet and shoots it
-    public override IEnumerator SpecAtk()
+    public override IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
 
         GameObject bullet = Instantiate(projectile, new Vector2(transform.position.x + 1.25f * transform.localScale.x, transform.position.y), Quaternion.identity) as GameObject;
