@@ -16,10 +16,11 @@ public class Thornton : Character
 
     public override IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
+        SpriteRenderer SP = SpecHitBox.GetComponent<SpriteRenderer>();
         int F = SpecAtkHit;
         if (Charges <= MaxCharges)
         {
-            
+            SP.sprite = SpecSprStartUp;
 
             while (F > 0)
             {
@@ -32,7 +33,7 @@ public class Thornton : Character
         else
         {
             SpecHitBox.enabled = true;
-
+            SP.sprite = SpecSprHit;
             F = F * 2;
             while (F > 0)
             {
