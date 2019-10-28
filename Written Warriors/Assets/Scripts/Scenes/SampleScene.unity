@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 465822264}
   - component: {fileID: 465822263}
   - component: {fileID: 465822262}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -661,7 +661,7 @@ GameObject:
   - component: {fileID: 929358249}
   - component: {fileID: 929358248}
   - component: {fileID: 929358247}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -911,7 +911,7 @@ GameObject:
   - component: {fileID: 1367420247}
   - component: {fileID: 1367420251}
   - component: {fileID: 1367420250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player2
   m_TagString: Player2
   m_Icon: {fileID: 0}
@@ -1035,6 +1035,7 @@ MonoBehaviour:
   HighBlocking: 0
   LowBlocking: 0
   Hit: 0
+  CurrentForm: {fileID: 0}
 --- !u!61 &1367420247
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1177,7 +1178,7 @@ GameObject:
   - component: {fileID: 1385800304}
   - component: {fileID: 1385800301}
   - component: {fileID: 1385800305}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player1
   m_TagString: Player1
   m_Icon: {fileID: 0}
@@ -1400,6 +1401,7 @@ MonoBehaviour:
   HighBlocking: 0
   LowBlocking: 0
   Hit: 0
+  CurrentForm: {fileID: 0}
 --- !u!61 &1385800305
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -48,6 +48,31 @@ public class CharSelectScr : MonoBehaviour
         MoveP2 = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
         MoveP1 = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
 
+        if (Input.GetKey(KeyCode.A))
+        {
+            MoveP1 = new Vector2(-1.0f, 0.0f);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            MoveP1 = new Vector2(1.0f, 0.0f);
+        }
+        else if (Input.GetKey(KeyCode.Z))
+        {
+            MoveP1 = new Vector2(0.0f, -1.0f);
+        }
+        if (Input.GetKey(KeyCode.J))
+        {
+            MoveP2 = new Vector2(-1.0f, 0.0f);
+        }
+        else if (Input.GetKey(KeyCode.K))
+        {
+            MoveP2 = new Vector2(1.0f, 0.0f);
+        }
+        else if (Input.GetKey(KeyCode.M))
+        {
+            MoveP2 = new Vector2(0.0f, -1.0f);
+        }
+
 
         if (ReadyP2 == false && turn2 == true && ((MoveP2.x > 0.8f || MoveP2.x < -0.8f) || (MoveP2.y > 0.8f || MoveP2.y < -0.8f)))
         {
@@ -76,25 +101,25 @@ public class CharSelectScr : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.F))
         {
             SelectP1();
         }
-        if (Input.GetKeyDown(KeyCode.Joystick2Button1))
+        if (Input.GetKeyDown(KeyCode.Joystick2Button1) || Input.GetKey(KeyCode.Semicolon))
         {
             SelectP2();
         }
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Joystick2Button3))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Joystick2Button3) || Input.GetKey(KeyCode.P) || Input.GetKey(KeyCode.R))
         {
             StartMatch();
         }
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.G))
         {
             BackP1();
         }
-        if (Input.GetKeyDown(KeyCode.Joystick2Button2))
+        if (Input.GetKeyDown(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.G))
         {
             BackP2();
         }

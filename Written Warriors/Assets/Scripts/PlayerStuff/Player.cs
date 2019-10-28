@@ -49,6 +49,7 @@ public abstract class Player : MonoBehaviour
 
     string CurrentAtk; //the string titling the current move
 
+    [SerializeField]
     SpriteRenderer CurrentForm;
 
     private void Start()
@@ -87,7 +88,8 @@ public abstract class Player : MonoBehaviour
 
     void Update()
     {
-        
+
+        Debug.Log(TakingAction);
         if (TakingAction == false)
         {
             //Move changes when the player waggles the analog stick
@@ -499,8 +501,9 @@ public abstract class Player : MonoBehaviour
         HP.text = Health.ToString();
         Hit = true; //when hit is on the player cant move
         StartCoroutine(HitAnimation(AttackerPush,DefenderPush));
+        TakingAction = false;
+        Opponent.TakingAction = false;
 
-       
     }
 
     void Explode(Vector2 position)
@@ -526,7 +529,8 @@ public abstract class Player : MonoBehaviour
         StartCoroutine(KnockBack(0.3f,AttackerPush,DefenderPush));
         yield return StartCoroutine(SlowDown());
         //we send them flying for about a minute
-        
+        TakingAction = false;
+        Opponent.TakingAction = false;
 
 
         Hit = false; //allow player to move now
@@ -597,7 +601,7 @@ public abstract class Player : MonoBehaviour
             TakingAction = true;
             Opponent.TakingAction = true;
             cam.orthographicSize -= 0.5f;
-            yield return null;
+           // yield return null;
         }
         yield return new WaitForSeconds(0.0025f);
         while (cam.orthographicSize < 10.0f)
@@ -605,7 +609,7 @@ public abstract class Player : MonoBehaviour
             TakingAction = true;
             Opponent.TakingAction = true;
             cam.orthographicSize += 0.5f;
-            yield return null;
+            //yield return null;
         }
 
 

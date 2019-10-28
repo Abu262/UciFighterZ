@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363433916390150168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.0950165, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,9 +95,9 @@ MonoBehaviour:
   SpecSprCoolDown: {fileID: 21300000, guid: 4f1ab9d19feab5848adec0933268b6a9, type: 3}
   SpecAtkCoolDown: 3
   SpecAttackerHitPush: 0
-  SpecDefenderHitPush: 0
+  SpecDefenderHitPush: 50
   SpecAttackerBlockPush: 0
-  SpecDefenderBlockPush: 0
+  SpecDefenderBlockPush: 25
   SpecHitBoxOffset: {x: 1.5, y: 0}
   SpecHitBoxSize: {x: 3, y: 0.5}
   SpecialStr: Middle

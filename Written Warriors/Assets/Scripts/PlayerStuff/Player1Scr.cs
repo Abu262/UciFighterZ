@@ -31,28 +31,49 @@ public class Player1Scr : Player
         //controller stuff
         while (true)
         {
-            if (Input.GetKey(KeyCode.Joystick1Button0))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.D))
             {
                 Debug.Log("Hello");
                 StartCoroutine(MedAttack());
             }
             //X
-            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.F))
             {
                 StartCoroutine(LowAttack());
             }
             //circle
-            if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.G))
             {
                 StartCoroutine(SpecAttack());
             }
             //triangle
-            if (Input.GetKeyDown(KeyCode.Joystick1Button3))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKey(KeyCode.R))
             {
                 StartCoroutine(HighAttack());
             }
 
-            Move = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
+            if (Input.GetKey(KeyCode.A))
+            {
+                Move = new Vector2(-1.0f, 0.0f);
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                Move = new Vector2(1.0f,0.0f);
+            }
+            else if (Input.GetKey(KeyCode.Z))
+            {
+                Move = new Vector2(0.0f,-1.0f);
+            }
+            else
+            {
+                Move = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
+            }
+
+
+
+
+
+
 
             yield return null;
         }
