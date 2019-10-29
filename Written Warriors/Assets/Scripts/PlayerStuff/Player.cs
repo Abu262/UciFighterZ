@@ -89,7 +89,7 @@ public abstract class Player : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(TakingAction);
+
         if (TakingAction == false)
         {
             //Move changes when the player waggles the analog stick
@@ -498,6 +498,7 @@ public abstract class Player : MonoBehaviour
         //but it isn't necessary
         
         Health -= 1;
+        FindObjectOfType<HealthDisplay>().ChangeHealth(gameObject.tag);
         HP.text = Health.ToString();
         Hit = true; //when hit is on the player cant move
         StartCoroutine(HitAnimation(AttackerPush,DefenderPush));
