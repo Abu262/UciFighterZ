@@ -49,6 +49,8 @@ public abstract class Player : MonoBehaviour
 
     string CurrentAtk; //the string titling the current move
 
+    private int BlockTime;
+    private bool CurrentBlocking = false;
     [SerializeField]
     SpriteRenderer CurrentForm;
 
@@ -348,7 +350,7 @@ public abstract class Player : MonoBehaviour
 
                 if (Opponent.HighBlocking == true)
                 {
-                    StartCoroutine(Blocking(Opponent.Self.StandBlockSpr));
+                    StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.HighBlockStun));
                     GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
                     StartCoroutine(KnockBack(0.1f, Self.HighAttackerBlockPush, Self.HighDefenderBlockPush));
                     //                    KnockBackSelf(Self.HighAttackerBlockPush);
@@ -371,7 +373,7 @@ public abstract class Player : MonoBehaviour
 
                 if (Opponent.HighBlocking == true)
                 {
-                    StartCoroutine(Blocking(Opponent.Self.StandBlockSpr));
+                    StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.MedBlockStun));
                     GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
                     KnockBack(0.1f, Self.MedAttackerBlockPush, Self.MedDefenderBlockPush);
                     //                    KnockBackSelf(Self.MedAttackerBlockPush);
@@ -396,7 +398,7 @@ public abstract class Player : MonoBehaviour
 
                 if (Opponent.LowBlocking == true)
                 {
-                    StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr));
+                    StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr, Self.LowBlockStun));
                     GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
                     StartCoroutine(KnockBack(0.1f, Self.LowAttackerBlockPush, Self.LowDefenderBlockPush));
                  //   KnockBackSelf(Self.LowAttackerBlockPush);
@@ -418,7 +420,7 @@ public abstract class Player : MonoBehaviour
                 {
                     if (Opponent.HighBlocking == true)
                     {
-                        StartCoroutine(Blocking(Opponent.Self.StandBlockSpr));
+                        StartCoroutine(Blocking(Opponent.Self.StandBlockSpr,Self.SpecBlockStun));
                         GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
@@ -437,7 +439,7 @@ public abstract class Player : MonoBehaviour
                 {
                     if (Opponent.HighBlocking == true)
                     {
-                        StartCoroutine(Blocking(Opponent.Self.StandBlockSpr));
+                        StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.SpecBlockStun));
                         GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
@@ -456,7 +458,7 @@ public abstract class Player : MonoBehaviour
                 {
                     if (Opponent.LowBlocking == true)
                     {
-                        StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr));
+                        StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr, Self.SpecBlockStun));
                         GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
@@ -554,15 +556,23 @@ public abstract class Player : MonoBehaviour
         yield return null;
     }
 
-    public IEnumerator Blocking(Sprite BlockSpr)
+    public IEnumerator Blocking(Sprite BlockSpr, int BlockStun)
     {
         Opponent.CurrentForm.sprite = BlockSpr;
-        float time = 0.1f;
-        while (time > 0.0f)
+        Opponent.TakingAction = true;
+        BlockTime = BlockStun;
+        if (CurrentBlocking == false)
         {
-            Opponent.CurrentForm.sprite = BlockSpr;
-            time -= Time.deltaTime;
-            yield return null;
+            CurrentBlocking = true;
+            while (BlockTime > 0)
+            {
+                Opponent.TakingAction = true;
+                Opponent.CurrentForm.sprite = BlockSpr;
+                BlockTime -= 1;
+                yield return null;
+            }
+            Opponent.TakingAction = false;
+            CurrentBlocking = false;
         }
 
 

@@ -35,6 +35,7 @@ public class Character : MonoBehaviour
     public int LowAtkHit = 6;   //Low Attack hit frames
     public Sprite LowSprCoolDown;
     public int LowAtkCoolDown = 3;   //Low Attack Cooldown frames
+    public int LowBlockStun = 60;
 
     //pushback on block and hit
     public float LowAttackerHitPush = 0.0f;
@@ -55,6 +56,7 @@ public class Character : MonoBehaviour
     public int MedAtkHit = 6;  //Med Attack hit frames
     public Sprite MedSprCoolDown;
     public int MedAtkCoolDown = 3;  //Med Attack Cooldown frames
+    public int MedBlockStun = 60;
 
     //pushback on block and hit
     public float MedAttackerHitPush = 0.0f;
@@ -77,6 +79,7 @@ public class Character : MonoBehaviour
     public int HighAtkHit = 6;  //High Attack hit frames
     public Sprite HighSprCoolDown;
     public int HighAtkCoolDown = 3; //High Attack Cooldown frames
+    public int HighBlockStun = 60;
 
     //pushback on block and hit
     public float HighAttackerHitPush = 0.0f;
@@ -98,6 +101,8 @@ public class Character : MonoBehaviour
     public int SpecAtkHit = 3; //Special Attack hit frames
     public Sprite SpecSprCoolDown;
     public int SpecAtkCoolDown = 3; //Special Attack Cooldown frames
+    public int SpecBlockStun = 60;
+
 
     public float SpecAttackerHitPush = 0.0f;
     public float SpecDefenderHitPush = 0.0f;
