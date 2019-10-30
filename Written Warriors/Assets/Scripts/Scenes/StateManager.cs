@@ -28,19 +28,13 @@ public class StateManager : MonoBehaviour
 
     IEnumerator startCountdown(float countdown)
     {
-        while (countdown > 0)
+        while (countdown > -1)
         {
-            if (countdown % 15 == 0)
+            if (countdown % 150 == 0)
                 StartCoroutine(shake(countdown));
-
-            /*countdown += .99f;
-            for (; countdown % 1 > -1; countdown -= .01f)
-            {
-                timerLabel.text = (countdown).ToString("0.00");
-                yield return new WaitForSeconds(.006f);
-            }*/
-            timerLabel.text = (countdown).ToString("0.00");
-            yield return new WaitForSeconds(1f);
+            
+            timerLabel.text = (countdown).ToString("0");
+            yield return new WaitForSeconds(.05f);
             countdown -= 1f;
         }
         yield return null;
@@ -48,36 +42,41 @@ public class StateManager : MonoBehaviour
 
     IEnumerator shake(float countdown)
     {
+
+        Color clr = shakeObj.GetComponent<Text>().color;
         for (int x = 0; x < 10; x++)
         {
-            shakeObj.GetComponent<Text>().color = Color.Lerp(Color.white, Color.red, 0.1f * x);
+            shakeObj.GetComponent<Text>().color = Color.Lerp(clr, Color.red, 0.1f * x);
             yield return new WaitForSeconds(0.05f);
         }
-        vUp = new Vector3(startingPos.x, startingPos.y + 7.0f * count, 0);
-        vDown = new Vector3(startingPos.x, startingPos.y - 7.0f * count, 0);
-        vRight = new Vector3(startingPos.x + 7.0f * count, startingPos.y, 0);
-        vLeft = new Vector3(startingPos.x - 7.0f * count, startingPos.y, 0);
+        vUp = new Vector3(startingPos.x, startingPos.y + 2.0f * count, 0);
+        vDown = new Vector3(startingPos.x, startingPos.y - 2.0f * count, 0);
+        vRight = new Vector3(startingPos.x + 5.0f * count, startingPos.y, 0);
+        vLeft = new Vector3(startingPos.x - 5.0f * count, startingPos.y, 0);
         for (int x = 0; x < 3 * count; x++)
         {
-            if (countdown == 15)
+            if (countdown <= 300)
             {
+                x += 2;
                 shakeObj.transform.position = vUp;
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.02f);
                 shakeObj.transform.position = vDown;
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.02f);
             }
             shakeObj.transform.position = vRight;
             yield return new WaitForSeconds(0.05f);
             shakeObj.transform.position = vLeft;
             yield return new WaitForSeconds(0.05f);
         }
+
+        shakeObj.transform.position = new Vector3(startingPos.x, startingPos.y, 0);
         count += 1;
         for (int x = 0; x < 10; x++)
         {
-            shakeObj.GetComponent<Text>().color = Color.Lerp(Color.red, Color.white, 0.1f * x);
+            shakeObj.GetComponent<Text>().color = Color.Lerp(Color.red, clr, 0.1f * x);
             yield return new WaitForSeconds(0.05f);
         }
-        shakeObj.GetComponent<Text>().color = Color.white;
+        shakeObj.GetComponent<Text>().color = clr;
         yield return null;
     }
 }
