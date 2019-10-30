@@ -18,7 +18,7 @@ public abstract class Player : MonoBehaviour
     public Camera cam;
     public bool IsP1 = false;
 //    public string Path = FindObjectOfType<GameManager>().ReturnPath();
-    public Text HP; //Temporary, displays the current HP
+   // public Text HP; //Temporary, displays the current HP
     public int Health; //Since the health value changes we want to copy the character health stat
     public PlayerControls Controls; //Player Controls
     
@@ -51,9 +51,9 @@ public abstract class Player : MonoBehaviour
 
     private int BlockTime;
     private bool CurrentBlocking = false;
-    [SerializeField]
-    SpriteRenderer CurrentForm;
-
+    
+    public SpriteRenderer CurrentForm;
+    public GameOver GO;
     private void Start()
     {
 
@@ -66,7 +66,7 @@ public abstract class Player : MonoBehaviour
         //setting some initial things
         Hit = false;
         Health = Self.Health;
-        HP.text = Health.ToString();
+       // HP.text = Health.ToString();
         HighBlocking = false;
         LowBlocking = false;
         RB = gameObject.GetComponent<Rigidbody2D>();
@@ -88,7 +88,7 @@ public abstract class Player : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
 
 
@@ -501,9 +501,13 @@ public abstract class Player : MonoBehaviour
         
         Health -= 1;
         FindObjectOfType<HealthDisplay>().ChangeHealth(gameObject.tag);
-        HP.text = Health.ToString();
+       // HP.text = Health.ToString();
         Hit = true; //when hit is on the player cant move
         StartCoroutine(HitAnimation(AttackerPush,DefenderPush));
+        if (Health <= 0)
+        {
+            StartCoroutine(GO.PlayerDies(opponentTag));
+        }
         TakingAction = false;
         Opponent.TakingAction = false;
 
@@ -604,32 +608,83 @@ public abstract class Player : MonoBehaviour
 
         TakingAction = true;
         Opponent.TakingAction = true;
-
+        float Vert =  cam.transform.position.y - 2f;
+        float OriginalSize = cam.orthographicSize;
         Time.timeScale = 0.01f;
         Time.fixedDeltaTime = 0.01f * 0.02f;
+        StartCoroutine(MoveCamera(1.75f));
         while (cam.orthographicSize > 3.0f)
         {
+                ////if (cam.transform.position.y > Vert)
+                ////{
+                ////    cam.transform.position += new Vector3(0.0f, -0.2f, 0.0f);
+                ////}
+
+
             TakingAction = true;
             Opponent.TakingAction = true;
             cam.orthographicSize -= 0.5f;
-           // yield return null;
+            yield return null;
         }
         yield return new WaitForSeconds(0.0025f);
-        while (cam.orthographicSize < 10.0f)
+        StartCoroutine(MoveCamera(-1.75f));
+        while (cam.orthographicSize < OriginalSize)
         {
+
+
+
             TakingAction = true;
             Opponent.TakingAction = true;
             cam.orthographicSize += 0.5f;
-            //yield return null;
+            yield return null;
         }
 
 
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = 1.0f * 0.02f;
-        cam.orthographicSize = 10.0f;
+        //cam.orthographicSize = 10.0f;
 
         TakingAction = false;
         Opponent.TakingAction = false;
         yield return null;
+    }
+
+    IEnumerator MoveCamera(float Distance)
+    {
+        if (Distance >= 0.0)
+        {
+            while (Distance >= 0.0f)
+            {
+
+                cam.transform.position += new Vector3(0.0f, -0.5f, 0.0f);
+                Distance -= 0.5f;
+                yield return null;
+            }
+        }
+        else
+        {
+            while (Distance <= 0.0f)
+            {
+
+                cam.transform.position += new Vector3(0.0f, 0.5f, 0.0f);
+                Distance += 0.5f;
+                yield return null;
+            }
+        }
+
+
+        yield return null;
+
+
+    }
+
+    public IEnumerator Freeze()
+    {
+        while (true)
+        {
+            TakingAction = true;
+            yield return null;
+        }
+
     }
 }

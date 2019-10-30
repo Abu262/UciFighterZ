@@ -15,6 +15,7 @@ public class StateManager : MonoBehaviour
     Vector3 vDown;
     Vector3 vRight;
     Vector3 vLeft;
+    public GameOver GO;
     int count = 1;
 
     // Start is called before the first frame update
@@ -37,6 +38,7 @@ public class StateManager : MonoBehaviour
             yield return new WaitForSeconds(.05f);
             countdown -= 1f;
         }
+        yield return StartCoroutine(GO.TimerEnds());
         yield return null;
     }
 

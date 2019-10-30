@@ -34,17 +34,31 @@ public class CameraMovement : MonoBehaviour
         Vector3 midpoint = (t1.position + t2.position) / 2f;
 
         // Distance between objects
-        //float distance = (t1.position - t2.position).magnitude;
+        float distance = (t1.position - t2.position).magnitude;
+
+        //if (distance >= 6f)
+        //{
+         //   cam.orthographicSize = distance;
+
+        //}
 
         // Move camera a certain distance
-        Vector3 cameraDestination = midpoint - cam.transform.forward * 5 * zoomFactor;
+        Vector3 newDistance = midpoint - cam.transform.forward * 5 * zoomFactor;
+        //if (newDistance.x >= -6f && newDistance.x <= 6f)
+        //{
+            Vector3 cameraDestination = midpoint - cam.transform.forward * 5 * zoomFactor;
+            cameraDestination = new Vector3(cameraDestination.x, cam.transform.position.y, cam.transform.position.z);
+            // Adjust ortho size if we're using one of those
+            // You specified to use MoveTowards instead of Slerp
+            cam.transform.position = Vector3.Slerp(cam.transform.position, cameraDestination, followTimeDelta);
 
-        // Adjust ortho size if we're using one of those
-        // You specified to use MoveTowards instead of Slerp
-        cam.transform.position = Vector3.Slerp(cam.transform.position, cameraDestination, followTimeDelta);
+            // Snap when close enough to prevent annoying slerp behavior
+            if ((cameraDestination - cam.transform.position).magnitude <= 0.05f)
+                cam.transform.position = cameraDestination;
+        //}
 
-        // Snap when close enough to prevent annoying slerp behavior
-        if ((cameraDestination - cam.transform.position).magnitude <= 0.05f)
-            cam.transform.position = cameraDestination;
+
+
+
     }
 }

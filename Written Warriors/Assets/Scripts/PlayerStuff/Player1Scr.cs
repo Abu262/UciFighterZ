@@ -31,23 +31,23 @@ public class Player1Scr : Player
         //controller stuff
         while (true)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.Alpha4))
             {
                 Debug.Log("Hello");
                 StartCoroutine(MedAttack());
             }
             //X
-            if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.R))
             {
                 StartCoroutine(LowAttack());
             }
             //circle
-            if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.G))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.T))
             {
                 StartCoroutine(SpecAttack());
             }
             //triangle
-            if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKey(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKey(KeyCode.Alpha5))
             {
                 StartCoroutine(HighAttack());
             }
@@ -56,11 +56,11 @@ public class Player1Scr : Player
             {
                 Move = new Vector2(-1.0f, 0.0f);
             }
-            else if (Input.GetKey(KeyCode.S))
+            else if (Input.GetKey(KeyCode.D))
             {
                 Move = new Vector2(1.0f,0.0f);
             }
-            else if (Input.GetKey(KeyCode.Z))
+            else if (Input.GetKey(KeyCode.S))
             {
                 Move = new Vector2(0.0f,-1.0f);
             }

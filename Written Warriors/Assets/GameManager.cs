@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    
 
     public string PathP1 = "SampleCharactePrFab";
     public string PathP2 = "SampleCharactePrFab";
@@ -20,7 +21,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
+        Application.targetFrameRate = 60;
+            
         if (instance == null)
         {
             instance = this;
