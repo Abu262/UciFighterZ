@@ -44,7 +44,18 @@ public class Klefstad : Character
         yield return null;
     }
 
+    public override IEnumerator RageMode()
+    {
+        HighAttackerBlockPush = 0.0f;
+        HighDefenderBlockPush = 0.0f;
+        MedDefenderBlockPush = 0.0f;
+        MedAttackerBlockPush = 0.0f;
+        LowAttackerBlockPush = 0.0f;
+        LowDefenderBlockPush = 0.0f;
+
+        yield return null;
+    }
 
 
-    
-}
+
+    }

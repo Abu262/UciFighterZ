@@ -27,7 +27,7 @@ public abstract class Player : MonoBehaviour
     public Player Opponent; //the opponent player object
     public string opponentTag; //The opponent tag, for checking collisions 
 
-    bool TakingAction = false;     //a bool to prvent the player from interupting their moves
+    bool TakingAction = true;     //a bool to prvent the player from interupting their moves
 
     public Vector2 Move;    //vector to move the player
 
@@ -61,8 +61,8 @@ public abstract class Player : MonoBehaviour
         PlayerBox.offset = new Vector2(Self.PlayerOffset.x, Self.PlayerOffset.y);
 
         Self.transform.position = transform.position;
-        CurrentForm = GetComponent<SpriteRenderer>();
         
+
         //setting some initial things
         Hit = false;
         Health = Self.Health;
@@ -82,10 +82,10 @@ public abstract class Player : MonoBehaviour
         //  ready = true;
     }
 
-    private void Awake()
-    {
-
-    }
+//    private void Awake()
+  //  {
+  //
+    //}
 
 
     void FixedUpdate()
@@ -151,10 +151,6 @@ public abstract class Player : MonoBehaviour
               
             }
         }
-        else
-        {
-            RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
-        }
 
 
 
@@ -174,7 +170,8 @@ public abstract class Player : MonoBehaviour
 
         if (Hit == true)
         {
-            RB.velocity = new Vector2(0.0f, 0.0f);
+//            TakingAction = true;
+            //RB.velocity = new Vector2(0.0f, 0.0f);
         }
 
     }
@@ -193,11 +190,12 @@ public abstract class Player : MonoBehaviour
         //if the player isn't already attacking
         if (TakingAction == false)
         {
+
             HighBlocking = false;
             LowBlocking = false;
             // state that they are attacking    
             TakingAction = true;
-
+            RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
 
 
             CurrentAtk = "High";
@@ -221,7 +219,7 @@ public abstract class Player : MonoBehaviour
             HighBlocking = false;
             LowBlocking = false;
             TakingAction = true;
-
+            RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
 
 
             CurrentAtk = "Middle";
@@ -244,7 +242,7 @@ public abstract class Player : MonoBehaviour
             HighBlocking = false;
             LowBlocking = false;
             TakingAction = true;
-
+            RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
 
 
             CurrentAtk = "Low";
@@ -272,7 +270,7 @@ public abstract class Player : MonoBehaviour
             Self.transform.localScale = transform.localScale;
 
             TakingAction = true;
-
+            RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
             CurrentForm.sprite = Self.SpecSprStartUp;
             yield return StartCoroutine(PlayStartUpFrames(Self.SpecAtkStartUp));
             CurrentForm.sprite = Self.SpecSprHit;
@@ -375,7 +373,7 @@ public abstract class Player : MonoBehaviour
                 {
                     StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.MedBlockStun));
                     GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
-                    KnockBack(0.1f, Self.MedAttackerBlockPush, Self.MedDefenderBlockPush);
+                    StartCoroutine(KnockBack(0.1f, Self.MedAttackerBlockPush, Self.MedDefenderBlockPush));
                     //                    KnockBackSelf(Self.MedAttackerBlockPush);
                     //                  Opponent.KnockBackSelf(Self.MedDefenderBlockPush);
                     Debug.Log("BLOCK");
@@ -680,11 +678,18 @@ public abstract class Player : MonoBehaviour
 
     public IEnumerator Freeze()
     {
-        while (true)
+            while (true)
         {
             TakingAction = true;
             yield return null;
         }
+
+    }
+    public IEnumerator UnFreeze()
+    {
+
+        TakingAction = false;
+        yield return null;
 
     }
 }

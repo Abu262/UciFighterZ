@@ -48,4 +48,11 @@ public class Thornton : Character
         }
         yield return null;
     }
+
+    public override IEnumerator RageMode()
+    {
+        MoveSpeed = MoveSpeed * 1.5f;
+        yield return null;
+    }
+
 }

@@ -121,7 +121,10 @@ public class Character : MonoBehaviour
         yield return null;
     }
     ////////////////////
+    public virtual IEnumerator RageMode()
+    {
+        yield return null;
+    }
 
-    
 
 }
