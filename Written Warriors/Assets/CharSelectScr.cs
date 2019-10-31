@@ -136,7 +136,7 @@ public class CharSelectScr : MonoBehaviour
     {
         ReadyP1 = true;
         //  FindObjectOfType<GameManager>().PathP1 = FindSource(indexP1);
-        manager.PathP1 = FindSource(indexP1);
+        FindObjectOfType<GameManager>().PathP1 = FindSource(indexP1);
         //FindObjectOfType<GameManager>().Self1 = (Character)Resources.Load(FindObjectOfType<GameManager>().PathP1, typeof(Character));
         //manager.Self1 = (Character)Resources.Load(manager.PathP1, typeof(Character));
        
@@ -146,7 +146,7 @@ public class CharSelectScr : MonoBehaviour
         ReadyP2 = true;
         //FindObjectOfType<GameManager>().PathP2 = FindSource(indexP2);
         //FindObjectOfType<GameManager>().Self2 = (Character)Resources.Load(FindObjectOfType<GameManager>().PathP2, typeof(Character));
-        manager.PathP2 = FindSource(indexP2);
+        FindObjectOfType<GameManager>().PathP2 = FindSource(indexP2);
         //manager.Self2 = (Character)Resources.Load(manager.PathP2, typeof(Character));
        
     }
