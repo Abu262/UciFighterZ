@@ -21,6 +21,7 @@ public class Player2Scr : Player
         Self = Resources.Load<Character>(FindObjectOfType<GameManager>().PathP2);
 
         opponentTag = "Player1";
+        CurrentForm.sprite = Self.StandSpr;
         //set hitbix sizes and positions
         //HighHitBox.offset = Self.HighHitBoxOffset;
         //MedHitBox.offset = Self.MedHitBoxOffset;

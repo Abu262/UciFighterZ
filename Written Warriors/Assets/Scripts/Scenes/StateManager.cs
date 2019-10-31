@@ -29,6 +29,7 @@ public class StateManager : MonoBehaviour
 
     IEnumerator startCountdown(float countdown)
     {
+        yield return StartCoroutine(GO.StartMatch());
         while (countdown > -1)
         {
             if (countdown % 150 == 0)

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 6464483582514816885}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4, y: -2.5, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,19 +46,19 @@ MonoBehaviour:
   Health: 3
   PlayerSize: {x: 1.25, y: 5}
   PlayerOffset: {x: 0, y: 0}
-  MoveSpeed: 50
+  MoveSpeed: 18
   StandSpr: {fileID: 21300000, guid: 3eb867e1d4d79ff48b4ba2bd75a6fc45, type: 3}
   CrouchSpr: {fileID: 21300000, guid: fbc3124a17945044f83803951e5ac91b, type: 3}
   StandBlockSpr: {fileID: 21300000, guid: 09ec6e36f080fa64eae1a3e33f3a5606, type: 3}
   CrouchBlockSpr: {fileID: 21300000, guid: 70eaf2540156b2a4ebdb1e2c1d7b4cac, type: 3}
   HitSpr: {fileID: 21300000, guid: 8715048add78f7340a0f872796c16c7c, type: 3}
   LowSprStartUp: {fileID: 21300000, guid: 79e6cf220e31beb4781713f97c664e65, type: 3}
-  LowAtkStartUp: 3
+  LowAtkStartUp: 11
   LowSprHit: {fileID: 21300000, guid: d03400df705da7c41acd7e9204f15e4d, type: 3}
-  LowAtkHit: 6
+  LowAtkHit: 3
   LowSprCoolDown: {fileID: 21300000, guid: 79e6cf220e31beb4781713f97c664e65, type: 3}
-  LowAtkCoolDown: 3
-  LowBlockStun: 60
+  LowAtkCoolDown: 11
+  LowBlockStun: 15
   LowAttackerHitPush: 10
   LowDefenderHitPush: 50
   LowAttackerBlockPush: 5
@@ -66,43 +66,43 @@ MonoBehaviour:
   LowHitBoxOffset: {x: 1.5, y: -1}
   LowHitBoxSize: {x: 3, y: 0.5}
   MedSprStartUp: {fileID: 21300000, guid: 4f1ab9d19feab5848adec0933268b6a9, type: 3}
-  MedAtkStartUp: 3
+  MedAtkStartUp: 18
   MedSprHit: {fileID: 21300000, guid: f85ed5932dff2674d918bf9a7417fd28, type: 3}
   MedAtkHit: 6
   MedSprCoolDown: {fileID: 21300000, guid: 4f1ab9d19feab5848adec0933268b6a9, type: 3}
-  MedAtkCoolDown: 3
+  MedAtkCoolDown: 11
   MedBlockStun: 60
-  MedAttackerHitPush: 0
-  MedDefenderHitPush: 0
-  MedAttackerBlockPush: 0
-  MedDefenderBlockPush: 0
+  MedAttackerHitPush: 20
+  MedDefenderHitPush: 40
+  MedAttackerBlockPush: 40
+  MedDefenderBlockPush: 5
   MedHitBoxOffset: {x: 1.5, y: 0}
   MedHitBoxSize: {x: 3, y: 0.5}
   HighSprStartUp: {fileID: 21300000, guid: 604e2c6fb1d23e741adf880845421a7f, type: 3}
-  HighAtkStartUp: 3
+  HighAtkStartUp: 15
   HighSprHit: {fileID: 21300000, guid: ad10bfb863e9b5b4ab1ff9ee02b7c44e, type: 3}
   HighAtkHit: 6
   HighSprCoolDown: {fileID: 21300000, guid: 604e2c6fb1d23e741adf880845421a7f, type: 3}
-  HighAtkCoolDown: 3
-  HighBlockStun: 60
-  HighAttackerHitPush: 0
-  HighDefenderHitPush: 0
-  HighAttackerBlockPush: 0
-  HighDefenderBlockPush: 0
+  HighAtkCoolDown: 11
+  HighBlockStun: 15
+  HighAttackerHitPush: 50
+  HighDefenderHitPush: 50
+  HighAttackerBlockPush: 50
+  HighDefenderBlockPush: 50
   HighHitBoxOffset: {x: 1.5, y: 1.25}
   HighHitBoxSize: {x: 3, y: 0.5}
   SpecSprStartUp: {fileID: 21300000, guid: 09ec6e36f080fa64eae1a3e33f3a5606, type: 3}
-  SpecAtkStartUp: 0
+  SpecAtkStartUp: 11
   SpecSprHit: {fileID: 21300000, guid: f85ed5932dff2674d918bf9a7417fd28, type: 3}
-  SpecAtkHit: 10
+  SpecAtkHit: 11
   SpecSprCoolDown: {fileID: 21300000, guid: 09ec6e36f080fa64eae1a3e33f3a5606, type: 3}
-  SpecAtkCoolDown: 0
+  SpecAtkCoolDown: 11
   SpecBlockStun: 60
-  SpecAttackerHitPush: 0
-  SpecDefenderHitPush: 0
-  SpecAttackerBlockPush: 0
-  SpecDefenderBlockPush: 0
+  SpecAttackerHitPush: 50
+  SpecDefenderHitPush: 50
+  SpecAttackerBlockPush: 50
+  SpecDefenderBlockPush: 50
   SpecHitBoxOffset: {x: 1.5, y: 0}
   SpecHitBoxSize: {x: 3, y: 0.5}
   SpecialStr: Unblockable
-  MaxCharges: 5
+  MaxCharges: 2

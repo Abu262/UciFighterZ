@@ -12,7 +12,7 @@ public class GameOver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -20,6 +20,25 @@ public class GameOver : MonoBehaviour
     {
         
     }
+
+    public IEnumerator StartMatch()
+    {
+
+        Announcement.text = "GET READY!";
+        yield return new WaitForSeconds(2.0f);
+        Announcement.text = "3";
+        yield return new WaitForSeconds(1.0f);
+        Announcement.text = "2";
+        yield return new WaitForSeconds(1.0f);
+        Announcement.text = "1";
+        yield return new WaitForSeconds(1.0f);
+        Announcement.text = "FIGHT!";
+        StartCoroutine(p1.UnFreeze());
+        StartCoroutine(p2.UnFreeze());
+        yield return new WaitForSeconds(1.0f);
+        Announcement.text = "";
+    }
+
 
     public IEnumerator PlayerDies(string opponentTag)
     {
@@ -60,6 +79,8 @@ public class GameOver : MonoBehaviour
         if (p1.Health == p2.Health)
         {
             Announcement.text = "SUDDEN DEATH!!!";
+            yield return new WaitForSeconds(1.0f);
+            Announcement.text = "";
             while (p1.Health > 1)
             {
                 p1.Health -= 1;
@@ -70,6 +91,7 @@ public class GameOver : MonoBehaviour
                 p2.Health -= 1;
                 FindObjectOfType<HealthDisplay>().ChangeHealth("Player2");
             }
+            yield return new WaitForSeconds(2.0f);
             //SUDDEN DEATH shit goes down
         }
         else

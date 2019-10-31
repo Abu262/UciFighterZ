@@ -41,4 +41,13 @@ public class Pattis : Character
         //      T.position = new Vector2(T.position.x + Spec)
         yield return null;
     }
+
+
+    public override IEnumerator RageMode()
+    {
+        SpecAtkStartUp = 0;
+        SpecAtkCoolDown = 0;
+        yield return null;
+
+    }
 }

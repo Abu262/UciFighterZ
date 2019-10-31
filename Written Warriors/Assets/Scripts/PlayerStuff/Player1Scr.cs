@@ -17,9 +17,9 @@ public class Player1Scr : Player
 
         Self = Resources.Load<Character>(FindObjectOfType<GameManager>().PathP1); ///load the character script
         opponentTag = "Player2";        //set the tag for the opponent
+        CurrentForm.sprite = Self.StandSpr;
 
 
-  
         StartCoroutine(FakeUpdate());   //start the "update"
 
 
