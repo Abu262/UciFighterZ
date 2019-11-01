@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameOver : MonoBehaviour
 {
-    public Text Announcement;
+    public TextMeshProUGUI Announcement;
     public Player p1;
     public Player p2;
-    // Start is called before the first frame update
-    void Start()
-    {
+    public GameObject HealthDisplay;
+    public GameObject GM;
 
+    // Start is called before the first frame update
+    void Awake()
+    {
+        GM = GameObject.FindGameObjectWithTag("GameManager");
     }
 
     // Update is called once per frame
@@ -24,7 +28,7 @@ public class GameOver : MonoBehaviour
     //this is called to announce when a match starts
     public IEnumerator StartMatch()
     {
-
+        yield return StartCoroutine(ShowRound());
         Announcement.text = "GET READY!";
         yield return new WaitForSeconds(2.0f); //waits 2 seconds
         Announcement.text = "3";
@@ -42,6 +46,33 @@ public class GameOver : MonoBehaviour
         Announcement.text = "";
     }
 
+    public IEnumerator ShowRound()
+    {
+        if (GM.GetComponent<GameManager>().w1 == 2 || GM.GetComponent<GameManager>().w2 == 2)
+        {
+            if (p1.GetComponent<Player>().Health > p2.GetComponent<Player>().Health)
+            {
+                Announcement.text = "MATCH COMPLETE: PLAYER 2 WINS!";
+            }
+            else
+            {
+                Announcement.text = "MATCH COMPLETE: PLAYER 1 WINS!";
+            }
+            yield return new WaitForSeconds(3.0f);
+            SceneManager.LoadScene(0);
+            yield return null;
+        }
+        else
+        {
+            HealthDisplay.GetComponent<HealthDisplay>().ResetHealth();
+            //p1.CurrentForm.color = new Color(1f, 1f, 1f, 255f);
+            //p2.CurrentForm.color = new Color(1f, 1f, 1f, 255f);
+            Announcement.text = "ROUND " + (GM.GetComponent<GameManager>().w1 + GM.GetComponent<GameManager>().w2 + 1).ToString();
+            yield return new WaitForSeconds(3.0f);
+            Announcement.text = "";
+        }
+    }
+
     //NICHOLE
     //////////////////////////////
     ///I  would recommend a few things
@@ -54,22 +85,6 @@ public class GameOver : MonoBehaviour
     ///    these two coroutines are ALWAYS called when a player dies, 
     ///    so putting this coroutine in here would make it easier on you
     //////////////////////////////
-    //hope this helps!
-
-
-    //*
-    //I dont know if you ever used a coroutine before. but here's an explanation
-    //Coroutines are like functions with a few perks.
-    //   They run EXACTLY in the order you write them
-    //   you can tell them to pause and wait before moving on
-    //   they run parallel to the rest of the game, so they're good for timers and stuff like that
-
-    //also they always have to have a yield call somewhere in them
-    //if you remember ICS 33 then think of it as an iterator, 
-    //it has to reach a yield no matter what path it takes
-
-    //I can explain it more if you want, feel free to ask
-
 
 
 
@@ -95,6 +110,7 @@ public class GameOver : MonoBehaviour
         {
             p2.CurrentForm.color = new Color(1f, 1f, 1f, 0f);
             Announcement.text = "PLAYER ONE WINS!!!";
+            GM.GetComponent<GameManager>().w1++;
             //for a round system this is where we would count a round for P2
             
 
@@ -103,11 +119,11 @@ public class GameOver : MonoBehaviour
         {
             p1.CurrentForm.color = new Color(1f, 1f, 1f, 0f);
             Announcement.text = "PLAYER TWO WINS!!!";
+            GM.GetComponent<GameManager>().w2++;
             //for a round system this is where we would count a round for P2
         }
         yield return new WaitForSeconds(3.0f);
-
-        SceneManager.LoadScene(0); //loads the main menu
+        SceneManager.LoadScene(1); //loads the main menu
 
         ////////
         yield return null; 
@@ -162,6 +178,7 @@ public class GameOver : MonoBehaviour
             if (p1.Health > p2.Health)
             {
                 Announcement.text = "PLAYER ONE WINS!!!";
+                GM.GetComponent<GameManager>().w1++;
                 //for a round system this is where we would count a round for P2
                 
             }
@@ -170,6 +187,7 @@ public class GameOver : MonoBehaviour
             if (p1.Health < p2.Health)
             {
                 Announcement.text = "PLAYER TWO WINS!!!";
+                GM.GetComponent<GameManager>().w2++;
                 //for a round system this is where we would count a round for P2
                 
             }
@@ -177,7 +195,7 @@ public class GameOver : MonoBehaviour
             yield return new WaitForSeconds(3.0f);
             //loads main menu
             //NOTE: for a round system we are going to want to remove this
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
         yield return null;
     }

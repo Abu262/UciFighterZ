@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour
 {
@@ -24,16 +25,30 @@ public class HealthDisplay : MonoBehaviour
     {
         if (player == "Player1")
         {
-            Destroy(Display1.transform.GetChild(HealthTracker1 - 1).gameObject);
+            Display1.transform.GetChild(HealthTracker1 - 1).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
+            //Destroy(Display1.transform.GetChild(HealthTracker1 - 1).gameObject);
             HealthTracker1 -= 1;
         }
         else
         {
-            Destroy(Display2.transform.GetChild(HealthTracker2 - 1).gameObject);
+            Display2.transform.GetChild(HealthTracker2 - 1).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
+            //Destroy(Display2.transform.GetChild(HealthTracker2 - 1).gameObject);
             HealthTracker2 -= 1;
         }
+    }
 
-
+    public void ResetHealth()
+    {
+        for (int i = 0; i < Display1.transform.childCount; ++i)
+        {
+            Display1.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 255f);
+        }
+        for (int i = 0; i < Display2.transform.childCount; ++i)
+        {
+            Display2.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 255f);
+        }
+        HealthTracker1 = 3;
+        HealthTracker2 = 3;
     }
 
 }

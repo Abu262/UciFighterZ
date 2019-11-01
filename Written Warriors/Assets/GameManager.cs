@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject HitEffect;
     public GameObject BlockEffect;
 
+    public int w1 = 0;
+    public int w2 = 0;
 
     private void Awake()
     {

@@ -27,7 +27,7 @@ public class StateManager : MonoBehaviour
         startingPos.y = shakeObj.transform.position.y;
     }
 
-    IEnumerator startCountdown(float countdown)
+    public IEnumerator startCountdown(float countdown)
     {
         yield return StartCoroutine(GO.StartMatch());
         while (countdown > -1)
