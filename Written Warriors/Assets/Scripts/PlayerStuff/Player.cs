@@ -54,6 +54,8 @@ public abstract class Player : MonoBehaviour
     
     public SpriteRenderer CurrentForm;
     public GameOver GO;
+
+    private bool Hitstun = false;
     private void Start()
     {
 
@@ -134,22 +136,39 @@ public abstract class Player : MonoBehaviour
             }
 
         //ducking stuff
-        if (Move.y <= -0.6f && !(Move.x >= 0.8f || Move.x <= -0.8f))
+        if (Hit == false)
             {
-                CurrentForm.sprite = Self.CrouchSpr;
-                PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y/2.0f);
-                PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y - 0.5f);
-                LowBlocking = true;
-                HighBlocking = false;
+                if (Move.y <= -0.6f && !(Move.x >= 0.8f || Move.x <= -0.8f))
+                {
+                    CurrentForm.sprite = Self.CrouchSpr;
+                    PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y / 2.0f);
+                    PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y - 0.5f);
+                    LowBlocking = true;
+                    HighBlocking = false;
+                }
+                else
+                {
+                    CurrentForm.sprite = Self.StandSpr;
+                    PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
+                    PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
+                    LowBlocking = false;
+
+                }
             }
         else
             {
-                CurrentForm.sprite = Self.StandSpr;
-                PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
-                PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
-                LowBlocking = false;
-              
+                Hitstun = true;
+                CurrentForm.sprite = Self.HitSpr;
+                StopCoroutine("PlayStartUpFrames");
+                StopCoroutine("PlayHitFrames");
+                StopCoroutine("PlayCooldownFrames");
+                StopCoroutine("HighAttack");
+                StopCoroutine("MedAttack");
+                StopCoroutine("LowAttack");
+                StopCoroutine("SpecAttack");
+
             }
+
         }
 
 
@@ -201,11 +220,28 @@ public abstract class Player : MonoBehaviour
             CurrentAtk = "High";
             CurrentForm.sprite = Self.HighSprStartUp;
             yield return StartCoroutine(PlayStartUpFrames(Self.HighAtkStartUp)); //start up frames
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
             CurrentForm.sprite = Self.HighSprHit;
             yield return StartCoroutine(PlayHitFrames(Self.HighAtkHit, HighHitBox)); //hit frames
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
             CurrentForm.sprite = Self.HighSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.HighAtkCoolDown)); //cooldown frames
-
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
 
             TakingAction = false; //attack is done
         }
@@ -225,11 +261,28 @@ public abstract class Player : MonoBehaviour
             CurrentAtk = "Middle";
             CurrentForm.sprite = Self.MedSprStartUp;
             yield return StartCoroutine(PlayStartUpFrames(Self.MedAtkStartUp));
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
             CurrentForm.sprite = Self.MedSprHit;
             yield return StartCoroutine(PlayHitFrames(Self.MedAtkHit, MedHitBox));
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
             CurrentForm.sprite = Self.MedSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.MedAtkCoolDown));
-
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
 
             TakingAction = false;
         }
@@ -248,11 +301,28 @@ public abstract class Player : MonoBehaviour
             CurrentAtk = "Low";
             CurrentForm.sprite = Self.LowSprStartUp;
             yield return StartCoroutine(PlayStartUpFrames(Self.LowAtkStartUp));
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
             CurrentForm.sprite = Self.LowSprHit;
             yield return StartCoroutine(PlayHitFrames(Self.LowAtkHit, LowHitBox));
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
             CurrentForm.sprite = Self.LowSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.LowAtkCoolDown));
-
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
 
             TakingAction = false;
         }
@@ -273,10 +343,28 @@ public abstract class Player : MonoBehaviour
             RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
             CurrentForm.sprite = Self.SpecSprStartUp;
             yield return StartCoroutine(PlayStartUpFrames(Self.SpecAtkStartUp));
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
             CurrentForm.sprite = Self.SpecSprHit;
             yield return StartCoroutine(Self.SpecAtk(SpecHitBox)); //call the special attack directly
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
             CurrentForm.sprite = Self.SpecSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.SpecAtkCoolDown));
+            if (Hitstun == true)
+            {
+                Hitstun = false;
+                TakingAction = false;
+                yield break;
+            }
             TakingAction = false;
         }
     }
@@ -353,13 +441,13 @@ public abstract class Player : MonoBehaviour
                     StartCoroutine(KnockBack(0.1f, Self.HighAttackerBlockPush, Self.HighDefenderBlockPush));
                     //                    KnockBackSelf(Self.HighAttackerBlockPush);
                     //                  Opponent.KnockBackSelf(Self.HighDefenderBlockPush);
-                    Debug.Log("BLOCK");
+                  //  Debug.Log("BLOCK");
                 }
                 else
                 {
                     Explode(v);
                     Opponent.TakeDamage(Self.HighAttackerHitPush,Self.HighDefenderHitPush);
-                    Debug.Log("HIT");
+                    //Debug.Log("HIT");
                     
                 }
             }
@@ -376,14 +464,14 @@ public abstract class Player : MonoBehaviour
                     StartCoroutine(KnockBack(0.1f, Self.MedAttackerBlockPush, Self.MedDefenderBlockPush));
                     //                    KnockBackSelf(Self.MedAttackerBlockPush);
                     //                  Opponent.KnockBackSelf(Self.MedDefenderBlockPush);
-                    Debug.Log("BLOCK");
+                    //Debug.Log("BLOCK");
                 }
                 
                 else
                 {
                     Explode(v);
                     Opponent.TakeDamage(Self.MedAttackerHitPush, Self.MedDefenderHitPush);
-                    Debug.Log("HIT");
+                    //Debug.Log("HIT");
                 }
 
             }
@@ -401,14 +489,14 @@ public abstract class Player : MonoBehaviour
                     StartCoroutine(KnockBack(0.1f, Self.LowAttackerBlockPush, Self.LowDefenderBlockPush));
                  //   KnockBackSelf(Self.LowAttackerBlockPush);
                    // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
-                    Debug.Log("BLOCK");
+                    //Debug.Log("BLOCK");
                 }
                 else
                 {
 
                     Opponent.TakeDamage(Self.LowAttackerHitPush, Self.LowDefenderHitPush);
                     Explode(v);
-                    Debug.Log("HIT");
+                    //Debug.Log("HIT");
                 }
             }
             else if (CurrentAtk == "Special")
@@ -423,14 +511,14 @@ public abstract class Player : MonoBehaviour
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
                         // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
-                        Debug.Log("BLOCK");
+                    //    Debug.Log("BLOCK");
                     }
                     else
                     {
 
                         Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
                         Explode(v);
-                        Debug.Log("HIT");
+                    //    Debug.Log("HIT");
                     }
                 }
                 else if (Self.SpecialStr == "Middle")
@@ -442,14 +530,14 @@ public abstract class Player : MonoBehaviour
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
                         // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
-                        Debug.Log("BLOCK");
+                    //    Debug.Log("BLOCK");
                     }
                     else
                     {
 
                         Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
                         Explode(v);
-                        Debug.Log("HIT");
+                    //    Debug.Log("HIT");
                     }
                 }
                 else if (Self.SpecialStr == "Low")
@@ -461,14 +549,14 @@ public abstract class Player : MonoBehaviour
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
                         // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
-                        Debug.Log("BLOCK");
+                    //    Debug.Log("BLOCK");
                     }
                     else
                     {
 
                         Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
                         Explode(v);
-                        Debug.Log("HIT");
+                     //   Debug.Log("HIT");
                     }
                 }
                 else
@@ -476,7 +564,7 @@ public abstract class Player : MonoBehaviour
 
                     Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
                     Explode(v);
-                    Debug.Log("HIT");
+                   // Debug.Log("HIT");
                 }
             }
 
@@ -497,6 +585,7 @@ public abstract class Player : MonoBehaviour
         //I want to impliment a slowdown/zoom in effect when someone gets hit
         //but it isn't necessary
         
+
         Health -= 1;
         FindObjectOfType<HealthDisplay>().ChangeHealth(gameObject.tag);
        // HP.text = Health.ToString();

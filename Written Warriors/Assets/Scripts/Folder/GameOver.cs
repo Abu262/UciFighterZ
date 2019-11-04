@@ -12,6 +12,7 @@ public class GameOver : MonoBehaviour
     public Player p2;
     public GameObject HealthDisplay;
     public GameObject GM;
+    public StateManager SM;
 
     // Start is called before the first frame update
     void Awake()
@@ -59,6 +60,8 @@ public class GameOver : MonoBehaviour
                 Announcement.text = "MATCH COMPLETE: PLAYER 1 WINS!";
             }
             yield return new WaitForSeconds(3.0f);
+            GM.GetComponent<GameManager>().w2 = 0;
+            GM.GetComponent<GameManager>().w1 = 0;
             SceneManager.LoadScene(0);
             yield return null;
         }
@@ -97,10 +100,12 @@ public class GameOver : MonoBehaviour
         StartCoroutine(p1.Freeze());
         StartCoroutine(p2.Freeze());
 
+        
         //announce KO
         Announcement.text = "K.O.";
+        SM.runTimer = false;
         yield return new WaitForSeconds(3.0f);
-
+        
 
         //whoever wins, we announce it
 

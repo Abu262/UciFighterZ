@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public Character Self1 { get => self1; set => self1 = value; }
     public Character Self2 { get => self2; set => self2 = value; }
     bool P1 = true;
-    public Camera cam;
+    //public Camera cam;
     public static GameManager instance;
     public GameObject HitEffect;
     public GameObject BlockEffect;

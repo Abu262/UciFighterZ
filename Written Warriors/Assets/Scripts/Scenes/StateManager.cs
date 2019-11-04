@@ -17,6 +17,7 @@ public class StateManager : MonoBehaviour
     Vector3 vLeft;
     public GameOver GO;
     int count = 1;
+    public bool runTimer = true;
 
     // Start is called before the first frame update
     void Start()
@@ -29,15 +30,20 @@ public class StateManager : MonoBehaviour
 
     public IEnumerator startCountdown(float countdown)
     {
+        runTimer = true;
         yield return StartCoroutine(GO.StartMatch());
-        while (countdown > -1)
+        while (countdown > -1 )
         {
             if (countdown % 150 == 0)
                 StartCoroutine(shake(countdown));
             
             timerLabel.text = (countdown).ToString("0");
             yield return new WaitForSeconds(.05f);
-            countdown -= 1f;
+            if (runTimer)
+            {
+                countdown -= 1f;
+            }
+
         }
         yield return StartCoroutine(GO.TimerEnds());
         yield return null;
@@ -82,4 +88,6 @@ public class StateManager : MonoBehaviour
         shakeObj.GetComponent<Text>().color = clr;
         yield return null;
     }
+
+
 }

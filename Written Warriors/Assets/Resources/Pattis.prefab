@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222539763000281454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.548456, y: -2.5, z: 0}
+  m_LocalPosition: {x: 4, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,13 +53,13 @@ MonoBehaviour:
   CrouchBlockSpr: {fileID: 21300000, guid: 70eaf2540156b2a4ebdb1e2c1d7b4cac, type: 3}
   HitSpr: {fileID: 21300000, guid: 8715048add78f7340a0f872796c16c7c, type: 3}
   LowSprStartUp: {fileID: 21300000, guid: 79e6cf220e31beb4781713f97c664e65, type: 3}
-  LowAtkStartUp: 3
+  LowAtkStartUp: 60
   LowSprHit: {fileID: 21300000, guid: d03400df705da7c41acd7e9204f15e4d, type: 3}
   LowAtkHit: 6
   LowSprCoolDown: {fileID: 21300000, guid: 79e6cf220e31beb4781713f97c664e65, type: 3}
   LowAtkCoolDown: 3
   LowBlockStun: 60
-  LowAttackerHitPush: 0
+  LowAttackerHitPush: 60
   LowDefenderHitPush: 0
   LowAttackerBlockPush: 0
   LowDefenderBlockPush: 0
