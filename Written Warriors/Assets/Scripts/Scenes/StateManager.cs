@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class StateManager : MonoBehaviour
 {
     public float currentCountdown;
-    public Text timerLabel;
+//    public Text timerLabel;
+    public TextMeshProUGUI timerLabel;
+    public TextMeshProUGUI timerLabelBG;
     public GameObject shakeObj;
+    public GameObject shakeObjBG;
     Vector2 startingPos;
+    Vector2 startingPosBG;
     Vector3 vUp;
     Vector3 vDown;
     Vector3 vRight;
@@ -23,9 +27,12 @@ public class StateManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(startCountdown(currentCountdown));
-        shakeObj.GetComponent<Text>().material.color = Color.white;
+        shakeObj.GetComponent<TextMeshProUGUI>().material.color = Color.white;
         startingPos.x = shakeObj.transform.position.x;
         startingPos.y = shakeObj.transform.position.y;
+        startingPosBG.x = shakeObjBG.transform.position.x;
+        startingPosBG.y = shakeObjBG.transform.position.y;
+
     }
 
     public IEnumerator startCountdown(float countdown)
@@ -38,6 +45,7 @@ public class StateManager : MonoBehaviour
                 StartCoroutine(shake(countdown));
             
             timerLabel.text = (countdown).ToString("0");
+            timerLabelBG.text = (countdown).ToString("0");
             yield return new WaitForSeconds(.05f);
             if (runTimer)
             {
@@ -49,19 +57,57 @@ public class StateManager : MonoBehaviour
         yield return null;
     }
 
+    public IEnumerator MoveTextIn(string FGtext, string BGtext, TextMeshProUGUI FG, TextMeshProUGUI BG, float ypos)
+    {
+        FG.GetComponent<Transform>().position = new Vector3(-1280 + 640f, ypos);
+        BG.GetComponent<Transform>().position = new Vector3(640f + 1280f, ypos);
+
+        FG.text = FGtext;
+        BG.text = BGtext;
+
+        while (FG.GetComponent<Transform>().position.x < 640.0f)
+        {
+            FG.GetComponent<Transform>().position += Vector3.right * 40f;
+            BG.GetComponent<Transform>().position -= Vector3.right * 40f;
+            yield return null;
+        }
+        FG.GetComponent<Transform>().position = new Vector3(640f, ypos);
+        BG.GetComponent<Transform>().position = new Vector3(640f, ypos);
+        yield return new WaitForSeconds(0.1f);
+        while (FG.GetComponent<Transform>().position.y <= ypos + 7.0f)
+        {
+            FG.GetComponent<Transform>().position += Vector3.up * 1.5f;
+            FG.GetComponent<Transform>().position -= Vector3.right * 1.5f;
+            BG.GetComponent<Transform>().position -= Vector3.up * 1.5f;
+            BG.GetComponent<Transform>().position += Vector3.right * 1.5f;
+            yield return null;
+        }
+
+        yield return null;
+    }
+
+
+
     IEnumerator shake(float countdown)
     {
 
-        Color clr = shakeObj.GetComponent<Text>().color;
+        Color clr = shakeObj.GetComponent<TextMeshProUGUI>().color;
+        Color clrBG = shakeObjBG.GetComponent<TextMeshProUGUI>().color;
         for (int x = 0; x < 10; x++)
         {
-            shakeObj.GetComponent<Text>().color = Color.Lerp(clr, Color.red, 0.1f * x);
+            shakeObj.GetComponent<TextMeshProUGUI>().color = Color.Lerp(clr, Color.red, 0.1f * x);
+            shakeObjBG.GetComponent<TextMeshProUGUI>().color = Color.Lerp(clr, Color.black, 0.1f * x);
             yield return new WaitForSeconds(0.05f);
         }
         vUp = new Vector3(startingPos.x, startingPos.y + 2.0f * count, 0);
         vDown = new Vector3(startingPos.x, startingPos.y - 2.0f * count, 0);
         vRight = new Vector3(startingPos.x + 5.0f * count, startingPos.y, 0);
         vLeft = new Vector3(startingPos.x - 5.0f * count, startingPos.y, 0);
+
+        vUp = new Vector3(startingPosBG.x, startingPosBG.y + 2.0f * count, 0);
+        vDown = new Vector3(startingPosBG.x, startingPosBG.y - 2.0f * count, 0);
+        vRight = new Vector3(startingPosBG.x + 5.0f * count, startingPosBG.y, 0);
+        vLeft = new Vector3(startingPosBG.x - 5.0f * count, startingPosBG.y, 0);
         for (int x = 0; x < 3 * count; x++)
         {
             if (countdown <= 300)
@@ -79,13 +125,16 @@ public class StateManager : MonoBehaviour
         }
 
         shakeObj.transform.position = new Vector3(startingPos.x, startingPos.y, 0);
+        shakeObjBG.transform.position = new Vector3(startingPosBG.x, startingPosBG.y, 0);
         count += 1;
         for (int x = 0; x < 10; x++)
         {
-            shakeObj.GetComponent<Text>().color = Color.Lerp(Color.red, clr, 0.1f * x);
+            shakeObj.GetComponent<TextMeshProUGUI>().color = Color.Lerp(Color.red, clr, 0.1f * x);
+            shakeObjBG.GetComponent<TextMeshProUGUI>().color = Color.Lerp(Color.red, clr, 0.1f * x);
             yield return new WaitForSeconds(0.05f);
         }
-        shakeObj.GetComponent<Text>().color = clr;
+        shakeObj.GetComponent<TextMeshProUGUI>().color = clr;
+        shakeObjBG.GetComponent<TextMeshProUGUI>().color = clrBG;
         yield return null;
     }
 

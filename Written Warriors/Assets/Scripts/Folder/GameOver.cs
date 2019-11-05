@@ -8,6 +8,7 @@ using TMPro;
 public class GameOver : MonoBehaviour
 {
     public TextMeshProUGUI Announcement;
+    public TextMeshProUGUI AnnouncementBG;
     public Player p1;
     public Player p2;
     public GameObject HealthDisplay;
@@ -29,22 +30,54 @@ public class GameOver : MonoBehaviour
     //this is called to announce when a match starts
     public IEnumerator StartMatch()
     {
+
+        yield return StartCoroutine(SM.MoveTextIn("GET READY", "GET READY", Announcement, AnnouncementBG, 360.0f));
+        yield return new WaitForSeconds(1.0f);
         yield return StartCoroutine(ShowRound());
-        Announcement.text = "GET READY!";
+        /*Announcement.text = "GET READY!";
         yield return new WaitForSeconds(2.0f); //waits 2 seconds
         Announcement.text = "3";
         yield return new WaitForSeconds(1.0f);  //1 second
         Announcement.text = "2";
         yield return new WaitForSeconds(1.0f);  // "
-        Announcement.text = "1";
-        yield return new WaitForSeconds(1.0f);  // "
+        Announcement.text = "1";*/
+        //yield return new WaitForSeconds(1.0f);  // "
         Announcement.text = "FIGHT!";
+        AnnouncementBG.text = "FIGHT!";
 
         //allows the playeers to fight
         StartCoroutine(p1.UnFreeze());
         StartCoroutine(p2.UnFreeze());
-        yield return new WaitForSeconds(1.0f); //waits another second before removing text
+
+        yield return new WaitForSeconds(0.05f);
+        Announcement.enabled = false;
+        AnnouncementBG.enabled = false;
+        yield return new WaitForSeconds(0.05f);
+        Announcement.enabled = true;
+        AnnouncementBG.enabled = true;
+        yield return new WaitForSeconds(0.05f);
+        Announcement.enabled = false;
+        AnnouncementBG.enabled = false;
+        yield return new WaitForSeconds(0.05f);
+        Announcement.enabled = true;
+        AnnouncementBG.enabled = true;
+        yield return new WaitForSeconds(0.05f);
+        Announcement.enabled = false;
+        AnnouncementBG.enabled = false;
+        yield return new WaitForSeconds(0.05f);
+        Announcement.enabled = true;
+        AnnouncementBG.enabled = true;
+        yield return new WaitForSeconds(0.05f);
+        Announcement.enabled = false;
+        AnnouncementBG.enabled = false;
+        yield return new WaitForSeconds(0.05f);
+        Announcement.enabled = true;
+        AnnouncementBG.enabled = true;
+        yield return new WaitForSeconds(0.6f);
+
+//        yield return new WaitForSeconds(1.0f); //waits another second before removing text
         Announcement.text = "";
+        AnnouncementBG.text = "";
     }
 
     public IEnumerator ShowRound()
@@ -54,10 +87,12 @@ public class GameOver : MonoBehaviour
             if (p1.GetComponent<Player>().Health > p2.GetComponent<Player>().Health)
             {
                 Announcement.text = "MATCH COMPLETE: PLAYER 2 WINS!";
+                AnnouncementBG.text = "MATCH COMPLETE: PLAYER 2 WINS!";
             }
             else
             {
                 Announcement.text = "MATCH COMPLETE: PLAYER 1 WINS!";
+                AnnouncementBG.text = "MATCH COMPLETE: PLAYER 1 WINS!";
             }
             yield return new WaitForSeconds(3.0f);
             GM.GetComponent<GameManager>().w2 = 0;
@@ -71,8 +106,9 @@ public class GameOver : MonoBehaviour
             //p1.CurrentForm.color = new Color(1f, 1f, 1f, 255f);
             //p2.CurrentForm.color = new Color(1f, 1f, 1f, 255f);
             Announcement.text = "ROUND " + (GM.GetComponent<GameManager>().w1 + GM.GetComponent<GameManager>().w2 + 1).ToString();
+            AnnouncementBG.text = "ROUND " + (GM.GetComponent<GameManager>().w1 + GM.GetComponent<GameManager>().w2 + 1).ToString();
             yield return new WaitForSeconds(3.0f);
-            Announcement.text = "";
+
         }
     }
 
@@ -103,6 +139,7 @@ public class GameOver : MonoBehaviour
         
         //announce KO
         Announcement.text = "K.O.";
+        AnnouncementBG.text = "K.O.";
         SM.runTimer = false;
         yield return new WaitForSeconds(3.0f);
         
@@ -115,6 +152,7 @@ public class GameOver : MonoBehaviour
         {
             p2.CurrentForm.color = new Color(1f, 1f, 1f, 0f);
             Announcement.text = "PLAYER ONE WINS!!!";
+            AnnouncementBG.text = "PLAYER ONE WINS!!!";
             GM.GetComponent<GameManager>().w1++;
             //for a round system this is where we would count a round for P2
             
@@ -124,6 +162,7 @@ public class GameOver : MonoBehaviour
         {
             p1.CurrentForm.color = new Color(1f, 1f, 1f, 0f);
             Announcement.text = "PLAYER TWO WINS!!!";
+            AnnouncementBG.text = "PLAYER TWO WINS!!!";
             GM.GetComponent<GameManager>().w2++;
             //for a round system this is where we would count a round for P2
         }
@@ -148,8 +187,10 @@ public class GameOver : MonoBehaviour
         if (p1.Health == p2.Health)
         {
             Announcement.text = "SUDDEN DEATH!!!";
-            yield return new WaitForSeconds(1.0f);
+            AnnouncementBG.text = "SUDDEN DEATH!!!";
+            yield return new WaitForSeconds(0.5f);
             Announcement.text = "";
+            AnnouncementBG.text = "";
 
             //set both hps equal to 1   
             while (p1.Health > 1)
@@ -174,6 +215,7 @@ public class GameOver : MonoBehaviour
             StartCoroutine(p1.Freeze());
             StartCoroutine(p2.Freeze());
             Announcement.text = "TIME";
+            AnnouncementBG.text = "TIME";
             //wait a few seconds
             yield return new WaitForSeconds(3.0f);
 
@@ -183,6 +225,7 @@ public class GameOver : MonoBehaviour
             if (p1.Health > p2.Health)
             {
                 Announcement.text = "PLAYER ONE WINS!!!";
+                AnnouncementBG.text = "PLAYER ONE WINS!!!";
                 GM.GetComponent<GameManager>().w1++;
                 //for a round system this is where we would count a round for P2
                 
@@ -192,6 +235,7 @@ public class GameOver : MonoBehaviour
             if (p1.Health < p2.Health)
             {
                 Announcement.text = "PLAYER TWO WINS!!!";
+                AnnouncementBG.text = "PLAYER TWO WINS!!!";
                 GM.GetComponent<GameManager>().w2++;
                 //for a round system this is where we would count a round for P2
                 

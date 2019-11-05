@@ -584,8 +584,8 @@ public abstract class Player : MonoBehaviour
     {
         //I want to impliment a slowdown/zoom in effect when someone gets hit
         //but it isn't necessary
-        
 
+     //   FindObjectOfType<AudioManager>().Play("Hit");
         Health -= 1;
         FindObjectOfType<HealthDisplay>().ChangeHealth(gameObject.tag);
        // HP.text = Health.ToString();
@@ -595,6 +595,15 @@ public abstract class Player : MonoBehaviour
         {
             StartCoroutine(GO.PlayerDies(opponentTag));
         }
+        if (Health == 1)
+        {
+            StartCoroutine(Self.RageMode());
+            GameObject Rage = Instantiate(Self.Aura, new Vector3(0,0,0), Quaternion.identity);
+            Rage.transform.SetParent(gameObject.transform, false);
+            Rage.SetActive(true);
+        }
+
+ 
         TakingAction = false;
         Opponent.TakingAction = false;
 
