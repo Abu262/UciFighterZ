@@ -19,6 +19,12 @@ public class StateManager : MonoBehaviour
     Vector3 vDown;
     Vector3 vRight;
     Vector3 vLeft;
+
+    Vector3 vUpBG;
+    Vector3 vDownBG;
+    Vector3 vRightBG;
+    Vector3 vLeftBG;
+
     public GameOver GO;
     int count = 1;
     public bool runTimer = true;
@@ -104,10 +110,10 @@ public class StateManager : MonoBehaviour
         vRight = new Vector3(startingPos.x + 5.0f * count, startingPos.y, 0);
         vLeft = new Vector3(startingPos.x - 5.0f * count, startingPos.y, 0);
 
-        vUp = new Vector3(startingPosBG.x, startingPosBG.y + 2.0f * count, 0);
-        vDown = new Vector3(startingPosBG.x, startingPosBG.y - 2.0f * count, 0);
-        vRight = new Vector3(startingPosBG.x + 5.0f * count, startingPosBG.y, 0);
-        vLeft = new Vector3(startingPosBG.x - 5.0f * count, startingPosBG.y, 0);
+        vUpBG = new Vector3(startingPosBG.x, startingPosBG.y + 2.0f * count, 0);
+        vDownBG = new Vector3(startingPosBG.x, startingPosBG.y - 2.0f * count, 0);
+        vRightBG = new Vector3(startingPosBG.x + 5.0f * count, startingPosBG.y, 0);
+        vLeftBG = new Vector3(startingPosBG.x - 5.0f * count, startingPosBG.y, 0);
         for (int x = 0; x < 3 * count; x++)
         {
             if (countdown <= 300)

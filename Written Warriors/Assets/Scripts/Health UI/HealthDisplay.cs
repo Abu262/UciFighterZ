@@ -43,8 +43,13 @@ public class HealthDisplay : MonoBehaviour
     {
         if (player == "Player1")
         {
-            Display1.transform.GetChild(HealthTracker1 - 1).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
-            //Destroy(Display1.transform.GetChild(HealthTracker1 - 1).gameObject);
+            if (HealthTracker1 - 1 >= 0)
+            {
+                Display1.transform.GetChild(HealthTracker1 - 1).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
+                //Destroy(Display1.transform.GetChild(HealthTracker1 - 1).gameObject);
+                
+
+            }
             HealthTracker1 -= 1;
             //if (HealthTracker1 == 1)
             //{
@@ -54,8 +59,13 @@ public class HealthDisplay : MonoBehaviour
         }
         else
         {
-            Display2.transform.GetChild(HealthTracker2 - 1).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
-            //Destroy(Display2.transform.GetChild(HealthTracker2 - 1).gameObject);
+            if (HealthTracker2 - 1 >= 0)
+            {
+                Display2.transform.GetChild(HealthTracker2 - 1).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
+                //Destroy(Display2.transform.GetChild(HealthTracker2 - 1).gameObject);
+                
+
+            }
             HealthTracker2 -= 1;
             //if (HealthTracker2 == 1)
             //{

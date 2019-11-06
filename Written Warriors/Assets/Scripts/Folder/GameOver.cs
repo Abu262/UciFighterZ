@@ -132,6 +132,8 @@ public class GameOver : MonoBehaviour
     //meaning that if player 2 died, then they call this script, meaning player 1 wins
     public IEnumerator PlayerDies(string opponentTag)
     {
+        p2.PlayerBox.enabled = false;
+        p1.PlayerBox.enabled = false;
         //Disables player controls since the battle is over
         StartCoroutine(p1.Freeze());
         StartCoroutine(p2.Freeze());
@@ -183,6 +185,7 @@ public class GameOver : MonoBehaviour
     public IEnumerator TimerEnds()
     {
 
+
         //if the players have equal health
         if (p1.Health == p2.Health)
         {
@@ -211,6 +214,8 @@ public class GameOver : MonoBehaviour
         //else someone has less hp
         else
         {
+            p2.PlayerBox.enabled = false;
+            p1.PlayerBox.enabled = false;
             //stop the players from fighting
             StartCoroutine(p1.Freeze());
             StartCoroutine(p2.Freeze());
