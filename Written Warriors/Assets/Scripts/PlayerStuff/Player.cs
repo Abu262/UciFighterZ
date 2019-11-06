@@ -591,7 +591,7 @@ public abstract class Player : MonoBehaviour
        // HP.text = Health.ToString();
         Hit = true; //when hit is on the player cant move
         StartCoroutine(HitAnimation(AttackerPush,DefenderPush));
-        if (Health <= 0)
+        if (Health == 0)
         {
             StartCoroutine(GO.PlayerDies(opponentTag));
         }
