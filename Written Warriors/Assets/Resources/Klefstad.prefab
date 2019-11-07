@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363433916390150168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalPosition: {x: -4, y: -2.5, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,3 +106,9 @@ MonoBehaviour:
   SpecHitBoxOffset: {x: 1.5, y: 0}
   SpecHitBoxSize: {x: 3, y: 0.5}
   SpecialStr: Middle
+  copyHighAttackerBlockPush: 0
+  copyHighDefenderBlockPush: 0
+  copyMedDefenderBlockPush: 0
+  copyMedAttackerBlockPush: 0
+  copyLowAttackerBlockPush: 0
+  copyLowDefenderBlockPush: 0

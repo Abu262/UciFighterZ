@@ -315,7 +315,7 @@ public class CharSelectScr : MonoBehaviour
                 {
                     if (indexP1 == 2)
                     {
-                        indexP1 = indexP1 - CharPics.Length / 2 + 1;
+                        indexP1 = 0;
                     }
                     else
                     {

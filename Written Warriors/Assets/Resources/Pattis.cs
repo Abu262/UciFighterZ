@@ -45,8 +45,8 @@ public class Pattis : Character
 
     public override IEnumerator RageMode()
     {
-        SpecAtkStartUp = 0;
-        SpecAtkCoolDown = 0;
+ //       SpecAtkStartUp = 0;
+   //     SpecAtkCoolDown = 0;
         yield return null;
 
     }

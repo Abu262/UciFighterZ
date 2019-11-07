@@ -51,7 +51,7 @@ public class Thornton : Character
 
     public override IEnumerator RageMode()
     {
-        MoveSpeed = MoveSpeed * 1.5f;
+        //MoveSpeed = MoveSpeed * 1.5f;
         yield return null;
     }
 

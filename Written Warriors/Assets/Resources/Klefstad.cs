@@ -4,10 +4,34 @@ using UnityEngine;
 
 public class Klefstad : Character
 {
+//    public float copyHighAttackerBlockPush;// = 0.0f;
+  //  public float copyHighDefenderBlockPush;// = 0.0f;
+ //   public float copyMedDefenderBlockPush;// = 0.0f;
+   // public float copyMedAttackerBlockPush;// = 0.0f;
+ //   public float copyLowAttackerBlockPush;// = 0.0f;
+ //   public float copyLowDefenderBlockPush;// = 0.0f;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+/*        copyHighAttackerBlockPush = HighAttackerBlockPush;
+        copyHighDefenderBlockPush = HighDefenderBlockPush;
+        copyMedAttackerBlockPush = MedAttackerBlockPush;
+        copyMedDefenderBlockPush = MedDefenderBlockPush;
+        copyLowAttackerBlockPush = LowAttackerBlockPush;
+        copyLowDefenderBlockPush = LowDefenderBlockPush;*/
+
+    }
+
+    private void Start()
+    {
+/*        HighAttackerBlockPush = copyHighAttackerBlockPush;
+        HighDefenderBlockPush = copyHighDefenderBlockPush;
+        MedAttackerBlockPush = copyMedAttackerBlockPush;
+        MedDefenderBlockPush = copyMedDefenderBlockPush;
+        LowAttackerBlockPush = copyLowAttackerBlockPush;
+        LowDefenderBlockPush = copyLowDefenderBlockPush;*/
+
     }
 
     // Update is called once per frame
@@ -46,12 +70,12 @@ public class Klefstad : Character
 
     public override IEnumerator RageMode()
     {
-        HighAttackerBlockPush = 0.0f;
-        HighDefenderBlockPush = 0.0f;
-        MedDefenderBlockPush = 0.0f;
-        MedAttackerBlockPush = 0.0f;
-        LowAttackerBlockPush = 0.0f;
-        LowDefenderBlockPush = 0.0f;
+ //       HighAttackerBlockPush = 0.0f;
+   //     HighDefenderBlockPush = 0.0f;
+     //   MedDefenderBlockPush = 0.0f;
+   //     MedAttackerBlockPush = 0.0f;
+     //   LowAttackerBlockPush = 0.0f;
+      //  LowDefenderBlockPush = 0.0f;
 
         yield return null;
     }

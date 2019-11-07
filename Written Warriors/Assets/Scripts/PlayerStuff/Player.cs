@@ -56,6 +56,8 @@ public abstract class Player : MonoBehaviour
     public GameOver GO;
 
     private bool Hitstun = false;
+    private bool KnockingBack = false;
+
     private void Start()
     {
 
@@ -642,18 +644,23 @@ public abstract class Player : MonoBehaviour
 
     IEnumerator KnockBack(float time, float AttackerPush, float DefenderPush)
     {
-
-
-        while (time > 0.0f)
+        if (KnockingBack == false)
         {
+            KnockingBack = true;
+            while (time > 0.0f)
+            {
 
-            RB.velocity = AttackerPush * transform.localScale * -1.0f;
-            Opponent.RB.velocity = DefenderPush * Opponent.transform.localScale * -1.0f;
-            time -= Time.deltaTime;
+                RB.velocity = AttackerPush * transform.localScale * -1.0f;
+                Opponent.RB.velocity = DefenderPush * Opponent.transform.localScale * -1.0f;
+                time -= Time.deltaTime;
+                yield return null;
+
+            }
+            KnockingBack = false;
             yield return null;
-
         }
         yield return null;
+
     }
 
     public IEnumerator Blocking(Sprite BlockSpr, int BlockStun)

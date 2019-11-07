@@ -73,9 +73,9 @@ MonoBehaviour:
   MedSprCoolDown: {fileID: 21300000, guid: 4f1ab9d19feab5848adec0933268b6a9, type: 3}
   MedAtkCoolDown: 11
   MedBlockStun: 60
-  MedAttackerHitPush: 20
-  MedDefenderHitPush: 40
-  MedAttackerBlockPush: 40
+  MedAttackerHitPush: 0
+  MedDefenderHitPush: 1
+  MedAttackerBlockPush: 0
   MedDefenderBlockPush: 5
   MedHitBoxOffset: {x: 1.5, y: 0}
   MedHitBoxSize: {x: 3, y: 0.5}
