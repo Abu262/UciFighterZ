@@ -54,42 +54,42 @@ MonoBehaviour:
   CrouchBlockSpr: {fileID: 21300000, guid: 70eaf2540156b2a4ebdb1e2c1d7b4cac, type: 3}
   HitSpr: {fileID: 21300000, guid: 8715048add78f7340a0f872796c16c7c, type: 3}
   LowSprStartUp: {fileID: 21300000, guid: 79e6cf220e31beb4781713f97c664e65, type: 3}
-  LowAtkStartUp: 3
+  LowAtkStartUp: 2
   LowSprHit: {fileID: 21300000, guid: d03400df705da7c41acd7e9204f15e4d, type: 3}
   LowAtkHit: 6
   LowSprCoolDown: {fileID: 21300000, guid: 79e6cf220e31beb4781713f97c664e65, type: 3}
-  LowAtkCoolDown: 3
-  LowBlockStun: 60
-  LowAttackerHitPush: 0
-  LowDefenderHitPush: 0
-  LowAttackerBlockPush: 0
-  LowDefenderBlockPush: 0
+  LowAtkCoolDown: 2
+  LowBlockStun: 6
+  LowAttackerHitPush: 25
+  LowDefenderHitPush: 25
+  LowAttackerBlockPush: 2.5
+  LowDefenderBlockPush: 1
   LowHitBoxOffset: {x: 1.5, y: -1}
   LowHitBoxSize: {x: 3, y: 0.5}
   MedSprStartUp: {fileID: 21300000, guid: 4f1ab9d19feab5848adec0933268b6a9, type: 3}
-  MedAtkStartUp: 3
+  MedAtkStartUp: 10
   MedSprHit: {fileID: 21300000, guid: f85ed5932dff2674d918bf9a7417fd28, type: 3}
-  MedAtkHit: 15
+  MedAtkHit: 6
   MedSprCoolDown: {fileID: 21300000, guid: 4f1ab9d19feab5848adec0933268b6a9, type: 3}
-  MedAtkCoolDown: 3
-  MedBlockStun: 60
-  MedAttackerHitPush: 0
-  MedDefenderHitPush: 0
-  MedAttackerBlockPush: 0
-  MedDefenderBlockPush: 0
+  MedAtkCoolDown: 8
+  MedBlockStun: 6
+  MedAttackerHitPush: 25
+  MedDefenderHitPush: 25
+  MedAttackerBlockPush: 5
+  MedDefenderBlockPush: 1
   MedHitBoxOffset: {x: 1.5, y: 0}
   MedHitBoxSize: {x: 3, y: 0.5}
   HighSprStartUp: {fileID: 21300000, guid: 604e2c6fb1d23e741adf880845421a7f, type: 3}
-  HighAtkStartUp: 3
+  HighAtkStartUp: 2
   HighSprHit: {fileID: 21300000, guid: ad10bfb863e9b5b4ab1ff9ee02b7c44e, type: 3}
   HighAtkHit: 6
   HighSprCoolDown: {fileID: 21300000, guid: 604e2c6fb1d23e741adf880845421a7f, type: 3}
-  HighAtkCoolDown: 3
-  HighBlockStun: 60
-  HighAttackerHitPush: 0
-  HighDefenderHitPush: 0
-  HighAttackerBlockPush: 0
-  HighDefenderBlockPush: 0
+  HighAtkCoolDown: 2
+  HighBlockStun: 6
+  HighAttackerHitPush: 25
+  HighDefenderHitPush: 25
+  HighAttackerBlockPush: 1.5
+  HighDefenderBlockPush: 1
   HighHitBoxOffset: {x: 1.5, y: 1.25}
   HighHitBoxSize: {x: 3, y: 0.5}
   SpecSprStartUp: {fileID: 21300000, guid: 4f1ab9d19feab5848adec0933268b6a9, type: 3}
