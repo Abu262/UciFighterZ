@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363433916390150168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: -2.5, z: 0}
+  m_LocalPosition: {x: -4.8366776, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,7 +79,7 @@ MonoBehaviour:
   MedAttackerBlockPush: 9
   MedDefenderBlockPush: 1
   MedHitBoxOffset: {x: 1.5, y: 0}
-  MedHitBoxSize: {x: 3.5, y: 0.5}
+  MedHitBoxSize: {x: 4.5, y: 0.5}
   HighSprStartUp: {fileID: 21300000, guid: abaabc08f9d0ff7478a4bee14adf8246, type: 3}
   HighAtkStartUp: 5
   HighSprHit: {fileID: 21300000, guid: fc950711b1054b14e91cf236e0ec96fc, type: 3}
@@ -92,12 +92,12 @@ MonoBehaviour:
   HighAttackerBlockPush: 2.5
   HighDefenderBlockPush: 1
   HighHitBoxOffset: {x: 1.5, y: 1.25}
-  HighHitBoxSize: {x: 3, y: 0.5}
-  SpecSprStartUp: {fileID: 21300000, guid: 4f1ab9d19feab5848adec0933268b6a9, type: 3}
+  HighHitBoxSize: {x: 2.5, y: 0.5}
+  SpecSprStartUp: {fileID: 21300000, guid: 7704fa8a689ab7b4abb02164a5c607fc, type: 3}
   SpecAtkStartUp: 8
-  SpecSprHit: {fileID: 21300000, guid: f85ed5932dff2674d918bf9a7417fd28, type: 3}
+  SpecSprHit: {fileID: 21300000, guid: 1cfa02f32baecfb46b6343fe9c971eb5, type: 3}
   SpecAtkHit: 30
-  SpecSprCoolDown: {fileID: 21300000, guid: 4f1ab9d19feab5848adec0933268b6a9, type: 3}
+  SpecSprCoolDown: {fileID: 21300000, guid: e006c865e5c3fb34b953c292dc064c4a, type: 3}
   SpecAtkCoolDown: 12
   SpecBlockStun: 43
   SpecAttackerHitPush: 25
