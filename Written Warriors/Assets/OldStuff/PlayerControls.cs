@@ -1,11 +1,12 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/PlayerControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/OldStuff/PlayerControls.inputactions'
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class PlayerControls : IInputActionCollection
+public class PlayerControls : IInputActionCollection, IDisposable
 {
     private InputActionAsset asset;
     public PlayerControls()
@@ -228,7 +229,7 @@ public class PlayerControls : IInputActionCollection
         m_Gameplay_Move1 = m_Gameplay.FindAction("Move1", throwIfNotFound: true);
     }
 
-    ~PlayerControls()
+    public void Dispose()
     {
         UnityEngine.Object.Destroy(asset);
     }

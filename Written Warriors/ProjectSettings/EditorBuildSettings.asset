@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scripts/Scenes/CharacterSelect.unity
+    path: Assets/Scenes/CharacterSelect.unity
     guid: a40da1990a4aba14baf540603d55fd77
   - enabled: 1
-    path: Assets/Scripts/Scenes/SampleScene.unity
+    path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scripts/Scenes/How2Play.unity
+    path: Assets/Scenes/How2Play.unity
     guid: 89f38795dd72dcf43a60434f75bd401a
   - enabled: 1
-    path: Assets/Scripts/Scenes/Controls.unity
+    path: Assets/Scenes/Controls.unity
     guid: c42c4337583c73049bdf22031709c565
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f111ebf49691fed4388d019dc2c0b263,
