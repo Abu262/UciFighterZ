@@ -20,8 +20,8 @@ public class Character : MonoBehaviour
     public float MoveSpeed = 50.0f; //Move speed
                                     ////////////////////
 
-    public GameObject Aura; 
-
+    public GameObject Aura;
+    public string CharName;
 
     public Sprite StandSpr;
     public Sprite CrouchSpr;

@@ -58,9 +58,11 @@ public abstract class Player : MonoBehaviour
     private bool Hitstun = false;
     private bool KnockingBack = false;
 
+    float OriginalSize;// = cam.orthographicSize;
+
     private void Start()
     {
-
+        OriginalSize = cam.orthographicSize;
         PlayerBox.size = new Vector2(Self.PlayerSize.x, Self.PlayerSize.y);
         PlayerBox.offset = new Vector2(Self.PlayerOffset.x, Self.PlayerOffset.y);
 
@@ -625,6 +627,9 @@ public abstract class Player : MonoBehaviour
     //this function isnt working quite how I want it to but it works well enough right now
     IEnumerator HitAnimation(float AttackerPush, float DefenderPush)
     {
+        TakingAction = true;
+        Opponent.TakingAction = true;
+        
         CurrentForm.sprite = Self.HitSpr;
         //stop both players from moving
         Opponent.RB.velocity = new Vector2(0.0f, 0.0f);
@@ -639,6 +644,8 @@ public abstract class Player : MonoBehaviour
 
 
         Hit = false; //allow player to move now
+        TakingAction = false;
+        Opponent.TakingAction = false;
         yield return null;
     }
 
@@ -712,43 +719,49 @@ public abstract class Player : MonoBehaviour
         TakingAction = true;
         Opponent.TakingAction = true;
         float Vert =  cam.transform.position.y - 2f;
-        float OriginalSize = cam.orthographicSize;
+        
         Time.timeScale = 0.01f;
         Time.fixedDeltaTime = 0.01f * 0.02f;
-        StartCoroutine(MoveCamera(1.75f));
-        while (cam.orthographicSize > 3.0f)
+
+        if (Time.timeScale < 1.0f)
         {
+            StartCoroutine(MoveCamera(1.75f));
+            while (cam.orthographicSize > 3.0f)
+            {
                 ////if (cam.transform.position.y > Vert)
                 ////{
                 ////    cam.transform.position += new Vector3(0.0f, -0.2f, 0.0f);
                 ////}
 
 
-            TakingAction = true;
-            Opponent.TakingAction = true;
-            cam.orthographicSize -= 0.5f;
-            yield return null;
+                TakingAction = true;
+                Opponent.TakingAction = true;
+                cam.orthographicSize -= 0.5f;
+                yield return null;
+            }
+            cam.orthographicSize = 3.0f;
+            yield return new WaitForSeconds(0.0025f);
+            StartCoroutine(MoveCamera(-1.75f));
+            while (cam.orthographicSize < OriginalSize)
+            {
+
+
+
+                TakingAction = true;
+                Opponent.TakingAction = true;
+                cam.orthographicSize += 0.5f;
+                yield return null;
+            }
+            cam.orthographicSize = OriginalSize;
+
+            Time.timeScale = 1.0f;
+            Time.fixedDeltaTime = 1.0f * 0.02f;
+            //cam.orthographicSize = 10.0f;
+
+            TakingAction = false;
+            Opponent.TakingAction = false;
         }
-        yield return new WaitForSeconds(0.0025f);
-        StartCoroutine(MoveCamera(-1.75f));
-        while (cam.orthographicSize < OriginalSize)
-        {
 
-
-
-            TakingAction = true;
-            Opponent.TakingAction = true;
-            cam.orthographicSize += 0.5f;
-            yield return null;
-        }
-
-
-        Time.timeScale = 1.0f;
-        Time.fixedDeltaTime = 1.0f * 0.02f;
-        //cam.orthographicSize = 10.0f;
-
-        TakingAction = false;
-        Opponent.TakingAction = false;
         yield return null;
     }
 

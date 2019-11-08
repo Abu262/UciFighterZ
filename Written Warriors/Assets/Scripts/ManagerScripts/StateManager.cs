@@ -63,13 +63,13 @@ public class StateManager : MonoBehaviour
         yield return null;
     }
 
-    public IEnumerator MoveTextIn(string FGtext, string BGtext, TextMeshProUGUI FG, TextMeshProUGUI BG, float ypos)
+    public IEnumerator MoveTextIn(string FGtext, TextMeshProUGUI FG, TextMeshProUGUI BG, float ypos)
     {
         FG.GetComponent<Transform>().position = new Vector3(-1280 + 640f, ypos);
         BG.GetComponent<Transform>().position = new Vector3(640f + 1280f, ypos);
 
         FG.text = FGtext;
-        BG.text = BGtext;
+        BG.text = FGtext;
 
         while (FG.GetComponent<Transform>().position.x < 640.0f)
         {

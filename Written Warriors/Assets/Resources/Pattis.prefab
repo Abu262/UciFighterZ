@@ -48,6 +48,7 @@ MonoBehaviour:
   PlayerOffset: {x: 0, y: 0}
   MoveSpeed: 18
   Aura: {fileID: 1915751818211251191, guid: d7a0fdd7720d7ed48acc102f7df60765, type: 3}
+  CharName: Pattis
   StandSpr: {fileID: 21300000, guid: 3eb867e1d4d79ff48b4ba2bd75a6fc45, type: 3}
   CrouchSpr: {fileID: 21300000, guid: fbc3124a17945044f83803951e5ac91b, type: 3}
   StandBlockSpr: {fileID: 21300000, guid: 09ec6e36f080fa64eae1a3e33f3a5606, type: 3}

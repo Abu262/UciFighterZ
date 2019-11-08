@@ -9,6 +9,13 @@ public class GameOver : MonoBehaviour
 {
     public TextMeshProUGUI Announcement;
     public TextMeshProUGUI AnnouncementBG;
+
+    public TextMeshProUGUI PlayerName;
+    public TextMeshProUGUI PlayerNameBG;
+    public TextMeshProUGUI PlayerName2;
+    public TextMeshProUGUI PlayerName2BG;
+
+
     public Player p1;
     public Player p2;
     public GameObject HealthDisplay;
@@ -18,6 +25,7 @@ public class GameOver : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+ 
         GM = GameObject.FindGameObjectWithTag("GameManager");
     }
 
@@ -30,8 +38,11 @@ public class GameOver : MonoBehaviour
     //this is called to announce when a match starts
     public IEnumerator StartMatch()
     {
-
-        yield return StartCoroutine(SM.MoveTextIn("GET READY", "GET READY", Announcement, AnnouncementBG, 360.0f));
+        PlayerName.text = p1.Self.CharName + " " + GM.GetComponent<GameManager>().w1.ToString();
+        PlayerNameBG.text = p1.Self.CharName + " " + GM.GetComponent<GameManager>().w1.ToString();
+        PlayerName2.text = p2.Self.CharName + " " + GM.GetComponent<GameManager>().w2.ToString();
+        PlayerName2BG.text = p2.Self.CharName + " " + GM.GetComponent<GameManager>().w2.ToString();
+        yield return StartCoroutine(SM.MoveTextIn("GET READY", Announcement, AnnouncementBG, 360.0f));
         yield return new WaitForSeconds(1.0f);
         yield return StartCoroutine(ShowRound());
         /*Announcement.text = "GET READY!";
@@ -132,8 +143,8 @@ public class GameOver : MonoBehaviour
     //meaning that if player 2 died, then they call this script, meaning player 1 wins
     public IEnumerator PlayerDies(string opponentTag)
     {
-        p2.PlayerBox.enabled = false;
-        p1.PlayerBox.enabled = false;
+//        p2.PlayerBox.enabled = false;
+  //      p1.PlayerBox.enabled = false;
         //Disables player controls since the battle is over
         StartCoroutine(p1.Freeze());
         StartCoroutine(p2.Freeze());
@@ -156,8 +167,13 @@ public class GameOver : MonoBehaviour
             Announcement.text = "PLAYER ONE WINS!!!";
             AnnouncementBG.text = "PLAYER ONE WINS!!!";
             GM.GetComponent<GameManager>().w1++;
+            PlayerName.text = p1.Self.CharName + " " + GM.GetComponent<GameManager>().w1.ToString();
+            PlayerNameBG.text = p1.Self.CharName + " " + GM.GetComponent<GameManager>().w1.ToString();
+            yield return new WaitForSeconds(1.0f);
+            yield return StartCoroutine(CheckWinner());
+
             //for a round system this is where we would count a round for P2
-            
+
 
         }
         else//opponentTag == Player2
@@ -166,9 +182,13 @@ public class GameOver : MonoBehaviour
             Announcement.text = "PLAYER TWO WINS!!!";
             AnnouncementBG.text = "PLAYER TWO WINS!!!";
             GM.GetComponent<GameManager>().w2++;
+            PlayerName2.text = p2.Self.CharName + " " + GM.GetComponent<GameManager>().w2.ToString();
+            PlayerName2BG.text = p2.Self.CharName + " " + GM.GetComponent<GameManager>().w2.ToString();
+            yield return new WaitForSeconds(1.0f);
+            yield return StartCoroutine(CheckWinner());
             //for a round system this is where we would count a round for P2
         }
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene(1); //loads the main menu
 
         ////////
@@ -231,9 +251,15 @@ public class GameOver : MonoBehaviour
             {
                 Announcement.text = "PLAYER ONE WINS!!!";
                 AnnouncementBG.text = "PLAYER ONE WINS!!!";
+                yield return new WaitForSeconds(1.0f);
+
                 GM.GetComponent<GameManager>().w1++;
+                PlayerName.text = p1.Self.CharName + " " + GM.GetComponent<GameManager>().w1.ToString();
+                PlayerNameBG.text = p1.Self.CharName + " " + GM.GetComponent<GameManager>().w1.ToString();
+                yield return new WaitForSeconds(1.0f);
+                yield return StartCoroutine(CheckWinner());
                 //for a round system this is where we would count a round for P2
-                
+
             }
 
             //player 2 wins
@@ -241,12 +267,17 @@ public class GameOver : MonoBehaviour
             {
                 Announcement.text = "PLAYER TWO WINS!!!";
                 AnnouncementBG.text = "PLAYER TWO WINS!!!";
+                yield return new WaitForSeconds(1.0f);
                 GM.GetComponent<GameManager>().w2++;
+                PlayerName2.text = p2.Self.CharName + " " + GM.GetComponent<GameManager>().w2.ToString();
+                PlayerName2BG.text = p2.Self.CharName + " " + GM.GetComponent<GameManager>().w2.ToString();
+                yield return new WaitForSeconds(1.0f);
+                yield return StartCoroutine(CheckWinner());
                 //for a round system this is where we would count a round for P2
-                
+
             }
 
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(2.0f);
             //loads main menu
             //NOTE: for a round system we are going to want to remove this
             SceneManager.LoadScene(1);
@@ -254,6 +285,27 @@ public class GameOver : MonoBehaviour
         yield return null;
     }
 
-    
+    IEnumerator CheckWinner()
+    {
+        if (GM.GetComponent<GameManager>().w1 == 2 || GM.GetComponent<GameManager>().w2 == 2)
+        {
+            if (p1.GetComponent<Player>().Health > p2.GetComponent<Player>().Health)
+            {
+                Announcement.text = "MATCH COMPLETE: PLAYER 2 WINS!";
+                AnnouncementBG.text = "MATCH COMPLETE: PLAYER 2 WINS!";
+            }
+            else
+            {
+                Announcement.text = "MATCH COMPLETE: PLAYER 1 WINS!";
+                AnnouncementBG.text = "MATCH COMPLETE: PLAYER 1 WINS!";
+            }
+            yield return new WaitForSeconds(3.0f);
+            GM.GetComponent<GameManager>().w2 = 0;
+            GM.GetComponent<GameManager>().w1 = 0;
+            SceneManager.LoadScene(0);
+            yield return null;
+        }
+        yield return null;
+    }
 
 }
