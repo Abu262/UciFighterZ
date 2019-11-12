@@ -6,16 +6,29 @@ public class Thornton : Character
 {
     int Charges = 0;
     public int MaxCharges = 5;
-
+    GameObject Rage;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+
+    }
+
+    private void Update()
+    {
+
     }
 
     public override IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
+        if (SpecHitBox.transform.childCount == 0)
+        {
+            Rage = Instantiate(Aura, new Vector3(0, 0, 0), Quaternion.identity);
+            Rage.transform.SetParent(SpecHitBox.transform, false);
+            Rage.SetActive(false);
+        }
+
+
         SpriteRenderer SP = SpecHitBox.GetComponent<SpriteRenderer>();
         int F = SpecAtkHit;
         if (Charges <= MaxCharges)
@@ -32,6 +45,7 @@ public class Thornton : Character
         }
         else
         {
+            Rage.SetActive(false);
             SpecHitBox.enabled = true;
             SP.sprite = SpecSprHit;
             F = F * 2;
@@ -45,6 +59,10 @@ public class Thornton : Character
             Charges = 0;
             SpecHitBox.enabled = false;
 
+        }
+        if (Charges == MaxCharges)
+        {
+            Rage.SetActive(true);
         }
         yield return null;
     }

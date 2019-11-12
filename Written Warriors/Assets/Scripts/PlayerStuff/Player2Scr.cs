@@ -17,7 +17,8 @@ public class Player2Scr : Player
     private void Awake()
     {
         //    Path = FindObjectOfType<GameManager>().PathP2;
- 
+        
+        CurrentForm.color= Color.blue;
         Self = Resources.Load<Character>(FindObjectOfType<GameManager>().PathP2);
 
         opponentTag = "Player1";
@@ -68,6 +69,10 @@ public class Player2Scr : Player
             if (Input.GetKeyDown(KeyCode.Joystick2Button3) || Input.GetKey(KeyCode.Equals))
             {
                 StartCoroutine(HighAttack());
+            }
+            if (Input.GetKeyDown(KeyCode.Joystick2Button4) || Input.GetKeyDown(KeyCode.Joystick2Button5))
+            {
+                StartCoroutine(Parry());
             }
 
             if (Input.GetKey(KeyCode.K))

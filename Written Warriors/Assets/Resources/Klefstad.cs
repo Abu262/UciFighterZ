@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Klefstad : Character
 {
-//    public float copyHighAttackerBlockPush;// = 0.0f;
-  //  public float copyHighDefenderBlockPush;// = 0.0f;
- //   public float copyMedDefenderBlockPush;// = 0.0f;
-   // public float copyMedAttackerBlockPush;// = 0.0f;
- //   public float copyLowAttackerBlockPush;// = 0.0f;
- //   public float copyLowDefenderBlockPush;// = 0.0f;
+    //    public float copyHighAttackerBlockPush;// = 0.0f;
+    //  public float copyHighDefenderBlockPush;// = 0.0f;
+    //   public float copyMedDefenderBlockPush;// = 0.0f;
+    // public float copyMedAttackerBlockPush;// = 0.0f;
+    //   public float copyLowAttackerBlockPush;// = 0.0f;
+    //   public float copyLowDefenderBlockPush;// = 0.0f;
+    public float speedscalar = 0.25f;
 
     // Start is called before the first frame update
     void Awake()
@@ -51,8 +52,12 @@ public class Klefstad : Character
         P.LowBlocking = true;
         while (F > 0)
         {
+            if (P.CurrentBlocking == true || P.Opponent.Hit == true)
+            {
+                F = 0;
+            }
   //          SpecHitBox.enabled = true;
-            P.RB.velocity = new Vector2(MoveSpeed * 0.25f * transform.localScale.x, 0.0f);
+            P.RB.velocity = new Vector2(MoveSpeed * speedscalar * transform.localScale.x, 0.0f);
             F -= 1;
 //            yield return new WaitForSeconds(5.0f / 60.0f);
     //

@@ -15,6 +15,7 @@ using System;
 
 public abstract class Player : MonoBehaviour
 {
+
     public Camera cam;
     public bool IsP1 = false;
 //    public string Path = FindObjectOfType<GameManager>().ReturnPath();
@@ -50,8 +51,10 @@ public abstract class Player : MonoBehaviour
     string CurrentAtk; //the string titling the current move
 
     private int BlockTime;
-    private bool CurrentBlocking = false;
-    
+    public bool CurrentBlocking = false;
+    public int FrameCountParry;
+
+
     public SpriteRenderer CurrentForm;
     public GameOver GO;
 
@@ -59,6 +62,8 @@ public abstract class Player : MonoBehaviour
     private bool KnockingBack = false;
 
     float OriginalSize;// = cam.orthographicSize;
+
+
 
     private void Start()
     {
@@ -108,14 +113,14 @@ public abstract class Player : MonoBehaviour
                 RB.velocity = new Vector2(50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime;
                
                 //change blocking bool if the player is walking or not
-                if (transform.localScale.x >=0.0f)
-                {
-                    HighBlocking = false;
-                }
-                else
-                {
-                    HighBlocking = true;
-                }
+                //if (transform.localScale.x >=0.0f)
+                //{
+                //    HighBlocking = false;
+                //}
+                //else
+                //{
+                //    HighBlocking = true;
+                //}
 
             }
             //More movement
@@ -124,19 +129,19 @@ public abstract class Player : MonoBehaviour
 
                 RB.velocity = new Vector2(-50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime;
 
-                if (transform.localScale.x <= 0.0f)
-                {
-                    HighBlocking = false;
-                }
-                else
-                {
-                    HighBlocking = true;
-                }
+                //if (transform.localScale.x <= 0.0f)
+                //{
+                //    HighBlocking = false;
+                //}
+                //else
+                //{
+                //    HighBlocking = true;
+                //}
             }
             else
             {
                 RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
-                HighBlocking = true;
+               // HighBlocking = true;
             }
 
         //ducking stuff
@@ -147,15 +152,15 @@ public abstract class Player : MonoBehaviour
                     CurrentForm.sprite = Self.CrouchSpr;
                     PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y / 2.0f);
                     PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y - 0.5f);
-                    LowBlocking = true;
-                    HighBlocking = false;
+                    //LowBlocking = true;
+                    //HighBlocking = false;
                 }
                 else
                 {
                     CurrentForm.sprite = Self.StandSpr;
                     PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
                     PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
-                    LowBlocking = false;
+                //    LowBlocking = false;
 
                 }
             }
@@ -373,6 +378,54 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+    public IEnumerator Parry()
+    {
+        if (TakingAction == false)
+        {
+                    TakingAction = true;
+        yield return StartCoroutine(PlayStartUpFrames(5));
+        //block
+        float height = Move.y;
+        Vector2 stance = new Vector2(0.0f, height);
+        FrameCountParry = 20;
+        
+        //this counts the frames
+        while (FrameCountParry > 0)
+        {
+                Debug.Log(FrameCountParry);
+            RB.velocity = stance;
+            if (height <= -0.6f)
+            {
+                CurrentForm.sprite = Self.CrouchBlockSpr;
+                LowBlocking = true;
+                HighBlocking = false;
+            }
+            else
+            {
+                CurrentForm.sprite = Self.StandBlockSpr;
+                LowBlocking = false;
+                HighBlocking = true;
+            }
+            FrameCountParry--;
+            yield return null;
+        }
+
+        if (CurrentBlocking == false)
+            {
+                LowBlocking = false;
+                HighBlocking = false;
+
+            }
+            CurrentForm.sprite = Self.StandSpr;
+        yield return StartCoroutine(PlayCoolDownFrames(8));
+        TakingAction = false;
+        }
+        yield return null;
+
+        
+    }
+
+
     //counts the frames
     IEnumerator PlayStartUpFrames(int Frames)
     {
@@ -586,10 +639,12 @@ public abstract class Player : MonoBehaviour
     //anyway this function causes the player to take damage
     public void TakeDamage(float AttackerPush, float DefenderPush)
     {
+        TakingAction = true;
+        Opponent.TakingAction = true;
         //I want to impliment a slowdown/zoom in effect when someone gets hit
         //but it isn't necessary
-
-     //   FindObjectOfType<AudioManager>().Play("Hit");
+        FindObjectOfType<AudioManager>().Play("HitSound");
+        //   FindObjectOfType<AudioManager>().Play("Hit");
         Health -= 1;
         FindObjectOfType<HealthDisplay>().ChangeHealth(gameObject.tag);
        // HP.text = Health.ToString();
@@ -599,13 +654,11 @@ public abstract class Player : MonoBehaviour
         {
             StartCoroutine(GO.PlayerDies(opponentTag));
         }
-        if (Health == 1)
-        {
-            StartCoroutine(Self.RageMode());
-            GameObject Rage = Instantiate(Self.Aura, new Vector3(0,0,0), Quaternion.identity);
-            Rage.transform.SetParent(gameObject.transform, false);
-            Rage.SetActive(true);
-        }
+//        if (Health == 1)
+  //      {
+    //        StartCoroutine(Self.RageMode());
+
+      //  }
 
  
         TakingAction = false;
@@ -651,12 +704,15 @@ public abstract class Player : MonoBehaviour
 
     IEnumerator KnockBack(float time, float AttackerPush, float DefenderPush)
     {
+        TakingAction = true;
+        Opponent.TakingAction = true;
         if (KnockingBack == false)
         {
             KnockingBack = true;
             while (time > 0.0f)
             {
-
+                TakingAction = true;
+                Opponent.TakingAction = true;
                 RB.velocity = AttackerPush * transform.localScale * -1.0f;
                 Opponent.RB.velocity = DefenderPush * Opponent.transform.localScale * -1.0f;
                 time -= Time.deltaTime;
@@ -666,25 +722,34 @@ public abstract class Player : MonoBehaviour
             KnockingBack = false;
             yield return null;
         }
+        TakingAction = false;
+        Opponent.TakingAction = false;
         yield return null;
 
     }
 
     public IEnumerator Blocking(Sprite BlockSpr, int BlockStun)
     {
+        FindObjectOfType<AudioManager>().Play("BlockSound");
         Opponent.CurrentForm.sprite = BlockSpr;
         Opponent.TakingAction = true;
         BlockTime = BlockStun;
+
+
         if (CurrentBlocking == false)
         {
+            Opponent.FrameCountParry = 0;
+
             CurrentBlocking = true;
             while (BlockTime > 0)
             {
                 Opponent.TakingAction = true;
-                Opponent.CurrentForm.sprite = BlockSpr;
+             //   Opponent.CurrentForm.sprite = BlockSpr;
                 BlockTime -= 1;
                 yield return null;
             }
+            HighBlocking = false;
+            LowBlocking = false;
             Opponent.TakingAction = false;
             CurrentBlocking = false;
         }
@@ -719,48 +784,51 @@ public abstract class Player : MonoBehaviour
         TakingAction = true;
         Opponent.TakingAction = true;
         float Vert =  cam.transform.position.y - 2f;
-        
-        Time.timeScale = 0.01f;
-        Time.fixedDeltaTime = 0.01f * 0.02f;
-
-        if (Time.timeScale < 1.0f)
+        if (Time.timeScale >= 1.0f)
         {
-            StartCoroutine(MoveCamera(1.75f));
-            while (cam.orthographicSize > 3.0f)
+            Time.timeScale = 0.01f;
+            Time.fixedDeltaTime = 0.01f * 0.02f;
+
+            if (Time.timeScale < 1.0f)
             {
-                ////if (cam.transform.position.y > Vert)
-                ////{
-                ////    cam.transform.position += new Vector3(0.0f, -0.2f, 0.0f);
-                ////}
+                StartCoroutine(MoveCamera(1.75f));
+                while (cam.orthographicSize > 3.0f)
+                {
+                    ////if (cam.transform.position.y > Vert)
+                    ////{
+                    ////    cam.transform.position += new Vector3(0.0f, -0.2f, 0.0f);
+                    ////}
 
 
-                TakingAction = true;
-                Opponent.TakingAction = true;
-                cam.orthographicSize -= 0.5f;
-                yield return null;
+                    TakingAction = true;
+                    Opponent.TakingAction = true;
+                    cam.orthographicSize -= 0.5f;
+                    yield return null;
+                }
+                cam.orthographicSize = 3.0f;
+                yield return new WaitForSeconds(0.0025f);
+                StartCoroutine(MoveCamera(-1.75f));
+                while (cam.orthographicSize < OriginalSize)
+                {
+
+
+
+                    TakingAction = true;
+                    Opponent.TakingAction = true;
+                    cam.orthographicSize += 0.5f;
+                    yield return null;
+                }
+                cam.orthographicSize = OriginalSize;
+
+                Time.timeScale = 1.0f;
+                Time.fixedDeltaTime = 1.0f * 0.02f;
+                //cam.orthographicSize = 10.0f;
+
+                TakingAction = false;
+                Opponent.TakingAction = false;
             }
-            cam.orthographicSize = 3.0f;
-            yield return new WaitForSeconds(0.0025f);
-            StartCoroutine(MoveCamera(-1.75f));
-            while (cam.orthographicSize < OriginalSize)
-            {
-
-
-
-                TakingAction = true;
-                Opponent.TakingAction = true;
-                cam.orthographicSize += 0.5f;
-                yield return null;
-            }
-            cam.orthographicSize = OriginalSize;
-
-            Time.timeScale = 1.0f;
-            Time.fixedDeltaTime = 1.0f * 0.02f;
-            //cam.orthographicSize = 10.0f;
-
-            TakingAction = false;
-            Opponent.TakingAction = false;
         }
+
 
         yield return null;
     }

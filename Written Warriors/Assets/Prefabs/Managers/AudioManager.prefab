@@ -43,5 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a67ffab65eb454418ef6da601c29abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: HitSound
+    clip: {fileID: 8300000, guid: 23d229da044709048aa2909419b80638, type: 3}
+    volume: 0.5
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
   ID: 0

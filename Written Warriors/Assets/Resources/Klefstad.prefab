@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363433916390150168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.8366776, y: -2.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4, y: -2.5, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,11 +55,11 @@ MonoBehaviour:
   CrouchBlockSpr: {fileID: 21300000, guid: 70eaf2540156b2a4ebdb1e2c1d7b4cac, type: 3}
   HitSpr: {fileID: 21300000, guid: 8715048add78f7340a0f872796c16c7c, type: 3}
   LowSprStartUp: {fileID: 21300000, guid: 6640ab795d05b2e4190672f0a1b8ea33, type: 3}
-  LowAtkStartUp: 7
+  LowAtkStartUp: 13
   LowSprHit: {fileID: 21300000, guid: 41ea74d02d00f6b49a5b59cb4c8e90f9, type: 3}
   LowAtkHit: 6
   LowSprCoolDown: {fileID: 21300000, guid: 099fa42fceff11748ba5c1aab87ddf35, type: 3}
-  LowAtkCoolDown: 7
+  LowAtkCoolDown: 13
   LowBlockStun: 6
   LowAttackerHitPush: 25
   LowDefenderHitPush: 25
@@ -68,11 +68,11 @@ MonoBehaviour:
   LowHitBoxOffset: {x: 1.5, y: -1}
   LowHitBoxSize: {x: 2, y: 0.5}
   MedSprStartUp: {fileID: 21300000, guid: 1ee7a18c89992d34bb8b29b76e7be7b9, type: 3}
-  MedAtkStartUp: 12
+  MedAtkStartUp: 17
   MedSprHit: {fileID: 21300000, guid: bf499412452c94f46b186c95b35d6992, type: 3}
   MedAtkHit: 6
   MedSprCoolDown: {fileID: 21300000, guid: 029200b4c4eb7874691a8d98d53ea888, type: 3}
-  MedAtkCoolDown: 8
+  MedAtkCoolDown: 13
   MedBlockStun: 6
   MedAttackerHitPush: 25
   MedDefenderHitPush: 25
@@ -92,13 +92,13 @@ MonoBehaviour:
   HighAttackerBlockPush: 2.5
   HighDefenderBlockPush: 1
   HighHitBoxOffset: {x: 1.5, y: 1.25}
-  HighHitBoxSize: {x: 2.5, y: 0.5}
+  HighHitBoxSize: {x: 3, y: 0.5}
   SpecSprStartUp: {fileID: 21300000, guid: 7704fa8a689ab7b4abb02164a5c607fc, type: 3}
-  SpecAtkStartUp: 8
+  SpecAtkStartUp: 13
   SpecSprHit: {fileID: 21300000, guid: 1cfa02f32baecfb46b6343fe9c971eb5, type: 3}
-  SpecAtkHit: 30
+  SpecAtkHit: 20
   SpecSprCoolDown: {fileID: 21300000, guid: e006c865e5c3fb34b953c292dc064c4a, type: 3}
-  SpecAtkCoolDown: 12
+  SpecAtkCoolDown: 17
   SpecBlockStun: 43
   SpecAttackerHitPush: 25
   SpecDefenderHitPush: 25
@@ -107,3 +107,4 @@ MonoBehaviour:
   SpecHitBoxOffset: {x: 1, y: 0}
   SpecHitBoxSize: {x: 2, y: 0.5}
   SpecialStr: Middle
+  speedscalar: 1.5

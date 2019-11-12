@@ -51,6 +51,10 @@ public class Player1Scr : Player
             {
                 StartCoroutine(HighAttack());
             }
+            if (Input.GetKeyDown(KeyCode.Joystick1Button4) || Input.GetKeyDown(KeyCode.Joystick1Button5))
+            {
+                StartCoroutine(Parry());
+            }
 
             if (Input.GetKey(KeyCode.A))
             {
