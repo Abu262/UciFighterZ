@@ -25,7 +25,10 @@ public class GameOver : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
- 
+        if (!FindObjectOfType<AudioManager>().Playing("SpectrumTheme"))
+        {
+            FindObjectOfType<AudioManager>().Play("SpectrumTheme");
+        }
         GM = GameObject.FindGameObjectWithTag("GameManager");
     }
 
@@ -45,16 +48,19 @@ public class GameOver : MonoBehaviour
         yield return StartCoroutine(SM.MoveTextIn("GET READY", Announcement, AnnouncementBG, 360.0f));
         yield return new WaitForSeconds(1.0f);
         yield return StartCoroutine(ShowRound());
-        /*Announcement.text = "GET READY!";
-        yield return new WaitForSeconds(2.0f); //waits 2 seconds
+        //Announcement.text = "GET READY!";
+        yield return new WaitForSeconds(0.2f); //waits 2 seconds
         Announcement.text = "3";
-        yield return new WaitForSeconds(1.0f);  //1 second
+        AnnouncementBG.text = "3";
+        yield return new WaitForSeconds(0.2f);  //1 second
         Announcement.text = "2";
-        yield return new WaitForSeconds(1.0f);  // "
-        Announcement.text = "1";*/
-        //yield return new WaitForSeconds(1.0f);  // "
-        Announcement.text = "FIGHT!";
-        AnnouncementBG.text = "FIGHT!";
+        AnnouncementBG.text = "2";
+        yield return new WaitForSeconds(0.2f);  // "
+        Announcement.text = "1";
+        AnnouncementBG.text = "1";
+        yield return new WaitForSeconds(0.2f);  // "
+        Announcement.text = "ZOT!";
+        AnnouncementBG.text = "ZOT!";
 
         //allows the playeers to fight
         StartCoroutine(p1.UnFreeze());
@@ -302,6 +308,7 @@ public class GameOver : MonoBehaviour
             yield return new WaitForSeconds(3.0f);
             GM.GetComponent<GameManager>().w2 = 0;
             GM.GetComponent<GameManager>().w1 = 0;
+            FindObjectOfType<AudioManager>().Stop("SpectrumTheme");
             SceneManager.LoadScene(0);
             yield return null;
         }

@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
     [HideInInspector]
-    public int ID;
+   
     public static AudioManager instance;
 
     private void Awake()
@@ -52,12 +52,39 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            return;
+        }
+
+        s.source.Stop();
+    }
+
+    public bool Playing(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            return false;
+        }
+        if (s.source.isPlaying)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
 
     void Start()
     {
-        ID = 7;
-        FindObjectOfType<AudioManager>().Play("Anime");
-        //        Play("MainTheme");
+            //        Play("MainTheme");
     }
 
     // Update is called once per frame

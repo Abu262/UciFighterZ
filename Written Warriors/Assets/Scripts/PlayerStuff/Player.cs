@@ -738,11 +738,13 @@ public abstract class Player : MonoBehaviour
 
         if (CurrentBlocking == false)
         {
+            Opponent.TakingAction = true;
             Opponent.FrameCountParry = 0;
+            
 
-            CurrentBlocking = true;
             while (BlockTime > 0)
             {
+                TakingAction = true;
                 Opponent.TakingAction = true;
              //   Opponent.CurrentForm.sprite = BlockSpr;
                 BlockTime -= 1;
