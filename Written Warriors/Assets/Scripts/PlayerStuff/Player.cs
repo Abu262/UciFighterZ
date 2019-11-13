@@ -670,19 +670,18 @@ public abstract class Player : MonoBehaviour
 
     IEnumerator IFrames()
     {
-        Color tmp = CurrentForm.color;
-        tmp.a = 0f;
-       // CurrentForm.color = tmp;
+        
+        CurrentForm.enabled = false;
         gameObject.layer = 10;
         int t = 0;
         while (t <= 10)
         {
-      //      tmp.a = Mathf.Abs(tmp.a - 255f);
+            CurrentForm.enabled = !CurrentForm.enabled;
             t += 1;
             yield return new WaitForSeconds(0.05f);
             
         }
-       // tmp.a = 255f;
+        CurrentForm.enabled = true;
         gameObject.layer = 8;
         yield return null;
     }
