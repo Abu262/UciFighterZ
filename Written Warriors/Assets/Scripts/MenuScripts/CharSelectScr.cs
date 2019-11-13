@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 
 public class CharSelectScr : MonoBehaviour
 {
     public PlayerControls Controls; //Player Controls
 
-    public Text READY;
+  //  public Text READY;
 
     public Image[] CharPics;
 
@@ -32,6 +32,12 @@ public class CharSelectScr : MonoBehaviour
     public Vector2 MoveP1;
     public Vector2 MoveP2;
 
+   /* public TextMeshProUGUI RDYP1;
+    public TextMeshProUGUI RDYP1BG;
+    public TextMeshProUGUI RDYP2;
+    public TextMeshProUGUI RDYP2BG;
+    */
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +52,33 @@ public class CharSelectScr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+/*        if (ReadyP1 == true)
+        {
+
+        }
+        else
+        {
+
+        }
+        if(ReadyP2 == true)
+        {
+
+        }
+        else
+        {
+
+        }
+        if (ReadyP1 == true && ReadyP2 == true)
+        {
+
+        }
+        else
+        {
+
+        }*/
+
+
         MoveP2 = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
         MoveP1 = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
 
@@ -94,11 +127,11 @@ public class CharSelectScr : MonoBehaviour
 
         if (ReadyP1 == true && ReadyP2 == true)
         {
-            READY.enabled = true;
+     //      READY.enabled = true;
         }
         else
         {
-            READY.enabled = false;
+      //      READY.enabled = false;
         }
 
 

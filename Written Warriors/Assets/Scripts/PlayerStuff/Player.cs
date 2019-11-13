@@ -383,7 +383,7 @@ public abstract class Player : MonoBehaviour
         if (TakingAction == false)
         {
                     TakingAction = true;
-        yield return StartCoroutine(PlayStartUpFrames(5));
+        yield return StartCoroutine(PlayStartUpFrames(3));
         //block
         float height = Move.y;
         Vector2 stance = new Vector2(0.0f, height);
@@ -639,6 +639,7 @@ public abstract class Player : MonoBehaviour
     //anyway this function causes the player to take damage
     public void TakeDamage(float AttackerPush, float DefenderPush)
     {
+
         TakingAction = true;
         Opponent.TakingAction = true;
         //I want to impliment a slowdown/zoom in effect when someone gets hit
@@ -649,6 +650,7 @@ public abstract class Player : MonoBehaviour
         FindObjectOfType<HealthDisplay>().ChangeHealth(gameObject.tag);
        // HP.text = Health.ToString();
         Hit = true; //when hit is on the player cant move
+        StartCoroutine(IFrames());
         StartCoroutine(HitAnimation(AttackerPush,DefenderPush));
         if (Health == 0)
         {
@@ -665,6 +667,26 @@ public abstract class Player : MonoBehaviour
         Opponent.TakingAction = false;
 
     }
+
+    IEnumerator IFrames()
+    {
+        Color tmp = CurrentForm.color;
+        tmp.a = 0f;
+       // CurrentForm.color = tmp;
+        gameObject.layer = 10;
+        int t = 0;
+        while (t <= 10)
+        {
+      //      tmp.a = Mathf.Abs(tmp.a - 255f);
+            t += 1;
+            yield return new WaitForSeconds(0.05f);
+            
+        }
+       // tmp.a = 255f;
+        gameObject.layer = 8;
+        yield return null;
+    }
+    
 
     void Explode(Vector2 position)
     {
@@ -752,6 +774,7 @@ public abstract class Player : MonoBehaviour
             }
             HighBlocking = false;
             LowBlocking = false;
+            TakingAction = false;
             Opponent.TakingAction = false;
             CurrentBlocking = false;
         }
