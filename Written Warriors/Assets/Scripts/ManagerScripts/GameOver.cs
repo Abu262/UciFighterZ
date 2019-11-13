@@ -25,7 +25,10 @@ public class GameOver : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
- 
+        if (!FindObjectOfType<AudioManager>().Playing("SpectrumTheme"))
+        {
+            FindObjectOfType<AudioManager>().Play("SpectrumTheme");
+        }
         GM = GameObject.FindGameObjectWithTag("GameManager");
     }
 
@@ -302,6 +305,7 @@ public class GameOver : MonoBehaviour
             yield return new WaitForSeconds(3.0f);
             GM.GetComponent<GameManager>().w2 = 0;
             GM.GetComponent<GameManager>().w1 = 0;
+            FindObjectOfType<AudioManager>().Stop("SpectrumTheme");
             SceneManager.LoadScene(0);
             yield return null;
         }

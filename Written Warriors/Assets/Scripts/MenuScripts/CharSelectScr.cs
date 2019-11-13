@@ -36,6 +36,7 @@ public class CharSelectScr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<AudioManager>().Play("VGDCTheme");
         indexP1 = 0;
         indexP2 = 0;
         P2Arrow.transform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 35.0f);
@@ -162,6 +163,7 @@ public class CharSelectScr : MonoBehaviour
     {
         if (ReadyP1 && ReadyP2)
         {
+            FindObjectOfType<AudioManager>().Stop("VGDCTheme");
             SceneManager.LoadScene(1);
         }
       //  manager.Self1 
