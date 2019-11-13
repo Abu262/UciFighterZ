@@ -55,12 +55,12 @@ MonoBehaviour:
   CrouchBlockSpr: {fileID: 21300000, guid: 70eaf2540156b2a4ebdb1e2c1d7b4cac, type: 3}
   HitSpr: {fileID: 21300000, guid: 8715048add78f7340a0f872796c16c7c, type: 3}
   LowSprStartUp: {fileID: 21300000, guid: 6640ab795d05b2e4190672f0a1b8ea33, type: 3}
-  LowAtkStartUp: 13
+  LowAtkStartUp: 16
   LowSprHit: {fileID: 21300000, guid: 41ea74d02d00f6b49a5b59cb4c8e90f9, type: 3}
-  LowAtkHit: 6
+  LowAtkHit: 9
   LowSprCoolDown: {fileID: 21300000, guid: 099fa42fceff11748ba5c1aab87ddf35, type: 3}
-  LowAtkCoolDown: 13
-  LowBlockStun: 6
+  LowAtkCoolDown: 16
+  LowBlockStun: 9
   LowAttackerHitPush: 25
   LowDefenderHitPush: 25
   LowAttackerBlockPush: 2
@@ -68,12 +68,12 @@ MonoBehaviour:
   LowHitBoxOffset: {x: 1.5, y: -1}
   LowHitBoxSize: {x: 2, y: 0.5}
   MedSprStartUp: {fileID: 21300000, guid: 1ee7a18c89992d34bb8b29b76e7be7b9, type: 3}
-  MedAtkStartUp: 17
+  MedAtkStartUp: 20
   MedSprHit: {fileID: 21300000, guid: bf499412452c94f46b186c95b35d6992, type: 3}
-  MedAtkHit: 6
+  MedAtkHit: 9
   MedSprCoolDown: {fileID: 21300000, guid: 029200b4c4eb7874691a8d98d53ea888, type: 3}
-  MedAtkCoolDown: 13
-  MedBlockStun: 6
+  MedAtkCoolDown: 16
+  MedBlockStun: 9
   MedAttackerHitPush: 25
   MedDefenderHitPush: 25
   MedAttackerBlockPush: 9
@@ -81,12 +81,12 @@ MonoBehaviour:
   MedHitBoxOffset: {x: 1.5, y: 0}
   MedHitBoxSize: {x: 4.5, y: 0.5}
   HighSprStartUp: {fileID: 21300000, guid: abaabc08f9d0ff7478a4bee14adf8246, type: 3}
-  HighAtkStartUp: 5
+  HighAtkStartUp: 8
   HighSprHit: {fileID: 21300000, guid: fc950711b1054b14e91cf236e0ec96fc, type: 3}
-  HighAtkHit: 6
+  HighAtkHit: 9
   HighSprCoolDown: {fileID: 21300000, guid: 13fdf587715bd004685257484d36c8ad, type: 3}
-  HighAtkCoolDown: 6
-  HighBlockStun: 6
+  HighAtkCoolDown: 9
+  HighBlockStun: 9
   HighAttackerHitPush: 25
   HighDefenderHitPush: 25
   HighAttackerBlockPush: 2.5
@@ -94,12 +94,12 @@ MonoBehaviour:
   HighHitBoxOffset: {x: 1.5, y: 1.25}
   HighHitBoxSize: {x: 3, y: 0.5}
   SpecSprStartUp: {fileID: 21300000, guid: 7704fa8a689ab7b4abb02164a5c607fc, type: 3}
-  SpecAtkStartUp: 13
+  SpecAtkStartUp: 16
   SpecSprHit: {fileID: 21300000, guid: 1cfa02f32baecfb46b6343fe9c971eb5, type: 3}
-  SpecAtkHit: 20
+  SpecAtkHit: 23
   SpecSprCoolDown: {fileID: 21300000, guid: e006c865e5c3fb34b953c292dc064c4a, type: 3}
-  SpecAtkCoolDown: 17
-  SpecBlockStun: 43
+  SpecAtkCoolDown: 20
+  SpecBlockStun: 46
   SpecAttackerHitPush: 25
   SpecDefenderHitPush: 25
   SpecAttackerBlockPush: 5
