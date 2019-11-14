@@ -55,6 +55,10 @@ public class CharSelectScr : MonoBehaviour
         indexP2 = 0;
         P2Arrow.transform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 35.0f);
         P1Arrow.transform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 35.0f);
+
+        StartCoroutine(FlashText(P1CHAR, P1CHARBG));
+        StartCoroutine(FlashTextP2(P2CHAR, P2CHARBG));
+
     }
 
     // Update is called once per frame
@@ -475,5 +479,54 @@ public class CharSelectScr : MonoBehaviour
         }
         }
 
-    
+    IEnumerator FlashText(TextMeshProUGUI T, TextMeshProUGUI T2)
+    {
+        Color tmp = P1Arrow.color;
+        tmp.a = 0f;
+        while (true)
+        {
+            if (ReadyP1 == true)
+            {
+                yield return new WaitForSeconds(0.025f);
+                T.enabled = !T.enabled;
+                T2.enabled = !T2.enabled;
+                tmp.a = Mathf.Abs(tmp.a - 255f);
+                P1Arrow.color = tmp;
+            }
+            else
+            {
+                tmp.a = 255f;
+                P1Arrow.color = tmp;
+                T.enabled = true;
+                T2.enabled = true;
+            }
+            yield return null;
+        }
+    }
+    IEnumerator FlashTextP2(TextMeshProUGUI T, TextMeshProUGUI T2)
+    {
+        Color tmp = P2Arrow.color;
+        tmp.a = 0f;
+        while (true)
+        {
+            if (ReadyP2 == true)
+            {
+                yield return new WaitForSeconds(0.025f);
+                T.enabled = !T.enabled;
+                T2.enabled = !T2.enabled;
+                tmp.a = Mathf.Abs(tmp.a - 255f);
+                P2Arrow.color = tmp;
+            }
+            else
+            {
+                tmp.a = 255f;
+                P2Arrow.color = tmp;
+                T.enabled = true;
+                T2.enabled = true;
+            }
+            yield return null;
+        }
+    }
+
 }
+

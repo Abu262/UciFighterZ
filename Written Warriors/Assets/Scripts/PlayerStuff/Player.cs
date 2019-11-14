@@ -60,7 +60,7 @@ public abstract class Player : MonoBehaviour
 
     private bool Hitstun = false;
     private bool KnockingBack = false;
-
+    private AudioManager AM;
     float OriginalSize;// = cam.orthographicSize;
 
 
@@ -68,11 +68,12 @@ public abstract class Player : MonoBehaviour
 
     //block e should explode towards blocker DONE
 
-    //flashier block (lower music for short period
+    //flashier block (lower music for short period)
 
 
     private void Start()
     {
+        AM = FindObjectOfType<AudioManager>();
         OriginalSize = cam.orthographicSize;
         PlayerBox.size = new Vector2(Self.PlayerSize.x, Self.PlayerSize.y);
         PlayerBox.offset = new Vector2(Self.PlayerOffset.x, Self.PlayerOffset.y);
@@ -652,7 +653,7 @@ public abstract class Player : MonoBehaviour
         Opponent.TakingAction = true;
         //I want to impliment a slowdown/zoom in effect when someone gets hit
         //but it isn't necessary
-        FindObjectOfType<AudioManager>().Play("HitSound");
+        
         //   FindObjectOfType<AudioManager>().Play("Hit");
         Health -= 1;
         FindObjectOfType<HealthDisplay>().ChangeHealth(gameObject.tag);
@@ -759,7 +760,9 @@ public abstract class Player : MonoBehaviour
 
     public IEnumerator Blocking(Sprite BlockSpr, int BlockStun)
     {
-        FindObjectOfType<AudioManager>().Play("BlockSound");
+        AM.SetVolume("SpectrumTheme", 0.01f);
+        AM.Play("BlockSound");
+
         Opponent.CurrentForm.sprite = BlockSpr;
         Opponent.TakingAction = true;
         BlockTime = BlockStun;
@@ -767,6 +770,7 @@ public abstract class Player : MonoBehaviour
 
         if (CurrentBlocking == false)
         {
+
             Opponent.TakingAction = true;
             Opponent.FrameCountParry = 0;
             
@@ -784,8 +788,9 @@ public abstract class Player : MonoBehaviour
             TakingAction = false;
             Opponent.TakingAction = false;
             CurrentBlocking = false;
-        }
 
+        }
+        AM.SetVolume("SpectrumTheme", 0.25f);
 
         yield return null;
     }
@@ -816,16 +821,20 @@ public abstract class Player : MonoBehaviour
         TakingAction = true;
         Opponent.TakingAction = true;
         float Vert =  cam.transform.position.y - 2f;
+        
         if (Time.timeScale >= 1.0f)
         {
+
             Time.timeScale = 0.005f;
-            Time.fixedDeltaTime = 0.01f * 0.02f;
+            Time.fixedDeltaTime = 0.005f * 0.02f;
 
             if (Time.timeScale < 1.0f)
             {
+                AM.Play("HitSound");
                 StartCoroutine(MoveCamera(1.75f));
                 while (cam.orthographicSize > 3.0f)
                 {
+                    AM.SetVolume("SpectrumTheme", AM.GetVolume("SpectrumTheme") - 0.025f);
                     ////if (cam.transform.position.y > Vert)
                     ////{
                     ////    cam.transform.position += new Vector3(0.0f, -0.2f, 0.0f);
@@ -837,12 +846,14 @@ public abstract class Player : MonoBehaviour
                     cam.orthographicSize -= 0.5f;
                     yield return null;
                 }
+
+                AM.Play("HitSoundReverse");
                 cam.orthographicSize = 3.0f;
                 yield return new WaitForSeconds(0.0025f);
                 StartCoroutine(MoveCamera(-1.75f));
                 while (cam.orthographicSize < OriginalSize)
                 {
-
+                    AM.SetVolume("SpectrumTheme", AM.GetVolume("SpectrumTheme") + 0.025f);
 
 
                     TakingAction = true;
@@ -850,6 +861,7 @@ public abstract class Player : MonoBehaviour
                     cam.orthographicSize += 0.5f;
                     yield return null;
                 }
+                AM.SetVolume("SpectrumTheme", 0.25f);
                 cam.orthographicSize = OriginalSize;
 
                 Time.timeScale = 1.0f;
