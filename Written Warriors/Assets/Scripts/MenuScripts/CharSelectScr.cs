@@ -32,11 +32,19 @@ public class CharSelectScr : MonoBehaviour
     public Vector2 MoveP1;
     public Vector2 MoveP2;
 
-   /* public TextMeshProUGUI RDYP1;
+    public TextMeshProUGUI READY;
+    public TextMeshProUGUI READYBG;
+    public TextMeshProUGUI RDYP1;
     public TextMeshProUGUI RDYP1BG;
     public TextMeshProUGUI RDYP2;
     public TextMeshProUGUI RDYP2BG;
-    */
+    public TextMeshProUGUI P1CHAR;
+    public TextMeshProUGUI P1CHARBG;
+    public TextMeshProUGUI P2CHAR;
+    public TextMeshProUGUI P2CHARBG;
+
+
+
 
 
     // Start is called before the first frame update
@@ -53,30 +61,36 @@ public class CharSelectScr : MonoBehaviour
     void Update()
     {
 
-/*        if (ReadyP1 == true)
+        if (ReadyP1 == true)
         {
-
+            RDYP1.enabled = true;
+            RDYP1BG.enabled = true;
         }
         else
         {
-
+            RDYP1.enabled = false;
+            RDYP1BG.enabled = false;
         }
         if(ReadyP2 == true)
         {
-
+            RDYP2.enabled = true;
+            RDYP2BG.enabled = true;
         }
         else
         {
-
+            RDYP2.enabled = false;
+            RDYP2BG.enabled = false;
         }
         if (ReadyP1 == true && ReadyP2 == true)
         {
-
+            READY.enabled = true;
+            READYBG.enabled = true;
         }
         else
         {
-
-        }*/
+            READY.enabled = false;
+            READYBG.enabled = false;
+        }
 
 
         MoveP2 = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
@@ -168,6 +182,7 @@ public class CharSelectScr : MonoBehaviour
 
     void SelectP1()
     {
+        FindObjectOfType<AudioManager>().Play("MenuSelect");
         ReadyP1 = true;
         //  FindObjectOfType<GameManager>().PathP1 = FindSource(indexP1);
         FindObjectOfType<GameManager>().PathP1 = FindSource(indexP1);
@@ -177,6 +192,7 @@ public class CharSelectScr : MonoBehaviour
     }
     void SelectP2()
     {
+        FindObjectOfType<AudioManager>().Play("MenuSelect");
         ReadyP2 = true;
         //FindObjectOfType<GameManager>().PathP2 = FindSource(indexP2);
         //FindObjectOfType<GameManager>().Self2 = (Character)Resources.Load(FindObjectOfType<GameManager>().PathP2, typeof(Character));
@@ -186,10 +202,12 @@ public class CharSelectScr : MonoBehaviour
     }
     void BackP1()
     {
+
         ReadyP1 = false;
     }
     void BackP2()
     {
+
         ReadyP2 = false;
     }
     void StartMatch()
@@ -256,7 +274,7 @@ public class CharSelectScr : MonoBehaviour
     IEnumerator ShiftP2Cursor()
     {
         turn2 = false;
-
+        FindObjectOfType<AudioManager>().Play("MenuScroll");
         while (turn2 == false)
         {
             if (MoveP2.x > 0.8f)
@@ -332,7 +350,21 @@ public class CharSelectScr : MonoBehaviour
 
 
             P2Arrow.transform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 35.0f);
-
+            if(indexP2 == 0)
+            {
+                P2CHAR.text = "THORNTON";
+                P2CHARBG.text = "THORNTON";
+            }
+            else if (indexP2 == 1)
+            {
+                P2CHAR.text = "KLEFSTAD";
+                P2CHARBG.text = "KLEFSTAD";
+            }
+            else
+            {
+                P2CHAR.text = "PATTIS";
+                P2CHARBG.text = "PATTIS";
+            }
 
 
 
@@ -343,8 +375,8 @@ public class CharSelectScr : MonoBehaviour
         IEnumerator ShiftP1Cursor()
         {
             turn1 = false;
-
-            while (turn1 == false)
+        FindObjectOfType<AudioManager>().Play("MenuScroll");
+        while (turn1 == false)
             {
                 if (MoveP1.x > 0.8f)
                 {
@@ -419,14 +451,28 @@ public class CharSelectScr : MonoBehaviour
 
 
             P1Arrow.transform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 35.0f);
-
-
-
-
-
-
-                //    yield return null;
+            if (indexP1 == 0)
+            {
+                P1CHAR.text = "THORNTON";
+                P1CHARBG.text = "THORNTON";
             }
+            else if (indexP1 == 1)
+            {
+                P1CHAR.text = "KLEFSTAD";
+                P1CHARBG.text = "KLEFSTAD";
+            }
+            else
+            {
+                P1CHAR.text = "PATTIS";
+                P1CHARBG.text = "PATTIS";
+            }
+
+
+
+
+
+            //    yield return null;
+        }
         }
 
     

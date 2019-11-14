@@ -64,6 +64,12 @@ public abstract class Player : MonoBehaviour
     float OriginalSize;// = cam.orthographicSize;
 
 
+    //music cut, sound e plays
+
+    //block e should explode towards blocker DONE
+
+    //flashier block (lower music for short period
+
 
     private void Start()
     {
@@ -147,6 +153,7 @@ public abstract class Player : MonoBehaviour
         //ducking stuff
         if (Hit == false)
             {
+                Hitstun = false;
                 if (Move.y <= -0.6f && !(Move.x >= 0.8f || Move.x <= -0.8f))
                 {
                     CurrentForm.sprite = Self.CrouchSpr;
@@ -475,7 +482,8 @@ public abstract class Player : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         Vector2 v = new Vector2(0.0f, 0.0f);
-
+        Vector3 rot = transform.rotation.eulerAngles;
+        rot = new Vector3(rot.x, rot.y, rot.z + (-90 * transform.localScale.x));
 
 
         //only activates if the object his is the opponent and not a projectile or another punch
@@ -494,7 +502,7 @@ public abstract class Player : MonoBehaviour
                 if (Opponent.HighBlocking == true)
                 {
                     StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.HighBlockStun));
-                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
+                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.HighAttackerBlockPush, Self.HighDefenderBlockPush));
                     //                    KnockBackSelf(Self.HighAttackerBlockPush);
                     //                  Opponent.KnockBackSelf(Self.HighDefenderBlockPush);
@@ -517,7 +525,7 @@ public abstract class Player : MonoBehaviour
                 if (Opponent.HighBlocking == true)
                 {
                     StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.MedBlockStun));
-                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
+                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.MedAttackerBlockPush, Self.MedDefenderBlockPush));
                     //                    KnockBackSelf(Self.MedAttackerBlockPush);
                     //                  Opponent.KnockBackSelf(Self.MedDefenderBlockPush);
@@ -542,7 +550,7 @@ public abstract class Player : MonoBehaviour
                 if (Opponent.LowBlocking == true)
                 {
                     StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr, Self.LowBlockStun));
-                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
+                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.LowAttackerBlockPush, Self.LowDefenderBlockPush));
                  //   KnockBackSelf(Self.LowAttackerBlockPush);
                    // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
@@ -564,7 +572,7 @@ public abstract class Player : MonoBehaviour
                     if (Opponent.HighBlocking == true)
                     {
                         StartCoroutine(Blocking(Opponent.Self.StandBlockSpr,Self.SpecBlockStun));
-                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
+                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
                         // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
@@ -583,7 +591,7 @@ public abstract class Player : MonoBehaviour
                     if (Opponent.HighBlocking == true)
                     {
                         StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.SpecBlockStun));
-                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
+                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
                         // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
@@ -602,7 +610,7 @@ public abstract class Player : MonoBehaviour
                     if (Opponent.LowBlocking == true)
                     {
                         StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr, Self.SpecBlockStun));
-                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.identity);
+                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
                         // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
@@ -810,7 +818,7 @@ public abstract class Player : MonoBehaviour
         float Vert =  cam.transform.position.y - 2f;
         if (Time.timeScale >= 1.0f)
         {
-            Time.timeScale = 0.01f;
+            Time.timeScale = 0.005f;
             Time.fixedDeltaTime = 0.01f * 0.02f;
 
             if (Time.timeScale < 1.0f)
