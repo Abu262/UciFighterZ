@@ -11,32 +11,38 @@ public class HealthDisplay : MonoBehaviour
     private int HealthTracker2;
     public Player Player1;
     public Player Player2;
-   // GameObject Rage1;
-   // GameObject Rage2;
-    private void Start()
-    {
-
-
-        //Rage1 = Instantiate(Player1.Self.Aura, Display1.transform.position, Quaternion.identity);
-        //Rage2 = Instantiate(Player1.Self.Aura, Display2.transform.position, Quaternion.identity);
-
-        //Rage1.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-        //Rage2.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-
-        //Rage1.transform.position = Display1.transform.position;
-        //Rage2.transform.position = Display2.transform.position;
-
-        //Rage1.SetActive(false);
-        //Rage2.SetActive(false);
-
-        //HealthTracker1 = 3;
-        //HealthTracker2 = 3;
-    }
-
 
     private void FlipSprite()
     {
         this.transform.Rotate(0f, 180f, 0f);
+    }
+
+    private IEnumerator ChangeDisplay(GameObject Display, int Health) // Flash the health bar whenever the player takes a hit
+    {
+        yield return StartCoroutine(FlashHealth(Display, Health, 2));
+        Display.transform.GetChild(Health - 1).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
+    }
+
+    private IEnumerator FlashHealth(GameObject Display, int Health, int max)
+    {
+        for (int i = 0; i < max; i++)
+        {
+            for (int j = 0; j < Health; j++)
+            {
+                Display.transform.GetChild(j).gameObject.GetComponent<Image>().enabled = true;
+            }
+            yield return new WaitForSeconds(0.05f);
+            for (int j = 0; j < Health; j++)
+            {
+                Display.transform.GetChild(j).gameObject.GetComponent<Image>().enabled = false;
+            }
+            yield return new WaitForSeconds(0.05f);
+            for (int j = 0; j < Health; j++)
+            {
+                Display.transform.GetChild(j).gameObject.GetComponent<Image>().enabled = true;
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 
     public void ChangeHealth(string player)
@@ -45,9 +51,10 @@ public class HealthDisplay : MonoBehaviour
         {
             if (HealthTracker1 - 1 >= 0)
             {
-                Display1.transform.GetChild(HealthTracker1 - 1).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
+                StartCoroutine(ChangeDisplay(Display1, HealthTracker1));
+                //Display1.transform.GetChild(HealthTracker1 - 1).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
                 //Destroy(Display1.transform.GetChild(HealthTracker1 - 1).gameObject);
-                
+
 
             }
             HealthTracker1 -= 1;
@@ -61,9 +68,9 @@ public class HealthDisplay : MonoBehaviour
         {
             if (HealthTracker2 - 1 >= 0)
             {
-                Display2.transform.GetChild(HealthTracker2 - 1).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
+                StartCoroutine(ChangeDisplay(Display2, HealthTracker2));
+                //Display2.transform.GetChild(HealthTracker2 - 1).gameObject.GetComponent<Image>().color = new Color(255f, 255f, 255f, 0f);
                 //Destroy(Display2.transform.GetChild(HealthTracker2 - 1).gameObject);
-                
 
             }
             HealthTracker2 -= 1;
