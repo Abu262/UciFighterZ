@@ -62,7 +62,7 @@ public abstract class Player : MonoBehaviour
     private bool KnockingBack = false;
     private AudioManager AM;
     float OriginalSize;// = cam.orthographicSize;
-
+    private GameManager GM;
 
     //music cut, sound e plays
 
@@ -73,6 +73,7 @@ public abstract class Player : MonoBehaviour
 
     private void Start()
     {
+        GM = FindObjectOfType<GameManager>();
         AM = FindObjectOfType<AudioManager>();
         OriginalSize = cam.orthographicSize;
         PlayerBox.size = new Vector2(Self.PlayerSize.x, Self.PlayerSize.y);
@@ -174,6 +175,7 @@ public abstract class Player : MonoBehaviour
             }
         else
             {
+                RB.velocity = new Vector2(50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime;
                 Hitstun = true;
                 CurrentForm.sprite = Self.HitSpr;
                 StopCoroutine("PlayStartUpFrames");
@@ -503,7 +505,7 @@ public abstract class Player : MonoBehaviour
                 if (Opponent.HighBlocking == true)
                 {
                     StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.HighBlockStun));
-                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
+                    GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.HighAttackerBlockPush, Self.HighDefenderBlockPush));
                     //                    KnockBackSelf(Self.HighAttackerBlockPush);
                     //                  Opponent.KnockBackSelf(Self.HighDefenderBlockPush);
@@ -526,7 +528,7 @@ public abstract class Player : MonoBehaviour
                 if (Opponent.HighBlocking == true)
                 {
                     StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.MedBlockStun));
-                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
+                    GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.MedAttackerBlockPush, Self.MedDefenderBlockPush));
                     //                    KnockBackSelf(Self.MedAttackerBlockPush);
                     //                  Opponent.KnockBackSelf(Self.MedDefenderBlockPush);
@@ -551,7 +553,7 @@ public abstract class Player : MonoBehaviour
                 if (Opponent.LowBlocking == true)
                 {
                     StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr, Self.LowBlockStun));
-                    GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
+                    GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.LowAttackerBlockPush, Self.LowDefenderBlockPush));
                  //   KnockBackSelf(Self.LowAttackerBlockPush);
                    // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
@@ -573,7 +575,7 @@ public abstract class Player : MonoBehaviour
                     if (Opponent.HighBlocking == true)
                     {
                         StartCoroutine(Blocking(Opponent.Self.StandBlockSpr,Self.SpecBlockStun));
-                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
+                        GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
                         // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
@@ -592,7 +594,7 @@ public abstract class Player : MonoBehaviour
                     if (Opponent.HighBlocking == true)
                     {
                         StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.SpecBlockStun));
-                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
+                        GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
                         // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
@@ -611,7 +613,7 @@ public abstract class Player : MonoBehaviour
                     if (Opponent.LowBlocking == true)
                     {
                         StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr, Self.SpecBlockStun));
-                        GameObject firework = Instantiate(FindObjectOfType<GameManager>().BlockEffect, v, Quaternion.Euler(rot));
+                        GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                         //   KnockBackSelf(Self.LowAttackerBlockPush);
                         // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
@@ -698,7 +700,7 @@ public abstract class Player : MonoBehaviour
 
     void Explode(Vector2 position)
     {
-        GameObject firework = Instantiate(FindObjectOfType<GameManager>().HitEffect, position, Quaternion.identity);
+        GameObject firework = Instantiate(GM.HitEffect, position, Quaternion.identity);
        // firework.GetComponent<ParticleSystem>().Play();
     }
 
@@ -720,6 +722,7 @@ public abstract class Player : MonoBehaviour
 
         //send both players flying away from eachother
         StartCoroutine(KnockBack(0.3f,AttackerPush,DefenderPush));
+        AM.Play("HitSoundReverse");
         yield return StartCoroutine(SlowDown());
         //we send them flying for about a minute
         TakingAction = false;
@@ -847,9 +850,10 @@ public abstract class Player : MonoBehaviour
                     yield return null;
                 }
 
-                AM.Play("HitSoundReverse");
+
                 cam.orthographicSize = 3.0f;
                 yield return new WaitForSeconds(0.0025f);
+                
                 StartCoroutine(MoveCamera(-1.75f));
                 while (cam.orthographicSize < OriginalSize)
                 {
@@ -861,7 +865,7 @@ public abstract class Player : MonoBehaviour
                     cam.orthographicSize += 0.5f;
                     yield return null;
                 }
-                AM.SetVolume("SpectrumTheme", 0.25f);
+                AM.SetVolume("SpectrumTheme", 0.3f);
                 cam.orthographicSize = OriginalSize;
 
                 Time.timeScale = 1.0f;
