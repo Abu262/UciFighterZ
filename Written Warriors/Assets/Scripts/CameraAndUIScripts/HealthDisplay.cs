@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour
 {
-    public GameObject Display1; // Health display
-    public GameObject Display2; // Health display
-    public GameObject DisplayRed1; // Red underlay for player one's health display
-    public GameObject DisplayRed2; // Red underlay for player two's health display
+    [SerializeField] GameObject Display1; // Health display
+    [SerializeField] GameObject Display2; // Health display
+    [SerializeField] GameObject DisplayRed1; // Red underlay for player one's health display
+    [SerializeField] GameObject DisplayRed2; // Red underlay for player two's health display
     private int HealthTracker1; // Keeps track of player's last known health
     private int HealthTracker2;
-    public Player Player1;
-    public Player Player2;
+    [SerializeField] Player Player1;
+    [SerializeField] Player Player2;
 
     private void FlipSprite()
     {
