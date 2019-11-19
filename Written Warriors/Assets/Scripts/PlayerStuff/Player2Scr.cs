@@ -75,6 +75,7 @@ public class Player2Scr : Player
                 StartCoroutine(Parry());
             }
 
+
             if (Input.GetKey(KeyCode.K))
             {
                 Move = new Vector2(-1.0f, 0.0f);

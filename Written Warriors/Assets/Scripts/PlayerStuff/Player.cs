@@ -58,12 +58,14 @@ public abstract class Player : MonoBehaviour
     public SpriteRenderer CurrentForm;
     public GameOver GO;
 
+    [HideInInspector]
+    public int Charges; //this is a quickfix for thornton's special, I'll fix it later
     private bool Hitstun = false;
     private bool KnockingBack = false;
     private AudioManager AM;
     float OriginalSize;// = cam.orthographicSize;
     private GameManager GM;
-
+    public GameObject Aura;
     //music cut, sound e plays
 
     //block e should explode towards blocker DONE
@@ -73,6 +75,11 @@ public abstract class Player : MonoBehaviour
 
     private void Start()
     {
+        Charges = 0;
+        Aura = Instantiate(Self.Aura, new Vector3(0f,0f,0f), Quaternion.identity);
+        Aura.transform.SetParent(gameObject.transform);
+        Aura.transform.localPosition = new Vector3(0, 0, 0);
+        Aura.SetActive(false);
         GM = FindObjectOfType<GameManager>();
         AM = FindObjectOfType<AudioManager>();
         OriginalSize = cam.orthographicSize;
@@ -189,6 +196,7 @@ public abstract class Player : MonoBehaviour
             }
 
         }
+        
 
 
 
@@ -352,6 +360,7 @@ public abstract class Player : MonoBehaviour
     {
         if (TakingAction == false)
         {
+
             CurrentAtk = "Special";
             //this is mainly to aim projectiles,
             //the character object and the player dont share positions so we have to do it manually
@@ -385,6 +394,7 @@ public abstract class Player : MonoBehaviour
                 yield break;
             }
             TakingAction = false;
+           
         }
     }
 
@@ -447,6 +457,7 @@ public abstract class Player : MonoBehaviour
         //this counts the frames
         while (FrameCount > 0)
         {
+
             FrameCount--;
             yield return null;
         }
@@ -650,7 +661,7 @@ public abstract class Player : MonoBehaviour
     //anyway this function causes the player to take damage
     public void TakeDamage(float AttackerPush, float DefenderPush)
     {
-
+      
         TakingAction = true;
         Opponent.TakingAction = true;
         //I want to impliment a slowdown/zoom in effect when someone gets hit
@@ -665,6 +676,8 @@ public abstract class Player : MonoBehaviour
         StartCoroutine(HitAnimation(AttackerPush,DefenderPush));
         if (Health == 0)
         {
+            CurrentForm.color = new Color(1f, 1f, 1f, 0f);
+            Aura.SetActive(false);
             StartCoroutine(GO.PlayerDies(opponentTag));
         }
 //        if (Health == 1)
@@ -764,7 +777,7 @@ public abstract class Player : MonoBehaviour
 
     public IEnumerator Blocking(Sprite BlockSpr, int BlockStun)
     {
-        AM.SetVolume("SpectrumTheme", 0.01f);
+//        AM.SetVolume("SpectrumTheme", 0.1f);
         AM.Play("BlockSound");
         //StartCoroutine(MiniSlowdown());
         Opponent.CurrentForm.sprite = BlockSpr;
@@ -794,7 +807,7 @@ public abstract class Player : MonoBehaviour
             CurrentBlocking = false;
 
         }
-        AM.SetVolume("SpectrumTheme", 0.25f);
+     //   AM.SetVolume("SpectrumTheme", 0.25f);
 
         yield return null;
     }

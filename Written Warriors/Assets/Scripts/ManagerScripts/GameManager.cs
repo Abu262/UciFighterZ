@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     
@@ -54,6 +54,29 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public IEnumerator FadeScreenIn(Image screen)
+    {
+        var tempColor = screen.color;
+        while (tempColor.a > 0.0)
+        {
+            tempColor.a -= 0.1f;
+            screen.color = tempColor;
+            yield return null;
+        }
+        yield return null;
+    }
+
+    public IEnumerator FadeScreenOut(Image screen)
+    {
+        var tempColor = screen.color;
+        while (tempColor.a < 1.0f)
+        {
+            tempColor.a += 0.1f;
+            screen.color = tempColor;
+            yield return null;
+        }
+        yield return null;
+    }    
 
 
 

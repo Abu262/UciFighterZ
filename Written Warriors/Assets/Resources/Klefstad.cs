@@ -45,7 +45,9 @@ public class Klefstad : Character
     //charge
     public override IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
+
         Player P = SpecHitBox.GetComponent<Player>();
+        P.Aura.SetActive(true);
         SpecHitBox.enabled = true;
         int F = SpecAtkHit;
         P.HighBlocking = true;
@@ -57,7 +59,7 @@ public class Klefstad : Character
                 F = 0;
             }
   //          SpecHitBox.enabled = true;
-            P.RB.velocity = new Vector2(MoveSpeed * speedscalar * transform.localScale.x, 0.0f);
+            P.RB.velocity = new Vector2(MoveSpeed * speedscalar * P.transform.localScale.x, 0.0f);
             F -= 1;
 //            yield return new WaitForSeconds(5.0f / 60.0f);
     //
@@ -67,7 +69,7 @@ public class Klefstad : Character
         P.HighBlocking = false;
         P.LowBlocking = false;
 
-
+        P.Aura.SetActive(false);
 
 
         yield return null;

@@ -8,6 +8,7 @@ TagManager:
   - Player2
   - GameManager
   - Canvas
+  - Screen
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Player
   - Walls
   - Invisible
-  - 
+  - Screen
   - 
   - 
   - 

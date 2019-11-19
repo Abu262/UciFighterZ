@@ -16,13 +16,14 @@ public class Pattis : Character
     {
 
         Player P = SpecHitBox.GetComponent<Player>();
+        P.Aura.SetActive(true);
         SpecHitBox.gameObject.layer = 10;
         P.HighBlocking = true;
         P.LowBlocking = true;
         int F = SpecAtkHit;
 
         SpecHitBox.GetComponent<SpriteRenderer>().enabled = false;
-        float Speed = 15.0f * transform.localScale.x;
+        float Speed = 15.0f * P.transform.localScale.x;
         
         while (F >= 0)
         {
@@ -39,6 +40,7 @@ public class Pattis : Character
         P.PlayerBox.enabled = true;
         //        Transform T = SpecHitBox.GetComponent<Transform>();
         //      T.position = new Vector2(T.position.x + Spec)
+        P.Aura.SetActive(false);
         yield return null;
     }
 

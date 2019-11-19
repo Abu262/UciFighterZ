@@ -44,7 +44,7 @@ public class CharSelectScr : MonoBehaviour
     public TextMeshProUGUI P2CHARBG;
 
 
-
+    private Image screen;
 
 
     // Start is called before the first frame update
@@ -58,7 +58,8 @@ public class CharSelectScr : MonoBehaviour
 
         StartCoroutine(FlashText(P1CHAR, P1CHARBG));
         StartCoroutine(FlashTextP2(P2CHAR, P2CHARBG));
-
+        screen = GameObject.FindGameObjectWithTag("Screen").GetComponent<Image>();
+        StartCoroutine(manager.FadeScreenIn(screen));
     }
 
     // Update is called once per frame
@@ -219,6 +220,7 @@ public class CharSelectScr : MonoBehaviour
         if (ReadyP1 && ReadyP2)
         {
             FindObjectOfType<AudioManager>().Stop("VGDCTheme");
+            StartCoroutine(manager.FadeScreenOut(screen));
             SceneManager.LoadScene(1);
         }
       //  manager.Self1 

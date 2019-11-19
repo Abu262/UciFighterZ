@@ -21,6 +21,7 @@ public class GameOver : MonoBehaviour
     public GameObject HealthDisplay;
     public GameObject GM;
     public StateManager SM;
+    private Image screen;
 
     // Start is called before the first frame update
     void Awake()
@@ -30,6 +31,13 @@ public class GameOver : MonoBehaviour
             StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("SpectrumTheme"));
         }
         GM = GameObject.FindGameObjectWithTag("GameManager");
+        screen = GameObject.FindGameObjectWithTag("Screen").GetComponent<Image>();
+        //FindObjectOfType<Screen>()
+    }
+
+    private void Start()
+    {
+        StartCoroutine(GM.GetComponent<GameManager>().FadeScreenIn(screen));
     }
 
 
@@ -110,6 +118,7 @@ public class GameOver : MonoBehaviour
             yield return new WaitForSeconds(3.0f);
             GM.GetComponent<GameManager>().w2 = 0;
             GM.GetComponent<GameManager>().w1 = 0;
+            StartCoroutine(GM.GetComponent<GameManager>().FadeScreenOut(screen));
             SceneManager.LoadScene(0);
             yield return null;
         }
@@ -191,6 +200,7 @@ public class GameOver : MonoBehaviour
             //for a round system this is where we would count a round for P2
         }
         yield return new WaitForSeconds(2.0f);
+        StartCoroutine(GM.GetComponent<GameManager>().FadeScreenOut(screen));
         SceneManager.LoadScene(1); //loads the main menu
 
         ////////
@@ -282,6 +292,7 @@ public class GameOver : MonoBehaviour
             yield return new WaitForSeconds(2.0f);
             //loads main menu
             //NOTE: for a round system we are going to want to remove this
+            StartCoroutine(GM.GetComponent<GameManager>().FadeScreenOut(screen));
             SceneManager.LoadScene(1);
         }
         yield return null;
@@ -305,6 +316,7 @@ public class GameOver : MonoBehaviour
             GM.GetComponent<GameManager>().w2 = 0;
             GM.GetComponent<GameManager>().w1 = 0;
             FindObjectOfType<AudioManager>().Stop("SpectrumTheme");
+            StartCoroutine(GM.GetComponent<GameManager>().FadeScreenOut(screen));
             SceneManager.LoadScene(0);
             yield return null;
         }
