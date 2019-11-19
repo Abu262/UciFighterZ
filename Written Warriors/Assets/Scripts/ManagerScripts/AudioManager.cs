@@ -111,6 +111,31 @@ public class AudioManager : MonoBehaviour
         return s.source.volume;
     }
 
+    public IEnumerator PlayFadeIn(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            yield return null;
+        }
+        else
+        {
+            float maxVolume = s.source.volume;
+         
+            s.source.volume = 0.0f;
+            s.source.Play();
+            while (s.source.volume < maxVolume)
+            {
+
+                s.source.volume += maxVolume/60;
+                yield return null;
+            }
+            s.source.volume = maxVolume;
+
+        }
+
+        yield return null;
+    }
 
 
     void Start()

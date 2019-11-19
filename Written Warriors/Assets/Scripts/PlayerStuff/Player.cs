@@ -722,7 +722,8 @@ public abstract class Player : MonoBehaviour
 
         //send both players flying away from eachother
         StartCoroutine(KnockBack(0.3f,AttackerPush,DefenderPush));
-        AM.Play("HitSoundReverse");
+       // AM.Play("HitSoundReverse");
+        AM.Play("HitSound2Reverse");
         yield return StartCoroutine(SlowDown());
         //we send them flying for about a minute
         TakingAction = false;
@@ -765,7 +766,7 @@ public abstract class Player : MonoBehaviour
     {
         AM.SetVolume("SpectrumTheme", 0.01f);
         AM.Play("BlockSound");
-
+        //StartCoroutine(MiniSlowdown());
         Opponent.CurrentForm.sprite = BlockSpr;
         Opponent.TakingAction = true;
         BlockTime = BlockStun;
@@ -816,7 +817,15 @@ public abstract class Player : MonoBehaviour
     }
 
 
-
+    IEnumerator MiniSlowdown()
+    {
+        Time.timeScale = 0.1f;
+        Time.fixedDeltaTime = 0.1f * 0.02f;
+        yield return new WaitForSeconds(0.010f);
+        yield return new WaitForSeconds(0.010f);
+        Time.timeScale = 1.0f;
+        Time.fixedDeltaTime = 1.0f * 0.02f;
+    }
 
     IEnumerator SlowDown()
     {
@@ -833,7 +842,8 @@ public abstract class Player : MonoBehaviour
 
             if (Time.timeScale < 1.0f)
             {
-                AM.Play("HitSound");
+                //AM.Play("HitSound");
+                AM.Play("HitSound2");
                 StartCoroutine(MoveCamera(1.75f));
                 while (cam.orthographicSize > 3.0f)
                 {

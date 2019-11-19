@@ -27,16 +27,12 @@ public class GameOver : MonoBehaviour
     {
         if (!FindObjectOfType<AudioManager>().Playing("SpectrumTheme"))
         {
-            FindObjectOfType<AudioManager>().Play("SpectrumTheme");
+            StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("SpectrumTheme"));
         }
         GM = GameObject.FindGameObjectWithTag("GameManager");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     //this is called to announce when a match starts
     public IEnumerator StartMatch()
