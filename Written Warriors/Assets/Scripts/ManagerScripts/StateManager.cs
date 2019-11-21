@@ -13,6 +13,7 @@ public class StateManager : MonoBehaviour
     public TextMeshProUGUI timerLabelBG;
     public GameObject shakeObj;
     public GameObject shakeObjBG;
+    public bool isPaused;
     Vector2 startingPos;
     Vector2 startingPosBG;
     Vector3 vUp;
@@ -45,7 +46,7 @@ public class StateManager : MonoBehaviour
     {
         runTimer = true;
         yield return StartCoroutine(GO.StartMatch());
-        while (countdown > -1 )
+        while (countdown > -1 && isPaused)
         {
             if (countdown % 150 == 0)
                 StartCoroutine(shake(countdown));
