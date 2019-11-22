@@ -13,18 +13,18 @@ public class StateManager : MonoBehaviour
     public TextMeshProUGUI timerLabelBG;
     public GameObject shakeObj;
     public GameObject shakeObjBG;
-    public bool isPaused;
     Vector2 startingPos;
     Vector2 startingPosBG;
     Vector3 vUp;
     Vector3 vDown;
     Vector3 vRight;
     Vector3 vLeft;
-
     Vector3 vUpBG;
     Vector3 vDownBG;
     Vector3 vRightBG;
     Vector3 vLeftBG;
+
+    PauseMenu p = new PauseMenu();
 
     public GameOver GO;
     int count = 1;
@@ -39,14 +39,13 @@ public class StateManager : MonoBehaviour
         startingPos.y = shakeObj.transform.position.y;
         startingPosBG.x = shakeObjBG.transform.position.x;
         startingPosBG.y = shakeObjBG.transform.position.y;
-
     }
 
     public IEnumerator startCountdown(float countdown)
     {
         runTimer = true;
         yield return StartCoroutine(GO.StartMatch());
-        while (countdown > -1 && isPaused)
+        while (countdown > -1 && p.isPaused == false)
         {
             if (countdown % 150 == 0)
                 StartCoroutine(shake(countdown));
