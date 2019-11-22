@@ -56,7 +56,7 @@ public class Klefstad : Character
         P.LowBlocking = true;
         while (F > 0)
         {
-            if (P.CurrentBlocking == true || P.Opponent.Hit == true)
+            if (P.Opponent.CurrentBlocking == true || P.Opponent.Hitstun == true)
             {
                 F = 0;
             }

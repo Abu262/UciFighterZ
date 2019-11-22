@@ -4385,6 +4385,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4713450108291769384, guid: 068702b6faab3f5468c521e978982bad,
         type: 3}
+    - target: {fileID: 7995926854756224209, guid: d7194f5e5e42715489b048878f063da4,
+        type: 3}
+      propertyPath: DeathEffect
+      value: 
+      objectReference: {fileID: 5378918243616654171, guid: 26f43ada8600e6c45831ac0deec79744,
+        type: 3}
     - target: {fileID: 7995926854756224210, guid: d7194f5e5e42715489b048878f063da4,
         type: 3}
       propertyPath: m_LocalPosition.x

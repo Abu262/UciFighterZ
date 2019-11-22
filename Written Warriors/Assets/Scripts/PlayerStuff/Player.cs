@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using System;
 
 //JESSE ALLAS
-//Last Updated: 10/1/2019
+//Last Updated: 11/21/2019
 
 //This is all the controls and stuff for the player
 //designers probably won' have to touch this, 
@@ -16,21 +16,15 @@ using System;
 public abstract class Player : MonoBehaviour
 {
 
-    public Camera cam;
-    public bool IsP1 = false;
-//    public string Path = FindObjectOfType<GameManager>().ReturnPath();
-   // public Text HP; //Temporary, displays the current HP
+    //some generally important stuff
+    public Camera cam; //camera
     public int Health; //Since the health value changes we want to copy the character health stat
     public PlayerControls Controls; //Player Controls
-    
     public Character Self; //the character we're getting all the stats from
-
     public Player Opponent; //the opponent player object
     public string opponentTag; //The opponent tag, for checking collisions 
-
-    bool TakingAction = true;     //a bool to prvent the player from interupting their moves
-
     public Vector2 Move;    //vector to move the player
+    // ///////////////////////
 
     //the hitboxes for the different attacks
     public BoxCollider2D HighHitBox;
@@ -38,39 +32,51 @@ public abstract class Player : MonoBehaviour
     public BoxCollider2D LowHitBox;
     public BoxCollider2D SpecHitBox;
     public BoxCollider2D PlayerBox;
+    ////////////////////////
 
-    //RigidBody because physics dont work if we dont
-    public Rigidbody2D RB;
 
-    //bools to check if the player is blocking
-    public bool HighBlocking;
-    public bool LowBlocking;
-    
-    public bool Hit; //true when the player is hit
+//    public bool Hit; //true when the player is hit
+
 
     string CurrentAtk; //the string titling the current move
 
-    private int BlockTime;
-    public bool CurrentBlocking = false;
-    public int FrameCountParry;
+    //bunch of blocking stuff
+    private int BlockTime;   //variable to time how long you are in blockstun
+    public bool CurrentBlocking = false;  //bool to make sure we dont overlap blocking functions (it gets weird if it does)
+    public int FrameCountParry;  //into to count the parry frames
+    
+    //bools to check if the player is blocking
+    public bool HighBlocking;
+    public bool LowBlocking;
+    // ////////////////////////////
 
-
-    public SpriteRenderer CurrentForm;
-    public GameOver GO;
+    
+    //managers for a  bunch of random stuff
+    public GameOver GO;     //reference to the game over script
+    public PauseMenu PM;    //reference to the pause menu script
+    private AudioManager AM; //reference to audio manager
+    private GameManager GM; //reference to game manager
+    // ////////////////////
 
     [HideInInspector]
-    public int Charges; //this is a quickfix for thornton's special, I'll fix it later
-    private bool Hitstun = false;
-    private bool KnockingBack = false;
-    private AudioManager AM;
-    float OriginalSize;// = cam.orthographicSize;
-    private GameManager GM;
-    public GameObject Aura;
-    //music cut, sound e plays
+    public int Charges; //this is a quickfix for thornton's special, I'll fix it later EDIT: i still dont know a bett way to do this
+    
 
-    //block e should explode towards blocker DONE
+    private bool KnockingBack = false; //bool to make sure we dont overlap knockbacks
 
-    //flashier block (lower music for short period)
+    //the big chungi, these determine wether you can act or not
+    public bool Hitstun = false;     //this is true when you get hit
+    public bool IsBlocking = false;   //this is true when you're blocking
+    public bool TakingAction = true;     //this is true when you attack or move or parry, basically when you press buttons
+
+    //some random stuff that we kinda need
+    public SpriteRenderer CurrentForm; //refernece to the sprite object
+    float OriginalSize; //saves the camera's size
+    public GameObject Aura; //a super saiyan affect for special moves
+
+    //RigidBody because physics dont work if we dont
+    public Rigidbody2D RB;
+    // ////////
 
 
     private void Start()
@@ -90,7 +96,7 @@ public abstract class Player : MonoBehaviour
         
 
         //setting some initial things
-        Hit = false;
+      //  Hit = false;
         Health = Self.Health;
        // HP.text = Health.ToString();
         HighBlocking = false;
@@ -117,74 +123,49 @@ public abstract class Player : MonoBehaviour
     void FixedUpdate()
     {
 
-
-        if (TakingAction == false)
+        //If the player isnt taking an action AND the player isn't currentlly hit AND the player isnt bllocking
+        //then they can move
+        if (TakingAction == false && Hitstun == false && IsBlocking == false)
         {
             //Move changes when the player waggles the analog stick
             //Move.x controls left and right movement
             if (Move.x >= 0.8f)
             {
-
-                RB.velocity = new Vector2(50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime;
-               
-                //change blocking bool if the player is walking or not
-                //if (transform.localScale.x >=0.0f)
-                //{
-                //    HighBlocking = false;
-                //}
-                //else
-                //{
-                //    HighBlocking = true;
-                //}
-
+                RB.velocity = new Vector2(50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime; //move right
             }
             //More movement
             else if (Move.x <= -0.8f)
             {
-
-                RB.velocity = new Vector2(-50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime;
-
-                //if (transform.localScale.x <= 0.0f)
-                //{
-                //    HighBlocking = false;
-                //}
-                //else
-                //{
-                //    HighBlocking = true;
-                //}
+                RB.velocity = new Vector2(-50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime; //move left
             }
             else
             {
                 RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
-               // HighBlocking = true;
             }
 
         //ducking stuff
-        if (Hit == false)
+        //if (Hit == false)
+          //  {
+            //    Hitstun = false;
+            if (Move.y <= -0.6f && !(Move.x >= 0.8f || Move.x <= -0.8f))
             {
-                Hitstun = false;
-                if (Move.y <= -0.6f && !(Move.x >= 0.8f || Move.x <= -0.8f))
-                {
-                    CurrentForm.sprite = Self.CrouchSpr;
-                    PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y / 2.0f);
-                    PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y - 0.5f);
-                    //LowBlocking = true;
-                    //HighBlocking = false;
-                }
-                else
-                {
-                    CurrentForm.sprite = Self.StandSpr;
-                    PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
-                    PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
-                //    LowBlocking = false;
-
-                }
+                CurrentForm.sprite = Self.CrouchSpr;
+                PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y / 2.0f);
+                PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y - 0.5f);
+                
             }
-        else
+            else
+            {
+                CurrentForm.sprite = Self.StandSpr;
+                PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
+                PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
+            }
+          //  }
+    /*    else
             {
                 RB.velocity = new Vector2(50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime;
                 Hitstun = true;
-                CurrentForm.sprite = Self.HitSpr;
+                
                 StopCoroutine("PlayStartUpFrames");
                 StopCoroutine("PlayHitFrames");
                 StopCoroutine("PlayCooldownFrames");
@@ -193,8 +174,13 @@ public abstract class Player : MonoBehaviour
                 StopCoroutine("LowAttack");
                 StopCoroutine("SpecAttack");
 
-            }
+            }*/
 
+        }
+        //this is a hard code to make sure when you're hit YOOU LOOK LIKE YOU'RE HIT
+        if (Hitstun == true)
+        {
+            CurrentForm.sprite = Self.HitSpr;
         }
         
 
@@ -214,11 +200,7 @@ public abstract class Player : MonoBehaviour
 
         }
 
-        if (Hit == true)
-        {
-//            TakingAction = true;
-            //RB.velocity = new Vector2(0.0f, 0.0f);
-        }
+
 
     }
     
@@ -229,46 +211,46 @@ public abstract class Player : MonoBehaviour
 
     //Coroutines for the different attack types, 
     //I'll only describe the high attack since low and mid attacks are the same as high
-
     public IEnumerator HighAttack()
     {
-
         //if the player isn't already attacking
         if (TakingAction == false)
         {
-
+            //they disable their blocks
             HighBlocking = false;
             LowBlocking = false;
+
             // state that they are attacking    
             TakingAction = true;
-            RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
+            RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime; //freeze their movement
 
 
-            CurrentAtk = "High";
-            CurrentForm.sprite = Self.HighSprStartUp;
+            CurrentAtk = "High"; //label the attack type
+            CurrentForm.sprite = Self.HighSprStartUp; //sprite type
             yield return StartCoroutine(PlayStartUpFrames(Self.HighAtkStartUp)); //start up frames
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+
+           // if (Hitstun == true)
+           // {
+           //     Hitstun = false;
+           /////     TakingAction = false;
+           //     yield break;
+           // }
             CurrentForm.sprite = Self.HighSprHit;
             yield return StartCoroutine(PlayHitFrames(Self.HighAtkHit, HighHitBox)); //hit frames
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+            //if (Hitstun == true)
+            //{
+            //    Hitstun = false;
+            //  //  TakingAction = false;
+            //    yield break;
+            //}
             CurrentForm.sprite = Self.HighSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.HighAtkCoolDown)); //cooldown frames
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+            //if (Hitstun == true)
+            //{
+            //    Hitstun = false;
+            // //   TakingAction = false;
+            //    yield break;
+            //}
 
             TakingAction = false; //attack is done
         }
@@ -288,28 +270,28 @@ public abstract class Player : MonoBehaviour
             CurrentAtk = "Middle";
             CurrentForm.sprite = Self.MedSprStartUp;
             yield return StartCoroutine(PlayStartUpFrames(Self.MedAtkStartUp));
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+           // if (Hitstun == true)
+           // {
+           //     Hitstun = false;
+           ////     TakingAction = false;
+           //     yield break;
+           // }
             CurrentForm.sprite = Self.MedSprHit;
             yield return StartCoroutine(PlayHitFrames(Self.MedAtkHit, MedHitBox));
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+          //  if (Hitstun == true)
+          //  {
+          //      Hitstun = false;
+          ////      TakingAction = false;
+          //      yield break;
+          //  }
             CurrentForm.sprite = Self.MedSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.MedAtkCoolDown));
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+            //if (Hitstun == true)
+            //{
+            //    Hitstun = false;
+            ////    TakingAction = false;
+            //    yield break;
+            //}
 
             TakingAction = false;
         }
@@ -317,6 +299,7 @@ public abstract class Player : MonoBehaviour
 
     public IEnumerator LowAttack()
     {
+
         if (TakingAction == false)
         {
             HighBlocking = false;
@@ -328,28 +311,28 @@ public abstract class Player : MonoBehaviour
             CurrentAtk = "Low";
             CurrentForm.sprite = Self.LowSprStartUp;
             yield return StartCoroutine(PlayStartUpFrames(Self.LowAtkStartUp));
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+           // if (Hitstun == true)
+           // {
+           //     Hitstun = false;
+           ////     TakingAction = false;
+           //     yield break;
+           // }
             CurrentForm.sprite = Self.LowSprHit;
             yield return StartCoroutine(PlayHitFrames(Self.LowAtkHit, LowHitBox));
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+           // if (Hitstun == true)
+           // {
+           //     Hitstun = false;
+           ////     TakingAction = false;
+           //     yield break;
+           // }
             CurrentForm.sprite = Self.LowSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.LowAtkCoolDown));
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+           // if (Hitstun == true)
+           // {
+           //     Hitstun = false;
+           ////     TakingAction = false;
+           //     yield break;
+           // }
 
             TakingAction = false;
         }
@@ -371,28 +354,28 @@ public abstract class Player : MonoBehaviour
             RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
             CurrentForm.sprite = Self.SpecSprStartUp;
             yield return StartCoroutine(PlayStartUpFrames(Self.SpecAtkStartUp));
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+           // if (Hitstun == true)
+           // {
+           //     Hitstun = false;
+           ////     TakingAction = false;
+           //     yield break;
+           // }
             CurrentForm.sprite = Self.SpecSprHit;
             yield return StartCoroutine(Self.SpecAtk(SpecHitBox)); //call the special attack directly
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+           // if (Hitstun == true)
+           // {
+           //     Hitstun = false;
+           ////     TakingAction = false;
+           //     yield break;
+           // }
             CurrentForm.sprite = Self.SpecSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.SpecAtkCoolDown));
-            if (Hitstun == true)
-            {
-                Hitstun = false;
-                TakingAction = false;
-                yield break;
-            }
+          //  if (Hitstun == true)
+          //  {
+          //      Hitstun = false;
+          ////      TakingAction = false;
+          //      yield break;
+          //  }
             TakingAction = false;
            
         }
@@ -400,20 +383,23 @@ public abstract class Player : MonoBehaviour
 
     public IEnumerator Parry()
     {
+        //if you arent doing something else
         if (TakingAction == false)
         {
-                    TakingAction = true;
-        yield return StartCoroutine(PlayStartUpFrames(3));
-        //block
-        float height = Move.y;
-        Vector2 stance = new Vector2(0.0f, height);
-        FrameCountParry = 20;
+        TakingAction = true; //now you're doing somethihng
+
+        yield return StartCoroutine(PlayStartUpFrames(3)); //play a few start up frames
+        
+            //block
+        float height = Move.y; //save the position, whether they are ducking or standing
+        Vector2 stance = new Vector2(0.0f, height); 
+        FrameCountParry = 20; 
         
         //this counts the frames
         while (FrameCountParry > 0)
         {
-                Debug.Log(FrameCountParry);
-            RB.velocity = stance;
+            //set the current block stance
+            RB.velocity = stance; 
             if (height <= -0.6f)
             {
                 CurrentForm.sprite = Self.CrouchBlockSpr;
@@ -430,13 +416,11 @@ public abstract class Player : MonoBehaviour
             yield return null;
         }
 
-        if (CurrentBlocking == false)
-            {
-                LowBlocking = false;
-                HighBlocking = false;
 
-            }
-            CurrentForm.sprite = Self.StandSpr;
+        LowBlocking = false;
+        HighBlocking = false;
+                
+        CurrentForm.sprite = Self.StandSpr;
         yield return StartCoroutine(PlayCoolDownFrames(8));
         TakingAction = false;
         }
@@ -495,9 +479,16 @@ public abstract class Player : MonoBehaviour
     //The player is a collider and cant activate triggers, so this is only for attacks
     void OnTriggerEnter2D(Collider2D col)
     {
-        Vector2 v = new Vector2(0.0f, 0.0f);
-        Vector3 rot = transform.rotation.eulerAngles;
-        rot = new Vector3(rot.x, rot.y, rot.z + (-90 * transform.localScale.x));
+
+    HighHitBox.enabled = false;
+    MedHitBox.enabled = false;
+    LowHitBox.enabled = false;
+    SpecHitBox.enabled = false;
+
+    //this is mainly for the particles
+    Vector2 v = new Vector2(0.0f, 0.0f);
+    Vector3 rot = transform.rotation.eulerAngles;
+    rot = new Vector3(rot.x, rot.y, rot.z + (-90 * transform.localScale.x));
 
 
         //only activates if the object his is the opponent and not a projectile or another punch
@@ -510,23 +501,19 @@ public abstract class Player : MonoBehaviour
             if (CurrentAtk == "High")
             {
                 v = new Vector2(col.bounds.center.x + (col.bounds.size.x/2 * transform.localScale.x * -1.0f), HighHitBox.bounds.center.y);
-
-                
-
+               
                 if (Opponent.HighBlocking == true)
                 {
                     StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.HighBlockStun));
                     GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.HighAttackerBlockPush, Self.HighDefenderBlockPush));
-                    //                    KnockBackSelf(Self.HighAttackerBlockPush);
-                    //                  Opponent.KnockBackSelf(Self.HighDefenderBlockPush);
-                  //  Debug.Log("BLOCK");
+                    
                 }
                 else
                 {
                     Explode(v);
-                    Opponent.TakeDamage(Self.HighAttackerHitPush,Self.HighDefenderHitPush);
-                    //Debug.Log("HIT");
+                    StartCoroutine(Opponent.TakeDamage(Self.HighAttackerHitPush,Self.HighDefenderHitPush));
+                    
                     
                 }
             }
@@ -541,21 +528,20 @@ public abstract class Player : MonoBehaviour
                     StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.MedBlockStun));
                     GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.MedAttackerBlockPush, Self.MedDefenderBlockPush));
-                    //                    KnockBackSelf(Self.MedAttackerBlockPush);
-                    //                  Opponent.KnockBackSelf(Self.MedDefenderBlockPush);
-                    //Debug.Log("BLOCK");
+                    
                 }
                 
                 else
                 {
                     Explode(v);
-                    Opponent.TakeDamage(Self.MedAttackerHitPush, Self.MedDefenderHitPush);
-                    //Debug.Log("HIT");
+                    StartCoroutine(Opponent.TakeDamage(Self.MedAttackerHitPush, Self.MedDefenderHitPush));
+              
                 }
 
             }
             else if (CurrentAtk == "Low")
             {
+
                 v = new Vector2(col.bounds.center.x + (col.bounds.size.x/2 * transform.localScale.x * -1.0f), LowHitBox.bounds.center.y);
 
 
@@ -566,18 +552,17 @@ public abstract class Player : MonoBehaviour
                     StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr, Self.LowBlockStun));
                     GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.LowAttackerBlockPush, Self.LowDefenderBlockPush));
-                 //   KnockBackSelf(Self.LowAttackerBlockPush);
-                   // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
-                    //Debug.Log("BLOCK");
+
                 }
                 else
                 {
 
-                    Opponent.TakeDamage(Self.LowAttackerHitPush, Self.LowDefenderHitPush);
+                    StartCoroutine(Opponent.TakeDamage(Self.LowAttackerHitPush, Self.LowDefenderHitPush));
                     Explode(v);
-                    //Debug.Log("HIT");
+
                 }
             }
+            //okay the special is a bit different since we have to seperatle label it, basically we redo everything from before but in the special if statement
             else if (CurrentAtk == "Special")
             {
                 v = new Vector2(col.bounds.center.x + (col.bounds.size.x / 2 * transform.localScale.x * -1.0f), SpecHitBox.bounds.center.y);
@@ -588,16 +573,13 @@ public abstract class Player : MonoBehaviour
                         StartCoroutine(Blocking(Opponent.Self.StandBlockSpr,Self.SpecBlockStun));
                         GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
-                        //   KnockBackSelf(Self.LowAttackerBlockPush);
-                        // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
-                    //    Debug.Log("BLOCK");
                     }
                     else
                     {
 
-                        Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
+                        StartCoroutine(Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush));
                         Explode(v);
-                    //    Debug.Log("HIT");
+
                     }
                 }
                 else if (Self.SpecialStr == "Middle")
@@ -607,16 +589,14 @@ public abstract class Player : MonoBehaviour
                         StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.SpecBlockStun));
                         GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
-                        //   KnockBackSelf(Self.LowAttackerBlockPush);
-                        // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
-                    //    Debug.Log("BLOCK");
+
                     }
                     else
                     {
 
-                        Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
+                        StartCoroutine(Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush));
                         Explode(v);
-                    //    Debug.Log("HIT");
+
                     }
                 }
                 else if (Self.SpecialStr == "Low")
@@ -626,24 +606,19 @@ public abstract class Player : MonoBehaviour
                         StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr, Self.SpecBlockStun));
                         GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
-                        //   KnockBackSelf(Self.LowAttackerBlockPush);
-                        // Opponent.KnockBackSelf(Self.LowDefenderBlockPush);
-                    //    Debug.Log("BLOCK");
                     }
                     else
                     {
 
-                        Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
+                        StartCoroutine(Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush));
                         Explode(v);
-                     //   Debug.Log("HIT");
                     }
                 }
                 else
                 {
 
-                    Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush);
+                    StartCoroutine(Opponent.TakeDamage(Self.SpecAttackerHitPush, Self.SpecDefenderHitPush));
                     Explode(v);
-                   // Debug.Log("HIT");
                 }
             }
 
@@ -658,43 +633,39 @@ public abstract class Player : MonoBehaviour
     //it would be easier to create a takedamage function
     //instead of a deal damage function
 
-    //anyway this function causes the player to take damage
-    public void TakeDamage(float AttackerPush, float DefenderPush)
+    //When you take damage you are put into hitstun
+    public IEnumerator TakeDamage(float AttackerPush, float DefenderPush)
     {
-      
-        TakingAction = true;
-        Opponent.TakingAction = true;
-        //I want to impliment a slowdown/zoom in effect when someone gets hit
-        //but it isn't necessary
+        Hitstun = true; //you are in hitstun
+//        TakingAction = true;
+  //      Opponent.TakingAction = true;
         
-        //   FindObjectOfType<AudioManager>().Play("Hit");
         Health -= 1;
         FindObjectOfType<HealthDisplay>().ChangeHealth(gameObject.tag);
-       // HP.text = Health.ToString();
-        Hit = true; //when hit is on the player cant move
-        StartCoroutine(IFrames(10));
-        StartCoroutine(HitAnimation(AttackerPush,DefenderPush));
+
+//        Hit = true; //when hit is on the player cant move
+        StartCoroutine(IFrames(60));
+        yield return StartCoroutine(HitAnimation(AttackerPush,DefenderPush));
+        
+        //check if we died
         if (Health == 0)
         {
             GameObject DeathSplooge = Instantiate(GM.DeathEffect, transform.position, Quaternion.identity);
             StartCoroutine(KillChar());
             StartCoroutine(GO.PlayerDies(opponentTag));
         }
-//        if (Health == 1)
-  //      {
-    //        StartCoroutine(Self.RageMode());
 
-      //  }
+        yield return null;
 
- 
-        TakingAction = false;
-        Opponent.TakingAction = false;
+        
+//        TakingAction = false;
+  //      Opponent.TakingAction = false;
 
     }
 
     IEnumerator KillChar()
     {
-        Debug.Log("PENIS");
+      
         Aura.SetActive(false);
         var tempColor = CurrentForm.color;
         yield return new WaitForSeconds(0.05f);
@@ -734,132 +705,113 @@ public abstract class Player : MonoBehaviour
 
 
 
-    //I seperated this from the take damage because coroutines do things in the order I list them
-    //functions tend to be less controlled
 
-    //this function isnt working quite how I want it to but it works well enough right now
+
+    //shouldnt have to swap any variables, just slowdown things and knock people back
     IEnumerator HitAnimation(float AttackerPush, float DefenderPush)
     {
-        TakingAction = true;
-        Opponent.TakingAction = true;
+  //      TakingAction = true;
+    //    Opponent.TakingAction = true;
         
         CurrentForm.sprite = Self.HitSpr;
+       
         //stop both players from moving
         Opponent.RB.velocity = new Vector2(0.0f, 0.0f);
         RB.velocity = new Vector2(0.0f, 0.0f);
 
         //send both players flying away from eachother
-        StartCoroutine(KnockBack(0.3f,AttackerPush,DefenderPush));
-       // AM.Play("HitSoundReverse");
+        StartCoroutine(KnockBack(0.1f,AttackerPush,DefenderPush));
+       
         AM.Play("HitSound2Reverse");
-        yield return StartCoroutine(SlowDown());
-        //we send them flying for about a minute
-        TakingAction = false;
-        Opponent.TakingAction = false;
+        yield return StartCoroutine(SlowDown()); //important that the knockback starts before the slowdown
+        
+        //keep the animation in line with the knockback, they'll end at the same time now
+        while (Hitstun == true)
+        {
+            yield return null;
+        }
 
-
-        Hit = false; //allow player to move now
-        TakingAction = false;
-        Opponent.TakingAction = false;
         yield return null;
     }
 
+    //this is what actually pushes people back
     IEnumerator KnockBack(float time, float AttackerPush, float DefenderPush)
     {
-        TakingAction = true;
-        Opponent.TakingAction = true;
+
+
+        //basically check that they aren't already being pushed back for other reasons
+        //adding forces together get's weird
         if (KnockingBack == false)
         {
             KnockingBack = true;
             while (time > 0.0f)
             {
-                TakingAction = true;
-                Opponent.TakingAction = true;
-                RB.velocity = AttackerPush * transform.localScale * -1.0f;
+                
+            
+                RB.velocity = AttackerPush  * transform.localScale * -1.0f;
                 Opponent.RB.velocity = DefenderPush * Opponent.transform.localScale * -1.0f;
                 time -= Time.deltaTime;
                 yield return null;
 
             }
             KnockingBack = false;
+            Hitstun = false;
             yield return null;
         }
-        TakingAction = false;
-        Opponent.TakingAction = false;
+
+  
         yield return null;
 
     }
 
+    //okay this is confusing, this affects the defender but is called from the attacker, trust me it works better this way
     public IEnumerator Blocking(Sprite BlockSpr, int BlockStun)
     {
-//        AM.SetVolume("SpectrumTheme", 0.1f);
+
         AM.Play("BlockSound");
-        //StartCoroutine(MiniSlowdown());
+
         Opponent.CurrentForm.sprite = BlockSpr;
         Opponent.TakingAction = true;
-        BlockTime = BlockStun;
+        BlockTime = BlockStun;   //dont actually change the passed in variable, copy it
 
 
-        if (CurrentBlocking == false)
-        {
+    //    if (CurrentBlocking == false)
+      //  {
 
-            Opponent.TakingAction = true;
+            
             Opponent.FrameCountParry = 0;
-            int IF = BlockTime;
-            StartCoroutine(Opponent.IFrames(IF));
+//            int IF = BlockTime;
+            //StartCoroutine(Opponent.IFrames(IF));
             while (BlockTime > 0)
             {
-                TakingAction = true;
-                Opponent.TakingAction = true;
+                //TakingAction = true;
+                //Opponent.TakingAction = true;
+                Opponent.IsBlocking = true;
              //   Opponent.CurrentForm.sprite = BlockSpr;
                 BlockTime -= 1;
                 yield return null;
             }
-            HighBlocking = false;
-            LowBlocking = false;
-            TakingAction = false;
-            Opponent.TakingAction = false;
-            CurrentBlocking = false;
+           // HighBlocking = false;
+           // LowBlocking = false;
+        Opponent.IsBlocking = false;
+        //            CurrentBlocking = false;
 
-        }
-     //   AM.SetVolume("SpectrumTheme", 0.25f);
-
-        yield return null;
-    }
-
-    public IEnumerator KnockBackSelf(float pushtime)
-    {
-        float t = pushtime;
-
-        RB.AddForce(pushtime * transform.localScale * -1.0f);
-
-        //while (t > 0.0f)
-        //{
-        //    RB.velocity = 10.0f * transform.localScale * -1.0f;
-        //    t -= Time.deltaTime;
-        //    yield return null;
-        //}
-
+        //      }
+        //   AM.SetVolume("SpectrumTheme", 0.25f);
 
         yield return null;
     }
 
 
-    IEnumerator MiniSlowdown()
-    {
-        Time.timeScale = 0.1f;
-        Time.fixedDeltaTime = 0.1f * 0.02f;
-        yield return new WaitForSeconds(0.010f);
-        yield return new WaitForSeconds(0.010f);
-        Time.timeScale = 1.0f;
-        Time.fixedDeltaTime = 1.0f * 0.02f;
-    }
 
+
+
+    //this is the only function I know works perfectly
     IEnumerator SlowDown()
     {
 
-        TakingAction = true;
-        Opponent.TakingAction = true;
+       // TakingAction = true;
+       // Opponent.TakingAction = true;
         float Vert =  cam.transform.position.y - 2f;
         
         if (Time.timeScale >= 1.0f)
@@ -882,8 +834,8 @@ public abstract class Player : MonoBehaviour
                     ////}
 
 
-                    TakingAction = true;
-                    Opponent.TakingAction = true;
+              //      TakingAction = true;
+         //           Opponent.TakingAction = true;
                     cam.orthographicSize -= 0.5f;
                     yield return null;
                 }
@@ -898,8 +850,8 @@ public abstract class Player : MonoBehaviour
                     AM.SetVolume("SpectrumTheme", AM.GetVolume("SpectrumTheme") + 0.025f);
 
 
-                    TakingAction = true;
-                    Opponent.TakingAction = true;
+         //           TakingAction = true;
+           //         Opponent.TakingAction = true;
                     cam.orthographicSize += 0.5f;
                     yield return null;
                 }
@@ -910,8 +862,8 @@ public abstract class Player : MonoBehaviour
                 Time.fixedDeltaTime = 1.0f * 0.02f;
                 //cam.orthographicSize = 10.0f;
 
-                TakingAction = false;
-                Opponent.TakingAction = false;
+          //      TakingAction = false;
+           //     Opponent.TakingAction = false;
             }
         }
 
@@ -919,6 +871,7 @@ public abstract class Player : MonoBehaviour
         yield return null;
     }
 
+    //this is how I keep the camera centered on the players, partly
     IEnumerator MoveCamera(float Distance)
     {
         if (Distance >= 0.0)
@@ -948,6 +901,7 @@ public abstract class Player : MonoBehaviour
 
     }
 
+    //this and the next one I use to stop the players from doing stuff while announcements play
     public IEnumerator Freeze()
     {
             while (true)
@@ -964,12 +918,43 @@ public abstract class Player : MonoBehaviour
         yield return null;
 
     }
+
+    //this aint working yet
     public IEnumerator Pause()
     {
         /////
+        ///
+        PM.isPaused = !PM.isPaused;
         Debug.Log("Pause");
         yield return null;
     }
 
+    //This ended up not being needed but it's here anyway
+    public IEnumerator KnockBackSelf(float pushtime)
+    {
+        float t = pushtime;
 
+        RB.AddForce(pushtime * transform.localScale * -1.0f); //this didnt work how I wanted
+
+        //while (t > 0.0f)
+        //{
+        //    RB.velocity = 10.0f * transform.localScale * -1.0f;
+        //    t -= Time.deltaTime;
+        //    yield return null;
+        //}
+
+
+        yield return null;
+    }
+
+    //see the above coroutine
+    IEnumerator MiniSlowdown()
+    {
+        Time.timeScale = 0.1f;
+        Time.fixedDeltaTime = 0.1f * 0.02f;
+        yield return new WaitForSeconds(0.010f);
+        yield return new WaitForSeconds(0.010f);
+        Time.timeScale = 1.0f;
+        Time.fixedDeltaTime = 1.0f * 0.02f;
+    }
 }

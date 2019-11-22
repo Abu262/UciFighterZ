@@ -51,47 +51,58 @@ public class Player2Scr : Player
         //controller stuff
         while (true)
         {
-            if (Input.GetKey(KeyCode.Joystick2Button0) || Input.GetKey(KeyCode.Minus))
+            //can only attack if they arent already doing something else and they arent currently  hit
+            if (TakingAction == false && Hitstun == false && IsBlocking == false)
             {
-                StartCoroutine(MedAttack());
-            }
-            //X
-            if (Input.GetKeyDown(KeyCode.Joystick2Button1) || Input.GetKey(KeyCode.LeftBracket))
-            {
-                StartCoroutine(LowAttack());
-            }
-            //circle
-            if (Input.GetKeyDown(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.RightBracket))
-            {
-                StartCoroutine(SpecAttack());
-            }
-            //triangle
-            if (Input.GetKeyDown(KeyCode.Joystick2Button3) || Input.GetKey(KeyCode.Equals))
-            {
-                StartCoroutine(HighAttack());
-            }
-            if (Input.GetKeyDown(KeyCode.Joystick2Button4) || Input.GetKeyDown(KeyCode.Joystick2Button5))
-            {
-                StartCoroutine(Parry());
-            }
+                if (Input.GetKey(KeyCode.Joystick2Button0) || Input.GetKey(KeyCode.Minus))
+                {
+                    StartCoroutine(MedAttack());
+                }
+                //X
+                if (Input.GetKeyDown(KeyCode.Joystick2Button1) || Input.GetKey(KeyCode.LeftBracket))
+                {
+                    StartCoroutine(LowAttack());
+                }
+                //circle
+                if (Input.GetKeyDown(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.RightBracket))
+                {
+                    StartCoroutine(SpecAttack());
+                }
+                //triangle
+                if (Input.GetKeyDown(KeyCode.Joystick2Button3) || Input.GetKey(KeyCode.Equals))
+                {
+                    StartCoroutine(HighAttack());
+                }
+                if (Input.GetKeyDown(KeyCode.Joystick2Button4) || Input.GetKeyDown(KeyCode.Joystick2Button5))
+                {
+                    StartCoroutine(Parry());
+                }
+                
 
+                if (Input.GetKey(KeyCode.K))
+                {
+                    Move = new Vector2(-1.0f, 0.0f);
+                }
+                else if (Input.GetKey(KeyCode.Semicolon))
+                {
+                    Move = new Vector2(1.0f, 0.0f);
+                }
+                else if (Input.GetKey(KeyCode.L))
+                {
+                    Move = new Vector2(0.0f, -1.0f);
+                }
+                else
+                {
+                    Move = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
+                }
+            }
+       //     if (Input.GetKeyDown(KeyCode.Joystick1Button9))
+         //   {
+           //     RB.velocity = Vector2.zero;
+             //   Move = Vector2.zero;
+               // StartCoroutine(Pause());
+           // }
 
-            if (Input.GetKey(KeyCode.K))
-            {
-                Move = new Vector2(-1.0f, 0.0f);
-            }
-            else if (Input.GetKey(KeyCode.Semicolon))
-            {
-                Move = new Vector2(1.0f, 0.0f);
-            }
-            else if (Input.GetKey(KeyCode.L))
-            {
-                Move = new Vector2(0.0f, -1.0f);
-            }
-            else
-            {
-                Move = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
-            }
 
 
             yield return null;
