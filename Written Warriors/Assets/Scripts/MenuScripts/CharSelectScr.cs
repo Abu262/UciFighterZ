@@ -53,8 +53,8 @@ public class CharSelectScr : MonoBehaviour
         StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
         indexP1 = 0;
         indexP2 = 0;
-        P2Arrow.transform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 35.0f);
-        P1Arrow.transform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 35.0f);
+        P2Arrow.transform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 55.0f);
+        P1Arrow.transform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 55.0f);
 
         StartCoroutine(FlashText(P1CHAR, P1CHARBG));
         StartCoroutine(FlashTextP2(P2CHAR, P2CHARBG));
@@ -219,9 +219,9 @@ public class CharSelectScr : MonoBehaviour
     {
         if (ReadyP1 && ReadyP2)
         {
-            FindObjectOfType<AudioManager>().Stop("VGDCTheme");
-            StartCoroutine(manager.FadeScreenOut(screen));
-            SceneManager.LoadScene(1);
+            //FindObjectOfType<AudioManager>().Stop("VGDCTheme");
+            StartCoroutine(Wait());
+            //SceneManager.LoadScene(7);
         }
       //  manager.Self1 
 
@@ -354,8 +354,8 @@ public class CharSelectScr : MonoBehaviour
             turn2 = true;
 
 
-
-            P2Arrow.transform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 35.0f);
+            
+            P2Arrow.rectTransform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 55.0f);
             if(indexP2 == 0)
             {
                 P2CHAR.text = "THORNTON";
@@ -456,7 +456,7 @@ public class CharSelectScr : MonoBehaviour
 
 
 
-            P1Arrow.transform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 35.0f);
+            P1Arrow.rectTransform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 55.0f);
             if (indexP1 == 0)
             {
                 P1CHAR.text = "THORNTON";
@@ -528,6 +528,16 @@ public class CharSelectScr : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    IEnumerator Wait()
+    {
+        FindObjectOfType<AudioManager>().Stop("VGDCTheme");
+      //  yield return new WaitForSeconds(1.0f);
+        
+        //StartCoroutine(manager.FadeScreenOut(screen));
+        SceneManager.LoadScene(7);
+        yield return null;
     }
 
 }

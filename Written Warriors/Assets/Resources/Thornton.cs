@@ -29,6 +29,7 @@ public class Thornton : Character
         //}
 
         Player P = SpecHitBox.GetComponent<Player>();
+
         P.Aura.SetActive(true);
         SpriteRenderer SP = SpecHitBox.GetComponent<SpriteRenderer>();
         int F = SpecAtkHit;

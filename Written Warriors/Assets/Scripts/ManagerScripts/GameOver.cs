@@ -50,7 +50,7 @@ public class GameOver : MonoBehaviour
         PlayerName2.text = p2.Self.CharName + " " + GM.GetComponent<GameManager>().w2.ToString();
         PlayerName2BG.text = p2.Self.CharName + " " + GM.GetComponent<GameManager>().w2.ToString();
         yield return StartCoroutine(SM.MoveTextIn("GET READY", Announcement, AnnouncementBG, 360.0f));
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.75f);
         yield return StartCoroutine(ShowRound());
         //Announcement.text = "GET READY!";
         yield return new WaitForSeconds(0.2f); //waits 2 seconds
@@ -129,7 +129,7 @@ public class GameOver : MonoBehaviour
             //p2.CurrentForm.color = new Color(1f, 1f, 1f, 255f);
             Announcement.text = "ROUND " + (GM.GetComponent<GameManager>().w1 + GM.GetComponent<GameManager>().w2 + 1).ToString();
             AnnouncementBG.text = "ROUND " + (GM.GetComponent<GameManager>().w1 + GM.GetComponent<GameManager>().w2 + 1).ToString();
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(1.0f);
 
         }
     }

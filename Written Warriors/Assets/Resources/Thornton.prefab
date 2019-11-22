@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6464483582514816885}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: -2.5, z: 0}
+  m_LocalPosition: {x: -4.0510554, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1abdb43d84c5b4295fbe69405cd895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Face: {fileID: 21300000, guid: db3bcd2af3ae0fb498fcca97b86f60a9, type: 3}
   Health: 3
   PlayerSize: {x: 1.25, y: 5}
   PlayerOffset: {x: 0, y: 0}
@@ -93,11 +94,11 @@ MonoBehaviour:
   HighDefenderBlockPush: 12
   HighHitBoxOffset: {x: 1.5, y: 1.25}
   HighHitBoxSize: {x: 5, y: 0.5}
-  SpecSprStartUp: {fileID: 21300000, guid: 09ec6e36f080fa64eae1a3e33f3a5606, type: 3}
+  SpecSprStartUp: {fileID: 21300000, guid: 4be14e14b48c18f40908635677809b1e, type: 3}
   SpecAtkStartUp: 11
-  SpecSprHit: {fileID: 21300000, guid: f85ed5932dff2674d918bf9a7417fd28, type: 3}
+  SpecSprHit: {fileID: 21300000, guid: 02e46498d05ee3a44bec9f5928d978ef, type: 3}
   SpecAtkHit: 11
-  SpecSprCoolDown: {fileID: 21300000, guid: 09ec6e36f080fa64eae1a3e33f3a5606, type: 3}
+  SpecSprCoolDown: {fileID: 21300000, guid: 15fd078b0b3fa854895df9b64e2c63be, type: 3}
   SpecAtkCoolDown: 11
   SpecBlockStun: 60
   SpecAttackerHitPush: 50

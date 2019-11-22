@@ -47,6 +47,8 @@ public class Klefstad : Character
     {
 
         Player P = SpecHitBox.GetComponent<Player>();
+        Vector2 constMotion = new Vector2(MoveSpeed * speedscalar * P.transform.localScale.x, 0.0f);
+        Vector3 s = P.transform.localScale;
         P.Aura.SetActive(true);
         SpecHitBox.enabled = true;
         int F = SpecAtkHit;
@@ -58,8 +60,9 @@ public class Klefstad : Character
             {
                 F = 0;
             }
-  //          SpecHitBox.enabled = true;
-            P.RB.velocity = new Vector2(MoveSpeed * speedscalar * P.transform.localScale.x, 0.0f);
+            //          SpecHitBox.enabled = true;
+            P.RB.velocity = constMotion;
+            P.transform.localScale = s;
             F -= 1;
 //            yield return new WaitForSeconds(5.0f / 60.0f);
     //

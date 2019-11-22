@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject HitEffect;
     public GameObject BlockEffect;
+    public GameObject DeathEffect;
 
     public int w1 = 0;
     public int w2 = 0;

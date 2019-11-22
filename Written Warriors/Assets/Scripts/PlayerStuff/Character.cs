@@ -11,6 +11,8 @@ public class Character : MonoBehaviour
 
     // MISC data
     //public Sprite PlayerImage; //player picture, ill make this an animation when we have animations.
+    public Sprite Face;
+
 
     public int Health = 3; // Health Points, I think all characters will have 3 hp
 

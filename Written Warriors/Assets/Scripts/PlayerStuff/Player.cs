@@ -672,12 +672,12 @@ public abstract class Player : MonoBehaviour
         FindObjectOfType<HealthDisplay>().ChangeHealth(gameObject.tag);
        // HP.text = Health.ToString();
         Hit = true; //when hit is on the player cant move
-        StartCoroutine(IFrames());
+        StartCoroutine(IFrames(10));
         StartCoroutine(HitAnimation(AttackerPush,DefenderPush));
         if (Health == 0)
         {
-            CurrentForm.color = new Color(1f, 1f, 1f, 0f);
-            Aura.SetActive(false);
+            GameObject DeathSplooge = Instantiate(GM.DeathEffect, transform.position, Quaternion.identity);
+            StartCoroutine(KillChar());
             StartCoroutine(GO.PlayerDies(opponentTag));
         }
 //        if (Health == 1)
@@ -692,17 +692,32 @@ public abstract class Player : MonoBehaviour
 
     }
 
-    IEnumerator IFrames()
+    IEnumerator KillChar()
+    {
+        Debug.Log("PENIS");
+        Aura.SetActive(false);
+        var tempColor = CurrentForm.color;
+        yield return new WaitForSeconds(0.05f);
+        while (tempColor.a > 0.0)
+        {
+            RB.velocity = Vector2.zero; 
+            tempColor.a -= 0.05f;
+            CurrentForm.color = tempColor;
+            yield return null;
+        }
+        yield return null;
+    }
+    public IEnumerator IFrames(int f)
     {
         
         CurrentForm.enabled = false;
         gameObject.layer = 10;
         int t = 0;
-        while (t <= 10)
+        while (t < f)
         {
             CurrentForm.enabled = !CurrentForm.enabled;
             t += 1;
-            yield return new WaitForSeconds(0.05f);
+            yield return null;// new WaitForSeconds(0.05f);
             
         }
         CurrentForm.enabled = true;
@@ -790,8 +805,8 @@ public abstract class Player : MonoBehaviour
 
             Opponent.TakingAction = true;
             Opponent.FrameCountParry = 0;
-            
-
+            int IF = BlockTime;
+            StartCoroutine(Opponent.IFrames(IF));
             while (BlockTime > 0)
             {
                 TakingAction = true;
@@ -949,4 +964,12 @@ public abstract class Player : MonoBehaviour
         yield return null;
 
     }
+    public IEnumerator Pause()
+    {
+        /////
+        Debug.Log("Pause");
+        yield return null;
+    }
+
+
 }

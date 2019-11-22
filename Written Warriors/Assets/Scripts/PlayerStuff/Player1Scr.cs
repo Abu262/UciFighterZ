@@ -55,6 +55,10 @@ public class Player1Scr : Player
             {
                 StartCoroutine(Parry());
             }
+            if (Input.GetKeyDown(KeyCode.Joystick2Button9))
+            {
+                StartCoroutine(Pause());
+            }
 
             if (Input.GetKey(KeyCode.A))
             {
