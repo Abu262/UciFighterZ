@@ -14,8 +14,9 @@ public class Pattis : Character
     //teleport
     public override IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
-
+        Vector2 teleport;
         Player P = SpecHitBox.GetComponent<Player>();
+        string tag = P.tag;
         P.Aura.SetActive(true);
         SpecHitBox.gameObject.layer = 10;
         P.HighBlocking = true;
@@ -24,12 +25,21 @@ public class Pattis : Character
 
         SpecHitBox.GetComponent<SpriteRenderer>().enabled = false;
        // float Speed = 15.0f * P.transform.localScale.x;
-        
+
         while (F >= 0)
         {
-       //     P.RB.velocity = new Vector2(Speed, 0.0f);
+            if (tag == "Player1")
+            {
+                teleport = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
+
+            }
+            else
+            {
+                teleport = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
+            }
+            //     P.RB.velocity = new Vector2(Speed, 0.0f);
             F -= 1;
-            if (P.Move.x >= 0.8f)
+            if (teleport.x >= 0.8f)
             {
 
                 P.RB.velocity = new Vector2(50.0f * MoveSpeed * 2.0f, 0.0f) * Time.fixedDeltaTime;
@@ -46,7 +56,7 @@ public class Pattis : Character
 
             }
             //More movement
-            else if (P.Move.x <= -0.8f)
+            else if (teleport.x <= -0.8f)
             {
 
                 P.RB.velocity = new Vector2(-50.0f * MoveSpeed * 2.0f, 0.0f) * Time.fixedDeltaTime;
@@ -71,6 +81,7 @@ public class Pattis : Character
         }
         P.HighBlocking = false;
         P.LowBlocking = false;
+        teleport = Vector2.zero;
         P.RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
         SpecHitBox.GetComponent<SpriteRenderer>().enabled = true;
         SpecHitBox.gameObject.layer = 8;

@@ -27,6 +27,7 @@ public class StateManager : MonoBehaviour
     PauseMenu p = new PauseMenu();
 
     public GameOver GO;
+    public PauseMenu PM;
     int count = 1;
     public bool runTimer = true;
 
@@ -47,16 +48,22 @@ public class StateManager : MonoBehaviour
         yield return StartCoroutine(GO.StartMatch());
         while (countdown > -1 && p.isPaused == false)
         {
-            if (countdown % 150 == 0)
-                StartCoroutine(shake(countdown));
-            
-            timerLabel.text = (countdown).ToString("0");
-            timerLabelBG.text = (countdown).ToString("0");
-            yield return new WaitForSeconds(.05f);
-            if (runTimer)
+            if (!PM.isPaused)
             {
-                countdown -= 1f;
+                if (countdown % 150 == 0)
+                    StartCoroutine(shake(countdown));
+
+                timerLabel.text = (countdown).ToString("0");
+                timerLabelBG.text = (countdown).ToString("0");
+                yield return new WaitForSeconds(.05f);
+                if (runTimer)
+                {
+                    countdown -= 1f;
+                }
             }
+
+            yield return null;
+
 
         }
         yield return StartCoroutine(GO.TimerEnds());

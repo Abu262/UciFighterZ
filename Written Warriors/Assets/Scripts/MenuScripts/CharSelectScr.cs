@@ -65,8 +65,8 @@ public class CharSelectScr : MonoBehaviour
         P1ArrowHeight = P1Arrow;
         P2ArrowHeight = P2Arrow;
         P1ArrowHeight = P1Arrow;
-        P2ArrowHeight2.rectTransform.sizeDelta = new Vector2(P2ArrowHeight2.rectTransform.rect.width, P2ArrowHeight2.rectTransform.rect.height * .8f);
-        P1ArrowHeight2.rectTransform.sizeDelta = new Vector2(P1ArrowHeight2.rectTransform.rect.width, P1ArrowHeight2.rectTransform.rect.height * .8f);
+//        P2ArrowHeight2.rectTransform.sizeDelta = new Vector2(P2ArrowHeight2.rectTransform.rect.width, P2ArrowHeight2.rectTransform.rect.height * .8f);
+     //   P1ArrowHeight2.rectTransform.sizeDelta = new Vector2(P1ArrowHeight2.rectTransform.rect.width, P1ArrowHeight2.rectTransform.rect.height * .8f);
 
 
 
@@ -257,9 +257,9 @@ public class CharSelectScr : MonoBehaviour
             case 2:
                 path = "Pattis";
                 break;
-            case 3:
-                path = "How2Play";
-                break;
+            //case 3:
+            //    path = "How2Play";
+            //    break;
             //case 3:
             //    path = "SampleCharactePreFab";
             //    break;
@@ -302,7 +302,7 @@ public class CharSelectScr : MonoBehaviour
         {
             if (MoveP2.x > 0.8f)
             {
-                if (indexP2 == 3)
+                if (indexP2 == 2)
                 {
                     indexP2 = 0;
                 }
@@ -320,7 +320,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (indexP2 == 0)
                 {
-                    indexP2 = 3;
+                    indexP2 = 2;
                 }
                 else
                 {
@@ -380,7 +380,7 @@ public class CharSelectScr : MonoBehaviour
             {
                // P2Arrow.rectTransform.sizeDelta = new Vector2(P2ArrowHeight.rectTransform.rect.width, P2ArrowHeight.rectTransform.rect.height);
                 P2Arrow.rectTransform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 55.0f);
-            }
+            //}
             if(indexP2 == 0)
             {
                 P2CHAR.text = "THORNTON";
@@ -391,16 +391,16 @@ public class CharSelectScr : MonoBehaviour
                 P2CHAR.text = "KLEFSTAD";
                 P2CHARBG.text = "KLEFSTAD";
             }
-            else if (indexP2 == 1)
+            else if (indexP2 == 2)
             {
                 P2CHAR.text = "PATTIS";
                 P2CHARBG.text = "PATTIS";
             }
-            else
-            {
-                P2CHAR.text = "HOW2PLAY";
-                P2CHAR.text = "HOW2PLAY";
-            }
+//            else
+  //          {
+    //            P2CHAR.text = "HOW2PLAY";
+      //          P2CHAR.text = "HOW2PLAY";
+      //      }
 
 
 
@@ -416,7 +416,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (MoveP1.x > 0.8f)
                 {
-                    if (indexP1 == 3)
+                    if (indexP1 == 2)
                     {
                         indexP1 = 0;
                     }
@@ -434,7 +434,7 @@ public class CharSelectScr : MonoBehaviour
                 {
                     if (indexP1 == 0)
                     {
-                        indexP1 = 3;
+                        indexP1 = 2;
                     }
                     else
                     {
@@ -485,16 +485,16 @@ public class CharSelectScr : MonoBehaviour
             turn1 = true;
 
 
-            if (indexP1 == 3)
-            {
-               // P1Arrow.rectTransform.sizeDelta = new Vector2(P1ArrowHeight2.rectTransform.rect.width, P1ArrowHeight2.rectTransform.rect.height);
-                P1Arrow.rectTransform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 35.0f);
-            }
-            else
-            {
+            //if (indexP1 == 3)
+            //{
+            //   // P1Arrow.rectTransform.sizeDelta = new Vector2(P1ArrowHeight2.rectTransform.rect.width, P1ArrowHeight2.rectTransform.rect.height);
+            //    P1Arrow.rectTransform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 35.0f);
+            //}
+            //else
+            //{
                // P1Arrow.rectTransform.sizeDelta = new Vector2(P1ArrowHeight.rectTransform.rect.width, P1ArrowHeight.rectTransform.rect.height);
                 P1Arrow.rectTransform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 55.0f);
-            }
+            //}
             if (indexP1 == 0)
             {
                 P1CHAR.text = "THORNTON";

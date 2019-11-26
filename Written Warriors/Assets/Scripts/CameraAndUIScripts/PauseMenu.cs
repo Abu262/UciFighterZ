@@ -36,7 +36,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        BG.SetActive(true);
+        BG.SetActive(false);
         StatusBG.color = new Color(21, 59, 176, 0);
         Status.color = new Color(255, 255, 255, 0);
         StopCoroutine(FlashStatus());
@@ -58,7 +58,7 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator FlashStatus()
     {
-        while(true)
+        while(isPaused)
         {
             StatusBG.color = new Color(21, 59, 176, 255);
             Status.color = new Color(255, 255, 255, 255);
