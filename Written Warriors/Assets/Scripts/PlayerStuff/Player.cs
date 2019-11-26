@@ -112,6 +112,16 @@ public abstract class Player : MonoBehaviour
         LowHitBox.size = Self.LowHitBoxSize;
         SpecHitBox.size = Self.SpecHitBoxSize;
         //  ready = true;
+        if (Opponent.transform.position.x < gameObject.transform.position.x)
+        {
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+
+        }
+        else
+        {
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+        }
     }
 
 //    private void Awake()
@@ -160,22 +170,33 @@ public abstract class Player : MonoBehaviour
                 PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
                 PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
             }
-          //  }
-    /*    else
+            //  }
+            /*    else
+                    {
+                        RB.velocity = new Vector2(50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime;
+                        Hitstun = true;
+
+                        StopCoroutine("PlayStartUpFrames");
+                        StopCoroutine("PlayHitFrames");
+                        StopCoroutine("PlayCooldownFrames");
+                        StopCoroutine("HighAttack");
+                        StopCoroutine("MedAttack");
+                        StopCoroutine("LowAttack");
+                        StopCoroutine("SpecAttack");
+
+                    }*/
+            //flips the character depending on which side of the screen they are on
+            //basically we want everyone to face eachother
+            if (Opponent.transform.position.x < gameObject.transform.position.x)
             {
-                RB.velocity = new Vector2(50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime;
-                Hitstun = true;
-                
-                StopCoroutine("PlayStartUpFrames");
-                StopCoroutine("PlayHitFrames");
-                StopCoroutine("PlayCooldownFrames");
-                StopCoroutine("HighAttack");
-                StopCoroutine("MedAttack");
-                StopCoroutine("LowAttack");
-                StopCoroutine("SpecAttack");
+                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
 
-            }*/
+            }
+            else
+            {
+                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
+            }
         }
         //this is a hard code to make sure when you're hit YOOU LOOK LIKE YOU'RE HIT
         if (Hitstun == true)
@@ -187,18 +208,7 @@ public abstract class Player : MonoBehaviour
 
 
 
-        //flips the character depending on which side of the screen they are on
-        //basically we want everyone to face eachother
-        if (Opponent.transform.position.x < gameObject.transform.position.x)
-        {
-            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
 
-        }
-        else
-        {
-            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
-        }
 
 
 

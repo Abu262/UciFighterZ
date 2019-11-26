@@ -37,7 +37,7 @@ public class Player1Scr : Player
             {
                 if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.Alpha4))
                 {
-                    Debug.Log("Hello");
+//                    Debug.Log("Hello");
                     StartCoroutine(MedAttack());
                 }
                 //X
