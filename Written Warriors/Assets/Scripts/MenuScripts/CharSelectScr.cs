@@ -372,6 +372,7 @@ public class CharSelectScr : MonoBehaviour
 
             if (indexP2 == 3)
             {
+               // P2Arrow.height *= .8f;
                // P2Arrow.rectTransform.sizeDelta = new Vector2(P2ArrowHeight2.rectTransform.rect.width, P2ArrowHeight2.rectTransform.rect.height);
                 P2Arrow.rectTransform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 35.0f);
             }
