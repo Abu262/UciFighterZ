@@ -650,7 +650,7 @@ public abstract class Player : MonoBehaviour
     //instead of a deal damage function
 
     //When you take damage you are put into hitstun
-    public IEnumerator TakeDamage(float AttackerPush, float DefenderPush)
+    public IEnumerator TakeDamage(float DefenderPush, float AttackerPush)
     {
         Hitstun = true; //you are in hitstun
 //        TakingAction = true;

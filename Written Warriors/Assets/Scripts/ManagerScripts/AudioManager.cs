@@ -120,17 +120,21 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            float maxVolume = s.source.volume;
-         
-            s.source.volume = 0.0f;
-            s.source.Play();
-            while (s.source.volume < maxVolume)
+            if (!s.source.isPlaying)
             {
+                float maxVolume = s.source.volume;
 
-                s.source.volume += maxVolume/60;
-                yield return null;
+                s.source.volume = 0.0f;
+                s.source.Play();
+                while (s.source.volume < maxVolume)
+                {
+
+                    s.source.volume += maxVolume / 60;
+                    yield return null;
+                }
+                s.source.volume = maxVolume;
             }
-            s.source.volume = maxVolume;
+
 
         }
 

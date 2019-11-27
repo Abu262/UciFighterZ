@@ -1965,6 +1965,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7995926854756224208, guid: d7194f5e5e42715489b048878f063da4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7995926854756224209, guid: d7194f5e5e42715489b048878f063da4,
         type: 3}
       propertyPath: self2

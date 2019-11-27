@@ -35,13 +35,14 @@ public class MenuSlct : MonoBehaviour
     public Vector2 MoveP1;
     public Vector2 MoveP2;
 
-    private Image screen;
+   // private Image screen;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
+        manager = FindObjectOfType<GameManager>();
+       // StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
         indexP1 = 0;
         indexP2 = 0;
         P2Arrow.transform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 25.0f);
@@ -51,7 +52,7 @@ public class MenuSlct : MonoBehaviour
         SizeSmall = new Vector2(rt.rect.width, rt.rect.height * .55f);
 
        // screen = GameObject.FindGameObjectWithTag("Screen").GetComponent<Image>();
-        StartCoroutine(manager.FadeScreenIn(screen));
+  //      StartCoroutine(manager.FadeScreenIn(screen));
     }
 
     // Update is called once per frame
