@@ -134,21 +134,6 @@ public class GameOver : MonoBehaviour
         }
     }
 
-    //NICHOLE
-    //////////////////////////////
-    ///I  would recommend a few things
-    /// 1) make 2 ints to keep track of the rounds wins for player 1 and player 2
-    /// 2) make a coroutine* that increments a players round counter, 
-    ///    then checks if said hplayer has won the required number of rounds to win,
-    ///    if they didnt, then it resets sets the game back up to how it should be 
-    ///    at the start of a round
-    /// 3) place a call to this coroutine in the PlayerDies and TimerEnds coroutines,
-    ///    these two coroutines are ALWAYS called when a player dies, 
-    ///    so putting this coroutine in here would make it easier on you
-    //////////////////////////////
-
-
-
     //this is called whenever a player dies
     //ok this looks weird, the PlayerDies Coroutine is called from the player that dies
     //meaning that if player 2 died, then they call this script, meaning player 1 wins
@@ -169,10 +154,16 @@ public class GameOver : MonoBehaviour
         
 
         //whoever wins, we announce it
+        if (p1.GetComponent<Player>().Health == 0 && p2.GetComponent<Player>().Health == 0)
+        {
+            Announcement.text = "DRAW!!!";
+            AnnouncementBG.text = "DRAW!!!";
+            yield return new WaitForSeconds(3.0f);
+            SceneManager.LoadScene(1);
+        }
 
 
-
-        if (opponentTag == "Player1") //checks the tag of the player that won
+        else if (opponentTag == "Player1") //checks the tag of the player that won
         {
             p2.CurrentForm.color = new Color(1f, 1f, 1f, 0f);
             Announcement.text = "PLAYER ONE WINS!!!";
