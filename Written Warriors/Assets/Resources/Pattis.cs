@@ -24,21 +24,34 @@ public class Pattis : Character
         int F = SpecAtkHit;
 
         SpecHitBox.GetComponent<SpriteRenderer>().enabled = false;
-       // float Speed = 15.0f * P.transform.localScale.x;
+        // float Speed = 15.0f * P.transform.localScale.x;
+
+        if (tag == "Player1")
+        {
+            teleport = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
+
+        }
+        else
+        {
+            teleport = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
+        }
+        //     P.RB.velocity = new Vector2(Speed, 0.0f);
+        
 
         while (F >= 0)
         {
-            if (tag == "Player1")
-            {
-                teleport = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
-
-            }
-            else
-            {
-                teleport = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
-            }
-            //     P.RB.velocity = new Vector2(Speed, 0.0f);
             F -= 1;
+            //if (tag == "Player1")
+            //{
+            //    teleport = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
+
+            //}
+            //else
+            //{
+            //    teleport = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
+            //}
+            ////     P.RB.velocity = new Vector2(Speed, 0.0f);
+            //F -= 1;
             if (teleport.x >= 0.8f)
             {
 

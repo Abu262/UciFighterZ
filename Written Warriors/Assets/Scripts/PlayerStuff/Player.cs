@@ -226,6 +226,8 @@ public abstract class Player : MonoBehaviour
         //if the player isn't already attacking
         if (TakingAction == false)
         {
+            PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
+            PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
             //they disable their blocks
             HighBlocking = false;
             LowBlocking = false;
@@ -270,7 +272,8 @@ public abstract class Player : MonoBehaviour
     {
         if (TakingAction == false)
         {
-
+            PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
+            PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
             HighBlocking = false;
             LowBlocking = false;
             TakingAction = true;
@@ -312,6 +315,8 @@ public abstract class Player : MonoBehaviour
 
         if (TakingAction == false)
         {
+            PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
+            PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
             HighBlocking = false;
             LowBlocking = false;
             TakingAction = true;
@@ -353,7 +358,8 @@ public abstract class Player : MonoBehaviour
     {
         if (TakingAction == false)
         {
-
+            PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
+            PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
             CurrentAtk = "Special";
             //this is mainly to aim projectiles,
             //the character object and the player dont share positions so we have to do it manually
@@ -398,7 +404,7 @@ public abstract class Player : MonoBehaviour
         {
         TakingAction = true; //now you're doing somethihng
 
-        yield return StartCoroutine(PlayStartUpFrames(3)); //play a few start up frames
+        //yield return StartCoroutine(PlayStartUpFrames(3)); //play a few start up frames
         
             //block
         float height = Move.y; //save the position, whether they are ducking or standing

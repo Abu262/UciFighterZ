@@ -49,7 +49,7 @@ public class How2PlaySlct : MonoBehaviour
         SizeLarge = rt.sizeDelta;
         SizeSmall = new Vector2(rt.rect.width, rt.rect.height * .55f);
 
-        screen = GameObject.FindGameObjectWithTag("Screen").GetComponent<Image>();
+    //    screen = GameObject.FindGameObjectWithTag("Screen").GetComponent<Image>();
         StartCoroutine(manager.FadeScreenIn(screen));
     }
 

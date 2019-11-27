@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222539763000281454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: -2.5, z: 0}
+  m_LocalPosition: {x: -4, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   SpecSprStartUp: {fileID: 21300000, guid: f1bf781185e0eb045bb24f73cd71c083, type: 3}
   SpecAtkStartUp: 6
   SpecSprHit: {fileID: 21300000, guid: eca1fa7d8a7f37a46bc4de8a96c5f028, type: 3}
-  SpecAtkHit: 40
+  SpecAtkHit: 25
   SpecSprCoolDown: {fileID: 21300000, guid: cba0a295263bb8c4a9d2459582c696e3, type: 3}
   SpecAtkCoolDown: 11
   SpecBlockStun: 60
