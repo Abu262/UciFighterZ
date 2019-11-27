@@ -15,12 +15,8 @@ public class CharSelectScr : MonoBehaviour
 
     public Image P1Arrow;
     public Image P2Arrow;
-    //Used to keep track of default values
-    Image P2ArrowHeight;
-    Image P1ArrowHeight;
-    //Used to hold altered values
-    Image P2ArrowHeight2;
-    Image P1ArrowHeight2;
+    Vector2 SizeLarge;
+    Vector2 SizeSmall;
 
     [SerializeField]
     private GameManager manager;
@@ -61,14 +57,9 @@ public class CharSelectScr : MonoBehaviour
         indexP2 = 0;
         P2Arrow.transform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 55.0f);
         P1Arrow.transform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 55.0f);
-        P2ArrowHeight = P2Arrow;
-        P1ArrowHeight = P1Arrow;
-        P2ArrowHeight = P2Arrow;
-        P1ArrowHeight = P1Arrow;
-//        P2ArrowHeight2.rectTransform.sizeDelta = new Vector2(P2ArrowHeight2.rectTransform.rect.width, P2ArrowHeight2.rectTransform.rect.height * .8f);
-     //   P1ArrowHeight2.rectTransform.sizeDelta = new Vector2(P1ArrowHeight2.rectTransform.rect.width, P1ArrowHeight2.rectTransform.rect.height * .8f);
-
-
+        RectTransform rt = P2Arrow.GetComponent<RectTransform>();
+        SizeLarge = rt.sizeDelta;
+        SizeSmall = new Vector2(rt.rect.width, rt.rect.height * .55f);
 
         StartCoroutine(FlashText(P1CHAR, P1CHARBG));
         StartCoroutine(FlashTextP2(P2CHAR, P2CHARBG));
@@ -257,9 +248,10 @@ public class CharSelectScr : MonoBehaviour
             case 2:
                 path = "Pattis";
                 break;
-            //case 3:
-            //    path = "How2Play";
-            //    break;
+            case 3:
+                path = "How2Play";
+                SceneManager.LoadScene("How2Play");
+                break;
             //case 3:
             //    path = "SampleCharactePreFab";
             //    break;
@@ -302,7 +294,7 @@ public class CharSelectScr : MonoBehaviour
         {
             if (MoveP2.x > 0.8f)
             {
-                if (indexP2 == 2)
+                if (indexP2 == 3)
                 {
                     indexP2 = 0;
                 }
@@ -320,7 +312,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (indexP2 == 0)
                 {
-                    indexP2 = 2;
+                    indexP2 = 3;
                 }
                 else
                 {
@@ -372,15 +364,14 @@ public class CharSelectScr : MonoBehaviour
 
             if (indexP2 == 3)
             {
-               // P2Arrow.height *= .8f;
-               // P2Arrow.rectTransform.sizeDelta = new Vector2(P2ArrowHeight2.rectTransform.rect.width, P2ArrowHeight2.rectTransform.rect.height);
-                P2Arrow.rectTransform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 35.0f);
+                P2Arrow.rectTransform.sizeDelta = SizeSmall;
+                P2Arrow.rectTransform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 25.0f);
             }
             else
             {
-               // P2Arrow.rectTransform.sizeDelta = new Vector2(P2ArrowHeight.rectTransform.rect.width, P2ArrowHeight.rectTransform.rect.height);
+                P2Arrow.rectTransform.sizeDelta = SizeLarge;
                 P2Arrow.rectTransform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 55.0f);
-            //}
+            }
             if(indexP2 == 0)
             {
                 P2CHAR.text = "THORNTON";
@@ -396,11 +387,11 @@ public class CharSelectScr : MonoBehaviour
                 P2CHAR.text = "PATTIS";
                 P2CHARBG.text = "PATTIS";
             }
-//            else
-  //          {
-    //            P2CHAR.text = "HOW2PLAY";
-      //          P2CHAR.text = "HOW2PLAY";
-      //      }
+            else
+            {
+                P2CHAR.text = "HOW2PLAY";
+                P2CHARBG.text = "HOW2PLAY";
+            }
 
 
 
@@ -416,7 +407,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (MoveP1.x > 0.8f)
                 {
-                    if (indexP1 == 2)
+                    if (indexP1 == 3)
                     {
                         indexP1 = 0;
                     }
@@ -434,7 +425,7 @@ public class CharSelectScr : MonoBehaviour
                 {
                     if (indexP1 == 0)
                     {
-                        indexP1 = 2;
+                        indexP1 = 3;
                     }
                     else
                     {
@@ -485,16 +476,17 @@ public class CharSelectScr : MonoBehaviour
             turn1 = true;
 
 
-            //if (indexP1 == 3)
-            //{
-            //   // P1Arrow.rectTransform.sizeDelta = new Vector2(P1ArrowHeight2.rectTransform.rect.width, P1ArrowHeight2.rectTransform.rect.height);
-            //    P1Arrow.rectTransform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 35.0f);
-            //}
-            //else
-            //{
-               // P1Arrow.rectTransform.sizeDelta = new Vector2(P1ArrowHeight.rectTransform.rect.width, P1ArrowHeight.rectTransform.rect.height);
+            if (indexP1 == 3)
+            {
+                P1Arrow.rectTransform.sizeDelta = SizeSmall;
+                P1Arrow.rectTransform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 25.0f);
+            }
+            else
+            {
+                P1Arrow.rectTransform.sizeDelta = SizeLarge;
                 P1Arrow.rectTransform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 55.0f);
-            //}
+            }
+
             if (indexP1 == 0)
             {
                 P1CHAR.text = "THORNTON";
