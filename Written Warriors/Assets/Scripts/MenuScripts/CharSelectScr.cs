@@ -380,7 +380,7 @@ public class CharSelectScr : MonoBehaviour
             {
                // P2Arrow.rectTransform.sizeDelta = new Vector2(P2ArrowHeight.rectTransform.rect.width, P2ArrowHeight.rectTransform.rect.height);
                 P2Arrow.rectTransform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 55.0f);
-            //}
+            }
             if(indexP2 == 0)
             {
                 P2CHAR.text = "THORNTON";
