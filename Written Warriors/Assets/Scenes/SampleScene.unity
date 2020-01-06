@@ -228,7 +228,6 @@ MonoBehaviour:
   timerLabelBG: {fileID: 1679048244}
   shakeObj: {fileID: 1197586169}
   shakeObjBG: {fileID: 1679048242}
-  isPaused: 0
   GO: {fileID: 150023348}
   PM: {fileID: 150023349}
   runTimer: 1
@@ -2706,7 +2705,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 963194227}
-  IsP1: 0
   Health: 0
   Self: {fileID: 6660736334519078319, guid: 315d917583822e74a949311fea46e807, type: 3}
   Opponent: {fileID: 1385800304}
@@ -2717,17 +2715,19 @@ MonoBehaviour:
   LowHitBox: {fileID: 1367420247}
   SpecHitBox: {fileID: 1367420251}
   PlayerBox: {fileID: 1367420245}
-  RB: {fileID: 1367420250}
-  HighBlocking: 0
-  LowBlocking: 0
-  Hit: 0
   CurrentBlocking: 0
   FrameCountParry: 0
-  CurrentForm: {fileID: 1367420243}
+  HighBlocking: 0
+  LowBlocking: 0
   GO: {fileID: 150023348}
   PM: {fileID: 150023349}
   Charges: 0
+  Hitstun: 0
+  IsBlocking: 0
+  TakingAction: 1
+  CurrentForm: {fileID: 1367420243}
   Aura: {fileID: 0}
+  RB: {fileID: 1367420250}
 --- !u!61 &1367420247
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3077,7 +3077,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 963194227}
-  IsP1: 1
   Health: 0
   Self: {fileID: 6660736334519078319, guid: 315d917583822e74a949311fea46e807, type: 3}
   Opponent: {fileID: 1367420246}
@@ -3088,17 +3087,19 @@ MonoBehaviour:
   LowHitBox: {fileID: 1385800302}
   SpecHitBox: {fileID: 1385800305}
   PlayerBox: {fileID: 1385800299}
-  RB: {fileID: 1385800301}
-  HighBlocking: 0
-  LowBlocking: 0
-  Hit: 0
   CurrentBlocking: 0
   FrameCountParry: 0
-  CurrentForm: {fileID: 1385800297}
+  HighBlocking: 0
+  LowBlocking: 0
   GO: {fileID: 150023348}
   PM: {fileID: 150023349}
   Charges: 0
+  Hitstun: 0
+  IsBlocking: 0
+  TakingAction: 1
+  CurrentForm: {fileID: 1385800297}
   Aura: {fileID: 0}
+  RB: {fileID: 1385800301}
 --- !u!61 &1385800305
 BoxCollider2D:
   m_ObjectHideFlags: 0

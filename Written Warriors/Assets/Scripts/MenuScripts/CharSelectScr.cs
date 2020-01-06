@@ -55,9 +55,27 @@ public class CharSelectScr : MonoBehaviour
         StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
         indexP1 = 0;
         indexP2 = 0;
-        P2Arrow.transform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 55.0f);
-        P1Arrow.transform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 55.0f);
-        RectTransform rt = P2Arrow.GetComponent<RectTransform>();
+        float x = CharPics[indexP1].rectTransform.position.x;
+        float y = CharPics[indexP1].rectTransform.position.y;
+        float sh = CharPics[indexP1].rectTransform.rect.height;
+        float sw = CharPics[indexP1].rectTransform.rect.width;
+        P1Arrow.rectTransform.sizeDelta = new Vector2(sw, sh);
+        P1Arrow.rectTransform.position = new Vector2(x, y + sh / 8);
+        float x2 = CharPics[indexP2].rectTransform.position.x;
+        float y2 = CharPics[indexP2].rectTransform.position.y;
+        float sh2 = CharPics[indexP2].rectTransform.rect.height;
+        float sw2 = CharPics[indexP2].rectTransform.rect.width;
+        P2Arrow.rectTransform.sizeDelta = new Vector2(sw2, sh2);
+        P2Arrow.rectTransform.position = new Vector2(x2, y2 - sh2 / 8);
+        //float w2 = CharPics[indexP2].transform.position.x;
+        //float h2 = CharPics[indexP2].transform.position.y;
+        ////P2Arrow.rectTransform.sizeDelta = SizeLarge;
+        //P2Arrow.rectTransform.position = new Vector2(w2, h2 - h2 / 6.5f);
+        //float w = CharPics[indexP1].transform.position.x;
+        //float h = CharPics[indexP1].transform.position.y;
+        ////P1Arrow.rectTransform.sizeDelta = SizeLarge;
+        //P1Arrow.rectTransform.position = new Vector2(w, h + h / 6.5f);
+        RectTransform rt = P1Arrow.GetComponent<RectTransform>();
         SizeLarge = rt.sizeDelta;
         SizeSmall = new Vector2(rt.rect.width, rt.rect.height * .55f);
 
@@ -157,7 +175,9 @@ public class CharSelectScr : MonoBehaviour
         {
       //      READY.enabled = false;
         }
-
+        //2 is square
+        //    1 is Circle
+        //    x is 0
 
         if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.Alpha4))
         {
@@ -294,7 +314,7 @@ public class CharSelectScr : MonoBehaviour
         {
             if (MoveP2.x > 0.8f)
             {
-                if (indexP2 == 3)
+                if (indexP2 == 2)
                 {
                     indexP2 = 0;
                 }
@@ -312,7 +332,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (indexP2 == 0)
                 {
-                    indexP2 = 3;
+                    indexP2 = 2;
                 }
                 else
                 {
@@ -362,17 +382,32 @@ public class CharSelectScr : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
             turn2 = true;
 
-            if (indexP2 == 3)
-            {
-                P2Arrow.rectTransform.sizeDelta = SizeSmall;
-                P2Arrow.rectTransform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 25.0f);
-            }
-            else
-            {
-                P2Arrow.rectTransform.sizeDelta = SizeLarge;
-                P2Arrow.rectTransform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 55.0f);
-            }
-            if(indexP2 == 0)
+
+            float x = CharPics[indexP2].rectTransform.position.x;
+            float y = CharPics[indexP2].rectTransform.position.y;
+            float sh = CharPics[indexP2].rectTransform.rect.height;
+            float sw = CharPics[indexP2].rectTransform.rect.width;
+            P2Arrow.rectTransform.sizeDelta = new Vector2(sw, sh);
+            P2Arrow.rectTransform.position = new Vector2(x,y - sh/8);
+ //           P2Arrow.rectTransform.rect.Set(x, y + sh / 8, sw, sh);// = P2Arrow.rectTransform.position.y + sh / 8;
+            //if (indexP2 == 3)
+            //{
+
+            //    float w = CharPics[indexP2].transform.position.x;
+            //    float h = CharPics[indexP2].transform.position.y;
+            //    float sh = CharPics[indexP2].rectTransform.rect.height;
+            //    P2Arrow.rectTransform.sizeDelta = SizeSmall;
+            //    P2Arrow.rectTransform.position = new Vector2(w,h - sh/2);
+            //}
+            //else
+            //{
+            //    float w = CharPics[indexP2].transform.position.x;
+            //    float h = CharPics[indexP2].transform.position.y;
+
+            //    P2Arrow.rectTransform.sizeDelta = SizeLarge;
+            //    P2Arrow.rectTransform.position = new Vector2(w,h-h/6.5f);
+            //}
+            if (indexP2 == 0)
             {
                 P2CHAR.text = "THORNTON";
                 P2CHARBG.text = "THORNTON";
@@ -407,7 +442,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (MoveP1.x > 0.8f)
                 {
-                    if (indexP1 == 3)
+                    if (indexP1 == 2)
                     {
                         indexP1 = 0;
                     }
@@ -425,7 +460,7 @@ public class CharSelectScr : MonoBehaviour
                 {
                     if (indexP1 == 0)
                     {
-                        indexP1 = 3;
+                        indexP1 = 2;
                     }
                     else
                     {
@@ -475,17 +510,26 @@ public class CharSelectScr : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
             turn1 = true;
 
-
-            if (indexP1 == 3)
-            {
-                P1Arrow.rectTransform.sizeDelta = SizeSmall;
-                P1Arrow.rectTransform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 25.0f);
-            }
-            else
-            {
-                P1Arrow.rectTransform.sizeDelta = SizeLarge;
-                P1Arrow.rectTransform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 55.0f);
-            }
+            float x = CharPics[indexP1].rectTransform.position.x;
+            float y = CharPics[indexP1].rectTransform.position.y;
+            float sh = CharPics[indexP1].rectTransform.rect.height;
+            float sw = CharPics[indexP1].rectTransform.rect.width;
+            P1Arrow.rectTransform.sizeDelta = new Vector2(sw, sh);
+            P1Arrow.rectTransform.position = new Vector2(x, y + sh / 8);
+            //if (indexP1 == 3)
+            //{
+            //    float w = CharPics[indexP1].transform.position.x;
+            //    float h = CharPics[indexP1].transform.position.y;
+            //    P1Arrow.rectTransform.sizeDelta = SizeSmall;
+            //    P1Arrow.rectTransform.position = new Vector2(w, h + h/6.5f);
+            //}
+            //else
+            //{
+            //    float w = CharPics[indexP1].transform.position.x;
+            //    float h = CharPics[indexP1].transform.position.y;
+            //    P1Arrow.rectTransform.sizeDelta = SizeLarge;
+            //    P1Arrow.rectTransform.position = new Vector2(w, h + h/6.5f);
+            //}
 
             if (indexP1 == 0)
             {

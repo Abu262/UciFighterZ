@@ -27,7 +27,9 @@ public class Player1Scr : Player
 
     IEnumerator FakeUpdate()
     {
-
+        //2 is square
+        //    1 is Circle
+        //    x is 0
         //controller stuff
         while (true)
         {

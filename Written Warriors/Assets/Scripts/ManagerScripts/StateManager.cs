@@ -72,22 +72,24 @@ public class StateManager : MonoBehaviour
 
     public IEnumerator MoveTextIn(string FGtext, TextMeshProUGUI FG, TextMeshProUGUI BG, float ypos)
     {
-        FG.GetComponent<Transform>().position = new Vector3(-1280 + 640f, ypos);
-        BG.GetComponent<Transform>().position = new Vector3(640f + 1280f, ypos);
+        float w = Screen.width;
+        float h = Screen.height;
+        FG.GetComponent<Transform>().position = new Vector3(-w + w/2, h/2);
+        BG.GetComponent<Transform>().position = new Vector3(w/2 + w, h/2);
 
         FG.text = FGtext;
         BG.text = FGtext;
 
-        while (FG.GetComponent<Transform>().position.x < 640.0f)
+        while (FG.GetComponent<Transform>().position.x < w/2)
         {
             FG.GetComponent<Transform>().position += Vector3.right * 40f;
             BG.GetComponent<Transform>().position -= Vector3.right * 40f;
             yield return null;
         }
-        FG.GetComponent<Transform>().position = new Vector3(640f, ypos);
-        BG.GetComponent<Transform>().position = new Vector3(640f, ypos);
+        FG.GetComponent<Transform>().position = new Vector3(w/2, h/2);
+        BG.GetComponent<Transform>().position = new Vector3(w/2, h/2);
         yield return new WaitForSeconds(0.1f);
-        while (FG.GetComponent<Transform>().position.y <= ypos + 7.0f)
+        while (FG.GetComponent<Transform>().position.y <= h/2 + 7.0f)
         {
             FG.GetComponent<Transform>().position += Vector3.up * 1.5f;
             FG.GetComponent<Transform>().position -= Vector3.right * 1.5f;

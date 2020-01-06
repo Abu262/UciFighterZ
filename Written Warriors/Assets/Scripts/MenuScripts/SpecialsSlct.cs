@@ -45,8 +45,14 @@ public class SpecialsSlct : MonoBehaviour
      //   StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
         indexP1 = 0;
         indexP2 = 0;
-        P2Arrow.transform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 25.0f);
-        P1Arrow.transform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 25.0f);
+        float w2 = CharPics[indexP2].transform.position.x;
+        float h2 = CharPics[indexP2].transform.position.y;
+        //P2Arrow.rectTransform.sizeDelta = SizeLarge;
+        P2Arrow.rectTransform.position = new Vector2(w2, h2 - h2 / 20f);
+        float w = CharPics[indexP1].transform.position.x;
+        float h = CharPics[indexP1].transform.position.y;
+        //P1Arrow.rectTransform.sizeDelta = SizeLarge;
+        P1Arrow.rectTransform.position = new Vector2(w, h + h / 20f);
         RectTransform rt = P2Arrow.GetComponent<RectTransform>();
         SizeLarge = rt.sizeDelta;
         SizeSmall = new Vector2(rt.rect.width, rt.rect.height * .55f);
@@ -224,7 +230,23 @@ public class SpecialsSlct : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
             turn2 = true;
 
-            P2Arrow.rectTransform.position = new Vector2(CharPics[indexP2].transform.position.x, CharPics[indexP2].transform.position.y - 25.0f);
+            if (indexP2 == 0)
+            {
+                float w2 = CharPics[indexP2].transform.position.x;
+                float h2 = CharPics[indexP2].transform.position.y;
+                //P2Arrow.rectTransform.sizeDelta = SizeLarge;
+                P2Arrow.rectTransform.position = new Vector2(w2, h2 - h2 / 20f);
+            }
+            else
+            {
+                float w2 = CharPics[indexP2].transform.position.x;
+                float h2 = CharPics[indexP2].transform.position.y;
+                //P2Arrow.rectTransform.sizeDelta = SizeLarge;
+                P2Arrow.rectTransform.position = new Vector2(w2, h2 - h2 / 6.5f);
+
+            }
+
+
 
             //    yield return null;
         }
@@ -262,8 +284,21 @@ public class SpecialsSlct : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
             turn1 = true;
 
-            P1Arrow.rectTransform.position = new Vector2(CharPics[indexP1].transform.position.x, CharPics[indexP1].transform.position.y + 25.0f);
+            if (indexP1 == 0)
+            {
+                float w = CharPics[indexP1].transform.position.x;
+                float h = CharPics[indexP1].transform.position.y;
+                //P2Arrow.rectTransform.sizeDelta = SizeLarge;
+                P1Arrow.rectTransform.position = new Vector2(w, h + h / 20f);
+            }
+            else
+            {
+                float w = CharPics[indexP1].transform.position.x;
+                float h = CharPics[indexP1].transform.position.y;
+                //P2Arrow.rectTransform.sizeDelta = SizeLarge;
+                P1Arrow.rectTransform.position = new Vector2(w, h + h / 6.5f);
 
+            }
         }
     }
 
