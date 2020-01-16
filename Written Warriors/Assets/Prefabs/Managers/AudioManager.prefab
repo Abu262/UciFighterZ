@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1876892929695485508}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,9 +45,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: HitSound
-    clip: {fileID: 8300000, guid: 23d229da044709048aa2909419b80638, type: 3}
-    volume: 0.5
-    pitch: 0
+    clip: {fileID: 8300000, guid: a3a13da7f411863489b4132c8d8f6021, type: 3}
+    volume: 0.75
+    pitch: 1
     loop: 0
     source: {fileID: 0}
-  ID: 0
+  - name: BlockSound
+    clip: {fileID: 8300000, guid: 806a4e19401754241a4e50603d64609f, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VGDCTheme
+    clip: {fileID: 8300000, guid: 32134e425d5d5df429f46a42966031dc, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: SpectrumTheme
+    clip: {fileID: 8300000, guid: e10a3d14ef2b0e34c8fe455d6d073378, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: MenuScroll
+    clip: {fileID: 8300000, guid: 82fd9c56981acec48b21da8389892259, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MenuSelect
+    clip: {fileID: 8300000, guid: 23a010eb2c540ad4085e6a1625086a31, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HitSoundReverse
+    clip: {fileID: 8300000, guid: f495421979b6bfa45a4a9da707b15903, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HitSound2
+    clip: {fileID: 8300000, guid: 1417bcccfc2bcdb40ac76d577298b26c, type: 3}
+    volume: 2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HitSound2Reverse
+    clip: {fileID: 8300000, guid: c55295b851c3d794c93c0c00f6e4e4b1, type: 3}
+    volume: 2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
