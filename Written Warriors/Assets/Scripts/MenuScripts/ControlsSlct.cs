@@ -42,29 +42,22 @@ public class ControlsSlct : MonoBehaviour
     void Start()
     {
         manager = FindObjectOfType<GameManager>();
-//        StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
         indexP1 = 0;
         indexP2 = 0;
         float w2 = CharPics[indexP2].transform.position.x;
         float h2 = CharPics[indexP2].transform.position.y;
-        //P2Arrow.rectTransform.sizeDelta = SizeLarge;
         P2Arrow.rectTransform.position = new Vector2(w2, h2 - h2 / 20);
         float w = CharPics[indexP1].transform.position.x;
         float h = CharPics[indexP1].transform.position.y;
-        //P1Arrow.rectTransform.sizeDelta = SizeLarge;
         P1Arrow.rectTransform.position = new Vector2(w, h + h / 20f);
         RectTransform rt = P2Arrow.GetComponent<RectTransform>();
         SizeLarge = rt.sizeDelta;
         SizeSmall = new Vector2(rt.rect.width, rt.rect.height * .55f);
-
-  //      screen = GameObject.FindGameObjectWithTag("Screen").GetComponent<Image>();
-    //    StartCoroutine(manager.FadeScreenIn(screen));
     }
 
     // Update is called once per frame
     void Update()
     {
-
         MoveP2 = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
         MoveP1 = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
 

@@ -9,8 +9,6 @@ public class CharSelectScr : MonoBehaviour
 {
     public PlayerControls Controls; //Player Controls
 
-  //  public Text READY;
-
     public Image[] CharPics;
 
     public Image P1Arrow;
@@ -52,35 +50,39 @@ public class CharSelectScr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Start playing theme song
         StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
+
+        //Set initial indices
         indexP1 = 0;
         indexP2 = 0;
+
+        //Set initial positions and dimensions
+        //P1
         float x = CharPics[indexP1].rectTransform.position.x;
         float y = CharPics[indexP1].rectTransform.position.y;
         float sh = CharPics[indexP1].rectTransform.rect.height;
         float sw = CharPics[indexP1].rectTransform.rect.width;
         P1Arrow.rectTransform.sizeDelta = new Vector2(sw, sh);
         P1Arrow.rectTransform.position = new Vector2(x, y + sh / 8);
+        //P2
         float x2 = CharPics[indexP2].rectTransform.position.x;
         float y2 = CharPics[indexP2].rectTransform.position.y;
         float sh2 = CharPics[indexP2].rectTransform.rect.height;
         float sw2 = CharPics[indexP2].rectTransform.rect.width;
         P2Arrow.rectTransform.sizeDelta = new Vector2(sw2, sh2);
         P2Arrow.rectTransform.position = new Vector2(x2, y2 - sh2 / 8);
-        //float w2 = CharPics[indexP2].transform.position.x;
-        //float h2 = CharPics[indexP2].transform.position.y;
-        ////P2Arrow.rectTransform.sizeDelta = SizeLarge;
-        //P2Arrow.rectTransform.position = new Vector2(w2, h2 - h2 / 6.5f);
-        //float w = CharPics[indexP1].transform.position.x;
-        //float h = CharPics[indexP1].transform.position.y;
-        ////P1Arrow.rectTransform.sizeDelta = SizeLarge;
-        //P1Arrow.rectTransform.position = new Vector2(w, h + h / 6.5f);
+
+        //Get sizes of small and large buttons
         RectTransform rt = P1Arrow.GetComponent<RectTransform>();
         SizeLarge = rt.sizeDelta;
         SizeSmall = new Vector2(rt.rect.width, rt.rect.height * .55f);
 
+        //Start f l a s h i n g
         StartCoroutine(FlashText(P1CHAR, P1CHARBG));
         StartCoroutine(FlashTextP2(P2CHAR, P2CHARBG));
+
+        //Screen fade in
         screen = GameObject.FindGameObjectWithTag("Screen").GetComponent<Image>();
         StartCoroutine(manager.FadeScreenIn(screen));
     }
@@ -88,7 +90,7 @@ public class CharSelectScr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //If P1 has selected player
         if (ReadyP1 == true)
         {
             RDYP1.enabled = true;
@@ -99,6 +101,7 @@ public class CharSelectScr : MonoBehaviour
             RDYP1.enabled = false;
             RDYP1BG.enabled = false;
         }
+        //If P2 has selected player
         if(ReadyP2 == true)
         {
             RDYP2.enabled = true;
@@ -109,6 +112,7 @@ public class CharSelectScr : MonoBehaviour
             RDYP2.enabled = false;
             RDYP2BG.enabled = false;
         }
+        //If both P1 and P2 have selected
         if (ReadyP1 == true && ReadyP2 == true)
         {
             READY.enabled = true;
@@ -120,139 +124,121 @@ public class CharSelectScr : MonoBehaviour
             READYBG.enabled = false;
         }
 
-
+        //Get User Input
         MoveP2 = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
         MoveP1 = new Vector2(Input.GetAxis("Horizontal1"), Input.GetAxis("Vertical1"));
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A)) //P1 left
         {
             MoveP1 = new Vector2(-1.0f, 0.0f);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D)) //P1 right
         {
             MoveP1 = new Vector2(1.0f, 0.0f);
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S)) //P1 down
         {
             MoveP1 = new Vector2(0.0f, -1.0f);
         }
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKey(KeyCode.K)) //P2 left
         {
             MoveP2 = new Vector2(-1.0f, 0.0f);
         }
-        else if (Input.GetKey(KeyCode.Semicolon))
+        else if (Input.GetKey(KeyCode.Semicolon)) //P2 right
         {
             MoveP2 = new Vector2(1.0f, 0.0f);
         }
-        else if (Input.GetKey(KeyCode.L))
+        else if (Input.GetKey(KeyCode.L)) //P2 down
         {
             MoveP2 = new Vector2(0.0f, -1.0f);
         }
 
-
+        //If P2 movement detected
         if (ReadyP2 == false && turn2 == true && ((MoveP2.x > 0.8f || MoveP2.x < -0.8f) || (MoveP2.y > 0.8f || MoveP2.y < -0.8f)))
         {
             turn2 = false;
             StartCoroutine(ShiftP2Cursor());
         }
-        // else
-        // {
-        //     turn2 = true;
-        // }
 
-
+        //If P1 movement detected
         if (ReadyP1 == false && turn1 == true && ((MoveP1.x > 0.8f || MoveP1.x < -0.8f) || (MoveP1.y > 0.8f || MoveP1.y < -0.8f)))
         {
             turn1 = false;
             StartCoroutine(ShiftP1Cursor());
         }
 
+        //???
         if (ReadyP1 == true && ReadyP2 == true)
         {
-     //      READY.enabled = true;
         }
         else
         {
-      //      READY.enabled = false;
         }
-        //2 is square
-        //    1 is Circle
-        //    x is 0
 
+        //If P1 locks in character
         if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.Alpha4))
         {
             SelectP1();
         }
+        //If P2 locks in character
         if (Input.GetKeyDown(KeyCode.Joystick2Button1) || Input.GetKey(KeyCode.Minus))
         {
             SelectP2();
         }
-
+        //If both players have selected
         if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.Joystick2Button3) || Input.GetKey(KeyCode.Alpha5) || Input.GetKey(KeyCode.Equals))
         {
             StartMatch();
         }
-
+        //P1 back
         if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.R))
         {
             BackP1();
         }
+        //P2 back
         if (Input.GetKeyDown(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.LeftBracket))
         {
             BackP2();
         }
-        // else
-        // {
-        //     turn1 = true;
-        // }
-        //Debug.Log(MoveP2);
-
-
+        
     }
 
+    //If P1 selects
     void SelectP1()
     {
         FindObjectOfType<AudioManager>().Play("MenuSelect");
         ReadyP1 = true;
-        //  FindObjectOfType<GameManager>().PathP1 = FindSource(indexP1);
         FindObjectOfType<GameManager>().PathP1 = FindSource(indexP1);
-        //FindObjectOfType<GameManager>().Self1 = (Character)Resources.Load(FindObjectOfType<GameManager>().PathP1, typeof(Character));
-        //manager.Self1 = (Character)Resources.Load(manager.PathP1, typeof(Character));
        
     }
+    //If P2 selects
     void SelectP2()
     {
         FindObjectOfType<AudioManager>().Play("MenuSelect");
         ReadyP2 = true;
-        //FindObjectOfType<GameManager>().PathP2 = FindSource(indexP2);
-        //FindObjectOfType<GameManager>().Self2 = (Character)Resources.Load(FindObjectOfType<GameManager>().PathP2, typeof(Character));
         FindObjectOfType<GameManager>().PathP2 = FindSource(indexP2);
-        //manager.Self2 = (Character)Resources.Load(manager.PathP2, typeof(Character));
-       
     }
+    //P1 back
     void BackP1()
     {
-
         ReadyP1 = false;
     }
+    //P2 back
     void BackP2()
     {
-
         ReadyP2 = false;
     }
+    //Begin Match if both players are ready
     void StartMatch()
     {
         if (ReadyP1 && ReadyP2)
         {
-            //FindObjectOfType<AudioManager>().Stop("VGDCTheme");
             StartCoroutine(Wait());
-            //SceneManager.LoadScene(7);
         }
-      //  manager.Self1 
 
     }
 
-
+    //Find what button was selected
     string FindSource(int index)
     {
         string path = "SampleCharactePreFab";
@@ -272,40 +258,14 @@ public class CharSelectScr : MonoBehaviour
                 path = "How2Play";
                 SceneManager.LoadScene("How2Play");
                 break;
-            //case 3:
-            //    path = "SampleCharactePreFab";
-            //    break;
-            //case 4:
-            //    path = "SampleCharactePreFab";
-            //    break;
-            //case 5:
-            //    path = "Thornton";
-            //    break;
-            //case 6:
-            //    path = "SampleCharactePreFab";
-            //    break;
-            //case 7:
-            //    path = "Klefstad";
-            //    break;
-            //case 8:
-            //    path = "SampleCharactePreFab";
-            //    break;
-            //case 9:
-            //    path = "Pattis";
-            //    break;
             default:
                 path = "SampleCharactePreFab";
                 break;
         }
-
-
-
-
         return path;
     }
 
-
-
+    //Move cursor for P2
     IEnumerator ShiftP2Cursor()
     {
         turn2 = false;
@@ -314,7 +274,7 @@ public class CharSelectScr : MonoBehaviour
         {
             if (MoveP2.x > 0.8f)
             {
-                if (indexP2 == 2)
+                if (indexP2 == 3)
                 {
                     indexP2 = 0;
                 }
@@ -322,63 +282,20 @@ public class CharSelectScr : MonoBehaviour
                 {
                     indexP2 += 1;
                 }
-
-
-                //              yield return new WaitForSeconds(0.15f);
-                //       Debug.Log(indexP2);
             }
 
             else if (MoveP2.x < -0.8f)
             {
                 if (indexP2 == 0)
                 {
-                    indexP2 = 2;
+                    indexP2 = 3;
                 }
                 else
                 {
                     indexP2 -= 1;
                 }
-
-
-                //                yield return new WaitForSeconds(0.15f);
-                //         Debug.Log(indexP2);
             }
 
-            //if (MoveP2.y < -0.8f)
-            //{
-            //    if (indexP2 + 1 <= CharPics.Length / 2)
-            //    {
-            //        indexP2 = indexP2 + CharPics.Length / 2;
-            //    }
-            //    else
-            //    {
-            //        indexP2 = indexP2 - CharPics.Length / 2;
-            //    }
-            //}
-            //else if (MoveP2.y > 0.8f)
-            //{
-            //    if (indexP2 + 1 > CharPics.Length / 2)
-            //    {
-            //        indexP2 = indexP2 - CharPics.Length / 2;
-            //    }
-            //    else
-            //    {
-            //        indexP2 = indexP2 + CharPics.Length / 2;
-            //    }
-
-
-            //    if (indexP2 > CharPics.Length - 1)
-            //    {
-            //        indexP2 = 0;
-            //    }
-
-            //    if (indexP2 < 0)
-            //    {
-            //        indexP2 = CharPics.Length;
-            //    }
-            //    //   yield return new WaitForSeconds(0.15f);
-            //    // turn1 = true;
-            //}
             yield return new WaitForSeconds(0.15f);
             turn2 = true;
 
@@ -389,24 +306,7 @@ public class CharSelectScr : MonoBehaviour
             float sw = CharPics[indexP2].rectTransform.rect.width;
             P2Arrow.rectTransform.sizeDelta = new Vector2(sw, sh);
             P2Arrow.rectTransform.position = new Vector2(x,y - sh/8);
- //           P2Arrow.rectTransform.rect.Set(x, y + sh / 8, sw, sh);// = P2Arrow.rectTransform.position.y + sh / 8;
-            //if (indexP2 == 3)
-            //{
 
-            //    float w = CharPics[indexP2].transform.position.x;
-            //    float h = CharPics[indexP2].transform.position.y;
-            //    float sh = CharPics[indexP2].rectTransform.rect.height;
-            //    P2Arrow.rectTransform.sizeDelta = SizeSmall;
-            //    P2Arrow.rectTransform.position = new Vector2(w,h - sh/2);
-            //}
-            //else
-            //{
-            //    float w = CharPics[indexP2].transform.position.x;
-            //    float h = CharPics[indexP2].transform.position.y;
-
-            //    P2Arrow.rectTransform.sizeDelta = SizeLarge;
-            //    P2Arrow.rectTransform.position = new Vector2(w,h-h/6.5f);
-            //}
             if (indexP2 == 0)
             {
                 P2CHAR.text = "THORNTON";
@@ -427,13 +327,9 @@ public class CharSelectScr : MonoBehaviour
                 P2CHAR.text = "HOW2PLAY";
                 P2CHARBG.text = "HOW2PLAY";
             }
-
-
-
-
-            //    yield return null;
         }
     }
+        //Move cursor for P1
         IEnumerator ShiftP1Cursor()
         {
             turn1 = false;
@@ -442,7 +338,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (MoveP1.x > 0.8f)
                 {
-                    if (indexP1 == 2)
+                    if (indexP1 == 3)
                     {
                         indexP1 = 0;
                     }
@@ -450,63 +346,19 @@ public class CharSelectScr : MonoBehaviour
                     {
                         indexP1 += 1;
                     }
-
-
-                    //              yield return new WaitForSeconds(0.15f);
-                    //       Debug.Log(indexP2);
                 }
 
                 else if (MoveP1.x < -0.8f)
                 {
                     if (indexP1 == 0)
                     {
-                        indexP1 = 2;
+                        indexP1 = 3;
                     }
                     else
                     {
                         indexP1 -= 1;
                     }
-
-
-                    //                yield return new WaitForSeconds(0.15f);
-                    //         Debug.Log(indexP2);
                 }
-
-                //if (MoveP1.y < -0.8f)
-                //{
-                //    if (indexP1 + 1 <= CharPics.Length/2)
-                //    {
-                //        indexP1 = indexP1 + CharPics.Length /2;
-                //    }
-                //    else
-                //    {
-                //        indexP1 = indexP1 - CharPics.Length / 2;
-                //    }
-                //}
-                //else if (MoveP1.y > 0.8f)
-                //{
-                //    if (indexP1 + 1 > CharPics.Length/2)
-                //    {
-                //        indexP1 = indexP1 - CharPics.Length / 2;
-                //    }
-                //    else
-                //    {
-                //        indexP1 = indexP1 + CharPics.Length / 2;
-                //    }
-
-
-                //    if (indexP1 > CharPics.Length - 1)
-                //    {
-                //        indexP1 = 0;
-                //    }
-
-                //    if (indexP1 < 0)
-                //    {
-                //        indexP1 = CharPics.Length;
-                //    }
-                // //   yield return new WaitForSeconds(0.15f);
-                //   // turn1 = true;
-                //}
             yield return new WaitForSeconds(0.15f);
             turn1 = true;
 
@@ -516,20 +368,6 @@ public class CharSelectScr : MonoBehaviour
             float sw = CharPics[indexP1].rectTransform.rect.width;
             P1Arrow.rectTransform.sizeDelta = new Vector2(sw, sh);
             P1Arrow.rectTransform.position = new Vector2(x, y + sh / 8);
-            //if (indexP1 == 3)
-            //{
-            //    float w = CharPics[indexP1].transform.position.x;
-            //    float h = CharPics[indexP1].transform.position.y;
-            //    P1Arrow.rectTransform.sizeDelta = SizeSmall;
-            //    P1Arrow.rectTransform.position = new Vector2(w, h + h/6.5f);
-            //}
-            //else
-            //{
-            //    float w = CharPics[indexP1].transform.position.x;
-            //    float h = CharPics[indexP1].transform.position.y;
-            //    P1Arrow.rectTransform.sizeDelta = SizeLarge;
-            //    P1Arrow.rectTransform.position = new Vector2(w, h + h/6.5f);
-            //}
 
             if (indexP1 == 0)
             {
@@ -551,15 +389,10 @@ public class CharSelectScr : MonoBehaviour
                 P1CHAR.text = "HOW2PLAY";
                 P1CHARBG.text = "HOW2PLAY";
             }
-
-
-
-
-
-            //    yield return null;
         }
-        }
+    }
 
+    //F L A S H T E X T
     IEnumerator FlashText(TextMeshProUGUI T, TextMeshProUGUI T2)
     {
         Color tmp = P1Arrow.color;
@@ -584,6 +417,7 @@ public class CharSelectScr : MonoBehaviour
             yield return null;
         }
     }
+    //F L A S H T E X T
     IEnumerator FlashTextP2(TextMeshProUGUI T, TextMeshProUGUI T2)
     {
         Color tmp = P2Arrow.color;
@@ -609,12 +443,10 @@ public class CharSelectScr : MonoBehaviour
         }
     }
 
+    //Wait? idk what this is for
     IEnumerator Wait()
     {
         FindObjectOfType<AudioManager>().Stop("VGDCTheme");
-      //  yield return new WaitForSeconds(1.0f);
-        
-        //StartCoroutine(manager.FadeScreenOut(screen));
         SceneManager.LoadScene(7);
         yield return null;
     }
