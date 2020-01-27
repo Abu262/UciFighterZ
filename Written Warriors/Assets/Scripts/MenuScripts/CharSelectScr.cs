@@ -76,7 +76,7 @@ public class CharSelectScr : MonoBehaviour
         //Get sizes of small and large buttons
         RectTransform rt = P1Arrow.GetComponent<RectTransform>();
         SizeLarge = rt.sizeDelta;
-        SizeSmall = new Vector2(rt.rect.width, rt.rect.height * .55f);
+        SizeSmall = new Vector2(rt.rect.width, rt.rect.height * .4f);
 
         //Start f l a s h i n g
         StartCoroutine(FlashText(P1CHAR, P1CHARBG));
@@ -258,6 +258,22 @@ public class CharSelectScr : MonoBehaviour
                 path = "How2Play";
                 SceneManager.LoadScene("How2Play");
                 break;
+            case 4:
+                path = "Health";
+                SceneManager.LoadScene("Health");
+                break;
+            case 5:
+                path = "Controls";
+                SceneManager.LoadScene("Controls");
+                break;
+            case 6:
+                path = "Specials";
+                SceneManager.LoadScene("Specials");
+                break;
+            case 7:
+                path = "SuddenDeath";
+                SceneManager.LoadScene("Health");
+                break;
             default:
                 path = "SampleCharactePreFab";
                 break;
@@ -274,7 +290,7 @@ public class CharSelectScr : MonoBehaviour
         {
             if (MoveP2.x > 0.8f)
             {
-                if (indexP2 == 3)
+                if (indexP2 == 7)
                 {
                     indexP2 = 0;
                 }
@@ -288,7 +304,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (indexP2 == 0)
                 {
-                    indexP2 = 3;
+                    indexP2 = 7;
                 }
                 else
                 {
@@ -306,6 +322,13 @@ public class CharSelectScr : MonoBehaviour
             float sw = CharPics[indexP2].rectTransform.rect.width;
             P2Arrow.rectTransform.sizeDelta = new Vector2(sw, sh);
             P2Arrow.rectTransform.position = new Vector2(x,y - sh/8);
+            if (indexP2 > 2)
+            {
+                P2Arrow.rectTransform.sizeDelta = SizeSmall;
+                P2Arrow.rectTransform.position = new Vector2(x, y-18);
+            }
+            else
+                P2Arrow.rectTransform.sizeDelta = SizeLarge;
 
             if (indexP2 == 0)
             {
@@ -322,10 +345,30 @@ public class CharSelectScr : MonoBehaviour
                 P2CHAR.text = "PATTIS";
                 P2CHARBG.text = "PATTIS";
             }
-            else
+            else if (indexP2 == 3)
             {
                 P2CHAR.text = "HOW2PLAY";
                 P2CHARBG.text = "HOW2PLAY";
+            }
+            else if (indexP2 == 4)
+            {
+                P2CHAR.text = "HEALTH";
+                P2CHARBG.text = "HEALTH";
+            }
+            else if (indexP2 == 5)
+            {
+                P2CHAR.text = "CONTROLS";
+                P2CHARBG.text = "CONTROLS";
+            }
+            else if (indexP2 == 6)
+            {
+                P2CHAR.text = "SPECIALS";
+                P2CHARBG.text = "SPECIALS";
+            }
+            else if (indexP2 == 7)
+            {
+                P2CHAR.text = "SUDDEN DEATH";
+                P2CHARBG.text = "SUDDEN DEATH";
             }
         }
     }
@@ -338,7 +381,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (MoveP1.x > 0.8f)
                 {
-                    if (indexP1 == 3)
+                    if (indexP1 == 7)
                     {
                         indexP1 = 0;
                     }
@@ -352,7 +395,7 @@ public class CharSelectScr : MonoBehaviour
                 {
                     if (indexP1 == 0)
                     {
-                        indexP1 = 3;
+                        indexP1 = 7;
                     }
                     else
                     {
@@ -368,6 +411,13 @@ public class CharSelectScr : MonoBehaviour
             float sw = CharPics[indexP1].rectTransform.rect.width;
             P1Arrow.rectTransform.sizeDelta = new Vector2(sw, sh);
             P1Arrow.rectTransform.position = new Vector2(x, y + sh / 8);
+            if (indexP1 > 2)
+            {
+                P1Arrow.rectTransform.sizeDelta = SizeSmall;
+                P1Arrow.rectTransform.position = new Vector2(x, y+18);
+            }
+            else
+                P1Arrow.rectTransform.sizeDelta = SizeLarge;
 
             if (indexP1 == 0)
             {
@@ -384,10 +434,30 @@ public class CharSelectScr : MonoBehaviour
                 P1CHAR.text = "PATTIS";
                 P1CHARBG.text = "PATTIS";
             }
-            else
+            else if (indexP1 == 3)
             {
                 P1CHAR.text = "HOW2PLAY";
                 P1CHARBG.text = "HOW2PLAY";
+            }
+            else if (indexP1 == 4)
+            {
+                P1CHAR.text = "HEALTH";
+                P1CHARBG.text = "HEALTH";
+            }
+            else if (indexP1 == 5)
+            {
+                P1CHAR.text = "CONTROLS";
+                P1CHARBG.text = "CONTROLS";
+            }
+            else if (indexP1 == 6)
+            {
+                P1CHAR.text = "SPECIALS";
+                P1CHARBG.text = "SPECIALS";
+            }
+            else if (indexP1 == 7)
+            {
+                P1CHAR.text = "SUDDEN DEATH";
+                P1CHARBG.text = "SUDDEN DEATH";
             }
         }
     }
