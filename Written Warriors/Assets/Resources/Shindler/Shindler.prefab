@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3740029232848074184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3740029232848074186}
+  - component: {fileID: 3740029232848074187}
+  m_Layer: 0
+  m_Name: Shindler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3740029232848074186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3740029232848074184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.9428576, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3740029232848074187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3740029232848074184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b128743089aecb04ebacd58a320017c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Face: {fileID: 0}
+  Health: 3
+  PlayerSize: {x: 1, y: 1.25}
+  PlayerOffset: {x: 0, y: 0}
+  MoveSpeed: 18
+  Aura: {fileID: 2085758644351299489, guid: cc61b84762a144c43a7921af80dd358e, type: 3}
+  CharName: Shindler
+  StandSpr: {fileID: 0}
+  StandAnim: {fileID: 0}
+  Skeleton: {fileID: 9100000, guid: de3c923f13db7c449a7562132a6dad17, type: 2}
+  CrouchSpr: {fileID: 0}
+  StandBlockSpr: {fileID: 0}
+  CrouchBlockSpr: {fileID: 0}
+  HitSpr: {fileID: 0}
+  LowSprStartUp: {fileID: 0}
+  LowAtkStartUp: 16
+  LowSprHit: {fileID: 0}
+  LowAtkHit: 9
+  LowSprCoolDown: {fileID: 0}
+  LowAtkCoolDown: 16
+  LowBlockStun: 9
+  LowAttackerHitPush: 25
+  LowDefenderHitPush: 25
+  LowAttackerBlockPush: 2
+  LowDefenderBlockPush: 1
+  LowHitBoxOffset: {x: 1.5, y: -0.5}
+  LowHitBoxSize: {x: 1.5, y: 0.5}
+  MedSprStartUp: {fileID: 0}
+  MedAtkStartUp: 20
+  MedSprHit: {fileID: 0}
+  MedAtkHit: 9
+  MedSprCoolDown: {fileID: 0}
+  MedAtkCoolDown: 16
+  MedBlockStun: 9
+  MedAttackerHitPush: 25
+  MedDefenderHitPush: 25
+  MedAttackerBlockPush: 9
+  MedDefenderBlockPush: 1
+  MedHitBoxOffset: {x: 1.5, y: 0}
+  MedHitBoxSize: {x: 1.5, y: 0.5}
+  HighSprStartUp: {fileID: 0}
+  HighAtkStartUp: 8
+  HighSprHit: {fileID: 0}
+  HighAtkHit: 9
+  HighSprCoolDown: {fileID: 0}
+  HighAtkCoolDown: 9
+  HighBlockStun: 9
+  HighAttackerHitPush: 25
+  HighDefenderHitPush: 25
+  HighAttackerBlockPush: 2.5
+  HighDefenderBlockPush: 1
+  HighHitBoxOffset: {x: 1.5, y: 0.5}
+  HighHitBoxSize: {x: 1.5, y: 0.5}
+  SpecSprStartUp: {fileID: 0}
+  SpecAtkStartUp: 20
+  SpecSprHit: {fileID: 0}
+  SpecAtkHit: 30
+  SpecSprCoolDown: {fileID: 0}
+  SpecAtkCoolDown: 12
+  SpecBlockStun: 25
+  SpecAttackerHitPush: 25
+  SpecDefenderHitPush: 25
+  SpecAttackerBlockPush: 5
+  SpecDefenderBlockPush: 5
+  SpecHitBoxOffset: {x: 4, y: -1.25}
+  SpecHitBoxSize: {x: 5, y: 1}
+  SpecialStr: High
+  MaxCharges: 900
+  speedscalar: 3
+  backdashtime: 30
