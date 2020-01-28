@@ -255,8 +255,8 @@ public class CharSelectScr : MonoBehaviour
                 path = "Pattis";
                 break;
             case 3:
-                path = "How2Play";
-                SceneManager.LoadScene("How2Play");
+                path = "ZotFighter";
+                SceneManager.LoadScene("ZotFighter");
                 break;
             case 4:
                 path = "Health";

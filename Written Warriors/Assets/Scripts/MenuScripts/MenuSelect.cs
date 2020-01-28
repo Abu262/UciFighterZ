@@ -159,8 +159,8 @@ public class MenuSelect : MonoBehaviour
                 SceneManager.LoadScene("CharacterSelect");
                 break;
             case 1:
-                path = "How2Play";
-                SceneManager.LoadScene("How2Play");
+                path = "ZotFighter";
+                SceneManager.LoadScene("ZotFighter");
                 break;
             case 2:
                 path = "Health";
