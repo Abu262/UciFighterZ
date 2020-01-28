@@ -13,8 +13,6 @@ public class MenuSelect : MonoBehaviour
 
     public Image P1Arrow;
     public Image P2Arrow;
-    Vector2 SizeLarge;
-    Vector2 SizeSmall;
 
     int indexP1;
     int indexP2;
@@ -31,8 +29,7 @@ public class MenuSelect : MonoBehaviour
 
 
     private Image screen;
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -49,18 +46,17 @@ public class MenuSelect : MonoBehaviour
         float y = CharPics[indexP1].rectTransform.position.y;
         float sh = CharPics[indexP1].rectTransform.rect.height;
         float sw = CharPics[indexP1].rectTransform.rect.width;
-        P1Arrow.rectTransform.position = new Vector2(x, y + sh);
+        P1Arrow.rectTransform.position = new Vector2(x, y + sh - 25);
         //P2
         float x2 = CharPics[indexP2].rectTransform.position.x;
         float y2 = CharPics[indexP2].rectTransform.position.y;
         float sh2 = CharPics[indexP2].rectTransform.rect.height;
         float sw2 = CharPics[indexP2].rectTransform.rect.width;
-        P2Arrow.rectTransform.position = new Vector2(x2, y2 - sh2 + 2);
+        P2Arrow.rectTransform.position = new Vector2(x2, y2 - sh2 + 25);
 
         //Set sizes
-        RectTransform rt = P1Arrow.GetComponent<RectTransform>();
-        P1Arrow.rectTransform.sizeDelta = new Vector2(rt.rect.width, rt.rect.height * .4f);
-        P2Arrow.rectTransform.sizeDelta = new Vector2(rt.rect.width, rt.rect.height * .8f);
+        P1Arrow.rectTransform.sizeDelta = new Vector2(sw*1.4f,sh);
+        P2Arrow.rectTransform.sizeDelta = new Vector2(sw2*1.4f, sh2);
 
     }
 
@@ -159,22 +155,26 @@ public class MenuSelect : MonoBehaviour
                 SceneManager.LoadScene("CharacterSelect");
                 break;
             case 1:
+                path = "OptionsMenu";
+                SceneManager.LoadScene("OptionsMenu");
+                break;
+            case 2:
                 path = "ZotFighter";
                 SceneManager.LoadScene("ZotFighter");
                 break;
-            case 2:
+            case 3:
                 path = "Health";
                 SceneManager.LoadScene("Health");
                 break;
-            case 3:
+            case 4:
                 path = "Controls";
                 SceneManager.LoadScene("Controls");
                 break;
-            case 4:
+            case 5:
                 path = "Specials";
                 SceneManager.LoadScene("Specials");
                 break;
-            case 5:
+            case 6:
                 path = "Sudden Death";
                 SceneManager.LoadScene("Sudden Death");
                 break;
@@ -194,7 +194,7 @@ public class MenuSelect : MonoBehaviour
         {
             if (MoveP2.x > 0.8f)
             {
-                if (indexP2 == 5)
+                if (indexP2 == 6)
                 {
                     indexP2 = 0;
                 }
@@ -208,7 +208,7 @@ public class MenuSelect : MonoBehaviour
             {
                 if (indexP2 == 0)
                 {
-                    indexP2 = 5;
+                    indexP2 = 6;
                 }
                 else
                 {
@@ -223,9 +223,9 @@ public class MenuSelect : MonoBehaviour
             float y = CharPics[indexP2].rectTransform.position.y;
             float sh = CharPics[indexP2].rectTransform.rect.height;
             float sw = CharPics[indexP2].rectTransform.rect.width;
-            P2Arrow.rectTransform.position = new Vector2(x, y - sh + 2);
+            P2Arrow.rectTransform.position = new Vector2(x, y - sh + 25);
+            P2Arrow.rectTransform.sizeDelta = new Vector2(sw*1.4f, sh);
 
-            
         }
     }
     //Move cursor for P1
@@ -237,7 +237,7 @@ public class MenuSelect : MonoBehaviour
         {
             if (MoveP1.x > 0.8f)
             {
-                if (indexP1 == 5)
+                if (indexP1 == 6)
                 {
                     indexP1 = 0;
                 }
@@ -251,7 +251,7 @@ public class MenuSelect : MonoBehaviour
             {
                 if (indexP1 == 0)
                 {
-                    indexP1 = 5;
+                    indexP1 = 6;
                 }
                 else
                 {
@@ -265,9 +265,8 @@ public class MenuSelect : MonoBehaviour
             float y = CharPics[indexP1].rectTransform.position.y;
             float sh = CharPics[indexP1].rectTransform.rect.height;
             float sw = CharPics[indexP1].rectTransform.rect.width;
-            P1Arrow.rectTransform.position = new Vector2(x, y + sh);
-
-            
+            P1Arrow.rectTransform.position = new Vector2(x, y + sh - 25);
+            P1Arrow.rectTransform.sizeDelta = new Vector2(sw*1.4f, sh);
         }
     }
 

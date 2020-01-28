@@ -255,22 +255,26 @@ public class CharSelectScr : MonoBehaviour
                 path = "Pattis";
                 break;
             case 3:
+                path = "Options";
+                SceneManager.LoadScene("OptionsMenu");
+                break;
+            case 4:
                 path = "ZotFighter";
                 SceneManager.LoadScene("ZotFighter");
                 break;
-            case 4:
+            case 5:
                 path = "Health";
                 SceneManager.LoadScene("Health");
                 break;
-            case 5:
+            case 6:
                 path = "Controls";
                 SceneManager.LoadScene("Controls");
                 break;
-            case 6:
+            case 7:
                 path = "Specials";
                 SceneManager.LoadScene("Specials");
                 break;
-            case 7:
+            case 8:
                 path = "SuddenDeath";
                 SceneManager.LoadScene("Health");
                 break;
@@ -290,7 +294,7 @@ public class CharSelectScr : MonoBehaviour
         {
             if (MoveP2.x > 0.8f)
             {
-                if (indexP2 == 7)
+                if (indexP2 == 8)
                 {
                     indexP2 = 0;
                 }
@@ -304,7 +308,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (indexP2 == 0)
                 {
-                    indexP2 = 7;
+                    indexP2 = 8;
                 }
                 else
                 {
@@ -347,25 +351,30 @@ public class CharSelectScr : MonoBehaviour
             }
             else if (indexP2 == 3)
             {
-                P2CHAR.text = "HOW2PLAY";
-                P2CHARBG.text = "HOW2PLAY";
+                P2CHAR.text = "OPTIONS";
+                P2CHARBG.text = "OPTIONS";
             }
             else if (indexP2 == 4)
+            {
+                P2CHAR.text = "ZOTFIGHTER";
+                P2CHARBG.text = "ZOTFIGHTER";
+            }
+            else if (indexP2 == 5)
             {
                 P2CHAR.text = "HEALTH";
                 P2CHARBG.text = "HEALTH";
             }
-            else if (indexP2 == 5)
+            else if (indexP2 == 6)
             {
                 P2CHAR.text = "CONTROLS";
                 P2CHARBG.text = "CONTROLS";
             }
-            else if (indexP2 == 6)
+            else if (indexP2 == 7)
             {
                 P2CHAR.text = "SPECIALS";
                 P2CHARBG.text = "SPECIALS";
             }
-            else if (indexP2 == 7)
+            else if (indexP2 == 8)
             {
                 P2CHAR.text = "SUDDEN DEATH";
                 P2CHARBG.text = "SUDDEN DEATH";
@@ -381,7 +390,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (MoveP1.x > 0.8f)
                 {
-                    if (indexP1 == 7)
+                    if (indexP1 == 8)
                     {
                         indexP1 = 0;
                     }
@@ -395,7 +404,7 @@ public class CharSelectScr : MonoBehaviour
                 {
                     if (indexP1 == 0)
                     {
-                        indexP1 = 7;
+                        indexP1 = 8;
                     }
                     else
                     {
@@ -436,25 +445,30 @@ public class CharSelectScr : MonoBehaviour
             }
             else if (indexP1 == 3)
             {
-                P1CHAR.text = "HOW2PLAY";
-                P1CHARBG.text = "HOW2PLAY";
+                P1CHAR.text = "OPTIONS";
+                P1CHARBG.text = "OPTIONS";
             }
             else if (indexP1 == 4)
+            {
+                P1CHAR.text = "ZOTFIGHTER";
+                P1CHARBG.text = "ZOTFIGHTER";
+            }
+            else if (indexP1 == 5)
             {
                 P1CHAR.text = "HEALTH";
                 P1CHARBG.text = "HEALTH";
             }
-            else if (indexP1 == 5)
+            else if (indexP1 == 6)
             {
                 P1CHAR.text = "CONTROLS";
                 P1CHARBG.text = "CONTROLS";
             }
-            else if (indexP1 == 6)
+            else if (indexP1 == 7)
             {
                 P1CHAR.text = "SPECIALS";
                 P1CHARBG.text = "SPECIALS";
             }
-            else if (indexP1 == 7)
+            else if (indexP1 == 8)
             {
                 P1CHAR.text = "SUDDEN DEATH";
                 P1CHARBG.text = "SUDDEN DEATH";
