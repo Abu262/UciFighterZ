@@ -47,67 +47,50 @@ MonoBehaviour:
   Health: 3
   PlayerSize: {x: 1, y: 1.25}
   PlayerOffset: {x: 0, y: 0}
-  MoveSpeed: 50
+  MoveSpeed: 25
   Aura: {fileID: 2085758644351299489, guid: cc61b84762a144c43a7921af80dd358e, type: 3}
   CharName: Wong Ma
-  StandSpr: {fileID: 0}
   StandAnim: {fileID: 0}
   Skeleton: {fileID: 9100000, guid: de3c923f13db7c449a7562132a6dad17, type: 2}
-  CrouchSpr: {fileID: 0}
-  StandBlockSpr: {fileID: 0}
-  CrouchBlockSpr: {fileID: 0}
-  HitSpr: {fileID: 0}
-  LowSprStartUp: {fileID: 0}
-  LowAtkStartUp: 10
-  LowSprHit: {fileID: 0}
-  LowAtkHit: 10
-  LowSprCoolDown: {fileID: 0}
-  LowAtkCoolDown: 10
-  LowBlockStun: 60
-  LowAttackerHitPush: 10
+  LowAtkStartUp: 16
+  LowAtkHit: 7
+  LowAtkCoolDown: 12
+  LowBlockStun: 9
+  LowAttackerHitPush: 20
   LowDefenderHitPush: 10
   LowAttackerBlockPush: 10
   LowDefenderBlockPush: 10
-  LowHitBoxOffset: {x: 1.5, y: -0.5}
-  LowHitBoxSize: {x: 1.5, y: 0.5}
-  MedSprStartUp: {fileID: 0}
-  MedAtkStartUp: 10
-  MedSprHit: {fileID: 0}
+  LowHitBoxOffset: {x: 2, y: -1}
+  LowHitBoxSize: {x: 3.5, y: 0.5}
+  MedAtkStartUp: 20
   MedAtkHit: 10
-  MedSprCoolDown: {fileID: 0}
-  MedAtkCoolDown: 10
-  MedBlockStun: 60
-  MedAttackerHitPush: 10
-  MedDefenderHitPush: 10
-  MedAttackerBlockPush: 10
-  MedDefenderBlockPush: 10
-  MedHitBoxOffset: {x: 1.5, y: 0}
-  MedHitBoxSize: {x: 1.5, y: 0.5}
-  HighSprStartUp: {fileID: 0}
-  HighAtkStartUp: 10
-  HighSprHit: {fileID: 0}
-  HighAtkHit: 10
-  HighSprCoolDown: {fileID: 0}
-  HighAtkCoolDown: 10
-  HighBlockStun: 60
-  HighAttackerHitPush: 10
-  HighDefenderHitPush: 10
-  HighAttackerBlockPush: 10
-  HighDefenderBlockPush: 10
-  HighHitBoxOffset: {x: 1.5, y: 0.5}
-  HighHitBoxSize: {x: 1.5, y: 0.5}
-  SpecSprStartUp: {fileID: 0}
+  MedAtkCoolDown: 15
+  MedBlockStun: 12
+  MedAttackerHitPush: 25
+  MedDefenderHitPush: 25
+  MedAttackerBlockPush: 0
+  MedDefenderBlockPush: 20
+  MedHitBoxOffset: {x: 2, y: 0}
+  MedHitBoxSize: {x: 7, y: 0.5}
+  HighAtkStartUp: 15
+  HighAtkHit: 7
+  HighAtkCoolDown: 13
+  HighBlockStun: 10
+  HighAttackerHitPush: 25
+  HighDefenderHitPush: 25
+  HighAttackerBlockPush: 5
+  HighDefenderBlockPush: 20
+  HighHitBoxOffset: {x: 2, y: 1.25}
+  HighHitBoxSize: {x: 7, y: 0.5}
   SpecAtkStartUp: 0
-  SpecSprHit: {fileID: 0}
-  SpecAtkHit: 30
-  SpecSprCoolDown: {fileID: 0}
-  SpecAtkCoolDown: 10
-  SpecBlockStun: 60
-  SpecAttackerHitPush: 10
-  SpecDefenderHitPush: 10
-  SpecAttackerBlockPush: 10
-  SpecDefenderBlockPush: 10
-  SpecHitBoxOffset: {x: 4, y: -1.25}
-  SpecHitBoxSize: {x: 5, y: 1}
+  SpecAtkHit: 15
+  SpecAtkCoolDown: 0
+  SpecBlockStun: 0
+  SpecAttackerHitPush: 0
+  SpecDefenderHitPush: 0
+  SpecAttackerBlockPush: 0
+  SpecDefenderBlockPush: 0
+  SpecHitBoxOffset: {x: 2, y: 0}
+  SpecHitBoxSize: {x: 3, y: 1}
   SpecialStr: 
-  MaxCharges: 5
+  MaxCharges: 9999

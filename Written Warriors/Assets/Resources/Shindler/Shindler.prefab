@@ -50,44 +50,30 @@ MonoBehaviour:
   MoveSpeed: 18
   Aura: {fileID: 2085758644351299489, guid: cc61b84762a144c43a7921af80dd358e, type: 3}
   CharName: Shindler
-  StandSpr: {fileID: 0}
   StandAnim: {fileID: 0}
   Skeleton: {fileID: 9100000, guid: de3c923f13db7c449a7562132a6dad17, type: 2}
-  CrouchSpr: {fileID: 0}
-  StandBlockSpr: {fileID: 0}
-  CrouchBlockSpr: {fileID: 0}
-  HitSpr: {fileID: 0}
-  LowSprStartUp: {fileID: 0}
-  LowAtkStartUp: 16
-  LowSprHit: {fileID: 0}
-  LowAtkHit: 9
-  LowSprCoolDown: {fileID: 0}
-  LowAtkCoolDown: 16
-  LowBlockStun: 9
+  LowAtkStartUp: 19
+  LowAtkHit: 7
+  LowAtkCoolDown: 7
+  LowBlockStun: 7
   LowAttackerHitPush: 25
   LowDefenderHitPush: 25
   LowAttackerBlockPush: 2
   LowDefenderBlockPush: 1
   LowHitBoxOffset: {x: 1.5, y: -0.5}
-  LowHitBoxSize: {x: 1.5, y: 0.5}
-  MedSprStartUp: {fileID: 0}
-  MedAtkStartUp: 20
-  MedSprHit: {fileID: 0}
-  MedAtkHit: 9
-  MedSprCoolDown: {fileID: 0}
-  MedAtkCoolDown: 16
-  MedBlockStun: 9
-  MedAttackerHitPush: 25
-  MedDefenderHitPush: 25
-  MedAttackerBlockPush: 9
-  MedDefenderBlockPush: 1
+  LowHitBoxSize: {x: 2, y: 0.5}
+  MedAtkStartUp: 18
+  MedAtkHit: 6
+  MedAtkCoolDown: 26
+  MedBlockStun: 6
+  MedAttackerHitPush: 9
+  MedDefenderHitPush: 18
+  MedAttackerBlockPush: 15
+  MedDefenderBlockPush: 18
   MedHitBoxOffset: {x: 1.5, y: 0}
-  MedHitBoxSize: {x: 1.5, y: 0.5}
-  HighSprStartUp: {fileID: 0}
-  HighAtkStartUp: 8
-  HighSprHit: {fileID: 0}
-  HighAtkHit: 9
-  HighSprCoolDown: {fileID: 0}
+  MedHitBoxSize: {x: 4.5, y: 0.5}
+  HighAtkStartUp: 9
+  HighAtkHit: 7
   HighAtkCoolDown: 9
   HighBlockStun: 9
   HighAttackerHitPush: 25
@@ -95,21 +81,18 @@ MonoBehaviour:
   HighAttackerBlockPush: 2.5
   HighDefenderBlockPush: 1
   HighHitBoxOffset: {x: 1.5, y: 0.5}
-  HighHitBoxSize: {x: 1.5, y: 0.5}
-  SpecSprStartUp: {fileID: 0}
-  SpecAtkStartUp: 20
-  SpecSprHit: {fileID: 0}
-  SpecAtkHit: 30
-  SpecSprCoolDown: {fileID: 0}
-  SpecAtkCoolDown: 12
-  SpecBlockStun: 25
+  HighHitBoxSize: {x: 3.75, y: 0.5}
+  SpecAtkStartUp: 10
+  SpecAtkHit: 9
+  SpecAtkCoolDown: 19
+  SpecBlockStun: 10
   SpecAttackerHitPush: 25
   SpecDefenderHitPush: 25
   SpecAttackerBlockPush: 5
-  SpecDefenderBlockPush: 5
-  SpecHitBoxOffset: {x: 4, y: -1.25}
-  SpecHitBoxSize: {x: 5, y: 1}
-  SpecialStr: High
-  MaxCharges: 900
-  speedscalar: 3
-  backdashtime: 30
+  SpecDefenderBlockPush: 12.5
+  SpecHitBoxOffset: {x: 1.5, y: -1.25}
+  SpecHitBoxSize: {x: 4.5, y: 1}
+  SpecialStr: Medium
+  speedscalarBack: 0.25
+  speedscalarForward: 1
+  backdashtime: 20

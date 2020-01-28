@@ -56,33 +56,33 @@ MonoBehaviour:
   LowAtkHit: 14
   LowAtkCoolDown: 11
   LowBlockStun: 7
-  LowAttackerHitPush: 20
-  LowDefenderHitPush: 10
+  LowAttackerHitPush: 30
+  LowDefenderHitPush: 30
   LowAttackerBlockPush: 10
   LowDefenderBlockPush: 10
-  LowHitBoxOffset: {x: 1.5, y: -1}
+  LowHitBoxOffset: {x: 2, y: -1.5}
   LowHitBoxSize: {x: 4, y: 0.5}
   MedAtkStartUp: 25
   MedAtkHit: 25
   MedAtkCoolDown: 20
   MedBlockStun: 4
   MedAttackerHitPush: 0
-  MedDefenderHitPush: 200
+  MedDefenderHitPush: 60
   MedAttackerBlockPush: 0
   MedDefenderBlockPush: 35
-  MedHitBoxOffset: {x: 1.5, y: 0}
+  MedHitBoxOffset: {x: 2, y: 0}
   MedHitBoxSize: {x: 8.5, y: 0.5}
   HighAtkStartUp: 20
   HighAtkHit: 9
   HighAtkCoolDown: 15
   HighBlockStun: 20
-  HighAttackerHitPush: 20
-  HighDefenderHitPush: 10
+  HighAttackerHitPush: 10
+  HighDefenderHitPush: 50
   HighAttackerBlockPush: 20
   HighDefenderBlockPush: 5
-  HighHitBoxOffset: {x: 1.5, y: 1.25}
+  HighHitBoxOffset: {x: 2, y: 1.75}
   HighHitBoxSize: {x: 7, y: 0.5}
-  SpecAtkStartUp: -83
+  SpecAtkStartUp: 0
   SpecAtkHit: 22
   SpecAtkCoolDown: 0
   SpecBlockStun: 60
@@ -90,7 +90,7 @@ MonoBehaviour:
   SpecDefenderHitPush: 100
   SpecAttackerBlockPush: 50
   SpecDefenderBlockPush: 50
-  SpecHitBoxOffset: {x: 1.5, y: 0}
+  SpecHitBoxOffset: {x: 2, y: 0}
   SpecHitBoxSize: {x: 6, y: 0.5}
   SpecialStr: Unblockable
   MaxCharges: 2
