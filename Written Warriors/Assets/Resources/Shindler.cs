@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Shindler : Character
 {
-    int Charges = 0;
-    public int MaxCharges = 5;
-    public float speedscalar = 0.25f;
+//    int Charges = 0;
+  //  public int MaxCharges = 5;
+    public float speedscalarBack = 0.25f;
+    public float speedscalarForward = 0.25f;
     public int backdashtime = 10;
     // GameObject Rage;
 
@@ -24,7 +25,7 @@ public class Shindler : Character
     public override IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
         Player P = SpecHitBox.GetComponent<Player>();
-        Vector2 constMotion = new Vector2(-1.0f * MoveSpeed * speedscalar * P.transform.localScale.x, 0.0f);
+        Vector2 constMotion = new Vector2(-1.0f * MoveSpeed * speedscalarBack * P.transform.localScale.x, 0.0f);
         Vector3 s = P.transform.localScale;
         P.Aura.SetActive(true);
 
@@ -38,10 +39,13 @@ public class Shindler : Character
             B -= 1;
             yield return null;
         }
-        constMotion = new Vector2(MoveSpeed * speedscalar * P.transform.localScale.x, 0.0f);
+        
+        constMotion = new Vector2(MoveSpeed * speedscalarForward * P.transform.localScale.x, 0.0f);
+
         SpecHitBox.enabled = true;
         while (F > 0)
         {
+
             P.RB.velocity = constMotion;
             P.transform.localScale = s;
             F -= 1;

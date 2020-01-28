@@ -35,7 +35,7 @@ public class Thornton : Character
         int F = SpecAtkHit;
         if (P.Charges <= MaxCharges)
         {
-            SP.sprite = SpecSprStartUp;
+        //    SP.sprite = SpecSprStartUp;
 
             while (F > 0)
             {
@@ -48,7 +48,7 @@ public class Thornton : Character
         else
         {
             SpecHitBox.enabled = true;
-            SP.sprite = SpecSprHit;
+      //      SP.sprite = SpecSprHit;
             F = F * 2;
             while (F > 0)
             {

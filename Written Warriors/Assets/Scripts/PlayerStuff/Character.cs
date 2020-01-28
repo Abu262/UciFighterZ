@@ -25,22 +25,22 @@ public class Character : MonoBehaviour
     public GameObject Aura;
     public string CharName;
 
-    public Sprite StandSpr;
+//    public Sprite StandSpr;
     public AnimationClip StandAnim;
     public RuntimeAnimatorController Skeleton;
-    public Sprite CrouchSpr;
-    public Sprite StandBlockSpr;
-    public Sprite CrouchBlockSpr;
-    public Sprite HitSpr;
+  //  public Sprite CrouchSpr;
+//    public Sprite StandBlockSpr;
+//    public Sprite CrouchBlockSpr;
+//    public Sprite HitSpr;
 
 
 
     //Low attack data    
-    public Sprite LowSprStartUp;
+//    public Sprite LowSprStartUp;
     public int LowAtkStartUp = 3;  //Low Attack startup frames
-    public Sprite LowSprHit;
+//    public Sprite LowSprHit;
     public int LowAtkHit = 6;   //Low Attack hit frames
-    public Sprite LowSprCoolDown;
+//    public Sprite LowSprCoolDown;
     public int LowAtkCoolDown = 3;   //Low Attack Cooldown frames
     public int LowBlockStun = 60;
 
@@ -57,11 +57,11 @@ public class Character : MonoBehaviour
 
 
     //Mid attack data
-    public Sprite MedSprStartUp;
+//    public Sprite MedSprStartUp;
     public int MedAtkStartUp = 3;     //Med Attack startup frames
-    public Sprite MedSprHit;
+//    public Sprite MedSprHit;
     public int MedAtkHit = 6;  //Med Attack hit frames
-    public Sprite MedSprCoolDown;
+//    public Sprite MedSprCoolDown;
     public int MedAtkCoolDown = 3;  //Med Attack Cooldown frames
     public int MedBlockStun = 60;
 
@@ -79,12 +79,12 @@ public class Character : MonoBehaviour
     //////////////////
 
 
-    //High Attack data
-    public Sprite HighSprStartUp;
+    //High Attack data/
+//    public Sprite HighSprStartUp;
     public int HighAtkStartUp = 3; //High Attack startup frames
-    public Sprite HighSprHit;
+//    public Sprite HighSprHit;
     public int HighAtkHit = 6;  //High Attack hit frames
-    public Sprite HighSprCoolDown;
+//    public Sprite HighSprCoolDown;
     public int HighAtkCoolDown = 3; //High Attack Cooldown frames
     public int HighBlockStun = 60;
 
@@ -102,11 +102,11 @@ public class Character : MonoBehaviour
 
 
     //Spec attack data
-    public Sprite SpecSprStartUp;
+//    public Sprite SpecSprStartUp;
     public int SpecAtkStartUp = 3;      //Special Attack startup frames
-    public Sprite SpecSprHit;
+//    public Sprite SpecSprHit;
     public int SpecAtkHit = 3; //Special Attack hit frames
-    public Sprite SpecSprCoolDown;
+//    public Sprite SpecSprCoolDown;
     public int SpecAtkCoolDown = 3; //Special Attack Cooldown frames
     public int SpecBlockStun = 60;
 

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6464483582514816885}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.353807, y: -2.5, z: 0}
+  m_LocalPosition: {x: -4, y: -2.5, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,18 +50,10 @@ MonoBehaviour:
   MoveSpeed: 18
   Aura: {fileID: 8695034891711154870, guid: d33a2bf6c85b5a440bb6a5c4e9313e9f, type: 3}
   CharName: Thornton
-  StandSpr: {fileID: 21300000, guid: bb07c9fc27cbeab4ea1ab996fcaf6d66, type: 3}
   StandAnim: {fileID: 7400000, guid: f27ebecf224a483428f326b4387a8c74, type: 2}
   Skeleton: {fileID: 9100000, guid: f25a54f3ea4b2a447ab7be0e06f76619, type: 2}
-  CrouchSpr: {fileID: 21300000, guid: 00d991fed3b9a5c42b7aa844f2a0a331, type: 3}
-  StandBlockSpr: {fileID: 21300000, guid: 09ec6e36f080fa64eae1a3e33f3a5606, type: 3}
-  CrouchBlockSpr: {fileID: 21300000, guid: 70eaf2540156b2a4ebdb1e2c1d7b4cac, type: 3}
-  HitSpr: {fileID: 21300000, guid: 8715048add78f7340a0f872796c16c7c, type: 3}
-  LowSprStartUp: {fileID: 21300000, guid: 93122a67cc6d2a44e89242c929aae032, type: 3}
   LowAtkStartUp: 19
-  LowSprHit: {fileID: 21300000, guid: 3448323ba72b8274983d62ff21d52f18, type: 3}
   LowAtkHit: 14
-  LowSprCoolDown: {fileID: 21300000, guid: 36fb92655642b6b41991527979cc4ec0, type: 3}
   LowAtkCoolDown: 11
   LowBlockStun: 7
   LowAttackerHitPush: 20
@@ -70,11 +62,8 @@ MonoBehaviour:
   LowDefenderBlockPush: 10
   LowHitBoxOffset: {x: 1.5, y: -1}
   LowHitBoxSize: {x: 4, y: 0.5}
-  MedSprStartUp: {fileID: 21300000, guid: 9dcbc08be687bc54cbc497bdda98975f, type: 3}
   MedAtkStartUp: 25
-  MedSprHit: {fileID: 21300000, guid: 19c8dca29623d4b428d78e733926c07c, type: 3}
   MedAtkHit: 25
-  MedSprCoolDown: {fileID: 21300000, guid: 9f7535868ef7fe64f8ccd84ad22eb987, type: 3}
   MedAtkCoolDown: 20
   MedBlockStun: 4
   MedAttackerHitPush: 0
@@ -83,11 +72,8 @@ MonoBehaviour:
   MedDefenderBlockPush: 35
   MedHitBoxOffset: {x: 1.5, y: 0}
   MedHitBoxSize: {x: 8.5, y: 0.5}
-  HighSprStartUp: {fileID: 21300000, guid: b3a89a8d1d640314ea07b1add5b43417, type: 3}
   HighAtkStartUp: 20
-  HighSprHit: {fileID: 21300000, guid: 0bb9bbde9bd14824cb891a88280b9119, type: 3}
   HighAtkHit: 9
-  HighSprCoolDown: {fileID: 21300000, guid: 85a0f5545c045554f87d935d149799cf, type: 3}
   HighAtkCoolDown: 15
   HighBlockStun: 20
   HighAttackerHitPush: 20
@@ -96,11 +82,8 @@ MonoBehaviour:
   HighDefenderBlockPush: 5
   HighHitBoxOffset: {x: 1.5, y: 1.25}
   HighHitBoxSize: {x: 7, y: 0.5}
-  SpecSprStartUp: {fileID: 21300000, guid: 4be14e14b48c18f40908635677809b1e, type: 3}
   SpecAtkStartUp: -83
-  SpecSprHit: {fileID: 21300000, guid: 02e46498d05ee3a44bec9f5928d978ef, type: 3}
   SpecAtkHit: 22
-  SpecSprCoolDown: {fileID: 21300000, guid: 15fd078b0b3fa854895df9b64e2c63be, type: 3}
   SpecAtkCoolDown: 0
   SpecBlockStun: 60
   SpecAttackerHitPush: 100

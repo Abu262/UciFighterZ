@@ -252,7 +252,7 @@ public abstract class Player : MonoBehaviour
         //this is a hard code to make sure when you're hit YOOU LOOK LIKE YOU'RE HIT
         if (Hitstun == true)
         {
-            CurrentForm.sprite = Self.HitSpr;
+//            CurrentForm.sprite = Self.HitSpr;
         }
         
 
@@ -621,7 +621,7 @@ public abstract class Player : MonoBehaviour
                
                 if (Opponent.HighBlocking == true)
                 {
-                    StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.HighBlockStun));
+                    StartCoroutine(Blocking(Self.HighBlockStun));
                     GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.HighAttackerBlockPush, Self.HighDefenderBlockPush));
                     
@@ -642,7 +642,7 @@ public abstract class Player : MonoBehaviour
 
                 if (Opponent.HighBlocking == true)
                 {
-                    StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.MedBlockStun));
+                    StartCoroutine(Blocking(Self.MedBlockStun));
                     GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.MedAttackerBlockPush, Self.MedDefenderBlockPush));
                     
@@ -666,7 +666,7 @@ public abstract class Player : MonoBehaviour
 
                 if (Opponent.LowBlocking == true)
                 {
-                    StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr, Self.LowBlockStun));
+                    StartCoroutine(Blocking(Self.LowBlockStun));
                     GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                     StartCoroutine(KnockBack(0.1f, Self.LowAttackerBlockPush, Self.LowDefenderBlockPush));
 
@@ -687,7 +687,7 @@ public abstract class Player : MonoBehaviour
                 {
                     if (Opponent.HighBlocking == true)
                     {
-                        StartCoroutine(Blocking(Opponent.Self.StandBlockSpr,Self.SpecBlockStun));
+                        StartCoroutine(Blocking(Self.SpecBlockStun));
                         GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                     }
@@ -703,7 +703,7 @@ public abstract class Player : MonoBehaviour
                 {
                     if (Opponent.HighBlocking == true)
                     {
-                        StartCoroutine(Blocking(Opponent.Self.StandBlockSpr, Self.SpecBlockStun));
+                        StartCoroutine(Blocking(Self.SpecBlockStun));
                         GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
 
@@ -720,7 +720,7 @@ public abstract class Player : MonoBehaviour
                 {
                     if (Opponent.LowBlocking == true)
                     {
-                        StartCoroutine(Blocking(Opponent.Self.CrouchBlockSpr, Self.SpecBlockStun));
+                        StartCoroutine(Blocking(Self.SpecBlockStun));
                         GameObject firework = Instantiate(GM.BlockEffect, v, Quaternion.Euler(rot));
                         StartCoroutine(KnockBack(0.1f, Self.SpecAttackerBlockPush, Self.SpecDefenderBlockPush));
                     }
@@ -898,7 +898,7 @@ public abstract class Player : MonoBehaviour
     }
 
     //okay this is confusing, this affects the defender but is called from the attacker, trust me it works better this way
-    public IEnumerator Blocking(Sprite BlockSpr, int BlockStun)
+    public IEnumerator Blocking(int BlockStun)
     {
 
         AM.Play("BlockSound");

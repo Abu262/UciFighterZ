@@ -22,50 +22,110 @@ public class WongMa : Character
 
     public override IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
-        int R = Random.Range(1, 4);
+        int R = SpecAtkHit;
         Player P = SpecHitBox.GetComponent<Player>();
  //       Vector2 constMotion = new Vector2(-1.0f * MoveSpeed * speedscalar * P.transform.localScale.x, 0.0f);
         Vector3 s = P.transform.localScale;
         P.Aura.SetActive(true);
-
         int F = SpecAtkHit;
 
-        if (R == 1)
+        while (R > 0)
         {
-            F = LowAtkStartUp;
-            while (F > 0)
+            if (P.opponentTag == "Player2")
             {
-                Debug.Log("LOW");
-                P.transform.localScale = s;
-                F -= 1;
-                yield return null;
+                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.Alpha4))
+                {
+                    F = MedAtkStartUp;
+                    while (F > 0)
+                    {
+                        Debug.Log("MEDIUM");
+                        P.transform.localScale = s;
+                        F -= 1;
+                        yield return null;
+                    }
+                }
+                //X
+                if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.R))
+                {
+                    F = LowAtkStartUp;
+                    while (F > 0)
+                    {
+                        Debug.Log("LOW");
+                        P.transform.localScale = s;
+                        F -= 1;
+                        yield return null;
+                    }
+                }
+                //triangle
+                if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKey(KeyCode.Alpha5))
+                {
+                    F = HighAtkStartUp;
+                    while (F > 0)
+                    {
+                        Debug.Log("HIGH");
+                        P.transform.localScale = s;
+                        F -= 1;
+                        yield return null;
+                    }
+                }
+
+
+
             }
-        }
-        if (R == 2)
-        {
-            F = MedAtkStartUp;
-            while (F > 0)
+
+            if (P.opponentTag == "Player1")
             {
-                Debug.Log("MEDIUM");
-                P.transform.localScale = s;
-                F -= 1;
-                yield return null;
+                if (Input.GetKeyDown(KeyCode.Joystick2Button0) || Input.GetKey(KeyCode.Alpha4))
+                {
+                    F = MedAtkStartUp;
+                    while (F > 0)
+                    {
+                        Debug.Log("MEDIUM");
+                        P.transform.localScale = s;
+                        F -= 1;
+                        yield return null;
+                    }
+                }
+                //X
+                if (Input.GetKeyDown(KeyCode.Joystick2Button1) || Input.GetKey(KeyCode.R))
+                {
+                    F = LowAtkStartUp;
+                    while (F > 0)
+                    {
+                        Debug.Log("LOW");
+                        P.transform.localScale = s;
+                        F -= 1;
+                        yield return null;
+                    }
+                }
+                //triangle
+                if (Input.GetKeyDown(KeyCode.Joystick2Button3) || Input.GetKey(KeyCode.Alpha5))
+                {
+                    F = HighAtkStartUp;
+                    while (F > 0)
+                    {
+                        Debug.Log("HIGH");
+                        P.transform.localScale = s;
+                        F -= 1;
+                        yield return null;
+                    }
+                }
+
+
+
             }
-        }
-        if (R == 3)
-        {
-            F = HighAtkStartUp;
-            while (F > 0)
-            {
-                Debug.Log("HIGH");
-                P.transform.localScale = s;
-                F -= 1;
-                yield return null;
-            }
+            R -= 1;
+            yield return null;
         }
 
 
-        SpecHitBox.enabled = false;
+
+        
+
+
+
+
+       // SpecHitBox.enabled = false;
         //P.HighBlocking = false;
         //P.LowBlocking = false;
 
