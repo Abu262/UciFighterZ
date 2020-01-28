@@ -15,7 +15,7 @@ using System;
 
 public abstract class Player : MonoBehaviour
 {
-
+//    AnimatorUpdateMode.UnscaledTime;
     //some generally important stuff
     public Camera cam; //camera
     public int Health; //Since the health value changes we want to copy the character health stat
@@ -24,7 +24,8 @@ public abstract class Player : MonoBehaviour
     public Player Opponent; //the opponent player object
     public string opponentTag; //The opponent tag, for checking collisions 
     public Vector2 Move;    //vector to move the player
-    // ///////////////////////
+
+     // ///////////////////////
 
     //the hitboxes for the different attacks
     public BoxCollider2D HighHitBox;
@@ -68,9 +69,12 @@ public abstract class Player : MonoBehaviour
     public bool Hitstun = false;     //this is true when you get hit
     public bool IsBlocking = false;   //this is true when you're blocking
     public bool TakingAction = true;     //this is true when you attack or move or parry, basically when you press buttons
-
+    bool Crouching;
     //some random stuff that we kinda need
     public SpriteRenderer CurrentForm; //refernece to the sprite object
+    public Animator animator;
+   
+//    public Animation CurrentAnim; //refernece to the sprite object
     float OriginalSize; //saves the camera's size
     public GameObject Aura; //a super saiyan affect for special moves
 
@@ -81,6 +85,10 @@ public abstract class Player : MonoBehaviour
 
     private void Start()
     {
+        //  CurrentAnim = GetComponent<Animation>();
+        
+        animator.runtimeAnimatorController = Self.Skeleton;
+        
         Charges = 0;
         Aura = Instantiate(Self.Aura, new Vector3(0f,0f,0f), Quaternion.identity);
         Aura.transform.SetParent(gameObject.transform);
@@ -115,13 +123,23 @@ public abstract class Player : MonoBehaviour
         if (Opponent.transform.position.x < gameObject.transform.position.x)
         {
             transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-
+            CurrentForm.flipX = true;
         }
         else
         {
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
+            CurrentForm.flipX = true;
         }
+
+        
+
+     //   foreach (AnimationClip ac in animator.runtimeAnimatorController.animationClips)
+       // {
+         //   ac.frameRate = Application.targetFrameRate;
+            // look at all the animation clips here!
+      //  }
+
+
     }
 
 //    private void Awake()
@@ -133,6 +151,7 @@ public abstract class Player : MonoBehaviour
     void FixedUpdate()
     {
 
+        Self.transform.position = transform.position;
         //If the player isnt taking an action AND the player isn't currentlly hit AND the player isnt bllocking
         //then they can move
         if (TakingAction == false && Hitstun == false && IsBlocking == false)
@@ -142,14 +161,37 @@ public abstract class Player : MonoBehaviour
             if (Move.x >= 0.8f)
             {
                 RB.velocity = new Vector2(50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime; //move right
+                if (transform.localScale.x <= 0.0f)
+                {
+                    animator.SetBool("IsForward", true);
+                    animator.SetBool("IsStanding", false);
+                }
+                if (transform.localScale.x >= 0.0f)
+                {
+                    animator.SetBool("IsBackwards", true);
+                    animator.SetBool("IsStanding", false);
+                }
             }
             //More movement
             else if (Move.x <= -0.8f)
             {
                 RB.velocity = new Vector2(-50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime; //move left
+                if (transform.localScale.x <= 0.0f)
+                {
+                    animator.SetBool("IsBackwards", true);
+                    animator.SetBool("IsStanding", false);
+                }
+                if (transform.localScale.x >= 0.0f)
+                {
+                    animator.SetBool("IsForward", true);
+                    animator.SetBool("IsStanding", false);
+                }
             }
             else
             {
+                animator.SetBool("IsForward", false);
+                animator.SetBool("IsBackwards", false);
+                animator.SetBool("IsStanding", true);
                 RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
             }
 
@@ -159,14 +201,23 @@ public abstract class Player : MonoBehaviour
             //    Hitstun = false;
             if (Move.y <= -0.6f && !(Move.x >= 0.8f || Move.x <= -0.8f))
             {
-                CurrentForm.sprite = Self.CrouchSpr;
+                //CurrentForm.sprite = Self.CrouchSpr;
+                animator.SetBool("IsCrouch", true);
+                animator.SetBool("IsStanding", false);
+                Crouching = true;
+             //   Debug.Log("DUCKING");
                 PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y / 2.0f);
                 PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y - 0.5f);
                 
             }
             else
             {
-                CurrentForm.sprite = Self.StandSpr;
+                //          CurrentAnim.clip = Self.StandAnim;
+                animator.SetBool("IsCrouch", false);
+                animator.SetBool("IsStanding", true);
+                Crouching = false;
+               //     Debug.Log("STANDING"); 
+                //                CurrentForm.sprite = Self.StandSpr;
                 PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
                 PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
             }
@@ -190,12 +241,12 @@ public abstract class Player : MonoBehaviour
             if (Opponent.transform.position.x < gameObject.transform.position.x)
             {
                 transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-
+                CurrentForm.flipX = true;
             }
             else
             {
                 transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
+                CurrentForm.flipX = true;
             }
         }
         //this is a hard code to make sure when you're hit YOOU LOOK LIKE YOU'RE HIT
@@ -226,6 +277,14 @@ public abstract class Player : MonoBehaviour
         //if the player isn't already attacking
         if (TakingAction == false)
         {
+            //stop everything   
+            animator.SetBool("IsCrouch", false);
+            animator.SetBool("IsForward", false);
+            animator.SetBool("IsBackwards", false);
+            animator.SetBool("IsStanding", false);
+            //activate highatk
+            animator.SetBool("IsHighAtk", true);
+
             PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
             PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
             //they disable their blocks
@@ -238,7 +297,7 @@ public abstract class Player : MonoBehaviour
 
 
             CurrentAtk = "High"; //label the attack type
-            CurrentForm.sprite = Self.HighSprStartUp; //sprite type
+        //    CurrentForm.sprite = Self.HighSprStartUp; //sprite type
             yield return StartCoroutine(PlayStartUpFrames(Self.HighAtkStartUp)); //start up frames
 
            // if (Hitstun == true)
@@ -247,7 +306,7 @@ public abstract class Player : MonoBehaviour
            /////     TakingAction = false;
            //     yield break;
            // }
-            CurrentForm.sprite = Self.HighSprHit;
+       //     CurrentForm.sprite = Self.HighSprHit;
             yield return StartCoroutine(PlayHitFrames(Self.HighAtkHit, HighHitBox)); //hit frames
             //if (Hitstun == true)
             //{
@@ -255,7 +314,7 @@ public abstract class Player : MonoBehaviour
             //  //  TakingAction = false;
             //    yield break;
             //}
-            CurrentForm.sprite = Self.HighSprStartUp;
+       //     CurrentForm.sprite = Self.HighSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.HighAtkCoolDown)); //cooldown frames
             //if (Hitstun == true)
             //{
@@ -265,6 +324,8 @@ public abstract class Player : MonoBehaviour
             //}
 
             TakingAction = false; //attack is done
+            animator.SetBool("IsHighAtk", false);
+            animator.speed = 1.0f;
         }
     }
 
@@ -272,6 +333,13 @@ public abstract class Player : MonoBehaviour
     {
         if (TakingAction == false)
         {
+            //stop everything   
+            animator.SetBool("IsCrouch", false);
+            animator.SetBool("IsForward", false);
+            animator.SetBool("IsBackwards", false);
+            animator.SetBool("IsStanding", false);
+            //activate highatk
+            animator.SetBool("IsMedAtk", true);
             PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
             PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
             HighBlocking = false;
@@ -281,7 +349,7 @@ public abstract class Player : MonoBehaviour
 
 
             CurrentAtk = "Middle";
-            CurrentForm.sprite = Self.MedSprStartUp;
+     //       CurrentForm.sprite = Self.MedSprStartUp;
             yield return StartCoroutine(PlayStartUpFrames(Self.MedAtkStartUp));
            // if (Hitstun == true)
            // {
@@ -289,7 +357,7 @@ public abstract class Player : MonoBehaviour
            ////     TakingAction = false;
            //     yield break;
            // }
-            CurrentForm.sprite = Self.MedSprHit;
+     //       CurrentForm.sprite = Self.MedSprHit;
             yield return StartCoroutine(PlayHitFrames(Self.MedAtkHit, MedHitBox));
           //  if (Hitstun == true)
           //  {
@@ -297,7 +365,7 @@ public abstract class Player : MonoBehaviour
           ////      TakingAction = false;
           //      yield break;
           //  }
-            CurrentForm.sprite = Self.MedSprStartUp;
+     //       CurrentForm.sprite = Self.MedSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.MedAtkCoolDown));
             //if (Hitstun == true)
             //{
@@ -307,6 +375,8 @@ public abstract class Player : MonoBehaviour
             //}
 
             TakingAction = false;
+            animator.SetBool("IsMedAtk", false);
+            animator.speed = 1.0f;
         }
     }
 
@@ -315,8 +385,17 @@ public abstract class Player : MonoBehaviour
 
         if (TakingAction == false)
         {
-            PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
-            PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
+            //stop everything   
+            animator.SetBool("IsCrouch", false);
+            animator.SetBool("IsForward", false);
+            animator.SetBool("IsBackwards", false);
+            animator.SetBool("IsStanding", false);
+            //activate highatk
+            animator.SetBool("IsLowAtk", true);
+            PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y / 2.0f);
+            PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y - 0.5f);
+//            PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y/ 2.0f);
+  //          PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
             HighBlocking = false;
             LowBlocking = false;
             TakingAction = true;
@@ -324,7 +403,7 @@ public abstract class Player : MonoBehaviour
 
 
             CurrentAtk = "Low";
-            CurrentForm.sprite = Self.LowSprStartUp;
+       //     CurrentForm.sprite = Self.LowSprStartUp;
             yield return StartCoroutine(PlayStartUpFrames(Self.LowAtkStartUp));
            // if (Hitstun == true)
            // {
@@ -332,7 +411,7 @@ public abstract class Player : MonoBehaviour
            ////     TakingAction = false;
            //     yield break;
            // }
-            CurrentForm.sprite = Self.LowSprHit;
+         //   CurrentForm.sprite = Self.LowSprHit;
             yield return StartCoroutine(PlayHitFrames(Self.LowAtkHit, LowHitBox));
            // if (Hitstun == true)
            // {
@@ -340,7 +419,7 @@ public abstract class Player : MonoBehaviour
            ////     TakingAction = false;
            //     yield break;
            // }
-            CurrentForm.sprite = Self.LowSprStartUp;
+     //       CurrentForm.sprite = Self.LowSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.LowAtkCoolDown));
            // if (Hitstun == true)
            // {
@@ -350,6 +429,8 @@ public abstract class Player : MonoBehaviour
            // }
 
             TakingAction = false;
+            animator.SetBool("IsLowAtk", false);
+            animator.speed = 1.0f;
         }
     }
 
@@ -368,7 +449,7 @@ public abstract class Player : MonoBehaviour
 
             TakingAction = true;
             RB.velocity = new Vector2(0.0f, 0.0f) * Time.fixedDeltaTime;
-            CurrentForm.sprite = Self.SpecSprStartUp;
+    //        CurrentForm.sprite = Self.SpecSprStartUp;
             yield return StartCoroutine(PlayStartUpFrames(Self.SpecAtkStartUp));
            // if (Hitstun == true)
            // {
@@ -376,7 +457,7 @@ public abstract class Player : MonoBehaviour
            ////     TakingAction = false;
            //     yield break;
            // }
-            CurrentForm.sprite = Self.SpecSprHit;
+   //         CurrentForm.sprite = Self.SpecSprHit;
             yield return StartCoroutine(Self.SpecAtk(SpecHitBox)); //call the special attack directly
            // if (Hitstun == true)
            // {
@@ -384,7 +465,7 @@ public abstract class Player : MonoBehaviour
            ////     TakingAction = false;
            //     yield break;
            // }
-            CurrentForm.sprite = Self.SpecSprStartUp;
+   //         CurrentForm.sprite = Self.SpecSprStartUp;
             yield return StartCoroutine(PlayCoolDownFrames(Self.SpecAtkCoolDown));
           //  if (Hitstun == true)
           //  {
@@ -393,7 +474,7 @@ public abstract class Player : MonoBehaviour
           //      yield break;
           //  }
             TakingAction = false;
-           
+            animator.speed = 1.0f;
         }
     }
 
@@ -409,22 +490,35 @@ public abstract class Player : MonoBehaviour
             //block
         float height = Move.y; //save the position, whether they are ducking or standing
         Vector2 stance = new Vector2(0.0f, height); 
-        FrameCountParry = 20; 
-        
-        //this counts the frames
-        while (FrameCountParry > 0)
+        FrameCountParry = 20;
+            
+            //this counts the frames
+            animator.SetBool("IsCrouch", false);
+            animator.SetBool("IsForward", false);
+            animator.SetBool("IsBackwards", false);
+            animator.SetBool("IsStanding", false);
+            while (FrameCountParry > 0)
         {
             //set the current block stance
             RB.velocity = stance; 
-            if (height <= -0.6f)
+            if (Crouching)
             {
-                CurrentForm.sprite = Self.CrouchBlockSpr;
+                    Debug.Log(height);
+                    //                    animator.SetBool("IsLowBlock", true);
+                    //                  animator.SetBool("IsForward", false);
+                    //                animator.SetBool("IsBackwards", false);
+                    //              animator.SetBool("IsStanding", false);
+                    animator.SetBool("IsLowBlock", true);
+   //                 CurrentForm.sprite = Self.CrouchBlockSpr;
                 LowBlocking = true;
                 HighBlocking = false;
             }
             else
             {
-                CurrentForm.sprite = Self.StandBlockSpr;
+
+
+                    animator.SetBool("IsHighBlock", true);
+    //                CurrentForm.sprite = Self.StandBlockSpr;
                 LowBlocking = false;
                 HighBlocking = true;
             }
@@ -432,12 +526,14 @@ public abstract class Player : MonoBehaviour
             yield return null;
         }
 
-
-        LowBlocking = false;
+            animator.SetBool("IsLowBlock", false)   ;
+            animator.SetBool("IsHighBlock", false);
+            LowBlocking = false;
         HighBlocking = false;
-                
-        CurrentForm.sprite = Self.StandSpr;
-        yield return StartCoroutine(PlayCoolDownFrames(8));
+       //     CurrentAnim.clip = Self.StandAnim;
+         //   CurrentAnim.Play();
+            //        CurrentForm.sprite = Self.StandSpr;
+            yield return StartCoroutine(PlayCoolDownFrames(8));
         TakingAction = false;
         }
         yield return null;
@@ -449,6 +545,7 @@ public abstract class Player : MonoBehaviour
     //counts the frames
     IEnumerator PlayStartUpFrames(int Frames)
     {
+
         HighBlocking = false;
         LowBlocking = false;
         //copy the frames so we don't actually change the character
@@ -457,7 +554,9 @@ public abstract class Player : MonoBehaviour
         //this counts the frames
         while (FrameCount > 0)
         {
-
+//            Debug.Log((float)((int)(1.0f / Time.smoothDeltaTime) / 60));
+            animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
+            //            animator.SetTime(FrameCount / Frames);
             FrameCount--;
             yield return null;
         }
@@ -473,6 +572,7 @@ public abstract class Player : MonoBehaviour
         int FrameCount = Frames;
         while (FrameCount > 0)
         {
+            animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
             FrameCount--;
             yield return null;
         }
@@ -486,6 +586,7 @@ public abstract class Player : MonoBehaviour
         int FrameCount = Frames;
         while (FrameCount > 0)
         {
+            animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
             FrameCount--;
             yield return null;
         }
@@ -559,7 +660,7 @@ public abstract class Player : MonoBehaviour
             {
 
                 v = new Vector2(col.bounds.center.x + (col.bounds.size.x/2 * transform.localScale.x * -1.0f), LowHitBox.bounds.center.y);
-
+              
 
 
 
@@ -652,6 +753,22 @@ public abstract class Player : MonoBehaviour
     //When you take damage you are put into hitstun
     public IEnumerator TakeDamage(float DefenderPush, float AttackerPush)
     {
+        animator.SetBool("IsCrouch", false);
+        animator.SetBool("IsForward", false);
+        animator.SetBool("IsBackwards", false);
+        animator.SetBool("IsStanding", false);
+
+        animator.SetBool("IsHighAtk", false);
+        animator.SetBool("IsHighAtk", false);
+        animator.SetBool("IsMedAtk", false);
+        animator.SetBool("IsLowAtk", false);
+        animator.SetBool("IsSpecAtk", false);
+
+        animator.SetBool("IsHighBlock", false);
+        animator.SetBool("IsLowBlock", false);
+
+        animator.SetBool("IsHit", true);
+
         Hitstun = true; //you are in hitstun
 //        TakingAction = true;
   //      Opponent.TakingAction = true;
@@ -670,7 +787,7 @@ public abstract class Player : MonoBehaviour
             StartCoroutine(KillChar());
             StartCoroutine(GO.PlayerDies(opponentTag));
         }
-
+        animator.SetBool("IsHit", false);
         yield return null;
 
         
@@ -729,7 +846,7 @@ public abstract class Player : MonoBehaviour
   //      TakingAction = true;
     //    Opponent.TakingAction = true;
         
-        CurrentForm.sprite = Self.HitSpr;
+  //      CurrentForm.sprite = Self.HitSpr;
        
         //stop both players from moving
         Opponent.RB.velocity = new Vector2(0.0f, 0.0f);
@@ -786,7 +903,7 @@ public abstract class Player : MonoBehaviour
 
         AM.Play("BlockSound");
 
-        Opponent.CurrentForm.sprite = BlockSpr;
+  //      Opponent.CurrentForm.sprite = BlockSpr;
         Opponent.TakingAction = true;
         BlockTime = BlockStun;   //dont actually change the passed in variable, copy it
 

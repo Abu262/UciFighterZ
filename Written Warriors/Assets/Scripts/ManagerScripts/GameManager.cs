@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     {
 
         Application.targetFrameRate = 60;
-            
+        QualitySettings.vSyncCount = 0;
         if (instance == null)
         {
             instance = this;
@@ -77,8 +77,12 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         yield return null;
-    }    
+    }
 
 
-
+    void Update()
+    {
+        if (Application.targetFrameRate!= 60)
+            Application.targetFrameRate = 60;
+    }
 }
