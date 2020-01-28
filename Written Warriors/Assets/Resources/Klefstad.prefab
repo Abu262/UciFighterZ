@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5291902737260625943}
   - component: {fileID: 2296873206820282039}
+  - component: {fileID: -5167331287401571306}
   m_Layer: 0
   m_Name: Klefstad
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7363433916390150168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4, y: -2.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -51,6 +52,8 @@ MonoBehaviour:
   Aura: {fileID: 2085758644351299489, guid: cc61b84762a144c43a7921af80dd358e, type: 3}
   CharName: Klefstad
   StandSpr: {fileID: 21300000, guid: eca1fa7d8a7f37a46bc4de8a96c5f028, type: 3}
+  StandAnim: {fileID: 7400000, guid: f27ebecf224a483428f326b4387a8c74, type: 2}
+  Skeleton: {fileID: 9100000, guid: a64f47d5d2501b6488d301389544f8bb, type: 2}
   CrouchSpr: {fileID: 21300000, guid: 00d991fed3b9a5c42b7aa844f2a0a331, type: 3}
   StandBlockSpr: {fileID: 21300000, guid: 09ec6e36f080fa64eae1a3e33f3a5606, type: 3}
   CrouchBlockSpr: {fileID: 21300000, guid: 70eaf2540156b2a4ebdb1e2c1d7b4cac, type: 3}
@@ -109,3 +112,22 @@ MonoBehaviour:
   SpecHitBoxSize: {x: 2, y: 0.5}
   SpecialStr: Middle
   speedscalar: 3
+--- !u!95 &-5167331287401571306
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363433916390150168}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222539763000281454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.615239, y: -2.5, z: 0}
+  m_LocalPosition: {x: -9.400003, y: -2.5, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,6 +51,8 @@ MonoBehaviour:
   Aura: {fileID: 3128592121935261644, guid: d3a6576672cc37d4c81a0a9a6c14c9b9, type: 3}
   CharName: Pattis
   StandSpr: {fileID: 21300000, guid: eca1fa7d8a7f37a46bc4de8a96c5f028, type: 3}
+  StandAnim: {fileID: 7400000, guid: f27ebecf224a483428f326b4387a8c74, type: 2}
+  Skeleton: {fileID: 9100000, guid: 3bd8a83e6a1a5b1488a7bcfb01efb99d, type: 2}
   CrouchSpr: {fileID: 21300000, guid: 00d991fed3b9a5c42b7aa844f2a0a331, type: 3}
   StandBlockSpr: {fileID: 21300000, guid: 09ec6e36f080fa64eae1a3e33f3a5606, type: 3}
   CrouchBlockSpr: {fileID: 21300000, guid: 70eaf2540156b2a4ebdb1e2c1d7b4cac, type: 3}

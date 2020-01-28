@@ -2374,6 +2374,80 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -22}
   m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1233357481
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7363433916390150168, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_Name
+      value: Klefstad
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291902737260625943, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.646786
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291902737260625943, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291902737260625943, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291902737260625943, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291902737260625943, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291902737260625943, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291902737260625943, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291902737260625943, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291902737260625943, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291902737260625943, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291902737260625943, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5167331287401571306, guid: d9ef7b22cdb52374398875da8ea43f45,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a0b6d4cecb82c5540942cce200fd82ed, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d9ef7b22cdb52374398875da8ea43f45, type: 3}
 --- !u!1 &1292118691
 GameObject:
   m_ObjectHideFlags: 0
@@ -2597,6 +2671,7 @@ GameObject:
   - component: {fileID: 1367420247}
   - component: {fileID: 1367420251}
   - component: {fileID: 1367420250}
+  - component: {fileID: 1367420252}
   m_Layer: 8
   m_Name: Player2
   m_TagString: Player2
@@ -2726,6 +2801,7 @@ MonoBehaviour:
   IsBlocking: 0
   TakingAction: 1
   CurrentForm: {fileID: 1367420243}
+  animator: {fileID: 1367420252}
   Aura: {fileID: 0}
   RB: {fileID: 1367420250}
 --- !u!61 &1367420247
@@ -2853,6 +2929,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.3}
   m_EdgeRadius: 0
+--- !u!95 &1367420252
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367420242}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de3c923f13db7c449a7562132a6dad17, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1385800296
 GameObject:
   m_ObjectHideFlags: 0
@@ -2870,6 +2965,7 @@ GameObject:
   - component: {fileID: 1385800304}
   - component: {fileID: 1385800301}
   - component: {fileID: 1385800305}
+  - component: {fileID: 1385800306}
   m_Layer: 8
   m_Name: Player1
   m_TagString: Player1
@@ -3098,6 +3194,7 @@ MonoBehaviour:
   IsBlocking: 0
   TakingAction: 1
   CurrentForm: {fileID: 1385800297}
+  animator: {fileID: 1385800306}
   Aura: {fileID: 0}
   RB: {fileID: 1385800301}
 --- !u!61 &1385800305
@@ -3126,6 +3223,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!95 &1385800306
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385800296}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a0b6d4cecb82c5540942cce200fd82ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1446762636
 GameObject:
   m_ObjectHideFlags: 0

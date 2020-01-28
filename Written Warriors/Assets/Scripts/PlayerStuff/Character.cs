@@ -26,6 +26,8 @@ public class Character : MonoBehaviour
     public string CharName;
 
     public Sprite StandSpr;
+    public AnimationClip StandAnim;
+    public RuntimeAnimatorController Skeleton;
     public Sprite CrouchSpr;
     public Sprite StandBlockSpr;
     public Sprite CrouchBlockSpr;

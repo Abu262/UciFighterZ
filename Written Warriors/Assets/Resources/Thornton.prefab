@@ -51,6 +51,8 @@ MonoBehaviour:
   Aura: {fileID: 8695034891711154870, guid: d33a2bf6c85b5a440bb6a5c4e9313e9f, type: 3}
   CharName: Thornton
   StandSpr: {fileID: 21300000, guid: bb07c9fc27cbeab4ea1ab996fcaf6d66, type: 3}
+  StandAnim: {fileID: 7400000, guid: f27ebecf224a483428f326b4387a8c74, type: 2}
+  Skeleton: {fileID: 9100000, guid: f25a54f3ea4b2a447ab7be0e06f76619, type: 2}
   CrouchSpr: {fileID: 21300000, guid: 00d991fed3b9a5c42b7aa844f2a0a331, type: 3}
   StandBlockSpr: {fileID: 21300000, guid: 09ec6e36f080fa64eae1a3e33f3a5606, type: 3}
   CrouchBlockSpr: {fileID: 21300000, guid: 70eaf2540156b2a4ebdb1e2c1d7b4cac, type: 3}
