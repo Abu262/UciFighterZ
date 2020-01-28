@@ -246,13 +246,13 @@ public class CharSelectScr : MonoBehaviour
         switch (index)
         {
             case 0:
-                path = "Thornton";
+                path = "Wong Ma/WongMa";
                 break;
             case 1:
-                path = "Klefstad";
+                path = "Klefstad/Klefstad";
                 break;
             case 2:
-                path = "Pattis";
+                path = "Shindler/Shindler";
                 break;
             case 3:
                 path = "Options";
