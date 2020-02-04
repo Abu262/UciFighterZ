@@ -246,35 +246,46 @@ public class CharSelectScr : MonoBehaviour
         switch (index)
         {
             case 0:
-                path = "Wong Ma/WongMa";
+                path = "Thornton/Thornton";
                 break;
             case 1:
                 path = "Klefstad/Klefstad";
                 break;
             case 2:
+                path = "Pattis/Pattis";
+                break;
+
+            case 3:
                 path = "Shindler/Shindler";
                 break;
-            case 3:
+            case 4:
+                path = "Wong Ma/WongMa";
+                break;
+            case 5:
+                path = "Navarro/Navarro";
+                break;
+
+            case 6:
                 path = "Options";
                 SceneManager.LoadScene("OptionsMenu");
                 break;
-            case 4:
+            case 7:
                 path = "ZotFighter";
                 SceneManager.LoadScene("ZotFighter");
                 break;
-            case 5:
+            case 8:
                 path = "Health";
                 SceneManager.LoadScene("Health");
                 break;
-            case 6:
+            case 9:
                 path = "Controls";
                 SceneManager.LoadScene("Controls");
                 break;
-            case 7:
+            case 10:
                 path = "Specials";
                 SceneManager.LoadScene("Specials");
                 break;
-            case 8:
+            case 11:
                 path = "SuddenDeath";
                 SceneManager.LoadScene("Health");
                 break;
@@ -294,7 +305,7 @@ public class CharSelectScr : MonoBehaviour
         {
             if (MoveP2.x > 0.8f)
             {
-                if (indexP2 == 8)
+                if (indexP2 == 11)
                 {
                     indexP2 = 0;
                 }
@@ -308,7 +319,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (indexP2 == 0)
                 {
-                    indexP2 = 8;
+                    indexP2 = 11;
                 }
                 else
                 {
@@ -351,30 +362,45 @@ public class CharSelectScr : MonoBehaviour
             }
             else if (indexP2 == 3)
             {
+                P2CHAR.text = "SHINDLER";
+                P2CHARBG.text = "SHINDLER";
+            }
+            else if (indexP2 == 4)
+            {
+                P2CHAR.text = "WONG MA";
+                P2CHARBG.text = "WONG MA";
+            }
+            else if (indexP2 == 5)
+            {
+                P2CHAR.text = "NAVARRO";
+                P2CHARBG.text = "NAVARRO";
+            }
+            else if (indexP2 == 6)
+            {
                 P2CHAR.text = "OPTIONS";
                 P2CHARBG.text = "OPTIONS";
             }
-            else if (indexP2 == 4)
+            else if (indexP2 == 7)
             {
                 P2CHAR.text = "ZOTFIGHTER";
                 P2CHARBG.text = "ZOTFIGHTER";
             }
-            else if (indexP2 == 5)
+            else if (indexP2 == 8)
             {
                 P2CHAR.text = "HEALTH";
                 P2CHARBG.text = "HEALTH";
             }
-            else if (indexP2 == 6)
+            else if (indexP2 == 9)
             {
                 P2CHAR.text = "CONTROLS";
                 P2CHARBG.text = "CONTROLS";
             }
-            else if (indexP2 == 7)
+            else if (indexP2 == 10)
             {
                 P2CHAR.text = "SPECIALS";
                 P2CHARBG.text = "SPECIALS";
             }
-            else if (indexP2 == 8)
+            else if (indexP2 == 11)
             {
                 P2CHAR.text = "SUDDEN DEATH";
                 P2CHARBG.text = "SUDDEN DEATH";
@@ -390,7 +416,7 @@ public class CharSelectScr : MonoBehaviour
             {
                 if (MoveP1.x > 0.8f)
                 {
-                    if (indexP1 == 8)
+                    if (indexP1 == 11)
                     {
                         indexP1 = 0;
                     }
@@ -404,7 +430,7 @@ public class CharSelectScr : MonoBehaviour
                 {
                     if (indexP1 == 0)
                     {
-                        indexP1 = 8;
+                        indexP1 = 11;
                     }
                     else
                     {
@@ -445,30 +471,45 @@ public class CharSelectScr : MonoBehaviour
             }
             else if (indexP1 == 3)
             {
+                P1CHAR.text = "SHINDLER";
+                P1CHARBG.text = "SHINDLER";
+            }
+            else if (indexP1 == 4)
+            {
+                P1CHAR.text = "WONG MA";
+                P1CHARBG.text = "WONG MA";
+            }
+            else if (indexP1 == 5)
+            {
+                P1CHAR.text = "NAVARRO";
+                P1CHARBG.text = "NAVARRO";
+            }
+            else if (indexP1 == 6)
+            {
                 P1CHAR.text = "OPTIONS";
                 P1CHARBG.text = "OPTIONS";
             }
-            else if (indexP1 == 4)
+            else if (indexP1 == 7)
             {
                 P1CHAR.text = "ZOTFIGHTER";
                 P1CHARBG.text = "ZOTFIGHTER";
             }
-            else if (indexP1 == 5)
+            else if (indexP1 == 8)
             {
                 P1CHAR.text = "HEALTH";
                 P1CHARBG.text = "HEALTH";
             }
-            else if (indexP1 == 6)
+            else if (indexP1 == 9)
             {
                 P1CHAR.text = "CONTROLS";
                 P1CHARBG.text = "CONTROLS";
             }
-            else if (indexP1 == 7)
+            else if (indexP1 == 10)
             {
                 P1CHAR.text = "SPECIALS";
                 P1CHARBG.text = "SPECIALS";
             }
-            else if (indexP1 == 8)
+            else if (indexP1 == 11)
             {
                 P1CHAR.text = "SUDDEN DEATH";
                 P1CHARBG.text = "SUDDEN DEATH";

@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7872932185762340393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7872932185762340398}
+  - component: {fileID: -3830244734540848309}
+  m_Layer: 0
+  m_Name: Navarro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7872932185762340398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7872932185762340393}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.893146, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3830244734540848309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7872932185762340393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b86948539023de340b88c3299be4e3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Face: {fileID: 0}
+  Health: 3
+  PlayerSize: {x: 1, y: 1.25}
+  PlayerOffset: {x: 0, y: 0}
+  MoveSpeed: 50
+  Aura: {fileID: 2085758644351299489, guid: cc61b84762a144c43a7921af80dd358e, type: 3}
+  CharName: Navarro
+  StandAnim: {fileID: 7400000, guid: f27ebecf224a483428f326b4387a8c74, type: 2}
+  Skeleton: {fileID: 9100000, guid: de3c923f13db7c449a7562132a6dad17, type: 2}
+  LowAtkStartUp: 3
+  LowAtkHit: 6
+  LowAtkCoolDown: 3
+  LowBlockStun: 60
+  LowAttackerHitPush: 0
+  LowDefenderHitPush: 0
+  LowAttackerBlockPush: 0
+  LowDefenderBlockPush: 0
+  LowHitBoxOffset: {x: 1.5, y: -0.5}
+  LowHitBoxSize: {x: 1.5, y: 0.5}
+  MedAtkStartUp: 3
+  MedAtkHit: 6
+  MedAtkCoolDown: 3
+  MedBlockStun: 60
+  MedAttackerHitPush: 0
+  MedDefenderHitPush: 0
+  MedAttackerBlockPush: 0
+  MedDefenderBlockPush: 0
+  MedHitBoxOffset: {x: 1.5, y: 0}
+  MedHitBoxSize: {x: 1.5, y: 0.5}
+  HighAtkStartUp: 3
+  HighAtkHit: 6
+  HighAtkCoolDown: 3
+  HighBlockStun: 60
+  HighAttackerHitPush: 0
+  HighDefenderHitPush: 0
+  HighAttackerBlockPush: 0
+  HighDefenderBlockPush: 0
+  HighHitBoxOffset: {x: 1.5, y: 0.5}
+  HighHitBoxSize: {x: 1.5, y: 0.5}
+  SpecAtkStartUp: 3
+  SpecAtkHit: 60
+  SpecAtkCoolDown: 20
+  SpecBlockStun: 60
+  SpecAttackerHitPush: 0
+  SpecDefenderHitPush: 0
+  SpecAttackerBlockPush: 0
+  SpecDefenderBlockPush: 0
+  SpecHitBoxOffset: {x: 4, y: -1.25}
+  SpecHitBoxSize: {x: 0, y: 0}
+  SpecialStr: 
+  speedscalar: 0.25

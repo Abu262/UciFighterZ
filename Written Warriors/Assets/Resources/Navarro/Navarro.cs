@@ -52,26 +52,32 @@ public class Navarro : Character
         P.Aura.SetActive(true);
         SpecHitBox.enabled = true;
         int F = SpecAtkHit;
-
-        while (F > 0)
+        if (P.opponentTag == "Player2")
         {
-            if (P.Opponent.CurrentBlocking == true || P.Opponent.Hitstun == true)
+            while (F > 0 && (Input.GetKey(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.T)))
             {
-                F = 0;
+                P.RB.velocity = constMotion;
+                P.transform.localScale = s;
+                F -= 1;
+                yield return null;
             }
-            //          SpecHitBox.enabled = true;
-            P.RB.velocity = constMotion;
-            P.transform.localScale = s;
-            F -= 1;
-            //            yield return new WaitForSeconds(5.0f / 60.0f);
-            //
-            yield return null;
+
         }
+        else if (P.opponentTag == "Player1")
+        {
+            while (F > 0 && (Input.GetKey(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.RightBracket)))
+            {
+                P.RB.velocity = constMotion;
+                P.transform.localScale = s;
+                F -= 1;
+                yield return null;
+            }
+
+        }
+
         SpecHitBox.enabled = false;
 
-
         P.Aura.SetActive(false);
-
 
         yield return null;
     }
