@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363433916390150168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: -2.5, z: 0}
+  m_LocalPosition: {x: 16.538994, y: -2.5, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,18 +51,10 @@ MonoBehaviour:
   MoveSpeed: 18
   Aura: {fileID: 2085758644351299489, guid: cc61b84762a144c43a7921af80dd358e, type: 3}
   CharName: Klefstad
-  StandSpr: {fileID: 21300000, guid: eca1fa7d8a7f37a46bc4de8a96c5f028, type: 3}
   StandAnim: {fileID: 7400000, guid: f27ebecf224a483428f326b4387a8c74, type: 2}
   Skeleton: {fileID: 9100000, guid: a64f47d5d2501b6488d301389544f8bb, type: 2}
-  CrouchSpr: {fileID: 21300000, guid: 00d991fed3b9a5c42b7aa844f2a0a331, type: 3}
-  StandBlockSpr: {fileID: 21300000, guid: 09ec6e36f080fa64eae1a3e33f3a5606, type: 3}
-  CrouchBlockSpr: {fileID: 21300000, guid: 70eaf2540156b2a4ebdb1e2c1d7b4cac, type: 3}
-  HitSpr: {fileID: 21300000, guid: 8715048add78f7340a0f872796c16c7c, type: 3}
-  LowSprStartUp: {fileID: 21300000, guid: 6640ab795d05b2e4190672f0a1b8ea33, type: 3}
   LowAtkStartUp: 16
-  LowSprHit: {fileID: 21300000, guid: 41ea74d02d00f6b49a5b59cb4c8e90f9, type: 3}
   LowAtkHit: 9
-  LowSprCoolDown: {fileID: 21300000, guid: 099fa42fceff11748ba5c1aab87ddf35, type: 3}
   LowAtkCoolDown: 16
   LowBlockStun: 9
   LowAttackerHitPush: 25
@@ -71,11 +63,8 @@ MonoBehaviour:
   LowDefenderBlockPush: 1
   LowHitBoxOffset: {x: 1.5, y: -1}
   LowHitBoxSize: {x: 2, y: 0.5}
-  MedSprStartUp: {fileID: 21300000, guid: 1ee7a18c89992d34bb8b29b76e7be7b9, type: 3}
   MedAtkStartUp: 20
-  MedSprHit: {fileID: 21300000, guid: bf499412452c94f46b186c95b35d6992, type: 3}
   MedAtkHit: 9
-  MedSprCoolDown: {fileID: 21300000, guid: 029200b4c4eb7874691a8d98d53ea888, type: 3}
   MedAtkCoolDown: 16
   MedBlockStun: 9
   MedAttackerHitPush: 25
@@ -84,11 +73,8 @@ MonoBehaviour:
   MedDefenderBlockPush: 1
   MedHitBoxOffset: {x: 1.5, y: 0}
   MedHitBoxSize: {x: 4.5, y: 0.5}
-  HighSprStartUp: {fileID: 21300000, guid: abaabc08f9d0ff7478a4bee14adf8246, type: 3}
   HighAtkStartUp: 8
-  HighSprHit: {fileID: 21300000, guid: fc950711b1054b14e91cf236e0ec96fc, type: 3}
   HighAtkHit: 9
-  HighSprCoolDown: {fileID: 21300000, guid: 13fdf587715bd004685257484d36c8ad, type: 3}
   HighAtkCoolDown: 9
   HighBlockStun: 9
   HighAttackerHitPush: 25
@@ -97,11 +83,8 @@ MonoBehaviour:
   HighDefenderBlockPush: 1
   HighHitBoxOffset: {x: 1.5, y: 1.25}
   HighHitBoxSize: {x: 3, y: 0.5}
-  SpecSprStartUp: {fileID: 21300000, guid: 7704fa8a689ab7b4abb02164a5c607fc, type: 3}
   SpecAtkStartUp: 20
-  SpecSprHit: {fileID: 21300000, guid: 1cfa02f32baecfb46b6343fe9c971eb5, type: 3}
   SpecAtkHit: 30
-  SpecSprCoolDown: {fileID: 21300000, guid: e006c865e5c3fb34b953c292dc064c4a, type: 3}
   SpecAtkCoolDown: 12
   SpecBlockStun: 25
   SpecAttackerHitPush: 25
