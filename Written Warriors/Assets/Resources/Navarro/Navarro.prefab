@@ -82,7 +82,7 @@ MonoBehaviour:
   HighDefenderBlockPush: 12
   HighHitBoxOffset: {x: 1.5, y: 1.25}
   HighHitBoxSize: {x: 6, y: 0.5}
-  SpecAtkStartUp: 5
+  SpecAtkStartUp: 15
   SpecAtkHit: 6
   SpecAtkCoolDown: 9
   SpecBlockStun: 3
