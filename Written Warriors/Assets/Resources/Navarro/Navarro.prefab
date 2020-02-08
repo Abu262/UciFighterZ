@@ -51,7 +51,7 @@ MonoBehaviour:
   Aura: {fileID: 2085758644351299489, guid: cc61b84762a144c43a7921af80dd358e, type: 3}
   CharName: Navarro
   StandAnim: {fileID: 7400000, guid: f27ebecf224a483428f326b4387a8c74, type: 2}
-  Skeleton: {fileID: 9100000, guid: de3c923f13db7c449a7562132a6dad17, type: 2}
+  Skeleton: {fileID: 9100000, guid: c23e0d298ecce324287cb2cdb2b41dbc, type: 2}
   LowAtkStartUp: 3
   LowAtkHit: 6
   LowAtkCoolDown: 3

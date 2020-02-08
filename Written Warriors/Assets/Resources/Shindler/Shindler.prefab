@@ -51,7 +51,7 @@ MonoBehaviour:
   Aura: {fileID: 2085758644351299489, guid: cc61b84762a144c43a7921af80dd358e, type: 3}
   CharName: Shindler
   StandAnim: {fileID: 0}
-  Skeleton: {fileID: 9100000, guid: de3c923f13db7c449a7562132a6dad17, type: 2}
+  Skeleton: {fileID: 9100000, guid: 1cb5f705faeae3f40b5c8b006d648957, type: 2}
   LowAtkStartUp: 19
   LowAtkHit: 7
   LowAtkCoolDown: 7
