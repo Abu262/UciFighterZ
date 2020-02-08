@@ -47,50 +47,50 @@ MonoBehaviour:
   Health: 3
   PlayerSize: {x: 1, y: 1.25}
   PlayerOffset: {x: 0, y: 0}
-  MoveSpeed: 50
+  MoveSpeed: 18
   Aura: {fileID: 2085758644351299489, guid: cc61b84762a144c43a7921af80dd358e, type: 3}
   CharName: Navarro
   StandAnim: {fileID: 7400000, guid: f27ebecf224a483428f326b4387a8c74, type: 2}
   Skeleton: {fileID: 9100000, guid: c23e0d298ecce324287cb2cdb2b41dbc, type: 2}
-  LowAtkStartUp: 3
-  LowAtkHit: 6
-  LowAtkCoolDown: 3
-  LowBlockStun: 60
-  LowAttackerHitPush: 0
-  LowDefenderHitPush: 0
-  LowAttackerBlockPush: 0
-  LowDefenderBlockPush: 0
-  LowHitBoxOffset: {x: 1.5, y: -0.5}
-  LowHitBoxSize: {x: 1.5, y: 0.5}
-  MedAtkStartUp: 3
-  MedAtkHit: 6
-  MedAtkCoolDown: 3
-  MedBlockStun: 60
-  MedAttackerHitPush: 0
-  MedDefenderHitPush: 0
-  MedAttackerBlockPush: 0
-  MedDefenderBlockPush: 0
+  LowAtkStartUp: 14
+  LowAtkHit: 4
+  LowAtkCoolDown: 16
+  LowBlockStun: 9
+  LowAttackerHitPush: 25
+  LowDefenderHitPush: 25
+  LowAttackerBlockPush: 2
+  LowDefenderBlockPush: 1
+  LowHitBoxOffset: {x: 1.5, y: -1}
+  LowHitBoxSize: {x: 2, y: 0.5}
+  MedAtkStartUp: 15
+  MedAtkHit: 9
+  MedAtkCoolDown: 16
+  MedBlockStun: 9
+  MedAttackerHitPush: 25
+  MedDefenderHitPush: 25
+  MedAttackerBlockPush: 9
+  MedDefenderBlockPush: 1
   MedHitBoxOffset: {x: 1.5, y: 0}
-  MedHitBoxSize: {x: 1.5, y: 0.5}
-  HighAtkStartUp: 3
-  HighAtkHit: 6
-  HighAtkCoolDown: 3
-  HighBlockStun: 60
-  HighAttackerHitPush: 0
-  HighDefenderHitPush: 0
-  HighAttackerBlockPush: 0
-  HighDefenderBlockPush: 0
-  HighHitBoxOffset: {x: 1.5, y: 0.5}
-  HighHitBoxSize: {x: 1.5, y: 0.5}
-  SpecAtkStartUp: 3
-  SpecAtkHit: 60
-  SpecAtkCoolDown: 20
-  SpecBlockStun: 60
-  SpecAttackerHitPush: 0
-  SpecDefenderHitPush: 0
-  SpecAttackerBlockPush: 0
-  SpecDefenderBlockPush: 0
-  SpecHitBoxOffset: {x: 4, y: -1.25}
-  SpecHitBoxSize: {x: 0, y: 0}
-  SpecialStr: 
-  speedscalar: 0.25
+  MedHitBoxSize: {x: 3, y: 0.5}
+  HighAtkStartUp: 11
+  HighAtkHit: 8
+  HighAtkCoolDown: 6
+  HighBlockStun: 6
+  HighAttackerHitPush: 20
+  HighDefenderHitPush: 10
+  HighAttackerBlockPush: 12
+  HighDefenderBlockPush: 12
+  HighHitBoxOffset: {x: 1.5, y: 1.25}
+  HighHitBoxSize: {x: 6, y: 0.5}
+  SpecAtkStartUp: 5
+  SpecAtkHit: 6
+  SpecAtkCoolDown: 9
+  SpecBlockStun: 3
+  SpecAttackerHitPush: 25
+  SpecDefenderHitPush: 25
+  SpecAttackerBlockPush: 8
+  SpecDefenderBlockPush: 2
+  SpecHitBoxOffset: {x: 1.5, y: -1}
+  SpecHitBoxSize: {x: 3, y: 0.5}
+  SpecialStr: Low
+  speedscalar: 5
