@@ -11,7 +11,7 @@ public class Navarro : Character
     //   public float copyLowAttackerBlockPush;// = 0.0f;
     //   public float copyLowDefenderBlockPush;// = 0.0f;
     public float speedscalar = 0.25f;
-
+    public int Dash = 20;
     // Start is called before the first frame update
     void Awake()
     {
@@ -50,27 +50,55 @@ public class Navarro : Character
         Vector2 constMotion = new Vector2(MoveSpeed * speedscalar * P.transform.localScale.x, 0.0f);
         Vector3 s = P.transform.localScale;
         P.Aura.SetActive(true);
-        SpecHitBox.enabled = true;
+      //  SpecHitBox.enabled = true;
         int F = SpecAtkHit;
+        int C = Dash;
+
         if (P.opponentTag == "Player2")
         {
-            while (F > 0 && (Input.GetKey(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.T)))
+            while (C > 0 && (Input.GetKey(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.T)))
+            {
+                P.RB.velocity = constMotion;
+                P.transform.localScale = s;
+                C -= 1;
+                yield return null;
+            }
+            if (C < 1)
+            {
+                SpecHitBox.enabled = true;
+                while (F > 0)
+                {
+
+                    P.RB.velocity = new Vector2(0.0f,0.0f);
+                    P.transform.localScale = s;
+                    F -= 1;
+                    yield return null;
+                }
+                SpecHitBox.enabled = false;
+            }
+
+        }
+        else if (P.opponentTag == "Player1")
+        {
+            while (C > 0 && (Input.GetKey(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.RightBracket)))
             {
                 P.RB.velocity = constMotion;
                 P.transform.localScale = s;
                 F -= 1;
                 yield return null;
             }
-
-        }
-        else if (P.opponentTag == "Player1")
-        {
-            while (F > 0 && (Input.GetKey(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.RightBracket)))
+            if (C < 1)
             {
-                P.RB.velocity = constMotion;
-                P.transform.localScale = s;
-                F -= 1;
-                yield return null;
+                SpecHitBox.enabled = true;
+                while (F > 0)
+                {
+
+                    P.RB.velocity = new Vector2(0.0f, 0.0f);
+                    P.transform.localScale = s;
+                    F -= 1;
+                    yield return null;
+                }
+                SpecHitBox.enabled = false;
             }
 
         }
