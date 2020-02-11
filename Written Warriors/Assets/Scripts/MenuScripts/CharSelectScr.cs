@@ -43,15 +43,16 @@ public class CharSelectScr : MonoBehaviour
     public TextMeshProUGUI P2CHAR;
     public TextMeshProUGUI P2CHARBG;
 
-
     private Image screen;
 
+    public AudioSource source;
 
     // Start is called before the first frame update
     void Start()
     {
         //Start playing theme song
-        StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
+        //StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
+        source.volume = OptionsSelect.volume;
 
         //Set initial indices
         indexP1 = 0;
@@ -76,7 +77,7 @@ public class CharSelectScr : MonoBehaviour
         //Get sizes of small and large buttons
         RectTransform rt = P1Arrow.GetComponent<RectTransform>();
         SizeLarge = rt.sizeDelta;
-        SizeSmall = new Vector2(rt.rect.width, rt.rect.height * .4f);
+        SizeSmall = new Vector2(rt.rect.width*2, rt.rect.height * .6f);
 
         //Start f l a s h i n g
         StartCoroutine(FlashText(P1CHAR, P1CHARBG));
@@ -264,7 +265,6 @@ public class CharSelectScr : MonoBehaviour
             case 5:
                 path = "Navarro/Navarro";
                 break;
-
             case 6:
                 path = "Options";
                 SceneManager.LoadScene("OptionsMenu");
@@ -337,7 +337,7 @@ public class CharSelectScr : MonoBehaviour
             float sw = CharPics[indexP2].rectTransform.rect.width;
             P2Arrow.rectTransform.sizeDelta = new Vector2(sw, sh);
             P2Arrow.rectTransform.position = new Vector2(x,y - sh/8);
-            if (indexP2 > 2)
+            if (indexP2 > 5)
             {
                 P2Arrow.rectTransform.sizeDelta = SizeSmall;
                 P2Arrow.rectTransform.position = new Vector2(x, y-18);
@@ -446,7 +446,7 @@ public class CharSelectScr : MonoBehaviour
             float sw = CharPics[indexP1].rectTransform.rect.width;
             P1Arrow.rectTransform.sizeDelta = new Vector2(sw, sh);
             P1Arrow.rectTransform.position = new Vector2(x, y + sh / 8);
-            if (indexP1 > 2)
+            if (indexP1 > 5)
             {
                 P1Arrow.rectTransform.sizeDelta = SizeSmall;
                 P1Arrow.rectTransform.position = new Vector2(x, y+18);
