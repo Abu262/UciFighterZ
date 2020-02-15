@@ -93,4 +93,5 @@ MonoBehaviour:
   SpecHitBoxOffset: {x: 1.5, y: -1}
   SpecHitBoxSize: {x: 3, y: 0.5}
   SpecialStr: Low
-  speedscalar: 5
+  speedscalar: 3.75
+  Dash: 20

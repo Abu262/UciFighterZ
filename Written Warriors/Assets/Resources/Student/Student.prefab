@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4361947582093019173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5469024953785140715}
+  - component: {fileID: 6660736334519078319}
+  m_Layer: 0
+  m_Name: Student
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5469024953785140715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4361947582093019173}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.306137, y: -2.5, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6660736334519078319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4361947582093019173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a7b78d3bc966b4d95e108f1866f7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Face: {fileID: 0}
+  Health: 3
+  PlayerSize: {x: 1.25, y: 5}
+  PlayerOffset: {x: 0, y: 0}
+  MoveSpeed: 0
+  Aura: {fileID: 8695034891711154870, guid: d33a2bf6c85b5a440bb6a5c4e9313e9f, type: 3}
+  CharName: Student
+  StandAnim: {fileID: 7400000, guid: ca0c224c59707fe4fa3aac458086e449, type: 2}
+  Skeleton: {fileID: 9100000, guid: de3c923f13db7c449a7562132a6dad17, type: 2}
+  LowAtkStartUp: 0
+  LowAtkHit: 0
+  LowAtkCoolDown: 0
+  LowBlockStun: 0
+  LowAttackerHitPush: 0
+  LowDefenderHitPush: 0
+  LowAttackerBlockPush: 0
+  LowDefenderBlockPush: 0
+  LowHitBoxOffset: {x: 1, y: -0.5}
+  LowHitBoxSize: {x: 1.5, y: 0.5}
+  MedAtkStartUp: 0
+  MedAtkHit: 0
+  MedAtkCoolDown: 0
+  MedBlockStun: 0
+  MedAttackerHitPush: 0
+  MedDefenderHitPush: 0
+  MedAttackerBlockPush: 0
+  MedDefenderBlockPush: 0
+  MedHitBoxOffset: {x: 1, y: 0}
+  MedHitBoxSize: {x: 1.5, y: 0.5}
+  HighAtkStartUp: 0
+  HighAtkHit: 0
+  HighAtkCoolDown: 0
+  HighBlockStun: 0
+  HighAttackerHitPush: 0
+  HighDefenderHitPush: 0
+  HighAttackerBlockPush: 0
+  HighDefenderBlockPush: 0
+  HighHitBoxOffset: {x: 1, y: 0.5}
+  HighHitBoxSize: {x: 1.5, y: 0.5}
+  SpecAtkStartUp: 0
+  SpecAtkHit: 0
+  SpecAtkCoolDown: 0
+  SpecBlockStun: 0
+  SpecAttackerHitPush: 0
+  SpecDefenderHitPush: 0
+  SpecAttackerBlockPush: 0
+  SpecDefenderBlockPush: 0
+  SpecHitBoxOffset: {x: 4, y: -1.25}
+  SpecHitBoxSize: {x: 5, y: 1}
+  SpecialStr: 
+  projectile: {fileID: 6622007885624565657, guid: c3c211332d940e54ca4e440f11244f85,
+    type: 3}

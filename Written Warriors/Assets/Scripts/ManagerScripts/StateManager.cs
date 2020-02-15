@@ -30,16 +30,29 @@ public class StateManager : MonoBehaviour
     public PauseMenu PM;
     int count = 1;
     public bool runTimer = true;
+    public bool isTraining = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(startCountdown(currentCountdown));
-        shakeObj.GetComponent<TextMeshProUGUI>().material.color = Color.white;
-        startingPos.x = shakeObj.transform.position.x;
-        startingPos.y = shakeObj.transform.position.y;
-        startingPosBG.x = shakeObjBG.transform.position.x;
-        startingPosBG.y = shakeObjBG.transform.position.y;
+		if (!isTraining)
+		{
+			StartCoroutine(startCountdown(currentCountdown));
+			shakeObj.GetComponent<TextMeshProUGUI>().material.color = Color.white;
+			startingPos.x = shakeObj.transform.position.x;
+			startingPos.y = shakeObj.transform.position.y;
+			startingPosBG.x = shakeObjBG.transform.position.x;
+			startingPosBG.y = shakeObjBG.transform.position.y;
+		}
+		else
+		{
+			StartCoroutine(GO.StartMatch());
+			timerLabel.color = new Color32(255, 255, 255, 0);
+			timerLabelBG.color = new Color32(21, 59, 176, 0);
+		}
+		
+		
+
     }
 
     public IEnumerator startCountdown(float countdown)
