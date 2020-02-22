@@ -37,27 +37,27 @@ public class Player1Scr : Player
             //  {
             if (TakingAction == false && Hitstun == false && IsBlocking == false)
             {
-                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.Alpha4))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.Alpha5))
                 {
 //                    Debug.Log("Hello");
                     StartCoroutine(MedAttack());
                 }
                 //X
-                if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.R))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.Alpha4))
                 {
                     StartCoroutine(LowAttack());
                 }
                 //circle
-                if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.T))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.R))
                 {
                     StartCoroutine(SpecAttack());
                 }
                 //triangle
-                if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKey(KeyCode.Alpha5))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKey(KeyCode.Alpha6))
                 {
                     StartCoroutine(HighAttack());
                 }
-                if (Input.GetKeyDown(KeyCode.Joystick1Button4) || Input.GetKeyDown(KeyCode.Joystick1Button5))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button4) || Input.GetKeyDown(KeyCode.Joystick1Button5) || Input.GetKeyDown(KeyCode.T))
                 {
                     StartCoroutine(Parry());
                 }

@@ -39,7 +39,7 @@ public class Shindler : Character
             B -= 1;
             yield return null;
         }
-        yield return null;
+        //yield return null;
         constMotion = new Vector2(MoveSpeed * speedscalarForward * P.transform.localScale.x, 0.0f);
 
         SpecHitBox.enabled = true;

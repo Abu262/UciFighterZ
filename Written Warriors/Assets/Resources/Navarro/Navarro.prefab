@@ -48,7 +48,7 @@ MonoBehaviour:
   PlayerSize: {x: 1, y: 1.25}
   PlayerOffset: {x: 0, y: 0}
   MoveSpeed: 18
-  Aura: {fileID: 2085758644351299489, guid: cc61b84762a144c43a7921af80dd358e, type: 3}
+  Aura: {fileID: 1836666677648511908, guid: b31dfee689a4d2a498c4d510e2e797b8, type: 3}
   CharName: Navarro
   StandAnim: {fileID: 7400000, guid: f27ebecf224a483428f326b4387a8c74, type: 2}
   Skeleton: {fileID: 9100000, guid: c23e0d298ecce324287cb2cdb2b41dbc, type: 2}
@@ -94,3 +94,4 @@ MonoBehaviour:
   SpecHitBoxSize: {x: 3, y: 0.5}
   SpecialStr: Low
   speedscalar: 5
+  Dash: 20

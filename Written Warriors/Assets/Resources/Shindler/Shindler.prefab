@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3740029232848074184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.420605, y: -2.5, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.9398835, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   PlayerSize: {x: 1.25, y: 5}
   PlayerOffset: {x: 0, y: 0}
   MoveSpeed: 18
-  Aura: {fileID: 2085758644351299489, guid: cc61b84762a144c43a7921af80dd358e, type: 3}
+  Aura: {fileID: 1847325149278014456, guid: 9bc8750a36a5e3545a5a30f2068017c6, type: 3}
   CharName: Shindler
   StandAnim: {fileID: 0}
   Skeleton: {fileID: 9100000, guid: 1cb5f705faeae3f40b5c8b006d648957, type: 2}
@@ -82,7 +82,7 @@ MonoBehaviour:
   HighDefenderBlockPush: 1
   HighHitBoxOffset: {x: 1.5, y: 0.5}
   HighHitBoxSize: {x: 3.75, y: 0.5}
-  SpecAtkStartUp: 10
+  SpecAtkStartUp: 6
   SpecAtkHit: 9
   SpecAtkCoolDown: 19
   SpecBlockStun: 10
@@ -93,6 +93,6 @@ MonoBehaviour:
   SpecHitBoxOffset: {x: 1.5, y: -1.25}
   SpecHitBoxSize: {x: 4.5, y: 1}
   SpecialStr: Medium
-  speedscalarBack: 0.25
-  speedscalarForward: 1
-  backdashtime: 20
+  speedscalarBack: 3
+  speedscalarForward: 4
+  backdashtime: 10

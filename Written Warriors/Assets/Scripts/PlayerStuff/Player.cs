@@ -119,6 +119,7 @@ public abstract class Player : MonoBehaviour
         MedHitBox.size = Self.MedHitBoxSize;
         LowHitBox.size = Self.LowHitBoxSize;
         SpecHitBox.size = Self.SpecHitBoxSize;
+//        animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
         //  ready = true;
         if (Opponent.transform.position.x < gameObject.transform.position.x)
         {
@@ -150,7 +151,7 @@ public abstract class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
         Self.transform.position = transform.position;
         //If the player isnt taking an action AND the player isn't currentlly hit AND the player isnt bllocking
         //then they can move
@@ -187,7 +188,7 @@ public abstract class Player : MonoBehaviour
                     animator.SetBool("IsStanding", false);
                 }
             }
-            else
+            else// if (animator.GetBool("IsStanding") == false)
             {
                 animator.SetBool("IsForward", false);
                 animator.SetBool("IsBackwards", false);
@@ -325,7 +326,7 @@ public abstract class Player : MonoBehaviour
 
             TakingAction = false; //attack is done
             animator.SetBool("IsHighAtk", false);
-            animator.speed = 1.0f;
+           // animator.speed = 1.0f;
         }
     }
 
@@ -376,7 +377,7 @@ public abstract class Player : MonoBehaviour
 
             TakingAction = false;
             animator.SetBool("IsMedAtk", false);
-            animator.speed = 1.0f;
+           // animator.speed = 1.0f;
         }
     }
 
@@ -555,7 +556,7 @@ public abstract class Player : MonoBehaviour
         while (FrameCount > 0)
         {
 //            Debug.Log((float)((int)(1.0f / Time.smoothDeltaTime) / 60));
-            animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
+            //animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
             //            animator.SetTime(FrameCount / Frames);
             FrameCount--;
             yield return null;
@@ -572,7 +573,7 @@ public abstract class Player : MonoBehaviour
         int FrameCount = Frames;
         while (FrameCount > 0)
         {
-            animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
+           // animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
             FrameCount--;
             yield return null;
         }
@@ -586,7 +587,7 @@ public abstract class Player : MonoBehaviour
         int FrameCount = Frames;
         while (FrameCount > 0)
         {
-            animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
+           // animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
             FrameCount--;
             yield return null;
         }

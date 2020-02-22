@@ -56,31 +56,31 @@ public class Player2Scr : Player
             //can only attack if they arent already doing something else and they arent currently  hit
             if (TakingAction == false && Hitstun == false && IsBlocking == false)
             {
-                if (Input.GetKey(KeyCode.Joystick2Button0) || Input.GetKey(KeyCode.Minus))
+                if (Input.GetKey(KeyCode.Joystick2Button0) || Input.GetKey(KeyCode.Equals))
                 {
                     StartCoroutine(MedAttack());
                 }
                 //X
-                if (Input.GetKeyDown(KeyCode.Joystick2Button1) || Input.GetKey(KeyCode.LeftBracket))
+                if (Input.GetKeyDown(KeyCode.Joystick2Button1) || Input.GetKey(KeyCode.Minus))
                 {
                     StartCoroutine(LowAttack());
                 }
                 //circle
-                if (Input.GetKeyDown(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.RightBracket))
+                if (Input.GetKeyDown(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.LeftBracket))
                 {
                     StartCoroutine(SpecAttack());
                 }
                 //triangle
-                if (Input.GetKeyDown(KeyCode.Joystick2Button3) || Input.GetKey(KeyCode.Equals))
+                if (Input.GetKeyDown(KeyCode.Joystick2Button3) || Input.GetKey(KeyCode.Backspace))
                 {
                     StartCoroutine(HighAttack());
                 }
-                if (Input.GetKeyDown(KeyCode.Joystick2Button4) || Input.GetKeyDown(KeyCode.Joystick2Button5))
+                if (Input.GetKeyDown(KeyCode.Joystick2Button4) || Input.GetKeyDown(KeyCode.Joystick2Button5) || Input.GetKeyDown(KeyCode.RightBracket))
                 {
                     StartCoroutine(Parry());
                 }
                 
-
+                
                 if (Input.GetKey(KeyCode.K))
                 {
                     Move = new Vector2(-1.0f, 0.0f);
