@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 using TMPro;
 
 public class OptionsSelect : MonoBehaviour
@@ -24,18 +25,21 @@ public class OptionsSelect : MonoBehaviour
     bool ReadyP2 = false;
 
     public Image cursor, bar;
-    float barPosition = 0;
+    float barPosition = 300;
     bool P1volumeSelected = false;
     bool P2volumeSelected = false;
 
     public Vector2 MoveP1;
     public Vector2 MoveP2;
 
+    public AudioSource source;
+    public static float volume = .5f;
+
     // Start is called before the first frame update
     void Start()
     {
         //Start playing theme song
-        StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
+        //StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
 
         //Set initial indices
         indexP1 = 0;
@@ -95,17 +99,21 @@ public class OptionsSelect : MonoBehaviour
 
         if(P2volumeSelected)
         {
-            if(MoveP2.x > 0.8f && barPosition < 300)
+            if(MoveP2.x > 0.8f && barPosition <= 600)
             {
                 cursor.rectTransform.position += new Vector3(5, 0, 0);
                 P2Arrow.rectTransform.position += new Vector3(5, 0, 0);
                 barPosition += 5;
+                source.volume = barPosition / 600.0f;
+                volume = source.volume;
             }
-            if(MoveP2.x < -0.8f && barPosition > -300)
+            if(MoveP2.x < -0.8f && barPosition >= 0)
             {
                 cursor.rectTransform.position -= new Vector3(5, 0, 0);
                 P2Arrow.rectTransform.position -= new Vector3(5, 0, 0);
                 barPosition -= 5;
+                source.volume = barPosition / 600.0f;
+                volume = source.volume;
             }
         }
         //If P2 movement detected
@@ -117,17 +125,21 @@ public class OptionsSelect : MonoBehaviour
 
         if (P1volumeSelected)
         {
-            if (MoveP1.x > 0.8f && barPosition < 300)
+            if (MoveP1.x > 0.8f && barPosition <= 600)
             {
                 cursor.rectTransform.position += new Vector3(5, 0, 0);
                 P1Arrow.rectTransform.position += new Vector3(5, 0, 0);
                 barPosition += 5;
+                source.volume = barPosition / 600.0f;
+                volume = source.volume;
             }
-            if (MoveP1.x < -0.8f && barPosition > -300)
+            if (MoveP1.x < -0.8f && barPosition >= 0)
             {
                 cursor.rectTransform.position -= new Vector3(5, 0, 0);
                 P1Arrow.rectTransform.position -= new Vector3(5, 0, 0);
                 barPosition -= 5;
+                source.volume = barPosition / 600.0f;
+                volume = source.volume;
             }
         }
         //If P1 movement detected
