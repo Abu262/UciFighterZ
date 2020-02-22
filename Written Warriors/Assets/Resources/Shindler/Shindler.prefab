@@ -92,7 +92,7 @@ MonoBehaviour:
   SpecDefenderBlockPush: 12.5
   SpecHitBoxOffset: {x: 1.5, y: -1.25}
   SpecHitBoxSize: {x: 4.5, y: 1}
-  SpecialStr: Medium
+  SpecialStr: Middle
   speedscalarBack: 3
   speedscalarForward: 4
   backdashtime: 10
