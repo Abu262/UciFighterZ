@@ -56,7 +56,7 @@ public class Navarro : Character
 
         if (P.opponentTag == "Player2")
         {
-            while (C > 0 && (Input.GetKey(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.T)))
+            while (C > 0 && (Input.GetKey(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.R)))
             {
                 P.RB.velocity = constMotion;
                 P.transform.localScale = s;
@@ -80,11 +80,11 @@ public class Navarro : Character
         }
         else if (P.opponentTag == "Player1")
         {
-            while (C > 0 && (Input.GetKey(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.RightBracket)))
+            while (C > 0 && (Input.GetKey(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.LeftBracket)))
             {
                 P.RB.velocity = constMotion;
                 P.transform.localScale = s;
-                F -= 1;
+                C -= 1;
                 yield return null;
             }
             if (C < 1)

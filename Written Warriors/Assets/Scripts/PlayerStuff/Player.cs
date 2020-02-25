@@ -151,7 +151,7 @@ public abstract class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
+        animator.speed = (float)(Time.smoothDeltaTime * 60);
         Self.transform.position = transform.position;
         //If the player isnt taking an action AND the player isn't currentlly hit AND the player isnt bllocking
         //then they can move
@@ -440,6 +440,13 @@ public abstract class Player : MonoBehaviour
     {
         if (TakingAction == false)
         {
+            //stop everything   
+            animator.SetBool("IsCrouch", false);
+            animator.SetBool("IsForward", false);
+            animator.SetBool("IsBackwards", false);
+            animator.SetBool("IsStanding", false);
+            //activate highatk
+            animator.SetBool("IsSpecAtk", true);
             PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
             PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
             CurrentAtk = "Special";
@@ -475,6 +482,7 @@ public abstract class Player : MonoBehaviour
           //      yield break;
           //  }
             TakingAction = false;
+            animator.SetBool("IsSpecAtk", false);
             animator.speed = 1.0f;
         }
     }
@@ -764,6 +772,10 @@ public abstract class Player : MonoBehaviour
         animator.SetBool("IsMedAtk", false);
         animator.SetBool("IsLowAtk", false);
         animator.SetBool("IsSpecAtk", false);
+
+        animator.SetBool("IsHighFeint", false);
+        animator.SetBool("IsMedFeint", false);
+        animator.SetBool("IsLowFeint", false);
 
         animator.SetBool("IsHighBlock", false);
         animator.SetBool("IsLowBlock", false);
