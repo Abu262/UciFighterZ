@@ -34,6 +34,11 @@ public class OptionsSelect : MonoBehaviour
 
     public AudioSource source;
     public static float volume = .5f;
+    public static int roundsNum = 2;
+    public static int matchTime = 999;
+
+    public TextMeshProUGUI roundsNumText;
+    public TextMeshProUGUI matchTimeText;
 
     // Start is called before the first frame update
     void Start()
@@ -167,6 +172,38 @@ public class OptionsSelect : MonoBehaviour
                 else
                     P1volumeSelected = true;
             }
+            else if (indexP1 == 2)
+            {
+                if (roundsNum > 2)
+                {
+                    roundsNum -= 1;
+                    roundsNumText.text = roundsNum.ToString();
+                }
+            }
+            else if (indexP1 == 3)
+            {
+                if (roundsNum < 5)
+                {
+                    roundsNum += 1;
+                    roundsNumText.text = roundsNum.ToString();
+                } 
+            }
+            else if (indexP1 == 4)
+            {
+                if (matchTime > 333)
+                {
+                    matchTime -= 111;
+                    matchTimeText.text = matchTime.ToString();
+                }
+            }
+            else if (indexP1 == 5)
+            {
+                if (matchTime < 999)
+                {
+                    matchTime += 111;
+                    matchTimeText.text = matchTime.ToString();
+                }
+            }
             else
                 SelectP1();
         }
@@ -179,6 +216,38 @@ public class OptionsSelect : MonoBehaviour
                     P2volumeSelected = false;
                 else
                     P2volumeSelected = true;
+            }
+            else if(indexP2 == 2)
+            {
+                if (roundsNum > 0)
+                {
+                    roundsNum -= 1;
+                    roundsNumText.text = roundsNum.ToString();
+                }
+            }
+            else if(indexP2 == 3)
+            {
+                if (roundsNum < 5)
+                {
+                    roundsNum += 1;
+                    roundsNumText.text = roundsNum.ToString();
+                }
+            }
+            else if(indexP2 == 4)
+            {
+                if (matchTime > 333)
+                {
+                    matchTime -= 111;
+                    matchTimeText.text = matchTime.ToString();
+                }
+            }
+            else if(indexP2 == 5)
+            {
+                if (matchTime < 999)
+                {
+                    matchTime += 111;
+                    matchTimeText.text = matchTime.ToString();
+                }
             }
             else
                 SelectP2();
@@ -213,27 +282,27 @@ public class OptionsSelect : MonoBehaviour
                 path = "Menu";
                 SceneManager.LoadScene("CharacterSelect");
                 break;
-            case 4:
+            case 6:
                 path = "OptionsMenu";
                 SceneManager.LoadScene("OptionsMenu");
                 break;
-            case 5:
+            case 7:
                 path = "ZotFighter";
                 SceneManager.LoadScene("ZotFighter");
                 break;
-            case 6:
+            case 8:
                 path = "Health";
                 SceneManager.LoadScene("Health");
                 break;
-            case 7:
+            case 9:
                 path = "Controls";
                 SceneManager.LoadScene("Controls");
                 break;
-            case 8:
+            case 10:
                 path = "Specials";
                 SceneManager.LoadScene("Specials");
                 break;
-            case 9:
+            case 11:
                 path = "Sudden Death";
                 SceneManager.LoadScene("Sudden Death");
                 break;
@@ -253,7 +322,7 @@ public class OptionsSelect : MonoBehaviour
         {
             if (MoveP2.x > 0.8f)
             {
-                if (indexP2 == 9)
+                if (indexP2 == 11)
                 {
                     indexP2 = 0;
                 }
@@ -267,7 +336,7 @@ public class OptionsSelect : MonoBehaviour
             {
                 if (indexP2 == 0)
                 {
-                    indexP2 = 9;
+                    indexP2 = 11;
                 }
                 else
                 {
@@ -282,7 +351,10 @@ public class OptionsSelect : MonoBehaviour
             float y = CharPics[indexP2].rectTransform.position.y;
             float sh = CharPics[indexP2].rectTransform.rect.height;
             float sw = CharPics[indexP2].rectTransform.rect.width;
-            P2Arrow.rectTransform.position = new Vector2(x, y - sh + 25);
+            if(indexP2 == 1)
+                P2Arrow.rectTransform.position = new Vector2(x, y + sh - 30);
+            else
+                P2Arrow.rectTransform.position = new Vector2(x, y - sh + 30);
             P2Arrow.rectTransform.sizeDelta = new Vector2(sw * 1.4f, sh);
 
         }
@@ -296,7 +368,7 @@ public class OptionsSelect : MonoBehaviour
         {
             if (MoveP1.x > 0.8f)
             {
-                if (indexP1 == 9)
+                if (indexP1 == 11)
                 {
                     indexP1 = 0;
                 }
@@ -310,7 +382,7 @@ public class OptionsSelect : MonoBehaviour
             {
                 if (indexP1 == 0)
                 {
-                    indexP1 = 9;
+                    indexP1 = 11;
                 }
                 else
                 {
@@ -324,7 +396,10 @@ public class OptionsSelect : MonoBehaviour
             float y = CharPics[indexP1].rectTransform.position.y;
             float sh = CharPics[indexP1].rectTransform.rect.height;
             float sw = CharPics[indexP1].rectTransform.rect.width;
-            P1Arrow.rectTransform.position = new Vector2(x, y + sh - 25);
+            if (indexP1 == 1)
+                P1Arrow.rectTransform.position = new Vector2(x, y - sh + 30);
+            else
+                P1Arrow.rectTransform.position = new Vector2(x, y + sh - 30);
             P1Arrow.rectTransform.sizeDelta = new Vector2(sw * 1.4f, sh);
         }
     }
