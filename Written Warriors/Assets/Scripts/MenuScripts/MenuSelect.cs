@@ -23,13 +23,15 @@ public class MenuSelect : MonoBehaviour
     bool ReadyP1 = false;
     bool ReadyP2 = false;
 
-
     public Vector2 MoveP1;
     public Vector2 MoveP2;
 
     private Image screen;
 
     public AudioSource source;
+
+    static public int positionP1 = 0;
+    static public int positionP2 = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -39,8 +41,15 @@ public class MenuSelect : MonoBehaviour
         source.volume = OptionsSelect.volume;
 
         //Set initial indices
-        indexP1 = 0;
-        indexP2 = 0;
+        if (positionP1 <= 5)
+            indexP1 = 0;
+        else
+            indexP1 = positionP1;
+
+        if (positionP2 <= 5)
+            indexP2 = 0;
+        else
+            indexP2 = positionP2;
 
         //Set initial positions and dimensions
         //P1
@@ -81,6 +90,11 @@ public class MenuSelect : MonoBehaviour
         {
             MoveP1 = new Vector2(0.0f, -1.0f);
         }
+        else if (Input.GetKey(KeyCode.W))
+        {
+            MoveP1 = new Vector2(0.0f, 1.0f);
+        }
+
         if (Input.GetKey(KeyCode.K)) //P2 left
         {
             MoveP2 = new Vector2(-1.0f, 0.0f);
@@ -92,6 +106,10 @@ public class MenuSelect : MonoBehaviour
         else if (Input.GetKey(KeyCode.L)) //P2 down
         {
             MoveP2 = new Vector2(0.0f, -1.0f);
+        }
+        else if (Input.GetKey(KeyCode.O))
+        {
+            MoveP2 = new Vector2(0.0f, 1.0f);
         }
 
         //If P2 movement detected
@@ -127,6 +145,8 @@ public class MenuSelect : MonoBehaviour
             SelectP2();
         }
 
+        positionP1 = indexP1;
+        positionP2 = indexP2;
     }
 
     //If P1 selects
@@ -135,7 +155,6 @@ public class MenuSelect : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("MenuSelect");
         ReadyP1 = true;
         FindObjectOfType<GameManager>().PathP1 = FindSource(indexP1);
-
     }
     //If P2 selects
     void SelectP2()
@@ -218,6 +237,21 @@ public class MenuSelect : MonoBehaviour
                 }
             }
 
+            else if (MoveP2.y > 0.8f)
+            {
+                if (indexP2 == 0)
+                    indexP2 -= 1;
+                else
+                    indexP2 = 0;
+            }
+
+            else if (MoveP2.y < -0.8f)
+            {
+                if (indexP2 == 0)
+                    indexP2 += 1;
+                else indexP2 = 0;
+            }
+
             yield return new WaitForSeconds(0.15f);
             turn2 = true;
 
@@ -260,6 +294,22 @@ public class MenuSelect : MonoBehaviour
                     indexP1 -= 1;
                 }
             }
+
+            else if (MoveP1.y > 0.8f)
+            {
+                if (indexP1 == 0)
+                    indexP1 -= 1;
+                else
+                    indexP1 = 0;
+            }
+
+            else if (MoveP1.y < -0.8f)
+            {
+                if (indexP1 == 0)
+                    indexP1 += 1;
+                else indexP1 = 0;
+            }
+
             yield return new WaitForSeconds(0.15f);
             turn1 = true;
 

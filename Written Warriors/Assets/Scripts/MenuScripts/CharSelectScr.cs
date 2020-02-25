@@ -141,6 +141,10 @@ public class CharSelectScr : MonoBehaviour
         {
             MoveP1 = new Vector2(0.0f, -1.0f);
         }
+        else if (Input.GetKey(KeyCode.W)) //P1 down
+        {
+            MoveP1 = new Vector2(0.0f, 1.0f);
+        }
         if (Input.GetKey(KeyCode.K)) //P2 left
         {
             MoveP2 = new Vector2(-1.0f, 0.0f);
@@ -152,6 +156,10 @@ public class CharSelectScr : MonoBehaviour
         else if (Input.GetKey(KeyCode.L)) //P2 down
         {
             MoveP2 = new Vector2(0.0f, -1.0f);
+        }
+        else if (Input.GetKey(KeyCode.O)) //P1 down
+        {
+            MoveP1 = new Vector2(0.0f, 1.0f);
         }
 
         //If P2 movement detected
@@ -201,7 +209,7 @@ public class CharSelectScr : MonoBehaviour
         {
             BackP2();
         }
-        
+
     }
 
     //If P1 selects
@@ -327,6 +335,26 @@ public class CharSelectScr : MonoBehaviour
                 }
             }
 
+            else if (MoveP2.y > 0.8f)
+            {
+                if (indexP2 <= 2)
+                    indexP2 = 6;
+                else if (indexP2 <= 5)
+                    indexP2 -= 3;
+                else
+                    indexP2 = 4;
+            }
+
+            else if (MoveP2.y < -0.8f)
+            {
+                if (indexP2 <= 2)
+                    indexP2 += 3;
+                else if (indexP2 <= 5)
+                    indexP2 = 9;
+                else
+                    indexP2 = 0;
+            }
+
             yield return new WaitForSeconds(0.15f);
             turn2 = true;
 
@@ -437,6 +465,27 @@ public class CharSelectScr : MonoBehaviour
                         indexP1 -= 1;
                     }
                 }
+
+            else if (MoveP1.y > 0.8f)
+            {
+                if (indexP1 <= 2)
+                    indexP1 = 6;
+                else if (indexP1 <= 5)
+                    indexP1 -= 3;
+                else
+                    indexP1 = 4;
+            }
+
+            else if (MoveP1.y < -0.8f)
+            {
+                if (indexP1 <= 2)
+                    indexP1 += 3;
+                else if (indexP1 <= 5)
+                    indexP1 = 9;
+                else
+                    indexP1 = 0;
+            }
+
             yield return new WaitForSeconds(0.15f);
             turn1 = true;
 

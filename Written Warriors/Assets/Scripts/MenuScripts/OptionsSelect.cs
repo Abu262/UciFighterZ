@@ -47,8 +47,8 @@ public class OptionsSelect : MonoBehaviour
         //StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
 
         //Set initial indices
-        indexP1 = 0;
-        indexP2 = 0;
+        indexP1 = MenuSelect.positionP1;
+        indexP2 = MenuSelect.positionP2;
 
         //Set initial positions and dimensions
         //P1
@@ -89,6 +89,11 @@ public class OptionsSelect : MonoBehaviour
         {
             MoveP1 = new Vector2(0.0f, -1.0f);
         }
+        else if (Input.GetKey(KeyCode.W)) //P1 down
+        {
+            MoveP1 = new Vector2(0.0f, 1.0f);
+        }
+
         if (Input.GetKey(KeyCode.K)) //P2 left
         {
             MoveP2 = new Vector2(-1.0f, 0.0f);
@@ -101,8 +106,12 @@ public class OptionsSelect : MonoBehaviour
         {
             MoveP2 = new Vector2(0.0f, -1.0f);
         }
+        else if (Input.GetKey(KeyCode.O)) //P1 down
+        {
+            MoveP1 = new Vector2(0.0f, 1.0f);
+        }
 
-        if(P2volumeSelected)
+        if (P2volumeSelected)
         {
             if(MoveP2.x > 0.8f && barPosition <= 600)
             {
@@ -252,7 +261,6 @@ public class OptionsSelect : MonoBehaviour
             else
                 SelectP2();
         }
-
     }
 
     //If P1 selects
@@ -344,6 +352,29 @@ public class OptionsSelect : MonoBehaviour
                 }
             }
 
+            else if (MoveP2.y > 0.8f)
+            {
+                if (indexP2 == 0)
+                    indexP2 = 11;
+                else if (indexP2 == 1 || indexP2 == 2)
+                    indexP2 -= 1;
+                else if (indexP2 > 2 && indexP2 <= 5)
+                    indexP2 -= 2;
+                else
+                    indexP2 = 4;
+                    
+            }
+
+            else if (MoveP2.y < -0.8f)
+            {
+                if (indexP2 <= 1)
+                    indexP2 += 1;
+                else if (indexP2 > 1 && indexP2 <= 5)
+                    indexP2 += 2;
+                else
+                    indexP2 = 0;
+            }
+
             yield return new WaitForSeconds(0.15f);
             turn2 = true;
 
@@ -389,6 +420,30 @@ public class OptionsSelect : MonoBehaviour
                     indexP1 -= 1;
                 }
             }
+
+            else if (MoveP1.y > 0.8f)
+            {
+                if (indexP1 == 0)
+                    indexP1 = 11;
+                else if (indexP1 == 1 || indexP1 == 2)
+                    indexP1 -= 1;
+                else if (indexP1 > 2 && indexP1 <= 5)
+                    indexP1 -= 2;
+                else
+                    indexP1 = 4;
+
+            }
+
+            else if (MoveP1.y < -0.8f)
+            {
+                if (indexP1 <= 1)
+                    indexP1 += 1;
+                else if (indexP1 > 1 && indexP1 <= 5)
+                    indexP1 += 2;
+                else
+                    indexP1 = 0;
+            }
+
             yield return new WaitForSeconds(0.15f);
             turn1 = true;
 
