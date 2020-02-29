@@ -93,7 +93,7 @@ public class WongMa : Character
                     P.animator.SetBool("IsMedFeint", true);
                     P.animator.SetBool("IsSpecAtk", false);
 
-                    F = MedAtkStartUp;
+                    F = MedAtkStartUp - 5;
                     while (F > 0)
                     {
                         //Debug.Log("MEDIUM");
@@ -109,7 +109,7 @@ public class WongMa : Character
                     P.animator.SetBool("IsLowFeint", true);
                     P.animator.SetBool("IsSpecAtk", false);
                     
-                    F = LowAtkStartUp;
+                    F = LowAtkStartUp - 5;
                     while (F > 0)
                     {
                         //Debug.Log("LOW");
@@ -125,7 +125,7 @@ public class WongMa : Character
                     P.animator.SetBool("IsHighFeint", true);
                     P.animator.SetBool("IsSpecAtk", false);
 
-                    F = HighAtkStartUp;
+                    F = HighAtkStartUp - 5;
                     while (F > 0)
                     {
                         //Debug.Log("HIGH");
