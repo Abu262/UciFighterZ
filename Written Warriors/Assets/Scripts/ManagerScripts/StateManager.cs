@@ -7,7 +7,7 @@ using TMPro;
 
 public class StateManager : MonoBehaviour
 {
-    public float currentCountdown;
+    float currentCountdown = OptionsSelect.matchTime;
 //    public Text timerLabel;
     public TextMeshProUGUI timerLabel;
     public TextMeshProUGUI timerLabelBG;
@@ -50,8 +50,9 @@ public class StateManager : MonoBehaviour
 			timerLabel.color = new Color32(255, 255, 255, 0);
 			timerLabelBG.color = new Color32(21, 59, 176, 0);
 		}
-		
-		
+
+        timerLabel.text = (currentCountdown).ToString("0");
+        timerLabelBG.text = (currentCountdown).ToString("0");
 
     }
 
