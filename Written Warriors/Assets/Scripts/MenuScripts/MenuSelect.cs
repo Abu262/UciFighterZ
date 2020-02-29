@@ -27,16 +27,11 @@ public class MenuSelect : MonoBehaviour
     public Vector2 MoveP2;
 
     private Image screen;
-
-    public AudioSource source;
     
     // Start is called before the first frame update
     void Start()
     {
         //Start playing theme song
-        //StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
-        source.volume = OptionsSelect.volume;
-
         indexP1 = CharSelectScr.positionP1;
         indexP2 = CharSelectScr.positionP2;
 

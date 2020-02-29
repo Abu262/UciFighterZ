@@ -25,15 +25,13 @@ public class OptionsSelect : MonoBehaviour
     bool ReadyP2 = false;
 
     public Image cursor, bar;
-    float barPosition = 300;
+    float barPosition = 450;
     bool P1volumeSelected = false;
     bool P2volumeSelected = false;
 
     public Vector2 MoveP1;
     public Vector2 MoveP2;
-
-    public AudioSource source;
-    public static float volume = .5f;
+    
     public static int roundsNum = 2;
     public static int matchTime = 999;
 
@@ -43,9 +41,6 @@ public class OptionsSelect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Start playing theme song
-        //StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
-
         //Set initial indices
         if (CharSelectScr.positionP1 == 0)
             indexP1 = CharSelectScr.positionP1;
@@ -119,22 +114,19 @@ public class OptionsSelect : MonoBehaviour
 
         if (P2volumeSelected)
         {
-            if(MoveP2.x > 0.8f && barPosition <= 600)
+            if(MoveP2.x > 0.8f && barPosition <= 900)
             {
-                cursor.rectTransform.position += new Vector3(5, 0, 0);
-                P2Arrow.rectTransform.position += new Vector3(5, 0, 0);
-                barPosition += 5;
-                source.volume = barPosition / 600.0f;
-                volume = source.volume;
+                cursor.rectTransform.position += new Vector3(10, 0, 0);
+                P2Arrow.rectTransform.position += new Vector3(10, 0, 0);
+                barPosition += 10;
             }
             if(MoveP2.x < -0.8f && barPosition >= 0)
             {
-                cursor.rectTransform.position -= new Vector3(5, 0, 0);
-                P2Arrow.rectTransform.position -= new Vector3(5, 0, 0);
-                barPosition -= 5;
-                source.volume = barPosition / 600.0f;
-                volume = source.volume;
+                cursor.rectTransform.position -= new Vector3(10, 0, 0);
+                P2Arrow.rectTransform.position -= new Vector3(10, 0, 0);
+                barPosition -= 10;
             }
+            Audio.audioSource.volume = barPosition / 900.0f;
         }
         //If P2 movement detected
         else if (ReadyP2 == false && turn2 == true && ((MoveP2.x > 0.8f || MoveP2.x < -0.8f) || (MoveP2.y > 0.8f || MoveP2.y < -0.8f)))
@@ -145,22 +137,19 @@ public class OptionsSelect : MonoBehaviour
 
         if (P1volumeSelected)
         {
-            if (MoveP1.x > 0.8f && barPosition <= 600)
+            if (MoveP1.x > 0.8f && barPosition <= 900)
             {
-                cursor.rectTransform.position += new Vector3(5, 0, 0);
-                P1Arrow.rectTransform.position += new Vector3(5, 0, 0);
-                barPosition += 5;
-                source.volume = barPosition / 600.0f;
-                volume = source.volume;
+                cursor.rectTransform.position += new Vector3(10, 0, 0);
+                P1Arrow.rectTransform.position += new Vector3(10, 0, 0);
+                barPosition += 10;
             }
             if (MoveP1.x < -0.8f && barPosition >= 0)
             {
-                cursor.rectTransform.position -= new Vector3(5, 0, 0);
-                P1Arrow.rectTransform.position -= new Vector3(5, 0, 0);
-                barPosition -= 5;
-                source.volume = barPosition / 600.0f;
-                volume = source.volume;
+                cursor.rectTransform.position -= new Vector3(10, 0, 0);
+                P1Arrow.rectTransform.position -= new Vector3(10, 0, 0);
+                barPosition -= 10;
             }
+            Audio.audioSource.volume = barPosition / 900.0f;
         }
         //If P1 movement detected
         else if (ReadyP1 == false && turn1 == true && ((MoveP1.x > 0.8f || MoveP1.x < -0.8f) || (MoveP1.y > 0.8f || MoveP1.y < -0.8f)))
