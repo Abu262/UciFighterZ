@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ThortonCrouch
+  m_Name: NavarroSpecLowAtk
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 2509301617988617133, guid: 909957659d1daca42a5f233f1d24af7d,
+      value: {fileID: 607708112369227735, guid: 8fe093a8fcac0d949b27a2f6a935032d,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -41,7 +41,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 2509301617988617133, guid: 909957659d1daca42a5f233f1d24af7d, type: 3}
+    - {fileID: 607708112369227735, guid: 8fe093a8fcac0d949b27a2f6a935032d, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

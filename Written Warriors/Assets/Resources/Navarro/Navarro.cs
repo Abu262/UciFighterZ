@@ -53,9 +53,11 @@ public class Navarro : Character
       //  SpecHitBox.enabled = true;
         int F = SpecAtkHit;
         int C = Dash;
-
+        P.animator.SetBool("IsSpecAtk", true);
         if (P.opponentTag == "Player2")
         {
+
+            
             while (C > 0 && (Input.GetKey(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.R)))
             {
                 P.RB.velocity = constMotion;
@@ -65,6 +67,7 @@ public class Navarro : Character
             }
             if (C < 1)
             {
+                P.animator.SetBool("IsSpecAtkLow", true);
                 SpecHitBox.enabled = true;
                 while (F > 0)
                 {
@@ -76,6 +79,7 @@ public class Navarro : Character
                 }
                 SpecHitBox.enabled = false;
             }
+
 
         }
         else if (P.opponentTag == "Player1")
@@ -89,6 +93,7 @@ public class Navarro : Character
             }
             if (C < 1)
             {
+                P.animator.SetBool("IsSpecAtkLow", true);
                 SpecHitBox.enabled = true;
                 while (F > 0)
                 {
@@ -106,7 +111,8 @@ public class Navarro : Character
         SpecHitBox.enabled = false;
 
         P.Aura.SetActive(false);
-
+        P.animator.SetBool("IsSpecAtkLow", false);
+        P.animator.SetBool("IsSpecAtk", false);
         yield return null;
     }
 

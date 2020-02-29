@@ -17,8 +17,8 @@ public class Player2Scr : Player
     private void Awake()
     {
         //    Path = FindObjectOfType<GameManager>().PathP2;
-        
-        CurrentForm.color= Color.blue;
+
+        CurrentForm.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);//Color.blue;
         Self = Resources.Load<Character>(FindObjectOfType<GameManager>().PathP2);
 
         opponentTag = "Player1";

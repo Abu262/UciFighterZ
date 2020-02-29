@@ -512,7 +512,7 @@ public abstract class Player : MonoBehaviour
             RB.velocity = stance; 
             if (Crouching)
             {
-                    Debug.Log(height);
+                    //Debug.Log(height);
                     //                    animator.SetBool("IsLowBlock", true);
                     //                  animator.SetBool("IsForward", false);
                     //                animator.SetBool("IsBackwards", false);
@@ -1071,7 +1071,7 @@ public abstract class Player : MonoBehaviour
         /////
         ///
         PM.isPaused = !PM.isPaused;
-        Debug.Log("Pause");
+        //Debug.Log("Pause");
         yield return null;
     }
 

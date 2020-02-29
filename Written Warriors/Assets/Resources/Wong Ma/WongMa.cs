@@ -33,7 +33,7 @@ public class WongMa : Character
         {
             if (P.opponentTag == "Player2")
             {
-                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.Alpha4))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.Alpha5))
                 {
                     P.animator.SetBool("IsMedFeint", true);
                     P.animator.SetBool("IsSpecAtk", false);
@@ -49,7 +49,7 @@ public class WongMa : Character
                     R = 0;
                 }
                 //X
-                if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.R))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.Alpha4))
                 {
                     P.animator.SetBool("IsLowFeint", true);
                     P.animator.SetBool("IsSpecAtk", false);
@@ -65,7 +65,7 @@ public class WongMa : Character
                     R = 0;
                 }
                 //triangle
-                if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKey(KeyCode.Alpha5))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKey(KeyCode.Alpha6))
                 {
                     P.animator.SetBool("IsHighFeint", true);
                     P.animator.SetBool("IsSpecAtk", false);
@@ -88,7 +88,7 @@ public class WongMa : Character
 
             if (P.opponentTag == "Player1")
             {
-                if (Input.GetKeyDown(KeyCode.Joystick2Button0) || Input.GetKey(KeyCode.Alpha4))
+                if (Input.GetKeyDown(KeyCode.Joystick2Button0) || Input.GetKey(KeyCode.Equals))
                 {
                     P.animator.SetBool("IsMedFeint", true);
                     P.animator.SetBool("IsSpecAtk", false);
@@ -104,7 +104,7 @@ public class WongMa : Character
                     R = 0;
                 }
                 //X
-                if (Input.GetKeyDown(KeyCode.Joystick2Button1) || Input.GetKey(KeyCode.R))
+                if (Input.GetKeyDown(KeyCode.Joystick2Button1) || Input.GetKey(KeyCode.Minus))
                 {
                     P.animator.SetBool("IsLowFeint", true);
                     P.animator.SetBool("IsSpecAtk", false);
@@ -120,7 +120,7 @@ public class WongMa : Character
                     R = 0;
                 }
                 //triangle
-                if (Input.GetKeyDown(KeyCode.Joystick2Button3) || Input.GetKey(KeyCode.Alpha5))
+                if (Input.GetKeyDown(KeyCode.Joystick2Button3) || Input.GetKey(KeyCode.Backspace))
                 {
                     P.animator.SetBool("IsHighFeint", true);
                     P.animator.SetBool("IsSpecAtk", false);

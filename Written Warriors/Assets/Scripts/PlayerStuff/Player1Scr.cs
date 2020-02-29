@@ -14,7 +14,7 @@ public class Player1Scr : Player
 
     private void Awake()
     {
-
+        CurrentForm.color = new Color(1.7f, 1.7f, 1.7f, 1.0f);//Color.blue;
         Self = Resources.Load<Character>(FindObjectOfType<GameManager>().PathP1); ///load the character script
         opponentTag = "Player2";        //set the tag for the opponent
        // CurrentForm.sprite = Self.StandSpr;
