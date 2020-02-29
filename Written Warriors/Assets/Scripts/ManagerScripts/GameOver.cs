@@ -26,9 +26,9 @@ public class GameOver : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (!FindObjectOfType<AudioManager>().Playing("SpectrumTheme"))
+        if (!FindObjectOfType<AudioManager>().Playing("JodaikoTheme"))
         {
-            StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("SpectrumTheme"));
+            StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("JodaikoTheme"));
         }
         GM = GameObject.FindGameObjectWithTag("GameManager");
         screen = GameObject.FindGameObjectWithTag("Screen").GetComponent<Image>();
