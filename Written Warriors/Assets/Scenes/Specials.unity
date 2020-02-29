@@ -3608,12 +3608,12 @@ MonoBehaviour:
     blow
 
 
-    Klefstad: Teleport a short distance towards the direction of your opponent, catching
-    them offguard or repositioning yourself
-
-
     Pattis: Charge rapidly towards your foe, closing distance or pounding them into
-    submission'
+    submission
+
+
+    Klefstad: Teleport a short distance towards the direction of your opponent, catching
+    them offguard or repositioning yourself'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6398991cdd542b64586f4d32884b1879, type: 2}
   m_sharedMaterial: {fileID: -3245255352268143851, guid: 6398991cdd542b64586f4d32884b1879,

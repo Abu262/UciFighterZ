@@ -29,9 +29,6 @@ public class MenuSelect : MonoBehaviour
     private Image screen;
 
     public AudioSource source;
-
-    static public int positionP1 = 0;
-    static public int positionP2 = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -40,16 +37,8 @@ public class MenuSelect : MonoBehaviour
         //StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
         source.volume = OptionsSelect.volume;
 
-        //Set initial indices
-        if (positionP1 <= 5)
-            indexP1 = 0;
-        else
-            indexP1 = positionP1;
-
-        if (positionP2 <= 5)
-            indexP2 = 0;
-        else
-            indexP2 = positionP2;
+        indexP1 = CharSelectScr.positionP1;
+        indexP2 = CharSelectScr.positionP2;
 
         //Set initial positions and dimensions
         //P1
@@ -145,8 +134,8 @@ public class MenuSelect : MonoBehaviour
             SelectP2();
         }
 
-        positionP1 = indexP1;
-        positionP2 = indexP2;
+        CharSelectScr.positionP1 = indexP1;
+        CharSelectScr.positionP2 = indexP2;
     }
 
     //If P1 selects

@@ -47,8 +47,14 @@ public class OptionsSelect : MonoBehaviour
         //StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("VGDCTheme"));
 
         //Set initial indices
-        indexP1 = MenuSelect.positionP1;
-        indexP2 = MenuSelect.positionP2;
+        if (CharSelectScr.positionP1 == 0)
+            indexP1 = CharSelectScr.positionP1;
+        else
+            indexP1 = CharSelectScr.positionP1 += 5;
+        if (CharSelectScr.positionP2 == 0)
+            indexP2 = CharSelectScr.positionP2;
+        else
+            indexP2 = CharSelectScr.positionP2 += 5;
 
         //Set initial positions and dimensions
         //P1
@@ -261,6 +267,17 @@ public class OptionsSelect : MonoBehaviour
             else
                 SelectP2();
         }
+
+        if (indexP1 < 6)
+            CharSelectScr.positionP1 = 0;
+        else
+            CharSelectScr.positionP1 = indexP1 - 5;
+        if (indexP2 < 6)
+            CharSelectScr.positionP2 = indexP2;
+        else
+            CharSelectScr.positionP2 = indexP2 - 5;
+
+
     }
 
     //If P1 selects

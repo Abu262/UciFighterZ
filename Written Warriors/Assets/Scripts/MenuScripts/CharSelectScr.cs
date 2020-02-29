@@ -46,6 +46,9 @@ public class CharSelectScr : MonoBehaviour
     private Image screen;
 
     public AudioSource source;
+    
+    static public int positionP1 = 0;
+    static public int positionP2 = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -86,6 +89,7 @@ public class CharSelectScr : MonoBehaviour
         //Screen fade in
         screen = GameObject.FindGameObjectWithTag("Screen").GetComponent<Image>();
         StartCoroutine(manager.FadeScreenIn(screen));
+
     }
 
     // Update is called once per frame
