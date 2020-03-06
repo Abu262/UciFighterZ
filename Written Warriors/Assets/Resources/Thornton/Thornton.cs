@@ -47,6 +47,10 @@ public class Thornton : Character
         }
         else
         {
+            Vector2 O = new Vector2(SpecHitBox.offset.x + (SpecHitBox.size.x / 2) - 0.6f, SpecHitBox.offset.y);
+            SpecHitBox.transform.GetChild(0).gameObject.SetActive(true);
+            float x = SpecHitBox.transform.GetChild(0).transform.localPosition.x;
+            SpecHitBox.transform.GetChild(0).transform.localPosition = O;
             SpecHitBox.enabled = true;
       //      SP.sprite = SpecSprHit;
             F = F * 2;
@@ -60,6 +64,7 @@ public class Thornton : Character
             P.Aura.SetActive(false);
             P.Charges = 0;
             SpecHitBox.enabled = false;
+            SpecHitBox.transform.GetChild(0).gameObject.SetActive(false);
 
         }
         if (P.Charges <= MaxCharges)

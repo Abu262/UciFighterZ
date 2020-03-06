@@ -22,10 +22,13 @@ public class GameOver : MonoBehaviour
     public GameObject GM;
     public StateManager SM;
     private Image screen;
+    private int rounds;
+
 
     // Start is called before the first frame update
     void Awake()
     {
+        rounds = OptionsSelect.roundsNum;
         if (!FindObjectOfType<AudioManager>().Playing("JodaikoTheme"))
         {
             StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("JodaikoTheme"));

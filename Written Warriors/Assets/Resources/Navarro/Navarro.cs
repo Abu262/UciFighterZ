@@ -69,6 +69,10 @@ public class Navarro : Character
             {
                 P.animator.SetBool("IsSpecAtkLow", true);
                 SpecHitBox.enabled = true;
+                Vector2 O = new Vector2(SpecHitBox.offset.x + (SpecHitBox.size.x / 2) - 0.6f, SpecHitBox.offset.y);
+                SpecHitBox.transform.GetChild(0).gameObject.SetActive(true);
+                float x = SpecHitBox.transform.GetChild(0).transform.localPosition.x;
+                SpecHitBox.transform.GetChild(0).transform.localPosition = O;
                 while (F > 0)
                 {
 
@@ -78,6 +82,7 @@ public class Navarro : Character
                     yield return null;
                 }
                 SpecHitBox.enabled = false;
+                SpecHitBox.transform.GetChild(0).gameObject.SetActive(false);
             }
 
 
@@ -95,6 +100,10 @@ public class Navarro : Character
             {
                 P.animator.SetBool("IsSpecAtkLow", true);
                 SpecHitBox.enabled = true;
+                Vector2 O = new Vector2(SpecHitBox.offset.x + (SpecHitBox.size.x / 2) - 0.6f, SpecHitBox.offset.y);
+                SpecHitBox.transform.GetChild(0).gameObject.SetActive(true);
+                float x = SpecHitBox.transform.GetChild(0).transform.localPosition.x;
+                SpecHitBox.transform.GetChild(0).transform.localPosition = O;
                 while (F > 0)
                 {
 
@@ -104,6 +113,7 @@ public class Navarro : Character
                     yield return null;
                 }
                 SpecHitBox.enabled = false;
+                SpecHitBox.transform.GetChild(0).gameObject.SetActive(false);
             }
 
         }

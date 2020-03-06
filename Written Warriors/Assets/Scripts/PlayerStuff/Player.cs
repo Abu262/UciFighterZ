@@ -535,7 +535,7 @@ public abstract class Player : MonoBehaviour
             yield return null;
         }
 
-            animator.SetBool("IsLowBlock", false)   ;
+            animator.SetBool("IsLowBlock", false);
             animator.SetBool("IsHighBlock", false);
             LowBlocking = false;
         HighBlocking = false;
@@ -578,6 +578,11 @@ public abstract class Player : MonoBehaviour
     {
         HitBox.enabled = true; //enables hitbox
 
+        Vector2 O = new Vector2(HitBox.offset.x + (HitBox.size.x/2) - 0.6f  ,HitBox.offset.y);        
+        HitBox.transform.GetChild(0).gameObject.SetActive(true);
+        float x = HitBox.transform.GetChild(0).transform.localPosition.x;
+        HitBox.transform.GetChild(0).transform.localPosition = O;
+        //HitBox.transform.GetChild(0).transform.localPosition = //new Vector2(x + r,HitBox.offset.y);
         int FrameCount = Frames;
         while (FrameCount > 0)
         {
@@ -586,6 +591,7 @@ public abstract class Player : MonoBehaviour
             yield return null;
         }
         HitBox.enabled = false;
+        HitBox.transform.GetChild(0).gameObject.SetActive(false);
         yield return null;
     }
 
@@ -959,7 +965,7 @@ public abstract class Player : MonoBehaviour
        // TakingAction = true;
        // Opponent.TakingAction = true;
         float Vert =  cam.transform.position.y - 2f;
-        
+        float OrthoScale = cam.orthographicSize;
         if (Time.timeScale >= 1.0f)
         {
 
@@ -971,7 +977,7 @@ public abstract class Player : MonoBehaviour
                 //AM.Play("HitSound");
                 AM.Play("HitSound2");
                 StartCoroutine(MoveCamera(1.75f));
-                while (cam.orthographicSize > 3.0f)
+                while (OrthoScale > 3.0f)
                 {
                     AM.SetVolume("SpectrumTheme", AM.GetVolume("SpectrumTheme") - 0.025f);
                     ////if (cam.transform.position.y > Vert)
@@ -980,30 +986,45 @@ public abstract class Player : MonoBehaviour
                     ////}
 
 
-              //      TakingAction = true;
-         //           Opponent.TakingAction = true;
-                    cam.orthographicSize -= 0.5f;
+                    //      TakingAction = true;
+                    //           Opponent.TakingAction = true;
+                    OrthoScale -= 0.5f;
+                    if (cam.transform.position.x >= -10.0f && cam.transform.position.x <= 10.0f)
+                    {
+                        cam.orthographicSize = OrthoScale;
+                    }
                     yield return null;
                 }
 
 
-                cam.orthographicSize = 3.0f;
+                OrthoScale = 3.0f;
+                if (cam.transform.position.x >= -10.0f && cam.transform.position.x <= 10.0f)
+                {
+                    cam.orthographicSize = OrthoScale;
+                }
                 yield return new WaitForSeconds(0.0025f);
                 
                 StartCoroutine(MoveCamera(-1.75f));
-                while (cam.orthographicSize < OriginalSize)
+                while (OrthoScale < OriginalSize)
                 {
-                    AM.SetVolume("SpectrumTheme", AM.GetVolume("SpectrumTheme") + 0.025f);
+                    AM.SetVolume("JodaikoTheme", AM.GetVolume("JodaikoTheme") + 0.025f);
 
 
          //           TakingAction = true;
            //         Opponent.TakingAction = true;
-                    cam.orthographicSize += 0.5f;
+                    OrthoScale += 0.5f;
+                    if (cam.transform.position.x >= -10.0f && cam.transform.position.x <= 10.0f)
+                    {
+                        cam.orthographicSize = OrthoScale;
+                    }
                     yield return null;
                 }
                 AM.SetVolume("SpectrumTheme", 0.3f);
-                cam.orthographicSize = OriginalSize;
-
+                OrthoScale = OriginalSize;
+                if (cam.transform.position.x >= -10.0f && cam.transform.position.x <= 10.0f)
+                {
+                    cam.orthographicSize = OrthoScale;
+                }
                 Time.timeScale = 1.0f;
                 Time.fixedDeltaTime = 1.0f * 0.02f;
                 //cam.orthographicSize = 10.0f;
@@ -1020,29 +1041,64 @@ public abstract class Player : MonoBehaviour
     //this is how I keep the camera centered on the players, partly
     IEnumerator MoveCamera(float Distance)
     {
-        if (Distance >= 0.0)
+        //cam.GetComponent<CameraMovement>().Hit = true;
+        if (cam.transform.position.x >= -10.0f && cam.transform.position.x <= 10.0f)
         {
-            while (Distance >= 0.0f)
+            if (Distance >= 0.0)
             {
+                while (Distance >= 0.0f)
+                {
 
-                cam.transform.position += new Vector3(0.0f, -0.5f, 0.0f);
-                Distance -= 0.5f;
-                yield return null;
+
+                    Vector3 midpoint = (Opponent.transform.position + Opponent.transform.position) / 2f;
+                    //              cam.transform.position += new Vector3(-1.5f, -0.5f, 0.0f);
+                    if (midpoint.x < cam.transform.position.x)
+                    {
+                        Debug.Log(midpoint.x);
+                        cam.transform.position += new Vector3(-3.5f, -0.5f, 0.0f);
+                    }
+                    else if (midpoint.x > cam.transform.position.x)
+                    {
+                        Debug.Log(midpoint.x);
+                        cam.transform.position += new Vector3(3.5f, -0.5f, 0.0f);
+                    }
+                    else
+                    {
+                        cam.transform.position += new Vector3(0.0f, -0.5f, 0.0f);
+                    }
+                    Distance -= 0.5f;
+                    yield return null;
+                }
             }
-        }
-        else
-        {
-            while (Distance <= 0.0f)
+            else
             {
-
-                cam.transform.position += new Vector3(0.0f, 0.5f, 0.0f);
-                Distance += 0.5f;
-                yield return null;
+                while (Distance <= 0.0f)
+                {
+                    Vector3 midpoint = (Opponent.transform.position + Opponent.transform.position) / 2f;
+                    //cam.transform.position += new Vector3(0.0f, 0.5f, 0.0f);
+                    if (midpoint.x > cam.transform.position.x)
+                    {
+                        Debug.Log(midpoint.x);
+                        cam.transform.position += new Vector3(-3.5f, 0.5f, 0.0f);
+                    }
+                    else if (midpoint.x > cam.transform.position.x)
+                    {
+                        Debug.Log(midpoint.x);
+                        cam.transform.position += new Vector3(3.5f, 0.5f, 0.0f);
+                    }
+                    else
+                    {
+                        cam.transform.position += new Vector3(0.0f, 0.5f, 0.0f);
+                    }
+                    Distance += 0.5f;
+                    yield return null;
+                }
             }
+
+            //cam.GetComponent<CameraMovement>().Hit = false;
+            yield return null;
         }
 
-
-        yield return null;
 
 
     }
@@ -1103,4 +1159,6 @@ public abstract class Player : MonoBehaviour
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = 1.0f * 0.02f;
     }
+
+
 }
