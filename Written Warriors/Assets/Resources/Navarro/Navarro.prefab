@@ -25,8 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7872932185762340393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: -9.657146, y: -2.5, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
+=======
+  m_LocalPosition: {x: 22.820713, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+>>>>>>> Stashed changes
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -92,6 +97,6 @@ MonoBehaviour:
   SpecDefenderBlockPush: 2
   SpecHitBoxOffset: {x: 1.5, y: -1}
   SpecHitBoxSize: {x: 3, y: 0.5}
-  SpecialStr: Low
-  speedscalar: 1.75
+  SpecialStr: High
+  speedscalar: 3.75
   Dash: 20

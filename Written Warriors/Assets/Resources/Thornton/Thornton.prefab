@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6464483582514816885}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: -2.5, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalPosition: {x: -7.0857162, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -59,20 +59,20 @@ MonoBehaviour:
   LowAttackerHitPush: 30
   LowDefenderHitPush: 30
   LowAttackerBlockPush: 10
-  LowDefenderBlockPush: 10
+  LowDefenderBlockPush: 20
   LowHitBoxOffset: {x: 2, y: -1.5}
   LowHitBoxSize: {x: 4, y: 0.5}
-  MedAtkStartUp: 25
-  MedAtkHit: 25
+  MedAtkStartUp: 30
+  MedAtkHit: 27
   MedAtkCoolDown: 20
   MedBlockStun: 4
   MedAttackerHitPush: 0
   MedDefenderHitPush: 60
-  MedAttackerBlockPush: 0
-  MedDefenderBlockPush: 35
+  MedAttackerBlockPush: 35
+  MedDefenderBlockPush: 0
   MedHitBoxOffset: {x: 2, y: 0}
   MedHitBoxSize: {x: 8.5, y: 0.5}
-  HighAtkStartUp: 20
+  HighAtkStartUp: 22
   HighAtkHit: 9
   HighAtkCoolDown: 15
   HighBlockStun: 20
@@ -81,8 +81,8 @@ MonoBehaviour:
   HighAttackerBlockPush: 20
   HighDefenderBlockPush: 5
   HighHitBoxOffset: {x: 2, y: 1.75}
-  HighHitBoxSize: {x: 7, y: 0.5}
-  SpecAtkStartUp: 0
+  HighHitBoxSize: {x: 6.5, y: 0.5}
+  SpecAtkStartUp: 2
   SpecAtkHit: 22
   SpecAtkCoolDown: 0
   SpecBlockStun: 60
@@ -91,6 +91,6 @@ MonoBehaviour:
   SpecAttackerBlockPush: 50
   SpecDefenderBlockPush: 50
   SpecHitBoxOffset: {x: 2, y: 0}
-  SpecHitBoxSize: {x: 6, y: 0.5}
+  SpecHitBoxSize: {x: 8, y: 0.5}
   SpecialStr: Unblockable
   MaxCharges: 2
