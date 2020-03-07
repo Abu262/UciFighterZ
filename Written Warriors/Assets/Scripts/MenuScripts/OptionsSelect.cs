@@ -68,7 +68,6 @@ public class OptionsSelect : MonoBehaviour
         //Set sizes
         P1Arrow.rectTransform.sizeDelta = new Vector2(sw * 1.4f, sh);
         P2Arrow.rectTransform.sizeDelta = new Vector2(sw2 * 1.4f, sh2);
-
     }
 
     // Update is called once per frame
@@ -126,7 +125,7 @@ public class OptionsSelect : MonoBehaviour
                 P2Arrow.rectTransform.position -= new Vector3(10, 0, 0);
                 barPosition -= 10;
             }
-            Audio.audioSource.volume = barPosition / 900.0f;
+            Audio.Song.volume = barPosition / 900.0f;
         }
         //If P2 movement detected
         else if (ReadyP2 == false && turn2 == true && ((MoveP2.x > 0.8f || MoveP2.x < -0.8f) || (MoveP2.y > 0.8f || MoveP2.y < -0.8f)))
@@ -149,7 +148,7 @@ public class OptionsSelect : MonoBehaviour
                 P1Arrow.rectTransform.position -= new Vector3(10, 0, 0);
                 barPosition -= 10;
             }
-            Audio.audioSource.volume = barPosition / 900.0f;
+            Audio.Song.volume = barPosition / 900.0f;
         }
         //If P1 movement detected
         else if (ReadyP1 == false && turn1 == true && ((MoveP1.x > 0.8f || MoveP1.x < -0.8f) || (MoveP1.y > 0.8f || MoveP1.y < -0.8f)))

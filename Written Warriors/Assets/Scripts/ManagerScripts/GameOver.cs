@@ -29,10 +29,10 @@ public class GameOver : MonoBehaviour
     void Awake()
     {
         rounds = OptionsSelect.roundsNum;
-        if (!FindObjectOfType<AudioManager>().Playing("JodaikoTheme"))
+        /*if (!FindObjectOfType<AudioManager>().Playing("JodaikoTheme"))
         {
             StartCoroutine(FindObjectOfType<AudioManager>().PlayFadeIn("JodaikoTheme"));
-        }
+        }*/
         GM = GameObject.FindGameObjectWithTag("GameManager");
         screen = GameObject.FindGameObjectWithTag("Screen").GetComponent<Image>();
         //FindObjectOfType<Screen>()
