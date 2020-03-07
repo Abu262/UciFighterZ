@@ -55,9 +55,14 @@ public class SetCanvas : MonoBehaviour
 
     IEnumerator Wait()
     {
+        List<int> iList = new List<int>();
+        iList.Add(1);
+        iList.Add(9);
         yield return new WaitForSeconds(2.0f);
         yield return StartCoroutine(GM.FadeScreenOut(screen));
-        SceneManager.LoadScene(1);
+        int i = Random.Range(0, 1);
+
+        SceneManager.LoadScene(9);
     }
 
 }
