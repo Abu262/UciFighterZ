@@ -43,8 +43,6 @@ public class CharSelectScr : MonoBehaviour
     public TextMeshProUGUI P2CHAR;
     public TextMeshProUGUI P2CHARBG;
 
-    public GameObject audioSrc;
-
     private Image screen;
     
     static public int positionP1 = 0;
@@ -623,7 +621,6 @@ public class CharSelectScr : MonoBehaviour
     //Wait? idk what this is for
     IEnumerator Wait()
     {
-        Destroy(audioSrc);
         SceneManager.LoadScene(7);
         yield return null;
     }
