@@ -62,7 +62,7 @@ public class SetCanvas : MonoBehaviour
         yield return StartCoroutine(GM.FadeScreenOut(screen));
         int i = Random.Range(0, 1);
 
-        SceneManager.LoadScene(9);
+        SceneManager.LoadScene(iList[i]);
     }
 
 }

@@ -172,7 +172,7 @@ public class OptionsSelect : MonoBehaviour
             {
                 if (P1volumeSelected)
                     P1volumeSelected = false;
-                else
+                else if (!P1volumeSelected)
                     P1volumeSelected = true;
             }
             else if (indexP1 == 2)
@@ -217,7 +217,7 @@ public class OptionsSelect : MonoBehaviour
             {
                 if (P2volumeSelected)
                     P2volumeSelected = false;
-                else
+                else if (!P1volumeSelected)
                     P2volumeSelected = true;
             }
             else if(indexP2 == 2)
