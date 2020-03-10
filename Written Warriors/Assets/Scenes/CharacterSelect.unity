@@ -792,7 +792,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2267,7 +2267,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2469,7 +2469,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -11489,7 +11489,6 @@ MonoBehaviour:
   P1CHARBG: {fileID: 274252477}
   P2CHAR: {fileID: 1657561042}
   P2CHARBG: {fileID: 1396480619}
-  audioSrc: {fileID: 1739992756}
 --- !u!4 &1972604473
 Transform:
   m_ObjectHideFlags: 0
