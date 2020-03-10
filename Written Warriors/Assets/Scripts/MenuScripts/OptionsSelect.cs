@@ -110,7 +110,7 @@ public class OptionsSelect : MonoBehaviour
         {
             MoveP1 = new Vector2(0.0f, 1.0f);
         }
-        else if (Input.GetKey(KeyCode.T))
+        else if (Input.GetKey(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.Joystick2Button2) || Input.GetKey(KeyCode.T))
         {
             SceneManager.LoadScene("CharacterSelect");
         }
