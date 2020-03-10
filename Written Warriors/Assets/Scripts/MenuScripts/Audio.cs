@@ -16,9 +16,10 @@ public class Audio : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         if (instance == null)
         {
-            instance = this.gameObject;
             Song = GameObject.Find("MenuMusic").GetComponent<AudioSource>();
+            instance = this.gameObject;
             Song.Play();
+            currentScene = SceneManager.GetActiveScene();
         }
         else
             Destroy(gameObject);
@@ -31,17 +32,30 @@ public class Audio : MonoBehaviour
             currentScene = SceneManager.GetActiveScene();
             if (currentScene.name == "TransitionScene")
                 Song.Stop();
-            if (currentScene.name == "Aldrich")
+            if(currentScene.name == "CharacterSelect")
             {
-                Song = GameObject.Find("AldrichMusic").GetComponent<AudioSource>();
+                Song.Stop();
+                Song = GameObject.Find("MenuMusic").GetComponent<AudioSource>();
                 Song.volume = volume;
                 Song.Play();
             }
+            if (currentScene.name == "Aldrich")
+            {
+                if (Song != GameObject.Find("AldrichMusic").GetComponent<AudioSource>())
+                {
+                    Song = GameObject.Find("AldrichMusic").GetComponent<AudioSource>();
+                    Song.volume = volume;
+                    Song.Play();
+                }
+            }
             if (currentScene.name == "Spectrum")
             {
-                Song = GameObject.Find("SpectrumMusic").GetComponent<AudioSource>();
-                Song.volume = volume;
-                Song.Play();
+                if (Song != GameObject.Find("SpectrumMusic").GetComponent<AudioSource>())
+                {
+                    Song = GameObject.Find("SpectrumMusic").GetComponent<AudioSource>();
+                    Song.volume = volume;
+                    Song.Play();
+                }
             }
         }
         

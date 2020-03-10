@@ -95,6 +95,10 @@ public class MenuSelect : MonoBehaviour
         {
             MoveP2 = new Vector2(0.0f, 1.0f);
         }
+        else if (Input.GetKey(KeyCode.T))
+        {
+            SceneManager.LoadScene("CharacterSelect");
+        }
 
         //If P2 movement detected
         if (ReadyP2 == false && turn2 == true && ((MoveP2.x > 0.8f || MoveP2.x < -0.8f) || (MoveP2.y > 0.8f || MoveP2.y < -0.8f)))
