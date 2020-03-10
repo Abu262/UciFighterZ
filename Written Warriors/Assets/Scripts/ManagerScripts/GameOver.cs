@@ -106,7 +106,7 @@ public class GameOver : MonoBehaviour
 
     public IEnumerator ShowRound()
     {
-        if (GM.GetComponent<GameManager>().w1 == 2 || GM.GetComponent<GameManager>().w2 == 2)
+        if (GM.GetComponent<GameManager>().w1 == rounds || GM.GetComponent<GameManager>().w2 == rounds)
         {
             if (p1.GetComponent<Player>().Health > p2.GetComponent<Player>().Health)
             {
@@ -195,7 +195,7 @@ public class GameOver : MonoBehaviour
         }
         yield return new WaitForSeconds(2.0f);
         StartCoroutine(GM.GetComponent<GameManager>().FadeScreenOut(screen));
-        SceneManager.LoadScene(1); //loads the main menu
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //loads the main menu
 
         ////////
         yield return null; 
@@ -294,7 +294,7 @@ public class GameOver : MonoBehaviour
 
     IEnumerator CheckWinner()
     {
-        if (GM.GetComponent<GameManager>().w1 == 2 || GM.GetComponent<GameManager>().w2 == 2)
+        if (GM.GetComponent<GameManager>().w1 == rounds || GM.GetComponent<GameManager>().w2 == rounds)
         {
             if (p1.GetComponent<Player>().Health > p2.GetComponent<Player>().Health)
             {

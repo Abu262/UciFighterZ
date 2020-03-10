@@ -38,6 +38,11 @@ public class SetCanvas : MonoBehaviour
         P1Image.sprite = P1.Face;
         P2Image.sprite = P2.Face;
 
+        if (Random.Range(0,20) == 10)
+        {
+            P1Image.sprite = Resources.Load<Sprite>("petr");
+        }
+
         P1Name.text = P1.CharName.ToUpper();
         P2Name.text = P2.CharName.ToUpper();
 

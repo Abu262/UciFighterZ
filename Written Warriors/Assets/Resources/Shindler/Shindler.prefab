@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b128743089aecb04ebacd58a320017c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Face: {fileID: 0}
+  Face: {fileID: 21300000, guid: be5db4b7f5600ab48a21d25efe490b92, type: 3}
   Health: 3
   PlayerSize: {x: 1.25, y: 5}
   PlayerOffset: {x: 0, y: 0}

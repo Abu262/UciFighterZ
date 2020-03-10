@@ -8,7 +8,27 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
-
+    public Sprite[] HighStartAnim;
+    public Sprite[] HighAtkAnim;
+    public Sprite[] HighCooldownAnim;
+    public Sprite[] MedStartAnim;
+    public Sprite[] MedAtkAnim;
+    public Sprite[] MedCooldownAnim;
+    public Sprite[] LowStartAnim;
+    public Sprite[] LowAtkAnim;
+    public Sprite[] LowCooldownAnim;
+    public Sprite[] SpecStartAnim;
+    public Sprite[] SpecAtkAnim;
+    public Sprite[] SpecCooldownAnim;
+    public Sprite[] ParryAnim;
+    public Sprite[] HighParryAnim;
+    public Sprite[] LowParryAnim;
+    public Sprite[] StandAnim;
+    public Sprite[] ForwardAnim;
+    public Sprite[] BackwardAnim;
+    public Sprite CrouchSpr;
+    public float animspeed;
+    //public int PENIS;
     // MISC data
     //public Sprite PlayerImage; //player picture, ill make this an animation when we have animations.
     public Sprite Face;
@@ -26,7 +46,7 @@ public class Character : MonoBehaviour
     public string CharName;
 
 //    public Sprite StandSpr;
-    public AnimationClip StandAnim;
+    //public AnimationClip StandAnim;
     public RuntimeAnimatorController Skeleton;
   //  public Sprite CrouchSpr;
 //    public Sprite StandBlockSpr;
@@ -43,6 +63,10 @@ public class Character : MonoBehaviour
 //    public Sprite LowSprCoolDown;
     public int LowAtkCoolDown = 3;   //Low Attack Cooldown frames
     public int LowBlockStun = 60;
+    [SerializeField]
+    
+
+
 
     //pushback on block and hit
     public float LowAttackerHitPush = 0.0f;
