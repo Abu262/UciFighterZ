@@ -45,7 +45,7 @@ public class Klefstad : Character
     //charge
     public override IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
-
+        int index = 0;
         Player P = SpecHitBox.GetComponent<Player>();
         Vector2 constMotion = new Vector2(MoveSpeed * speedscalar * P.transform.localScale.x, 0.0f);
         Vector3 s = P.transform.localScale;
@@ -60,6 +60,8 @@ public class Klefstad : Character
         P.LowBlocking = true;
         while (F > 0)
         {
+            index = Mathf.Min(SpecAtkHit - F, SpecAtkAnim.Length - 1);
+            P.CurrentForm.sprite = SpecAtkAnim[index];
             if (P.Opponent.CurrentBlocking == true || P.Opponent.Hitstun == true)
             {
                 F = 0;

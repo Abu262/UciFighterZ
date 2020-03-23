@@ -9,6 +9,7 @@ public class Shindler : Character
     public float speedscalarBack = 0.25f;
     public float speedscalarForward = 0.25f;
     public int backdashtime = 10;
+    public Sprite[] BackDashAnim;
     // GameObject Rage;
 
     // Start is called before the first frame update
@@ -28,12 +29,14 @@ public class Shindler : Character
         Vector2 constMotion = new Vector2(-1.0f * MoveSpeed * speedscalarBack * P.transform.localScale.x, 0.0f);
         Vector3 s = P.transform.localScale;
         P.Aura.SetActive(true);
-
+        int index = 0;
         int F = SpecAtkHit;
         int B = backdashtime;
 
         while (B > 0)
         {
+            index = Mathf.Min(backdashtime - B, BackDashAnim.Length - 1);
+            P.CurrentForm.sprite = BackDashAnim[index];
             P.RB.velocity = constMotion;
             P.transform.localScale = s;
             B -= 1;
@@ -48,7 +51,8 @@ public class Shindler : Character
         SpecHitBox.enabled = true;
         while (F > 0)
         {
-
+            index = Mathf.Min(SpecAtkHit - F, SpecAtkAnim.Length - 1);
+            P.CurrentForm.sprite = SpecAtkAnim[index];
             P.RB.velocity = constMotion;
             P.transform.localScale = s;
             F -= 1;

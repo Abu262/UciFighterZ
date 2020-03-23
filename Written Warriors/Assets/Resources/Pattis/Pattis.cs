@@ -22,7 +22,7 @@ public class Pattis : Character
         P.HighBlocking = true;
         P.LowBlocking = true;
         int F = SpecAtkHit;
-
+        int index = 0;
         SpecHitBox.GetComponent<SpriteRenderer>().enabled = false;
         // float Speed = 15.0f * P.transform.localScale.x;
 
@@ -40,6 +40,8 @@ public class Pattis : Character
 
         while (F >= 0)
         {
+            index = Mathf.Min(SpecAtkHit - F, SpecAtkAnim.Length - 1);
+            P.CurrentForm.sprite = SpecAtkAnim[index];
             F -= 1;
             //if (tag == "Player1")
             //{

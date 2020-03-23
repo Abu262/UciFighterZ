@@ -6,7 +6,8 @@ public class Thornton : Character
 {
     int Charges = 0;
     public int MaxCharges = 5;
-   // GameObject Rage;
+    public Sprite[] SpecChargeAnim;
+    // GameObject Rage;
 
     // Start is called before the first frame update
     void Awake()
@@ -33,13 +34,20 @@ public class Thornton : Character
         P.Aura.SetActive(true);
         SpriteRenderer SP = SpecHitBox.GetComponent<SpriteRenderer>();
         int F = SpecAtkHit;
+        int index = 0;
         if (P.Charges <= MaxCharges)
         {
-        //    SP.sprite = SpecSprStartUp;
-
+            //    SP.sprite = SpecSprStartUp;
+            
+            //int FrameCount = Frames;
+            
+                
+                // animator.speed = (float)((1.0f / Time.smoothDeltaTime) / 60);
+            
             while (F > 0)
             {
-
+                index = Mathf.Min(SpecAtkHit - F, SpecChargeAnim.Length - 1);
+                P.CurrentForm.sprite = SpecChargeAnim[index];
                 F -= 1;
                 yield return null;
             }
@@ -57,7 +65,8 @@ public class Thornton : Character
             while (F > 0)
             {
 
-                
+                index = Mathf.Min(SpecAtkHit - F, SpecAtkAnim.Length - 1);
+                P.CurrentForm.sprite = SpecAtkAnim[index];
                 F -= 1;
                 yield return null;
             }

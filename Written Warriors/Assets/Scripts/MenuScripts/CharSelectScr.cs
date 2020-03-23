@@ -216,17 +216,25 @@ public class CharSelectScr : MonoBehaviour
     //If P1 selects
     void SelectP1()
     {
-        FindObjectOfType<AudioManager>().Play("MenuSelect");
-        ReadyP1 = true;
-        FindObjectOfType<GameManager>().PathP1 = FindSource(indexP1);
+        if (indexP1 != 5)
+        {
+            FindObjectOfType<AudioManager>().Play("MenuSelect");
+            ReadyP1 = true;
+            FindObjectOfType<GameManager>().PathP1 = FindSource(indexP1);
+        }
+
        
     }
     //If P2 selects
     void SelectP2()
     {
-        FindObjectOfType<AudioManager>().Play("MenuSelect");
-        ReadyP2 = true;
-        FindObjectOfType<GameManager>().PathP2 = FindSource(indexP2);
+        if (indexP2 != 5)
+        {
+            FindObjectOfType<AudioManager>().Play("MenuSelect");
+            ReadyP2 = true;
+            FindObjectOfType<GameManager>().PathP2 = FindSource(indexP2);
+        }
+
     }
     //P1 back
     void BackP1()

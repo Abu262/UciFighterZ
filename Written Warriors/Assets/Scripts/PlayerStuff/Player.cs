@@ -184,6 +184,8 @@ public abstract class Player : MonoBehaviour
             //Move.x controls left and right movement
             if (Move.x >= 0.8f)
             {
+                PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
+                PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
                 RB.velocity = new Vector2(50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime; //move right
                 if (transform.localScale.x <= 0.0f)
                 {
@@ -202,6 +204,8 @@ public abstract class Player : MonoBehaviour
             //More movement
             else if (Move.x <= -0.8f)
             {
+                PlayerBox.size = new Vector2(PlayerBox.size.x, Self.PlayerSize.y);
+                PlayerBox.offset = new Vector2(PlayerBox.offset.x, Self.PlayerOffset.y);
                 RB.velocity = new Vector2(-50.0f * Self.MoveSpeed, 0.0f) * Time.fixedDeltaTime; //move left
                 if (transform.localScale.x <= 0.0f)
                 {
@@ -578,7 +582,15 @@ public abstract class Player : MonoBehaviour
        //     CurrentAnim.clip = Self.StandAnim;
          //   CurrentAnim.Play();
             //        CurrentForm.sprite = Self.StandSpr;
-            yield return StartCoroutine(PlayCoolDownFrames(8, Self.ParryAnim));
+            if (Crouching)
+            {
+                yield return StartCoroutine(PlayCoolDownFrames(8, Self.ParryAnimLow));
+            }
+            else
+            {
+                yield return StartCoroutine(PlayCoolDownFrames(8, Self.ParryAnim));
+            }
+
         TakingAction = false;
         }
         yield return null;
@@ -839,8 +851,8 @@ public abstract class Player : MonoBehaviour
         
         Health -= 1;
         FindObjectOfType<HealthDisplay>().ChangeHealth(gameObject.tag);
-
-//        Hit = true; //when hit is on the player cant move
+        CurrentForm.sprite = Self.HitSpr;
+        //        Hit = true; //when hit is on the player cant move
         StartCoroutine(IFrames(60));
         yield return StartCoroutine(HitAnimation(AttackerPush,DefenderPush));
         

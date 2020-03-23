@@ -22,6 +22,7 @@ public class WongMa : Character
 
     public override IEnumerator SpecAtk(BoxCollider2D SpecHitBox)
     {
+        int index = 0;
         int R = SpecAtkHit;
         Player P = SpecHitBox.GetComponent<Player>();
  //       Vector2 constMotion = new Vector2(-1.0f * MoveSpeed * speedscalar * P.transform.localScale.x, 0.0f);
@@ -41,6 +42,8 @@ public class WongMa : Character
                     F = MedAtkStartUp;
                     while (F > 0)
                     {
+                        index = Mathf.Min(MedAtkStartUp - F, MedStartAnim.Length - 1);
+                        P.CurrentForm.sprite = MedStartAnim[index];
                         //Debug.Log("MEDIUM");
                         P.transform.localScale = s;
                         F -= 1;
@@ -57,7 +60,9 @@ public class WongMa : Character
                     F = LowAtkStartUp;
                     while (F > 0)
                     {
-                       // Debug.Log("LOW");
+                        index = Mathf.Min(LowAtkStartUp - F, LowStartAnim.Length - 1);
+                        P.CurrentForm.sprite = LowStartAnim[index];
+                        // Debug.Log("LOW");
                         P.transform.localScale = s;
                         F -= 1;
                         yield return null;
@@ -73,7 +78,9 @@ public class WongMa : Character
                     F = HighAtkStartUp;
                     while (F > 0)
                     {
-                       //Debug.Log("HIGH");
+                        index = Mathf.Min(HighAtkStartUp - F, HighStartAnim.Length - 1);
+                        P.CurrentForm.sprite = HighStartAnim[index];
+                        //Debug.Log("HIGH");
                         P.transform.localScale = s;
                         F -= 1;
                         yield return null;
@@ -96,6 +103,8 @@ public class WongMa : Character
                     F = MedAtkStartUp - 5;
                     while (F > 0)
                     {
+                        index = Mathf.Min(MedAtkStartUp - F, MedStartAnim.Length - 1);
+                        P.CurrentForm.sprite = MedStartAnim[index];
                         //Debug.Log("MEDIUM");
                         P.transform.localScale = s;
                         F -= 1;
@@ -112,6 +121,8 @@ public class WongMa : Character
                     F = LowAtkStartUp - 5;
                     while (F > 0)
                     {
+                        index = Mathf.Min(LowAtkStartUp - F, LowStartAnim.Length - 1);
+                        P.CurrentForm.sprite = LowStartAnim[index];
                         //Debug.Log("LOW");
                         P.transform.localScale = s;
                         F -= 1;
@@ -128,6 +139,8 @@ public class WongMa : Character
                     F = HighAtkStartUp - 5;
                     while (F > 0)
                     {
+                        index = Mathf.Min(HighAtkStartUp - F, HighStartAnim.Length - 1);
+                        P.CurrentForm.sprite = HighStartAnim[index];
                         //Debug.Log("HIGH");
                         P.transform.localScale = s;
                         F -= 1;

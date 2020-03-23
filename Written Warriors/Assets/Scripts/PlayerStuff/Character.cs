@@ -21,12 +21,14 @@ public class Character : MonoBehaviour
     public Sprite[] SpecAtkAnim;
     public Sprite[] SpecCooldownAnim;
     public Sprite[] ParryAnim;
+    public Sprite[] ParryAnimLow;
     public Sprite[] HighParryAnim;
     public Sprite[] LowParryAnim;
     public Sprite[] StandAnim;
     public Sprite[] ForwardAnim;
     public Sprite[] BackwardAnim;
     public Sprite CrouchSpr;
+    public Sprite HitSpr;
     public float animspeed;
     //public int PENIS;
     // MISC data
